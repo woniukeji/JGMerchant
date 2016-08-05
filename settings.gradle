@@ -1,0 +1,1 @@
+include ':app', ':JianMerchant', ':dialoglibrary', ':viewPagerlibrary', ':flowlayout-lib', ':multi-image-selector'
