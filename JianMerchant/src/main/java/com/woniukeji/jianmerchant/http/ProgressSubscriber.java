@@ -12,13 +12,18 @@ import rx.Subscriber;
 public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCancelListener{
     private SubscriberOnNextListenner mSubscriberOnNextListenner;
     private Context context;
+    private boolean isShowCancel;
     private final ProgressDialogHandler progressDialogHandler;
 
     public ProgressSubscriber(SubscriberOnNextListenner mSubscriberOnNextListenner, Context context) {
+        this(mSubscriberOnNextListenner,context,true);
+    }
+
+    public ProgressSubscriber(SubscriberOnNextListenner mSubscriberOnNextListenner, Context context,boolean isShowCancel) {
         this.mSubscriberOnNextListenner = mSubscriberOnNextListenner;
         this.context = context;
-        progressDialogHandler = new ProgressDialogHandler(context, this, true);
-
+        this.isShowCancel = isShowCancel;
+        progressDialogHandler = new ProgressDialogHandler(context, this, isShowCancel);
     }
 
     @Override

@@ -52,9 +52,8 @@ public class ProgressDialogHandler extends Handler {
         }
         sad.setTitleText("正在加载中...");
         sad.setCancelable(isUnSubscriber);
-        sad.setCancelText("取消");
-
         if (isUnSubscriber) {
+            sad.setCancelText("取消");
             sad.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                 @Override
                 public void onClick(SweetAlertDialog sweetAlertDialog) {

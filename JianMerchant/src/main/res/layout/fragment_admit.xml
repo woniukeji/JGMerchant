@@ -38,15 +38,21 @@
 
         >
 
-        <com.woniukeji.jianmerchant.widget.FixedRecyclerView
+        <!--<com.woniukeji.jianmerchant.widget.FixedRecyclerView-->
+            <!--android:id="@+id/list"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@+id/rl_header"-->
+            <!--android:fastScrollEnabled="true"-->
+            <!--android:listSelector="@color/transparent"-->
+            <!--android:overScrollMode="never"-->
+            <!--android:scrollbarStyle="outsideOverlay" />-->
+        <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
             android:id="@+id/list"
+            android:layout_below="@+id/rl_header"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/rl_header"
-            android:fastScrollEnabled="true"
-            android:listSelector="@color/transparent"
-            android:overScrollMode="never"
-            android:scrollbarStyle="outsideOverlay" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <TextView

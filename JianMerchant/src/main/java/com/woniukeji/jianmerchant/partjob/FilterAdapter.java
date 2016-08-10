@@ -16,12 +16,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.woniukeji.jianmerchant.R;
-import com.woniukeji.jianmerchant.base.Constants;
-import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.utils.CropCircleTransfermation;
-import com.woniukeji.jianmerchant.utils.DateUtils;
-import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.widget.CircleImageView;
 
 import java.util.List;
@@ -29,8 +25,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-
-import static android.content.ClipData.newIntent;
 
 public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder> {
 
@@ -252,6 +246,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
                 @Override
                 public void onClick(View view) {
                     int type=0;
+                    //当前用户处于0待录取状态，当商家触发录取操作时候，用户状态应该改成3
                     if (user.getUser_status().equals("0")){
                         type=3;
                     }else {
@@ -283,7 +278,6 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
     static
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         @InjectView(R.id.circleimg_head) CircleImageView circleimgHead;
         @InjectView(R.id.tv_user_name) TextView tvUserName;
         @InjectView(R.id.img_sex) ImageView imgSex;

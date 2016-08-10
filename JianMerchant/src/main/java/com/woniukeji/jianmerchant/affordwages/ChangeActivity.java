@@ -36,7 +36,7 @@ public class ChangeActivity extends BaseActivity {
     @InjectView(R.id.tv_title) TextView tvTitle;
     @InjectView(R.id.img_share) ImageView imgShare;
     @InjectView(R.id.img_head) ImageView imgHead;
-    @InjectView(R.id.user_name) TextView userName;
+    @InjectView(R.id.tv_user_name) TextView userName;
     @InjectView(R.id.tv_phone) TextView tvPhone;
     @InjectView(R.id.ll_publish_time) LinearLayout llPublishTime;
     @InjectView(R.id.tv_wages) TextView tvWages;

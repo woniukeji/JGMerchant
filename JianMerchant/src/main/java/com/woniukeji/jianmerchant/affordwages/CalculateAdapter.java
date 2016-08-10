@@ -186,7 +186,7 @@ public class CalculateAdapter extends RecyclerView.Adapter<CalculateAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @InjectView(R.id.img_head) ImageView imgHead;
-        @InjectView(R.id.user_name) TextView userName;
+        @InjectView(R.id.tv_user_name) TextView userName;
         @InjectView(R.id.tv_phone) TextView tvPhone;
         @InjectView(R.id.ll_publish_time) LinearLayout llPublishTime;
         @InjectView(R.id.tv_wages) TextView tvWages;

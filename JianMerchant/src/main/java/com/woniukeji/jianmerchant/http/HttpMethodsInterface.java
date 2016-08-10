@@ -6,6 +6,7 @@ import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.JobDetails;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
+import com.woniukeji.jianmerchant.entity.PublishUser;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -56,4 +57,12 @@ public interface HttpMethodsInterface {
     @GET("T_enroll_Job_User_Servlet")
     Observable<BaseBean<AffordUser>> getPayList(@Query("only")String only,@Query("job_id")String job_id,@Query("nv_job_id")String nv_job_id,@Query("count")String count);
 
+    @GET("T_job_Merchant_Id_Zhong_Servlet")
+    Observable<BaseBean<Model>> getPublishJobs(@Query("only")String only,@Query("merchant_id")String merchant_id,@Query("count")String count,@Query("status")String status);
+
+    @GET("T_enroll_Job_Servlet")
+    Observable<BaseBean<PublishUser>> getEnrollJobs(@Query("only") String only,@Query("job_id")String job_id,@Query("count")String count,@Query("type")String type);
+
+    @GET("T_enroll_Offer_Servlet")
+    Observable<BaseBean<PublishUser>> admitUser(@Query("only") String only,@Query("job_id") String job_id,@Query("login_id")String login_id,@Query("offer")String offer);
 }

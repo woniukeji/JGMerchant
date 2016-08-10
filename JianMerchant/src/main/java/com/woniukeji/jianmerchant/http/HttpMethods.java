@@ -5,6 +5,7 @@ import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
+import com.woniukeji.jianmerchant.entity.PublishUser;
 
 import java.util.concurrent.TimeUnit;
 
@@ -115,6 +116,47 @@ public class HttpMethods {
     public void getJobInfoAccordingToMerchantID(Subscriber<Model> subscriber,String only,String merchant_id,String count,String status) {
         methodsInterface.getJobInfoAccordingToMerchantID(only, merchant_id, count, status)
                 .map(new BaseBeanFun<Model>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 用于兼职管理界面中的录取或者完成界面
+     * @param subscriber
+     * @param only
+     * @param merchant_id
+     * @param count
+     * @param staus 0完成 1录取
+     */
+    public void getPublishJobs(Subscriber<Model> subscriber, String only, String merchant_id, String count, String staus) {
+        methodsInterface.getPublishJobs(only, merchant_id, count, staus)
+                .map(new BaseBeanFun<Model>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取已报名人员信息
+     * @param subscriber
+     * @param only
+     * @param job_id
+     * @param count
+     * @param type
+     */
+    public void getEnrollJobs(Subscriber<PublishUser> subscriber, String only, String job_id, String count, String type) {
+        methodsInterface.getEnrollJobs(only,job_id,count,type)
+                .map(new BaseBeanFun<PublishUser>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+    public void admitOrRefuseUser(Subscriber<BaseBean> subscriber, String only, String job_id, String login_id, String offer) {
+        methodsInterface.admitUser(only,job_id,login_id,offer)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

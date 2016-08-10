@@ -56,6 +56,8 @@ public class PartJobManagerFragment extends BaseFragment implements PartJobManag
     FixedRecyclerView list;
     @InjectView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
+//    @InjectView(R.id.list)
+//    SwipeMenuRecyclerView list;
     private int MSG_GET_SUCCESS = 0;
     private int MSG_GET_FAIL = 1;
     private int MSG_DELETE_SUCCESS = 5;
@@ -182,7 +184,8 @@ private class Myhandler extends Handler {
         });
         merchant_id = (int) SPUtils.getParam(getActivity(), Constants.USER_INFO, Constants.USER_MERCHANT_ID, 0);//userinfo sp文件中保存着3
 
-
+//        list.setSwipeMenuCreator(swipeMenuCreator);
+//        list.setSwipeMenuItemClickListener(swipeMenuClickListener);
 
         list.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -275,5 +278,6 @@ private class Myhandler extends Handler {
 
                 });
     }
+
 
 }

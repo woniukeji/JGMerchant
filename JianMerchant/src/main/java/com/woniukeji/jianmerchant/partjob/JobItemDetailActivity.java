@@ -299,7 +299,7 @@ public class JobItemDetailActivity extends BaseActivity {
             tvWages.setText(modleJob.getMoney() + "/日");
         } else if (modleJob.getTerm() == 3) {
             tvWages.setText(modleJob.getMoney() + "/小时");
-        } else if (modleJob.getTerm() == 6) {
+        } else if (modleJob.getTerm() == 4) {
             tvWages.setText(modleJob.getMoney() + "/次");
         }else if(modleJob.getTerm()==5){
             tvWages.setText("义工");

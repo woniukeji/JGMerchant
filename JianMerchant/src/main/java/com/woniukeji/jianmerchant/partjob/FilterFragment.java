@@ -1,6 +1,5 @@
 package com.woniukeji.jianmerchant.partjob;
 
-import android.app.job.JobInfo;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,11 +25,13 @@ import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.eventbus.FilterEvent;
+import com.woniukeji.jianmerchant.http.HttpMethods;
+import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.ExcelUtil;
 import com.woniukeji.jianmerchant.utils.LogUtils;
-import com.woniukeji.jianmerchant.widget.CircleImageView;
-import com.woniukeji.jianmerchant.widget.FixedRecyclerView;
+import com.woniukeji.jianmerchant.utils.PopupUtils;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -59,7 +59,9 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
     private static String params2 = "jobid";
     @InjectView(R.id.img_renwu) ImageView imgRenwu;
     @InjectView(R.id.rl_null) RelativeLayout rlNull;
-    @InjectView(R.id.list) FixedRecyclerView list;
+//    @InjectView(R.id.list) FixedRecyclerView list;
+    @InjectView(R.id.list)
+    SwipeMenuRecyclerView list;
     @InjectView(R.id.refresh_layout) SwipeRefreshLayout refreshLayout;
     @InjectView(R.id.btn_out_info) TextView btnOutInfo;
     private int MSG_GET_SUCCESS = 0;
@@ -70,13 +72,18 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
     private Context mContext = this.getActivity();
     private List<PublishUser.ListTUserInfoEntity> modleList = new ArrayList<>();
     private int lastVisibleItem;
-    private FilterAdapter adapter;
+    //    private FilterAdapter adapter;
+    private NewFilterAdapter adapter;
     private LinearLayoutManager mLayoutManager;
     private int mPosition;
     private int type = 0;
     private String jobid;
     private String jobName;
     private boolean loadOk=false;
+    private ProgressSubscriber<BaseBean> subscriber;
+    private ProgressSubscriber.SubscriberOnNextListenner<BaseBean> listenner;
+    private android.view.ActionMode mActionMode;
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -119,12 +126,16 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
                     modleList.addAll(modelBaseBean.getData().getList_t_user_info());
 
                     if (modleList.size() > 0) {//判断录取人数 是否显示图片
-                        rlNull.setVisibility(View.GONE);
+                        if (rlNull != null) {
+                            rlNull.setVisibility(View.GONE);
+                        }
 //                        if (type==1){//导出录取人信息按钮=
                             btnOutInfo.setVisibility(View.VISIBLE);
 //                        }
                     } else {
-                        rlNull.setVisibility(View.VISIBLE);
+                        if (rlNull != null) {
+                            rlNull.setVisibility(View.VISIBLE);
+                        }
                     }
 
                     adapter.notifyDataSetChanged();
@@ -201,14 +212,51 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
 
     }
 
+
     private void initview() {
 
-        adapter = new FilterAdapter(modleList, getActivity(), type, jobid, this);
+//        adapter = new FilterAdapter(modleList, getActivity(), type, jobid, this);
+        adapter = new NewFilterAdapter(modleList,getActivity(),type,jobid);
+        adapter.setEnrollOrRefuseClickListener(new EnrollOrRefuseClickListener() {
+            @Override
+            public void onClick(int position, int login_id, int type, View view) {
+                String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+                HttpMethods.getInstance().admitOrRefuseUser(subscriber,only,jobid,String.valueOf(login_id),String.valueOf(type));
+            }
+        });
+        adapter.setFilterItemClickListener(new FilterItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                LogUtils.i("onItemClick",String.valueOf(position));
+            }
+
+            @Override
+            public boolean onItemLongClick(int position,View view) {
+                //用popupwindow
+                Toast.makeText(getHoldingContext(), "长按了", Toast.LENGTH_SHORT).show();
+                PopupUtils popupUtils = new PopupUtils(getHoldingContext());
+                popupUtils.setOnSetupDove(new PopupUtils.onSetupDove() {
+                    @Override
+                    public void onSetup(View v) {
+                        Toast.makeText(getHoldingContext(), "点击了", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                popupUtils.show(view);
+                view.setSelected(true);
+                return true;
+            }
+        });
+        adapter.setOnChatClickListener(new onChatClickListener() {
+            @Override
+            public void onChat(int postion, int login_id, View v) {
+                Toast.makeText(getHoldingContext(), "postion  "+postion+"  login_id  "+login_id, Toast.LENGTH_SHORT).show();
+            }
+        });
         mLayoutManager = new LinearLayoutManager(getActivity());
 //设置布局管理器
         list.setLayoutManager(mLayoutManager);
-//设置adapter
-        list.setAdapter(adapter);
+
+
 //设置Item增加、移除动画
         list.setItemAnimator(new DefaultItemAnimator());
 //添加分割线
@@ -216,6 +264,10 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
 //        });
 //        recycleList.addItemDecoration(new DividerItemDecoration(
 //                getActivity(), DividerItemDecoration.VERTICAL_LIST));
+
+        //设置adapter
+        list.setAdapter(adapter);
+
         refreshLayout.setColorSchemeResources(R.color.app_bg);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -227,6 +279,16 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
 //        merchant_id= (int) SPUtils.getParam(getActivity(),Constants.USER_INFO,Constants.USER_MERCHANT_ID,0);
         GetTask getTask = new GetTask(jobid, String.valueOf(type), "0");
         getTask.execute();
+        listenner = new ProgressSubscriber.SubscriberOnNextListenner<BaseBean>() {
+            @Override
+            public void onNext(BaseBean baseBean) {
+                Toast.makeText(getActivity(), baseBean.getMessage(), Toast.LENGTH_SHORT).show();
+                FilterEvent filterEvent = new FilterEvent();
+                EventBus.getDefault().post(filterEvent);
+            }
+        };
+        subscriber = new ProgressSubscriber<>(listenner,getActivity(),false);
+
 
     }
 
@@ -240,11 +302,11 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
         super.onAttach(context);
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
         list.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -252,6 +314,7 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
 
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItem + 1 == adapter.getItemCount()&&loadOk) {
+
                     GetTask getTask = new GetTask(jobid, String.valueOf(type), String.valueOf(lastVisibleItem));
                     getTask.execute();
                     refreshLayout.setRefreshing(true);
@@ -427,6 +490,9 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
                         }
                     });
         }
+
+
+
 
 
 }
