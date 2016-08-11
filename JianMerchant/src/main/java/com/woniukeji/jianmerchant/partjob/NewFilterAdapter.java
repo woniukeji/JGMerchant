@@ -129,12 +129,17 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
         private Button btnConfirm;
         private TextView tvPublishDate;
         private ImageView userPhone;
-        private ImageView userGezi;
+        private ImageView userGezi1;
+        private ImageView userGezi2;
+        private ImageView userGezi3;
+        private ImageView userGezi4;
+        private ImageView userGezi5;
         private TextView loading;
 
         private FilterItemClickListener filterItemClickListener;
         private ImageView userChat;
         private onChatClickListener onChatClickListener;
+
 
         public void setFilterItemClickListener(FilterItemClickListener filterItemClickListener) {
             this.filterItemClickListener = filterItemClickListener;
@@ -182,7 +187,11 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
             btnCancel = (Button) itemView.findViewById(R.id.btn_cancel);
             btnConfirm = (Button) itemView.findViewById(R.id.btn_confirm);
             userPhone = (ImageView) itemView.findViewById(R.id.user_phone);
-            userGezi = (ImageView) itemView.findViewById(R.id.user_gezi);
+            userGezi1 = (ImageView) itemView.findViewById(R.id.user_gezi1);
+            userGezi2 = (ImageView) itemView.findViewById(R.id.user_gezi2);
+            userGezi3 = (ImageView) itemView.findViewById(R.id.user_gezi3);
+            userGezi4 = (ImageView) itemView.findViewById(R.id.user_gezi4);
+            userGezi5 = (ImageView) itemView.findViewById(R.id.user_gezi5);
             userChat = (ImageView)itemView.findViewById(R.id.user_talk);
         }
 
@@ -202,7 +211,11 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
                 imgSex.setTextColor(Color.parseColor("#ef8db5"));
             }
             //学校
-            tvSchoolName.setText(userInfo.getSchool());
+            if (tvSchoolName.equals("")) {
+                tvSchoolName.setText("未设置学校");
+            } else {
+                tvSchoolName.setText(userInfo.getSchool());
+            }
             //时间
             tvPublishDate.setText(userInfo.getTime_job());
             //根据用户的状态这是现实的button
@@ -248,6 +261,8 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
                 btnConfirm.setVisibility(View.GONE);
                 btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
             }
+            // TODO: 2016/8/11 缺一段对鸽子显示的判断。
+            
             //头像
             Picasso.with(context).load(userInfo.getName_image())
                     .placeholder(R.mipmap.icon_head_defult)
