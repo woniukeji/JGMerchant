@@ -9,6 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/FlycoTabLayout_Lib" />
             <option value="$PROJECT_DIR$/JianMerchant" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/dialoglibrary" />
@@ -21,6 +22,7 @@
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/FlycoTabLayout_Lib" />
             <option value="$PROJECT_DIR$/JianMerchant" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/dialoglibrary" />

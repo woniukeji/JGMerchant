@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.partjob.PartJobManagerActivity;
 
 

@@ -2,28 +2,21 @@ package com.woniukeji.jianmerchant.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.avos.avoscloud.im.v2.AVIMClient;
-import com.avos.avoscloud.im.v2.AVIMException;
-import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.User;
-import com.woniukeji.jianmerchant.talk.leanmessage.ChatManager;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.LogUtils;
@@ -131,30 +124,16 @@ public class SplashActivity extends BaseActivity {
         SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_PAY_PASS,user.getT_merchant().getPay_password());
         SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_NAME,user.getT_merchant().getName()!=null?user.getT_merchant().getName():"");
         SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_IMG,user.getT_merchant().getName_image()!=null?user.getT_merchant().getName_image():"");
-        final ChatManager chatManager = ChatManager.getInstance();
-        if (!TextUtils.isEmpty(String.valueOf(user.getT_user_login().getId()))) {
-            chatManager.setupManagerWithUserId(this, String.valueOf(user.getT_user_login().getId()));
-            JPushInterface.setAlias(getApplicationContext(), "jianguo"+user.getT_user_login().getId(), new TagAliasCallback() {
-                @Override
-                public void gotResult(int i, String s, Set<String> set) {
-                    LogUtils.e("jpush",s+",code="+i);
-                }
-            });
-        }
-        ChatManager.getInstance().openClient(new AVIMClientCallback() {
+        JPushInterface.setAlias(getApplicationContext(), "jianguo"+user.getT_user_login().getId(), new TagAliasCallback() {
             @Override
-            public void done(AVIMClient avimClient, AVIMException e) {
-                if (null == e) {
-                    showShortToast("登录成功");
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                   finish();
-                } else {
-                    showShortToast(e.toString());
-                }
+            public void gotResult(int i, String s, Set<String> set) {
+                LogUtils.e("jpush",s+",code="+i);
             }
         });
-//        chatManager.setConversationEventHandler(ConversationEventHandler.getInstance());
+        showShortToast("登录成功");
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 

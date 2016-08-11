@@ -79,10 +79,6 @@
             android:name=".login.ChangPssActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".base.MainActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
             android:name=".publish.PublishActivity"
             android:configChanges="keyboardHidden"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -91,7 +87,7 @@
             android:name=".publish.PublishDetailActivity"
             android:configChanges="keyboardHidden"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="fromFragment" />
                 <action android:name="fromItem" />
@@ -255,7 +251,10 @@
             android:value="Channel ID" />
 
         <activity android:name=".mine.PersonExitActivity" />
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".TestActivity" />
+        <activity android:name=".base.MainActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

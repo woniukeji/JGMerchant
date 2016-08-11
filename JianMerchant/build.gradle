@@ -43,16 +43,11 @@ dependencies {
     compile project(path: ':viewPagerlibrary')
     compile project(path: ':multi-image-selector')
     compile files('libs/android-async-http-1.4.9.jar')
-    compile files('libs/avoscloud-push-v3.13.8.jar')
-    compile files('libs/avoscloud-sdk-v3.13.8.jar')
     compile files('libs/fastjson.jar')
     compile files('libs/happy-dns-0.2.4.jar')
     compile files('libs/httpclient-4.4.1.1.jar')
     compile files('libs/httpmime-4.2.4.jar')
-    compile files('libs/Java-WebSocket-1.3.1-leancloud.jar')
     compile files('libs/KJFrameForAndroid_v2.234.jar')
-    compile files('libs/okhttp-2.6.0-leancloud.jar')
-    compile files('libs/okio-1.6.0-leancloud.jar')
     compile files('libs/protobuf-java-2.6.1.jar')
     compile files('libs/qiniu-android-sdk-7.0.9.jar')
     compile files('libs/jxl.jar')
@@ -60,12 +55,14 @@ dependencies {
     compile files('libs/utdid4all-1.0.4.jar')
     compile files('libs/umeng-analytics-v6.0.0.jar')
     compile 'com.jakewharton:butterknife:6.1.0'
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile project(':flowlayout-lib')
+    compile project(path: ':recyclerview-swipe')
+    compile project(path: ':FlycoTabLayout_Lib')
     compile 'com.jakewharton:butterknife:6.1.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.zhy:okhttputils:2.6.2'
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:1.5.0'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.google.code.gson:gson:2.2.+'
+    compile 'com.google.code.gson:gson:2.7'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.rockerhieu.emojicon:library:1.3.1'
     compile 'com.squareup.picasso:picasso:2.4.0'
@@ -77,7 +74,4 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'io.reactivex:rxjava:1.1.7'
-    compile 'com.google.code.gson:gson:2.7'
-    compile project(':flowlayout-lib')
-    compile project(path: ':recyclerview-swipe')
 }
