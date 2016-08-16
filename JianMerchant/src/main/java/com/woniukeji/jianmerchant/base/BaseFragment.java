@@ -14,11 +14,8 @@ import android.view.ViewGroup;
  * @author invinjun
  */
 public abstract class BaseFragment extends Fragment {
-    public Context getHoldingContext() {
-        return context;
-    }
 
-    private Context context;
+    private boolean isFirstVisiable =true;
 
     @Override
     public void onAttach(Context context) {
@@ -42,7 +39,6 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -69,7 +65,10 @@ public abstract class BaseFragment extends Fragment {
         super.onStop();
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 
     @Override
     public void onDestroy() {
@@ -81,9 +80,39 @@ public abstract class BaseFragment extends Fragment {
         super.onDetach();
     }
 
-    /**
-     * fragment name
-     */
-//    public abstract String getFragmentName();
+    public Context getHoldingContext() {
+        return context;
+    }
 
+    private Context context;
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        //可见true 不可见false
+        if (isVisibleToUser) {//可见
+            if (isFirstVisiable) {
+                isFirstVisiable = false;
+                firstVisiableToUser();
+            } else {
+                visiableToUser();
+            }
+        } else {//不可见，这里不做什么操作了
+
+        }
+    }
+
+    /**
+     * 用户可以看见，
+     * 这种情况包括：
+     * 当前fragment后台未被摧毁，再次出现;
+     * 当前fragment后台摧毁后，再次出现.
+     */
+    protected abstract void visiableToUser();
+
+    /**
+     * 第一次对用户可见，并且是在onCreateView方法之前，onCreate之后，
+     * 可以根据需求都可以在次方法中做些操作，一般不做操作
+     */
+    protected abstract void firstVisiableToUser();
 }

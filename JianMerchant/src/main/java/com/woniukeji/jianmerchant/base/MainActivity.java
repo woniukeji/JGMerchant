@@ -1,6 +1,7 @@
 package com.woniukeji.jianmerchant.base;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,10 +16,15 @@ import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.adapter.MyPagerAdapter;
 import com.woniukeji.jianmerchant.entity.TabEntity;
 import com.woniukeji.jianmerchant.fragment.MainVPFragment;
+import com.woniukeji.jianmerchant.fragment.ManagerFragment;
+import com.woniukeji.jianmerchant.fragment.PublishFragment;
+import com.woniukeji.jianmerchant.mine.MineFragment;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import cn.leancloud.chatkit.activity.LCIMConversationListFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -27,15 +33,15 @@ public class MainActivity extends BaseActivity {
     private ImageView mRightCorner;
     private CommonTabLayout mTabLayout;
     private ViewPager mVPContent;
-    private String[] mTitles = {"发布", "管理", "果聊", "我的"};
+    private String[] mTitles = {"发布", "管理","", "果聊", "我的"};
     private int[] mIconUnselectIds = {
-            R.mipmap.tab_home_unselect, R.mipmap.tab_speech_unselect,
+            R.mipmap.tab_home_unselect, R.mipmap.tab_speech_unselect,R.drawable.fb,
             R.mipmap.tab_contact_unselect, R.mipmap.tab_more_unselect};
     private int[] mIconSelectIds = {
-            R.mipmap.tab_home_select, R.mipmap.tab_speech_select,
+            R.mipmap.tab_home_select, R.mipmap.tab_speech_select,R.drawable.fbclick,
             R.mipmap.tab_contact_select, R.mipmap.tab_more_select};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
-    private ArrayList<MainVPFragment> mFragments = new ArrayList<>();
+    private ArrayList<Fragment> mFragments = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +56,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        mBackView = (ImageView) findViewById(R.id.img_back);
-        mtitle = (TextView) findViewById(R.id.tv_title);
         mRightCorner = (ImageView) findViewById(R.id.img_share);
         mTabLayout = (CommonTabLayout) findViewById(R.id.bottom_tab);
         mVPContent = (ViewPager) findViewById(R.id.viewpager_content);
@@ -64,13 +68,25 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mBackView.setVisibility(View.GONE);
-        mRightCorner.setVisibility(View.GONE);
-        mtitle.setText("兼果");
         //设置ViewPager
-        for (int i = 0; i < mTitles.length; i++) {
-            mFragments.add(new MainVPFragment().newInstance(mTitles[i]));
-
+        for (int i = 0; i < mTitles.length+1; i++) {
+            switch (i) {
+                case 0:
+                    mFragments.add(new PublishFragment());
+                    break;
+                case 1:
+                    mFragments.add(new ManagerFragment());
+                    break;
+                case 2:
+                    mFragments.add(new MainVPFragment().newInstance("人才库"));
+                    break;
+                case 3:
+                    mFragments.add(new LCIMConversationListFragment());
+                    break;
+                case 4:
+                    mFragments.add(new MineFragment());
+                    break;
+            }
         }
         mVPContent.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mFragments));
         mVPContent.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -94,7 +110,10 @@ public class MainActivity extends BaseActivity {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
         mTabLayout.setTabData(mTabEntities);
-        mTabLayout.showMsg(2, new Random().nextInt(100) + 1);
+
+        TextView titleView = mTabLayout.getTitleView(2);
+        titleView.setVisibility(View.GONE);
+        mTabLayout.showMsg(3, new Random().nextInt(100) + 1);
         mTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
@@ -106,8 +125,6 @@ public class MainActivity extends BaseActivity {
                 mTabLayout.showMsg(2, new Random().nextInt(100) + 1);
             }
         });
-
-
         mVPContent.setCurrentItem(0);
 
     }
@@ -133,8 +150,8 @@ public class MainActivity extends BaseActivity {
                 Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
                 touchTime = currentTime;
             } else {
-//                finish();
-                moveTaskToBack(true);
+                finish();
+//                moveTaskToBack(true);
             }
             return true;
         }

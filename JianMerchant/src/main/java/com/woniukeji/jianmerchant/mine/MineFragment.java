@@ -44,6 +44,16 @@ public class MineFragment extends BaseFragment{
         return view;
     }
 
+    @Override
+    protected void visiableToUser() {
+
+    }
+
+    @Override
+    protected void firstVisiableToUser() {
+
+    }
+
     @OnClick(R.id.btn_logout)
     public void onClick() {
         SPUtils.deleteParams(getActivity());

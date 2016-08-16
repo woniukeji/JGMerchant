@@ -4,11 +4,13 @@ package com.woniukeji.jianmerchant.base;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.woniukeji.jianmerchant.chat.CustomUserProvider;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.leancloud.chatkit.LCChatKit;
 import okhttp3.OkHttpClient;
 
 /**
@@ -32,8 +34,11 @@ public class Application extends android.app.Application {
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 //其他配置
                 .build();
-
         OkHttpUtils.initClient(okHttpClient);
+        LCChatKit.getInstance().setProfileProvider(CustomUserProvider.getInstance(getApplicationContext()));
+
+//        AVOSCloud.setDebugLogEnabled(true);
+        LCChatKit.getInstance().init(getApplicationContext(), "AtwJtfIJPKQFtti8D3gNjMmb-gzGzoHsz","spNrDrtGWAXP633DkMMWT65B");
     }
     public void UmengConfig(){
 

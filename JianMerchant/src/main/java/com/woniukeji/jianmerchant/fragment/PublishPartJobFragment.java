@@ -29,6 +29,7 @@ import com.woniukeji.jianmerchant.entity.RegionBean;
 import com.woniukeji.jianmerchant.entity.TypeBean;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
+import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.publish.HistoryJobAdapter;
 import com.woniukeji.jianmerchant.publish.PublishDetailActivity;
 import com.woniukeji.jianmerchant.utils.DateUtils;
@@ -273,7 +274,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
         final int count = 10 * pagecount;
         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
         final int merchantid= (int) SPUtils.getParam(getHoldingContext(),Constants.USER_INFO,Constants.USER_MERCHANT_ID,0);
-        ProgressSubscriber.SubscriberOnNextListenner<Model> listenner = new ProgressSubscriber.SubscriberOnNextListenner<Model>() {
+        SubscriberOnNextListener<Model> listenner = new SubscriberOnNextListener<Model>() {
             @Override
             public void onNext(Model model) {
                 List<Model.ListTJobEntity> list_t_job = model.getList_t_job();
@@ -305,7 +306,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
      * 访问网络获取兼职类别
      */
     private void getCategoryToBean() {
-        ProgressSubscriber.SubscriberOnNextListenner<CityAndCategoryBean> onNextListenner = new ProgressSubscriber.SubscriberOnNextListenner<CityAndCategoryBean>() {
+        SubscriberOnNextListener<CityAndCategoryBean> onNextListenner = new SubscriberOnNextListener<CityAndCategoryBean>() {
 
             @Override
             public void onNext(CityAndCategoryBean cityAndCategoryBean) {
@@ -316,7 +317,6 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                 bundle.putParcelable("CityAndCategoryBean", cityAndCategoryBean);
             }
         };
-
         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
         int loginId = (int) SPUtils.getParam(getHoldingContext(), Constants.LOGIN_INFO, Constants.SP_USERID, 0);
         HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<CityAndCategoryBean>(onNextListenner, getHoldingContext()), only, String.valueOf(loginId));
@@ -327,6 +327,16 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
         super.onDestroyView();
 //        saveStateToArguments();
         ButterKnife.reset(this);
+    }
+
+    @Override
+    protected void visiableToUser() {
+
+    }
+
+    @Override
+    protected void firstVisiableToUser() {
+
     }
 
 

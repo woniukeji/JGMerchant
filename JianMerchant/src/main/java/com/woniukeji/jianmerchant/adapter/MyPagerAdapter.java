@@ -4,8 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.woniukeji.jianmerchant.fragment.MainVPFragment;
-
 import java.util.ArrayList;
 
 /**
@@ -13,9 +11,9 @@ import java.util.ArrayList;
  */
 public class MyPagerAdapter extends FragmentPagerAdapter {
 
-    private ArrayList<MainVPFragment> fragments;
+    private ArrayList<Fragment> fragments;
 
-    public MyPagerAdapter(FragmentManager fm, ArrayList<MainVPFragment> fragments) {
+    public MyPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
     }

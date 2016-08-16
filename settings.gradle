@@ -1,1 +1,1 @@
-include ':app', ':JianMerchant', ':dialoglibrary', ':viewPagerlibrary', ':flowlayout-lib', ':multi-image-selector', ':recyclerview-swipe', ':FlycoTabLayout_Lib'
+include ':app', ':JianMerchant', ':dialoglibrary', ':viewPagerlibrary', ':flowlayout-lib', ':multi-image-selector', ':recyclerview-swipe', ':FlycoTabLayout_Lib', ':leancloudchatkit'

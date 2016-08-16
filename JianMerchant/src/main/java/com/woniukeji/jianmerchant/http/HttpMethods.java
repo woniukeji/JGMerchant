@@ -6,9 +6,12 @@ import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.PublishUser;
+import com.woniukeji.jianmerchant.utils.DateUtils;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import cn.leancloud.chatkit.LCChatKitUser;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -161,6 +164,19 @@ public class HttpMethods {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
+    }
+
+    /**
+     *获取果聊用户资料
+     */
+    public void getTalkUser(Subscriber<List<LCChatKitUser>> lcChatKitUserSubscriber, String loginid){
+        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+        methodsInterface.getTalkUser(only,loginid)
+                .map(new BaseBeanFun<List<LCChatKitUser>>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(lcChatKitUserSubscriber);
     }
 
 

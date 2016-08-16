@@ -1,10 +1,14 @@
-package com.woniukeji.jianmerchant.partjob;
+package com.woniukeji.jianmerchant.fragment;
 
+
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,23 +16,23 @@ import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.woniukeji.jianmerchant.R;
-import com.woniukeji.jianmerchant.base.BaseActivity;
+import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.FragmentText;
 import com.woniukeji.jianmerchant.entity.TabEntity;
-import com.woniukeji.jianmerchant.utils.ActivityManager;
+import com.woniukeji.jianmerchant.partjob.PartJobManagerFragment;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+public class ManagerFragment extends BaseFragment {
 
-public class PartJobManagerActivity extends BaseActivity {
 
-    @InjectView(R.id.tl_6) CommonTabLayout tl6;
-    @InjectView(R.id.mainPager) ViewPager mainPager;
-    @InjectView(R.id.img_back) ImageView imgBack;
-    @InjectView(R.id.tv_title) TextView tvTitle;
-    private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
+    private View rootView;
+    private CommonTabLayout tl6;
+    private ViewPager mainPager;
+    private ImageView imgBack;
+    private ImageView imgShare;
+    private TextView tvTitle;
+    private ArrayList<CustomTabEntity> mTabEntities ;
     private String[] mTitles = {"录取", "完成"};
     private int[] mIconUnselectIds = {
             R.mipmap.tab_guo_talk_unselect,
@@ -38,18 +42,34 @@ public class PartJobManagerActivity extends BaseActivity {
             R.mipmap.tab_about_me_select};
     private ViewPagerAdapter adapter;
 
-
-    public int mType=1;//用于判断是录取还是完成的fragment（同一个对象实例化，需要区分）
     @Override
-    public void setContentView() {
-        setContentView(R.layout.activity_part_job_manager);
-        ButterKnife.inject(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.activity_part_job_manager, container, false);
+        initView();
+        initData();
+        initListener();
+        return rootView;
     }
 
-    @Override
-    public void initViews() {
-        tvTitle.setText("管理兼职");
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+
+
+    private void initView() {
+        tl6 = (CommonTabLayout) rootView.findViewById(R.id.tl_6);
+        mainPager = (ViewPager) rootView.findViewById(R.id.mainPager);
+        imgBack = (ImageView) rootView.findViewById(R.id.img_back);
+        imgShare = (ImageView) rootView.findViewById(R.id.img_share);
+        tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
+    }
+
+    private void initData() {
+        mTabEntities = new ArrayList<>();
+        imgBack.setVisibility(View.GONE);
+        imgShare.setVisibility(View.GONE);
+        tvTitle.setText("兼职管理");
+        adapter = new ViewPagerAdapter(getChildFragmentManager());
+
         mainPager.setAdapter(adapter);
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
@@ -63,7 +83,21 @@ public class PartJobManagerActivity extends BaseActivity {
 
             @Override
             public void onTabReselect(int position) {
-//                mainPager.setCurrentItem(position);
+
+            }
+        });
+    }
+
+    private void initListener() {
+        tl6.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                mainPager.setCurrentItem(position);
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
             }
         });
         mainPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -82,38 +116,6 @@ public class PartJobManagerActivity extends BaseActivity {
 
             }
         });
-    }
-
-    @Override
-    public void initListeners() {
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-    }
-
-    @Override
-    public void initData() {
-
-    }
-
-    @Override
-    public void addActivity() {
-        ActivityManager.getActivityManager().addActivity(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-
-    }
-    public int getmType() {
-        return mType;
-    }
-
-    public void setmType(int mType) {
-        this.mType = mType;
     }
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -137,4 +139,15 @@ public class PartJobManagerActivity extends BaseActivity {
             return 2;
         }
     }
+
+    @Override
+    protected void visiableToUser() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void firstVisiableToUser() {
+
+    }
+
 }

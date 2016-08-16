@@ -8,6 +8,9 @@ import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 
+import java.util.List;
+
+import cn.leancloud.chatkit.LCChatKitUser;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -65,4 +68,12 @@ public interface HttpMethodsInterface {
 
     @GET("T_enroll_Offer_Servlet")
     Observable<BaseBean<PublishUser>> admitUser(@Query("only") String only,@Query("job_id") String job_id,@Query("login_id")String login_id,@Query("offer")String offer);
+
+    /**
+     *查询果聊用户信息
+     */
+    @GET("T_UserGroup_Servlet")//T_UserGroup_Servlet
+    Observable<BaseBean<List<LCChatKitUser>>> getTalkUser(@Query("only") String only, @Query("login_id") String login_id);
+
+
 }

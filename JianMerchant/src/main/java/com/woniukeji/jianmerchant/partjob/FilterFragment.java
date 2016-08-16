@@ -1,6 +1,7 @@
 package com.woniukeji.jianmerchant.partjob;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.im.v2.AVIMClient;
+import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.woniukeji.jianmerchant.R;
@@ -27,10 +31,12 @@ import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.eventbus.FilterEvent;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
+import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.ExcelUtil;
 import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.PopupUtils;
+import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
@@ -43,6 +49,9 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import cn.leancloud.chatkit.LCChatKit;
+import cn.leancloud.chatkit.activity.LCIMConversationActivity;
+import cn.leancloud.chatkit.utils.LCIMConstants;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
 import okhttp3.Call;
@@ -81,8 +90,9 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
     private String jobName;
     private boolean loadOk=false;
     private ProgressSubscriber<BaseBean> subscriber;
-    private ProgressSubscriber.SubscriberOnNextListenner<BaseBean> listenner;
+    private SubscriberOnNextListener<BaseBean> listenner;
     private android.view.ActionMode mActionMode;
+    private int merchantId;
 
     @Override
     public void onDestroyView() {
@@ -199,6 +209,7 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
         type = getArguments().getInt(params1);
         jobid = getArguments().getString(params2);
         jobName = getArguments().getString("jobname");
+        merchantId = (int) SPUtils.getParam(getActivity(), "loginInfo", "id", 0);
         EventBus.getDefault().register(this);
     }
 
@@ -248,8 +259,21 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
         });
         adapter.setOnChatClickListener(new onChatClickListener() {
             @Override
-            public void onChat(int postion, int login_id, View v) {
+            public void onChat(int postion, final int login_id, View v) {
                 Toast.makeText(getHoldingContext(), "postion  "+postion+"  login_id  "+login_id, Toast.LENGTH_SHORT).show();
+                LCChatKit.getInstance().open(String.valueOf(merchantId), new AVIMClientCallback() {
+                    @Override
+                    public void done(AVIMClient avimClient, AVIMException e) {
+                        if (null == e) {
+                            Intent intent = new Intent(getHoldingContext(), LCIMConversationActivity.class);
+                            intent.putExtra(LCIMConstants.PEER_ID, String.valueOf(login_id));
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(getHoldingContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
             }
         });
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -279,7 +303,7 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
 //        merchant_id= (int) SPUtils.getParam(getActivity(),Constants.USER_INFO,Constants.USER_MERCHANT_ID,0);
         GetTask getTask = new GetTask(jobid, String.valueOf(type), "0");
         getTask.execute();
-        listenner = new ProgressSubscriber.SubscriberOnNextListenner<BaseBean>() {
+        listenner = new SubscriberOnNextListener<BaseBean>() {
             @Override
             public void onNext(BaseBean baseBean) {
                 Toast.makeText(getActivity(), baseBean.getMessage(), Toast.LENGTH_SHORT).show();
@@ -340,6 +364,17 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
     public void onDetach() {
         super.onDetach();
     }
+
+    @Override
+    protected void visiableToUser() {
+
+    }
+
+    @Override
+    protected void firstVisiableToUser() {
+
+    }
+
     void exportUser() {
       SweetAlertDialog sw=new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
         sw.show();

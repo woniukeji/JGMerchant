@@ -10,17 +10,17 @@ import rx.Subscriber;
  * Created by Administrator on 2016/7/16.
  */
 public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCancelListener{
-    private SubscriberOnNextListenner mSubscriberOnNextListenner;
+    private SubscriberOnNextListener mSubscriberOnNextListener;
     private Context context;
     private boolean isShowCancel;
     private final ProgressDialogHandler progressDialogHandler;
 
-    public ProgressSubscriber(SubscriberOnNextListenner mSubscriberOnNextListenner, Context context) {
-        this(mSubscriberOnNextListenner,context,true);
+    public ProgressSubscriber(SubscriberOnNextListener mSubscriberOnNextListener, Context context) {
+        this(mSubscriberOnNextListener,context,true);
     }
 
-    public ProgressSubscriber(SubscriberOnNextListenner mSubscriberOnNextListenner, Context context,boolean isShowCancel) {
-        this.mSubscriberOnNextListenner = mSubscriberOnNextListenner;
+    public ProgressSubscriber(SubscriberOnNextListener mSubscriberOnNextListener, Context context, boolean isShowCancel) {
+        this.mSubscriberOnNextListener = mSubscriberOnNextListener;
         this.context = context;
         this.isShowCancel = isShowCancel;
         progressDialogHandler = new ProgressDialogHandler(context, this, isShowCancel);
@@ -57,7 +57,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
 
     @Override
     public void onNext(T t) {
-        mSubscriberOnNextListenner.onNext(t);
+        mSubscriberOnNextListener.onNext(t);
     }
 
     @Override
@@ -68,7 +68,5 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
         }
     }
 
-    public interface SubscriberOnNextListenner<T> {
-        void onNext(T t);
-    }
+
 }

@@ -40,6 +40,7 @@ import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.PickType;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
+import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.BitmapUtils;
 import com.woniukeji.jianmerchant.utils.CommonUtils;
 import com.woniukeji.jianmerchant.utils.CropCircleTransfermation;
@@ -803,7 +804,7 @@ public class PublishDetailActivity extends BaseActivity {
                                         // TODO: 2016/7/26 男女各需的情况
                                     } else {
                                         alike = "0";
-                                        ProgressSubscriber.SubscriberOnNextListenner<Jobs> nextListenner = new ProgressSubscriber.SubscriberOnNextListenner<Jobs>() {
+                                        SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
 
                                             @Override
                                             public void onNext(Jobs jobs) {
@@ -848,7 +849,7 @@ public class PublishDetailActivity extends BaseActivity {
 //                        PostPartInfoTask postPartInfo = new PostPartInfoTask(etCount.getText().toString(), limit_sex);
 //                        postPartInfo.execute();
                         alike = "0";
-                        ProgressSubscriber.SubscriberOnNextListenner<Jobs> nextListenner = new ProgressSubscriber.SubscriberOnNextListenner<Jobs>() {
+                        SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
 
                             @Override
                             public void onNext(Jobs jobs) {
@@ -1058,7 +1059,7 @@ public class PublishDetailActivity extends BaseActivity {
      * 访问网络获取兼职类别
      */
     private void getCategoryToBean() {
-        ProgressSubscriber.SubscriberOnNextListenner<CityAndCategoryBean> onNextListenner = new ProgressSubscriber.SubscriberOnNextListenner<CityAndCategoryBean>() {
+        SubscriberOnNextListener<CityAndCategoryBean> onNextListenner = new SubscriberOnNextListener<CityAndCategoryBean>() {
 
             @Override
             public void onNext(CityAndCategoryBean cityAndCategoryBean) {

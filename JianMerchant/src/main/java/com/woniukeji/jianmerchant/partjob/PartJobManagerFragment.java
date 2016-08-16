@@ -225,6 +225,16 @@ private class Myhandler extends Handler {
         super.onDetach();
     }
 
+    @Override
+    protected void visiableToUser() {
+
+    }
+
+    @Override
+    protected void firstVisiableToUser() {
+
+    }
+
 
     /**
      * postInfo
