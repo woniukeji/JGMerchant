@@ -33,13 +33,13 @@ public class MainActivity extends BaseActivity {
     private ImageView mRightCorner;
     private CommonTabLayout mTabLayout;
     private ViewPager mVPContent;
-    private String[] mTitles = {"发布", "管理","", "果聊", "我的"};
+    private String[] mTitles = {"首页", "财务","", "果聊", "我的"};
     private int[] mIconUnselectIds = {
-            R.mipmap.tab_home_unselect, R.mipmap.tab_speech_unselect,R.drawable.fb,
-            R.mipmap.tab_contact_unselect, R.mipmap.tab_more_unselect};
+            R.mipmap.tab_home_unselect, R.drawable.cw,R.drawable.fb,
+            R.drawable.chat, R.mipmap.tab_contact_unselect};
     private int[] mIconSelectIds = {
-            R.mipmap.tab_home_select, R.mipmap.tab_speech_select,R.drawable.fbclick,
-            R.mipmap.tab_contact_select, R.mipmap.tab_more_select};
+            R.mipmap.tab_home_select, R.drawable.cwclick,R.drawable.fbclick,
+            R.drawable.chactclick,  R.mipmap.tab_contact_select};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ArrayList<Fragment> mFragments = new ArrayList<>();
 
@@ -72,13 +72,13 @@ public class MainActivity extends BaseActivity {
         for (int i = 0; i < mTitles.length+1; i++) {
             switch (i) {
                 case 0:
-                    mFragments.add(new PublishFragment());
-                    break;
-                case 1:
                     mFragments.add(new ManagerFragment());
                     break;
+                case 1:
+                    mFragments.add(new MainVPFragment().newInstance("财务"));
+                    break;
                 case 2:
-                    mFragments.add(new MainVPFragment().newInstance("人才库"));
+                    mFragments.add(new PublishFragment());
                     break;
                 case 3:
                     mFragments.add(new LCIMConversationListFragment());
