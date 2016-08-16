@@ -292,7 +292,7 @@ public class PublishDetailActivity extends BaseActivity {
 
     private String term = "2";//    期限（0=月结，1=周结，2=日结，3=小时结，4=次，5=义工）给默认值
 
-    private String limit_sex = "2";//         性别限制（0=只招女，1=只招男，2=不限男女）
+    private String limit_sex = "2";//         性别限制（0=只招女，1=只招男，2=不限男女，3=男女各需）
 
     private String sum;//        总人数
     private String girlsum;//
@@ -802,6 +802,24 @@ public class PublishDetailActivity extends BaseActivity {
                                     if (limit_sex.equals("3")) {//男女各需
                                         alike = "" + SystemClock.currentThreadTimeMillis();
                                         // TODO: 2016/7/26 男女各需的情况
+                                        SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
+
+                                            @Override
+                                            public void onNext(Jobs jobs) {
+                                                PublishDetailActivity.this.jobs = jobs;
+                                                LogUtils.i("jobs", jobs.toString());
+                                                String sucessMessage = "操作成功！";
+                                                Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
+//                                                PublishDetailActivity.this.finish();
+                                            }
+                                        };
+
+
+                                        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+                                        HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
+                                                only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
+                                                address, mode, money, term, limit_sex, etBoyCount.getText().toString(),etGirlCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
+                                                job_model, qualificationJsonObj.toString(), welfareJsonObj.toString(), labelJsonObj.toString());
                                     } else {
                                         alike = "0";
                                         SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
@@ -819,7 +837,7 @@ public class PublishDetailActivity extends BaseActivity {
                                         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
                                         HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
                                                 only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
-                                                address, mode, money, term, limit_sex, etCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
+                                                address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
                                                 job_model, qualificationJsonObj.toString(), welfareJsonObj.toString(), labelJsonObj.toString());
                                     }
                                 }
@@ -838,16 +856,27 @@ public class PublishDetailActivity extends BaseActivity {
                 if (CheckStatus()) {
                     if (limit_sex.equals("3")) {
                         // TODO: 2016/7/27 男女各需情况，暂不考虑
-//                        alike = String.valueOf(System.currentTimeMillis());
-//                        PostPartInfoTask postPartInfoTask = new PostPartInfoTask(etBoyCount.getText().toString(), "31");
-//                        postPartInfoTask.execute();
-//                        PostPartInfoTask postPartInfo = new PostPartInfoTask(etGirlCount.getText().toString(), "30");
-//                        postPartInfo.execute();
+                        alike = String.valueOf(System.currentTimeMillis());
+                        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+                        SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
+
+                            @Override
+                            public void onNext(Jobs jobs) {
+                                PublishDetailActivity.this.jobs = jobs;
+                                //将刚发布的兼职信息写入到本地
+                                LogUtils.i("jobs", new Gson().toJson(jobs).toString());
+                                String sucessMessage = "发布成功！";
+                                Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
+//                                PublishDetailActivity.this.finish();
+                            }
+                        };
+                        //job_model =0  不是模板
+                        HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
+                                only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
+                                address, mode, money, term, limit_sex, etBoyCount.getText().toString(),etGirlCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
+                                "0", qualificationJsonObj.toString(), welfareJsonObj.toString(), labelJsonObj.toString());
 
                     } else {
-//                        alike = "0";
-//                        PostPartInfoTask postPartInfo = new PostPartInfoTask(etCount.getText().toString(), limit_sex);
-//                        postPartInfo.execute();
                         alike = "0";
                         SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
 
@@ -865,7 +894,7 @@ public class PublishDetailActivity extends BaseActivity {
                         //job_model =0  不是模板
                         HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
                                 only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
-                                address, mode, money, term, limit_sex, etCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
+                                address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
                                 "0", qualificationJsonObj.toString(), welfareJsonObj.toString(), labelJsonObj.toString());
 
                     }

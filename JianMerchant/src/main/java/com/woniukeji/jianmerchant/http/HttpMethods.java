@@ -86,12 +86,12 @@ public class HttpMethods {
                                     String city_id,String aera_id,String type_id,
                                     String merchant_id,String name,String name_image,
                                     String start_date,String stop_date,String address,String mode,
-                                    String money,String term,String limit_sex,String sum,
+                                    String money,String term,String limit_sex,String sum,String girl_sum,
                                     String hot,String alike,String lon,String lat,String tel,String start_time,String stop_time,
                                     String set_place,String set_time,String other,String work_content,String work_require,String job_model,
                                     String json_limit,String json_welfare,String json_label) {
         Observable<BaseBean<Jobs>> jobs = methodsInterface.saveJobInfoToServer(only, city_id, aera_id, type_id, merchant_id, name, name_image, start_date,
-                stop_date, address, mode, money, term, limit_sex, sum, hot, alike, lon, lat, tel, start_time, stop_time, set_place, set_time, other, work_content, work_require, job_model,json_limit,json_welfare,json_label);
+                stop_date, address, mode, money, term, limit_sex,girl_sum, sum, hot, alike, lon, lat, tel, start_time, stop_time, set_place, set_time, other, work_content, work_require, job_model,json_limit,json_welfare,json_label);
         jobs.map(new BaseBeanFun<Jobs>())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

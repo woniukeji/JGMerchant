@@ -32,7 +32,7 @@ public interface HttpMethodsInterface {
                                                    @Query("stop_date") String stop_date,@Query("address") String address,
                                                    @Query("mode") String mode,@Query("money") String money,
                                                    @Query("term") String term,@Query("limit_sex") String limit_sex,
-                                                   @Query("sum") String sum,@Query("hot") String hot,
+                                                   @Query("sum") String sum,@Query("girl_sum") String girl_sum,@Query("max") String hot,
                                                    @Query("alike") String alike,@Query("lon") String lon,
                                                    @Query("lat") String lat,@Query("tel") String tel,
                                                    @Query("start_time") String start_time,@Query("stop_time") String stop_time,
