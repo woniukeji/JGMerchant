@@ -55,6 +55,17 @@ public class PublishUser implements Serializable{
             private int cancel_job;
             private String time_job;
             private String tel;
+            private int pigeon_count;
+
+            public int getPigeon_count() {
+                return pigeon_count;
+            }
+
+            public void setPigeon_count(int pigeon_count) {
+                this.pigeon_count = pigeon_count;
+            }
+
+
 
             public String getTel() {
                 return tel;

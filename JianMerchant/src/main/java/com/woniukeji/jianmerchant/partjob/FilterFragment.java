@@ -27,8 +27,10 @@ import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
+import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.eventbus.FilterEvent;
+import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
@@ -242,14 +244,23 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
             }
 
             @Override
-            public boolean onItemLongClick(int position,View view) {
+            public boolean onItemLongClick(final int position, View view, final int login_id) {
                 //用popupwindow
-                Toast.makeText(getHoldingContext(), "长按了", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getHoldingContext(), "长按了", Toast.LENGTH_SHORT).show();
                 PopupUtils popupUtils = new PopupUtils(getHoldingContext());
                 popupUtils.setOnSetupDove(new PopupUtils.onSetupDove() {
                     @Override
                     public void onSetup(View v) {
-                        Toast.makeText(getHoldingContext(), "点击了", Toast.LENGTH_SHORT).show();
+
+                        BackgroundSubscriber<Pigeon> subscriber = new BackgroundSubscriber<Pigeon>(new SubscriberOnNextListener<Pigeon>() {
+
+                            @Override
+                            public void onNext(Pigeon pigeon) {
+                                modleList.get(position).setPigeon_count(pigeon.getUser_info().getPigeon_count());
+                                adapter.notifyDataSetChanged();
+                            }
+                        },getHoldingContext());
+                        HttpMethods.getInstance().markPigeon(subscriber,jobid,String.valueOf(login_id), String.valueOf(merchantId));
                     }
                 });
                 popupUtils.show(view);
@@ -372,6 +383,16 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
 
     @Override
     protected void firstVisiableToUser() {
+
+    }
+
+    @Override
+    protected void onSaveInfoToBundle(Bundle outState) {
+
+    }
+
+    @Override
+    protected void onRestoreInfoFromBundle(Bundle savedInstanceState) {
 
     }
 

@@ -32,8 +32,6 @@ import butterknife.OnClick;
  * create an instance of this fragment.
  */
 public class PartJobFragment extends BaseFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     @InjectView(R.id.img_back) ImageView imgBack;
@@ -168,6 +166,16 @@ public class PartJobFragment extends BaseFragment {
 
     @Override
     protected void firstVisiableToUser() {
+
+    }
+
+    @Override
+    protected void onSaveInfoToBundle(Bundle outState) {
+
+    }
+
+    @Override
+    protected void onRestoreInfoFromBundle(Bundle savedInstanceState) {
 
     }
 

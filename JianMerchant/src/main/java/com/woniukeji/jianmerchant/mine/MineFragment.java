@@ -54,6 +54,16 @@ public class MineFragment extends BaseFragment{
 
     }
 
+    @Override
+    protected void onSaveInfoToBundle(Bundle outState) {
+
+    }
+
+    @Override
+    protected void onRestoreInfoFromBundle(Bundle savedInstanceState) {
+
+    }
+
     @OnClick(R.id.btn_logout)
     public void onClick() {
         SPUtils.deleteParams(getActivity());

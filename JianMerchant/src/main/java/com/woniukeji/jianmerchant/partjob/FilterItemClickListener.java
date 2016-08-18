@@ -8,5 +8,5 @@ import android.view.View;
 public interface FilterItemClickListener {
     void onItemClick(int position);
 
-    boolean onItemLongClick(int position,View view);
+    boolean onItemLongClick(int position,View view,int login_id);
 }

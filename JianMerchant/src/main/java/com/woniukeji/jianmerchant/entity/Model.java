@@ -47,6 +47,7 @@ public class Model implements Serializable {
         private int limit_sex;
         private int count;
         private int sum;
+        private int girl_sum;
         private int day;
         private String regedit_time;
         private int status;
@@ -464,6 +465,14 @@ public class Model implements Serializable {
 
         public void setInfo_work_require(String info_work_require) {
             this.info_work_require = info_work_require;
+        }
+
+        public int getGirl_sum() {
+            return girl_sum;
+        }
+
+        public void setGirl_sum(int girl_sum) {
+            this.girl_sum = girl_sum;
         }
     }
 

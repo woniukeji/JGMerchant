@@ -29,13 +29,11 @@ public class MainVPFragment extends BaseFragment {
         if (getArguments() != null) {
             mParam = getArguments().getString(PARAM);
         }
-        Log.i(TAG, "onCreate: "+getArguments().getString(PARAM));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i(TAG, "onCreateView: "+getArguments().getString(PARAM));
         TextView textView = new TextView(getActivity());
         textView.setText(mParam+"页");
         textView.setTextSize(100);
@@ -121,6 +119,16 @@ public class MainVPFragment extends BaseFragment {
 
     @Override
     protected void firstVisiableToUser() {
+
+    }
+
+    @Override
+    protected void onSaveInfoToBundle(Bundle outState) {
+
+    }
+
+    @Override
+    protected void onRestoreInfoFromBundle(Bundle savedInstanceState) {
 
     }
 

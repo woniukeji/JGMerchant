@@ -256,7 +256,7 @@ public class PublishDetailActivity extends BaseActivity {
     TagFlowLayout flow_partjob;
     //顺序对应不能改变，否则id和服务器不同步
     private String[] partHot = new String[]{"短期", "长期", "实习生", "旅行"};
-    private String[] payMethods = new String[]{"月结", "周结", "日结", "旅行"};
+    private String[] payMethods = new String[]{"月结", "周结", "日结", "旅行","完工结"};
     private String[] wagesMethods = new String[]{"元/月", "元/周", "元/天", "元/小时", "元/次", "义工", "面议"};
     private String[] sexs = new String[]{"仅限女", "仅限男", "不限男女", "男女各需"};
     private String[] second = new String[]{"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
@@ -1167,24 +1167,30 @@ public class PublishDetailActivity extends BaseActivity {
         etWages.setTextColor(getResources().getColor(R.color.black));
         tvWagesMethod.setText(wagesMethods[modle.getTerm()]);
         term = String.valueOf(modle.getTerm());
+        sum = String.valueOf(modle.getSum());
         limit_sex = String.valueOf(modle.getLimit_sex());
-        if (limit_sex.equals("30") || limit_sex.equals("31")) {
-            limit_sex = "3";
+//        if (limit_sex.equals("30") || limit_sex.equals("31")) {
+        if (limit_sex.equals("3") && limit_sex != null) {
             tvSex.setText("男女各需");
             rlLimits.setVisibility(View.VISIBLE);
             rlNoLimits.setVisibility(View.GONE);
+            etGirlCount.setText(modle.getGirl_sum()+"");
+            etBoyCount.setText(sum);
         } else {
             tvSex.setText(sexs[modle.getLimit_sex()]);
             rlLimits.setVisibility(View.GONE);
             rlNoLimits.setVisibility(View.VISIBLE);
         }
         tvSex.setTextColor(getResources().getColor(R.color.black));
-        sum = String.valueOf(modle.getSum());
-        if (limit_sex.equals("30")) {
-            etGirlCount.setText(sum);
-        } else if (limit_sex.equals("31")) {
-            etBoyCount.setText(sum);
-        } else {
+
+//        if (limit_sex.equals("30")) {
+//
+//        } else if (limit_sex.equals("31")) {
+//
+//        } else {
+//            etCount.setText(sum);
+//        }
+        if (!limit_sex.equals("3") && limit_sex != null) {
             etCount.setText(sum);
         }
 

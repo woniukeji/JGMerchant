@@ -197,7 +197,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
 //                holder.btnCancel.setText("催工资");
 //            }
             else{
-                holder.btnCancel.setText("工作已结束");
+                holder.btnCancel.setText("工作结束");
                 holder.btnCancel.setClickable(false);
                 holder.btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
             }

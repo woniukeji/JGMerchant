@@ -150,4 +150,14 @@ public class ManagerFragment extends BaseFragment {
 
     }
 
+    @Override
+    protected void onSaveInfoToBundle(Bundle outState) {
+
+    }
+
+    @Override
+    protected void onRestoreInfoFromBundle(Bundle savedInstanceState) {
+
+    }
+
 }

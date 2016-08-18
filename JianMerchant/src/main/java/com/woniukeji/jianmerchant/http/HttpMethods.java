@@ -5,6 +5,7 @@ import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
+import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 
@@ -64,8 +65,8 @@ public class HttpMethods {
     private class BaseBeanFun<T> implements Func1<BaseBean<T>,T>{
         @Override
         public T call(BaseBean<T> baseBean) {
-            if (Integer.valueOf(baseBean.getCode())==500) {
-                throw new APIExecption(Integer.valueOf(baseBean.getCode()));
+            if (Integer.valueOf(baseBean.getCode())!=200) {
+                throw new APIExecption(baseBean.getMessage());
             }
             return baseBean.getData();
         }
@@ -177,6 +178,16 @@ public class HttpMethods {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(lcChatKitUserSubscriber);
+    }
+
+    public void markPigeon(Subscriber<Pigeon> subscriber, String job_id, String login_id,String merchant_id) {
+        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+        methodsInterface.markPigeon(only,job_id,login_id,merchant_id)
+                .map(new BaseBeanFun<Pigeon>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
 
 

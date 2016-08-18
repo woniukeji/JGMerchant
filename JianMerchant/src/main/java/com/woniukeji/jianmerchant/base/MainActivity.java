@@ -22,9 +22,11 @@ import com.woniukeji.jianmerchant.mine.MineFragment;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import cn.leancloud.chatkit.activity.LCIMConversationListFragment;
+import cn.leancloud.chatkit.event.LCIMIMTypeMessageEvent;
+import cn.leancloud.chatkit.event.LCIMUnReadCountEvent;
+import de.greenrobot.event.EventBus;
 
 public class MainActivity extends BaseActivity {
 
@@ -46,7 +48,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -88,6 +90,7 @@ public class MainActivity extends BaseActivity {
                     break;
             }
         }
+        mVPContent.setOffscreenPageLimit(4);
         mVPContent.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mFragments));
         mVPContent.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -110,10 +113,9 @@ public class MainActivity extends BaseActivity {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
         mTabLayout.setTabData(mTabEntities);
-
         TextView titleView = mTabLayout.getTitleView(2);
         titleView.setVisibility(View.GONE);
-        mTabLayout.showMsg(3, new Random().nextInt(100) + 1);
+
         mTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
@@ -122,7 +124,9 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onTabReselect(int position) {
-                mTabLayout.showMsg(2, new Random().nextInt(100) + 1);
+                if (position == 3) {
+                    mTabLayout.hideMsg(3);
+                }
             }
         });
         mVPContent.setCurrentItem(0);
@@ -137,6 +141,38 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
 
+    }
+
+    /**
+     * 处理推送过来的消息
+     * 同理，避免无效消息，此处加了 conversation id 判断
+     * 当前选中的是果聊界面的时候不显示消息数量
+     * 否则消息数量自加
+     */
+    private int msgCount = 0;
+    public void onEvent(LCIMIMTypeMessageEvent messageEvent) {
+
+//        if (tabHost.getCurrentTab()==2) {
+//            tabHost.hideMsg(2);
+//            msgCount=0;
+//        }else {
+//            msgCount++;
+//            tabHost.showMsg(2,msgCount);
+//            tabHost.setMsgMargin(2, -7, 5);
+//        }
+        if (mTabLayout.getCurrentTab() != 3) {
+            mTabLayout.showMsg(3, ++msgCount);
+        } else {
+            msgCount = 0;
+            mTabLayout.hideMsg(3);
+        }
+
+    }
+    public void onEvent(LCIMUnReadCountEvent event) {
+        if (event.unReadCount!=0) {
+            mTabLayout.showMsg(3,event.unReadCount);
+//            tabHost.setMsgMargin(2, -7, 5);
+        }
     }
 
     private long touchTime = 0;

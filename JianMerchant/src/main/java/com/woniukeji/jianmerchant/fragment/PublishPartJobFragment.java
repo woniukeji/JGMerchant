@@ -339,6 +339,16 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
 
     }
 
+    @Override
+    protected void onSaveInfoToBundle(Bundle outState) {
+
+    }
+
+    @Override
+    protected void onRestoreInfoFromBundle(Bundle savedInstanceState) {
+
+    }
+
 
     @Override
     public void onClick(View v) {

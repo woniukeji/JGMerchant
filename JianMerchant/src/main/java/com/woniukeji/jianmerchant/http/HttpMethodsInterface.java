@@ -6,6 +6,7 @@ import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.JobDetails;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
+import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public interface HttpMethodsInterface {
                                                    @Query("stop_date") String stop_date,@Query("address") String address,
                                                    @Query("mode") String mode,@Query("money") String money,
                                                    @Query("term") String term,@Query("limit_sex") String limit_sex,
-                                                   @Query("sum") String sum,@Query("girl_sum") String girl_sum,@Query("max") String hot,
+                                                   @Query("sum") String sum,@Query("girl_sum") String girl_sum,@Query("max") String max,
                                                    @Query("alike") String alike,@Query("lon") String lon,
                                                    @Query("lat") String lat,@Query("tel") String tel,
                                                    @Query("start_time") String start_time,@Query("stop_time") String stop_time,
@@ -74,6 +75,12 @@ public interface HttpMethodsInterface {
      */
     @GET("T_UserGroup_Servlet")//T_UserGroup_Servlet
     Observable<BaseBean<List<LCChatKitUser>>> getTalkUser(@Query("only") String only, @Query("login_id") String login_id);
+
+    /**
+     *标记鸽子
+     */
+    @GET("T_UserPigeon_Servlet")
+    Observable<BaseBean<Pigeon>> markPigeon(@Query("only") String only, @Query("job_id") String job_id, @Query("login_id") String login_id,@Query("merchant_id") String merchant_id);
 
 
 }

@@ -327,7 +327,7 @@ public class JobItemDetailActivity extends BaseActivity {
             btnNoLimit.setVisibility(View.GONE);
             llLimitSex.setVisibility(View.VISIBLE);
             btnBoy.setText("男生部分：" + modleJob.getUser_count() + "/" + modleJob.getSum());
-            btnGirl.setText("女生部分: " + jobinfo.getNv_user_count() + "/" + jobinfo.getNv_sum());
+            btnGirl.setText("女生部分: " + jobinfo.getNv_user_count() + "/" + modleJob.getGirl_sum());
 
             tvSex.setText("男女各需");//性别限制（0=只招女，1=只招男，2=不限男女，30,31，男女各需）
         }
@@ -375,7 +375,7 @@ public class JobItemDetailActivity extends BaseActivity {
     public void initData() {
         Intent intent = getIntent();
         modleJob = (Model.ListTJobEntity) intent.getSerializableExtra("job");
-        String alike = modleJob.getAlike();
+        String alike = modleJob.getAlike();//时间戳-->男女各需的情况
         jobid = modleJob.getId();
         int merchantid = intent.getIntExtra("merchantid", 0);
         loginId = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_USERID, 0);

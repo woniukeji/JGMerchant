@@ -139,6 +139,7 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
         private FilterItemClickListener filterItemClickListener;
         private ImageView userChat;
         private onChatClickListener onChatClickListener;
+        private PublishUser.ListTUserInfoEntity userInfo;
 
 
         public void setFilterItemClickListener(FilterItemClickListener filterItemClickListener) {
@@ -166,7 +167,7 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
                         itemView.setOnLongClickListener(new View.OnLongClickListener() {
                             @Override
                             public boolean onLongClick(View v) {
-                                return filterItemClickListener.onItemLongClick(getAdapterPosition(),v);
+                                return filterItemClickListener.onItemLongClick(getAdapterPosition(),v,userInfo.getLogin_id());
                             }
                         });
 
@@ -196,6 +197,7 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
         }
 
         public void setData(final PublishUser.ListTUserInfoEntity userInfo, int position) {
+            this.userInfo = userInfo;
             //设置报名者姓名
             if (userInfo.getName() != null && !userInfo.getName().equals("0")) {
                 tvUserName.setText(userInfo.getName());
@@ -232,7 +234,7 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
                 btnConfirm.setText("待确认");
                 btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
             }else if (userInfo.getUser_status().equals("4")) {
-                btnCancel.setText("用户已取消");
+                btnCancel.setText("用户取消");
                 btnCancel.setClickable(false);
                 btnConfirm.setVisibility(View.GONE);
                 btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
@@ -241,7 +243,7 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
                 btnConfirm.setVisibility(View.GONE);
                 btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
             }else if (userInfo.getUser_status().equals("6")) {
-                btnCancel.setText("用户已取消");
+                btnCancel.setText("用户取消");
                 btnCancel.setClickable(false);
                 btnConfirm.setVisibility(View.GONE);
                 btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
@@ -256,13 +258,13 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
                 btnConfirm.setVisibility(View.GONE);
                 btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
             } else {
-                btnCancel.setText("工作已结束");
+                btnCancel.setText("工作结束");
                 btnCancel.setClickable(false);
                 btnConfirm.setVisibility(View.GONE);
                 btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
             }
-            // TODO: 2016/8/11 缺一段对鸽子显示的判断。
-            
+            //显示鸽子数量
+            showPigeonCount(userInfo.getPigeon_count());
             //头像
             Picasso.with(context).load(userInfo.getName_image())
                     .placeholder(R.mipmap.icon_head_defult)
@@ -326,5 +328,53 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
         public void setOnChatClickListener(com.woniukeji.jianmerchant.partjob.onChatClickListener onChatClickListener) {
             this.onChatClickListener = onChatClickListener;
         }
+
+        private void showPigeonCount(int count) {
+            if (count == 1) {
+                userGezi1.setVisibility(View.VISIBLE);
+                userGezi2.setVisibility(View.INVISIBLE);
+                userGezi3.setVisibility(View.INVISIBLE);
+                userGezi4.setVisibility(View.INVISIBLE);
+                userGezi5.setVisibility(View.INVISIBLE);
+            } else if (count==2) {
+                userGezi1.setVisibility(View.VISIBLE);
+                userGezi2.setVisibility(View.VISIBLE);
+                userGezi3.setVisibility(View.INVISIBLE);
+                userGezi4.setVisibility(View.INVISIBLE);
+                userGezi5.setVisibility(View.INVISIBLE);
+            } else if (count == 3) {
+                userGezi1.setVisibility(View.VISIBLE);
+                userGezi2.setVisibility(View.VISIBLE);
+                userGezi3.setVisibility(View.VISIBLE);
+                userGezi4.setVisibility(View.INVISIBLE);
+                userGezi5.setVisibility(View.INVISIBLE);
+            } else if (count == 4) {
+                userGezi1.setVisibility(View.VISIBLE);
+                userGezi2.setVisibility(View.VISIBLE);
+                userGezi3.setVisibility(View.VISIBLE);
+                userGezi4.setVisibility(View.VISIBLE);
+                userGezi5.setVisibility(View.INVISIBLE);
+            } else if (count == 5) {
+                userGezi1.setVisibility(View.VISIBLE);
+                userGezi2.setVisibility(View.VISIBLE);
+                userGezi3.setVisibility(View.VISIBLE);
+                userGezi4.setVisibility(View.VISIBLE);
+                userGezi5.setVisibility(View.INVISIBLE);
+            } else if (count ==0) {
+                userGezi1.setVisibility(View.INVISIBLE);
+                userGezi2.setVisibility(View.INVISIBLE);
+                userGezi3.setVisibility(View.INVISIBLE);
+                userGezi4.setVisibility(View.INVISIBLE);
+                userGezi5.setVisibility(View.INVISIBLE);
+            } else {
+                userGezi1.setVisibility(View.VISIBLE);
+                userGezi2.setVisibility(View.VISIBLE);
+                userGezi3.setVisibility(View.VISIBLE);
+                userGezi4.setVisibility(View.VISIBLE);
+                userGezi5.setVisibility(View.VISIBLE);
+            }
+
+        }
     }
+
 }

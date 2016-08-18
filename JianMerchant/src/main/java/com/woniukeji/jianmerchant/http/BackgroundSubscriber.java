@@ -30,7 +30,7 @@ public class BackgroundSubscriber<T> extends Subscriber<T>{
 
     @Override
     public void onError(Throwable e) {
-        Toast.makeText(mContext, "error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

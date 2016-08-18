@@ -71,7 +71,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         return (int) (scale * dipValue + 0.5f);
     }
     public void showShortToast(String text) {
-        Toast.makeText(BaseActivity.this,text,Toast.LENGTH_SHORT).show();
+        Toast toast = null;
+        if (toast == null) {
+            toast = Toast.makeText(BaseActivity.this, text, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(text);
+        }
+        toast.show();
     }
     public void showLongToast(String text) {
         Toast.makeText(BaseActivity.this,text,Toast.LENGTH_LONG).show();

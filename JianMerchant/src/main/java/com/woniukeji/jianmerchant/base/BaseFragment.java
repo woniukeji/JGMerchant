@@ -3,6 +3,7 @@ package com.woniukeji.jianmerchant.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -43,6 +45,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        onRestoreInfoFromBundle(savedInstanceState);
     }
 
     @Override
@@ -68,6 +76,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
     }
 
     @Override
@@ -78,6 +87,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        onSaveInfoToBundle(outState);
     }
 
     public Context getHoldingContext() {
@@ -115,4 +130,8 @@ public abstract class BaseFragment extends Fragment {
      * 可以根据需求都可以在次方法中做些操作，一般不做操作
      */
     protected abstract void firstVisiableToUser();
+
+    protected abstract void onSaveInfoToBundle(Bundle outState);
+
+    protected abstract void onRestoreInfoFromBundle(Bundle savedInstanceState);
 }

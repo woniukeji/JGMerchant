@@ -235,6 +235,16 @@ private class Myhandler extends Handler {
 
     }
 
+    @Override
+    protected void onSaveInfoToBundle(Bundle outState) {
+
+    }
+
+    @Override
+    protected void onRestoreInfoFromBundle(Bundle savedInstanceState) {
+
+    }
+
 
     /**
      * postInfo

@@ -120,6 +120,16 @@ public class PublishFragment extends BaseFragment {
 
     }
 
+    @Override
+    protected void onSaveInfoToBundle(Bundle outState) {
+
+    }
+
+    @Override
+    protected void onRestoreInfoFromBundle(Bundle savedInstanceState) {
+
+    }
+
     private void saveToSP(User user) {
         SPUtils.setParam(getHoldingContext(), Constants.LOGIN_INFO, Constants.SP_PASSWORD, user.getT_user_login().getPassword());
     }
