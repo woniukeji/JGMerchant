@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
     android:background="@drawable/tag_bg"
-    android:text="我是高明"
     android:textSize="10dp"
-    android:textColor="#999999">
+
+    android:textColor="@drawable/tag_text_color">
 
 </TextView>

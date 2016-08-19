@@ -1214,7 +1214,7 @@ public class PublishDetailActivity extends BaseActivity {
         qualificationJsonObj = new JsonObject();
         qualificationJsonArray = new JsonArray();
         while (qualificationIterator.hasNext()) {
-            qualificationJsonArray.add(qualificationIterator.next()+"");
+            qualificationJsonArray.add(1+qualificationIterator.next()+"");
         }
         qualificationJsonObj.add("list_t_limit", qualificationJsonArray);
 
@@ -1223,7 +1223,7 @@ public class PublishDetailActivity extends BaseActivity {
         welfareJsonObj = new JsonObject();
         welfareJsonArray = new JsonArray();
         while (welfareIterator.hasNext()) {
-            welfareJsonArray.add(welfareIterator.next()+"");
+            welfareJsonArray.add(1+welfareIterator.next()+"");
         }
         welfareJsonObj.add("list_t_welfare", welfareJsonArray);
 
@@ -1232,7 +1232,7 @@ public class PublishDetailActivity extends BaseActivity {
         labelJsonObj = new JsonObject();
         partjobJsonArray = new JsonArray();
         while (labelIterator.hasNext()) {
-            partjobJsonArray.add(labelIterator.next()+"");
+            partjobJsonArray.add(1+labelIterator.next()+"");
         }
         labelJsonObj.add("list_t_label", partjobJsonArray);
 
@@ -1242,15 +1242,15 @@ public class PublishDetailActivity extends BaseActivity {
         HashSet<Integer> set = new HashSet<>();
         if (name.equals("qualification")) {
             for (int i = 0; i < modle.getLimit_name().size(); i++) {
-                set.add(Integer.valueOf(modle.getLimit_name().get(i)));
+                set.add(Integer.valueOf(modle.getLimit_name().get(i))-1);
             }
         } else if (name.equals("welfare")) {
             for (int i = 0; i < modle.getWelfare_name().size(); i++) {
-                set.add(Integer.valueOf(modle.getWelfare_name().get(i)));
+                set.add(Integer.valueOf(modle.getWelfare_name().get(i))-1);
             }
         } else if (name.equals("label")) {
             for (int i = 0; i < modle.getLabel_name().size(); i++) {
-                set.add(Integer.valueOf(modle.getLabel_name().get(i)));
+                set.add(Integer.valueOf(modle.getLabel_name().get(i))-1);
             }
         }
 
@@ -1304,7 +1304,7 @@ public class PublishDetailActivity extends BaseActivity {
                     qualificationJsonArray = new JsonArray();
                     while (iterator.hasNext()) {
                         Integer next = iterator.next();
-                        qualificationJsonArray.add(next + "");
+                        qualificationJsonArray.add(1+next + "");
                     }
                     qualificationJsonObj.add("list_t_limit", qualificationJsonArray);
 
@@ -1323,7 +1323,7 @@ public class PublishDetailActivity extends BaseActivity {
                     welfareJsonArray = new JsonArray();
                     while (iterator.hasNext()) {
                         Integer next = iterator.next();
-                        welfareJsonArray.add(next + "");
+                        welfareJsonArray.add(1+next + "");
                     }
                     welfareJsonObj.add("list_t_welfare", welfareJsonArray);
 
@@ -1343,7 +1343,7 @@ public class PublishDetailActivity extends BaseActivity {
                     labelJsonArray = new JsonArray();
                     while (iterator.hasNext()) {
                         Integer next = iterator.next();
-                        labelJsonArray.add(next + "");
+                        labelJsonArray.add(1+next + "");
                     }
                     labelJsonObj.add("list_t_label", labelJsonArray);
             }

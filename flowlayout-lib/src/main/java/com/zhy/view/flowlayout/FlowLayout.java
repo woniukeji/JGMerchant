@@ -43,16 +43,18 @@ public class FlowLayout extends ViewGroup
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
+
         int sizeWidth = MeasureSpec.getSize(widthMeasureSpec);
         int modeWidth = MeasureSpec.getMode(widthMeasureSpec);
         int sizeHeight = MeasureSpec.getSize(heightMeasureSpec);
         int modeHeight = MeasureSpec.getMode(heightMeasureSpec);
 
         // wrap_content
-        int width = 0;
+        int width = 0;//最终宽
         int height = 0;
-
+        //当前行宽
         int lineWidth = 0;
+
         int lineHeight = 0;
 
         int cCount = getChildCount();
@@ -79,7 +81,7 @@ public class FlowLayout extends ViewGroup
                     + lp.bottomMargin;
 
             if (lineWidth + childWidth > sizeWidth - getPaddingLeft() - getPaddingRight())
-            {
+            {//如果当前控件宽度>此控件分配的宽度
                 width = Math.max(width, lineWidth);
                 lineWidth = childWidth;
                 height += lineHeight;
@@ -89,7 +91,7 @@ public class FlowLayout extends ViewGroup
                 lineWidth += childWidth;
                 lineHeight = Math.max(lineHeight, childHeight);
             }
-            if (i == cCount - 1)
+            if (i == cCount - 1)//最后一个
             {
                 width = Math.max(lineWidth, width);
                 height += lineHeight;

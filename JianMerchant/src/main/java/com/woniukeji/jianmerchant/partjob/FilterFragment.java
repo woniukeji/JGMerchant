@@ -251,16 +251,19 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
                 popupUtils.setOnSetupDove(new PopupUtils.onSetupDove() {
                     @Override
                     public void onSetup(View v) {
+                        if (type != 1) {
+                            Toast.makeText(getHoldingContext(), "未录用,不能标记为鸽子!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            BackgroundSubscriber<Pigeon> subscriber = new BackgroundSubscriber<Pigeon>(new SubscriberOnNextListener<Pigeon>() {
 
-                        BackgroundSubscriber<Pigeon> subscriber = new BackgroundSubscriber<Pigeon>(new SubscriberOnNextListener<Pigeon>() {
-
-                            @Override
-                            public void onNext(Pigeon pigeon) {
-                                modleList.get(position).setPigeon_count(pigeon.getUser_info().getPigeon_count());
-                                adapter.notifyDataSetChanged();
-                            }
-                        },getHoldingContext());
-                        HttpMethods.getInstance().markPigeon(subscriber,jobid,String.valueOf(login_id), String.valueOf(merchantId));
+                                @Override
+                                public void onNext(Pigeon pigeon) {
+                                    modleList.get(position).setPigeon_count(pigeon.getUser_info().getPigeon_count());
+                                    adapter.notifyDataSetChanged();
+                                }
+                            },getHoldingContext());
+                            HttpMethods.getInstance().markPigeon(subscriber,jobid,String.valueOf(login_id), String.valueOf(merchantId));
+                        }
                     }
                 });
                 popupUtils.show(view);
