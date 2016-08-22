@@ -21,7 +21,7 @@ public class PopupUtils {
         this.context = context;
         View view = LayoutInflater.from(context).inflate(R.layout.popupwindow, null);
         content = (TextView) view.findViewById(R.id.popup_content);
-        popupWindow = new PopupWindow(view, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,80,context.getResources().getDisplayMetrics()), (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,20,context.getResources().getDisplayMetrics()));
+        popupWindow = new PopupWindow(view, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,120,context.getResources().getDisplayMetrics()), (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,40,context.getResources().getDisplayMetrics()));
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(null);
         initListener();

@@ -38,7 +38,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         ta.recycle();
 
         if (mAutoSelectEffect)
-        {
+        {   //将此view设置可以点击的
             setClickable(true);
         }
     }
@@ -109,6 +109,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 
     private void changeAdapter()
     {
+
         removeAllViews();
         TagAdapter adapter = mTagAdapter;
         TagView tagViewContainer = null;
@@ -126,7 +127,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 //            lp.bottomMargin = clp.bottomMargin;
 //            lp.leftMargin = clp.leftMargin;
 //            lp.rightMargin = clp.rightMargin;
-            tagView.setDuplicateParentStateEnabled(true);
+            tagView.setDuplicateParentStateEnabled(true);//外层包装的tagview中的checkable可以传递到子View
             if (tagView.getLayoutParams() != null)
             {
                 tagViewContainer.setLayoutParams(tagView.getLayoutParams());
@@ -178,7 +179,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         int y = (int) mMotionEvent.getY();
         mMotionEvent = null;
 
-        TagView child = findChild(x, y);
+        TagView child = findChild(x, y);//根据点击的坐标值，找到在父布局中的view
         int pos = findPosByView(child);
         if (child != null)
         {
@@ -317,7 +318,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
             TagView v = (TagView) getChildAt(i);
             if (v.getVisibility() == View.GONE) continue;
             Rect outRect = new Rect();
-            v.getHitRect(outRect);
+            v.getHitRect(outRect);//获取该view在父布局中的坐标。
             if (outRect.contains(x, y))
             {
                 return v;
