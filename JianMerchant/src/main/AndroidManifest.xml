@@ -65,7 +65,7 @@
         tools:replace="android:icon, android:theme">
         <activity
             android:name=".login.SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -74,7 +74,7 @@
         </activity>
         <activity
             android:name=".login.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".login.ChangPssActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -130,6 +130,7 @@
             android:name=".affordwages.PassWordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:label=""
             android:name=".talk.ChatActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 

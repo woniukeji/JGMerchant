@@ -13,7 +13,6 @@
         android:layout_margin="40dp"
         android:text="退出登录"
         android:textColor="@color/white"
-
         />
 
 

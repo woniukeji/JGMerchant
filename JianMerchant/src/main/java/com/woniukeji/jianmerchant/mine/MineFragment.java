@@ -21,27 +21,33 @@ import com.woniukeji.jianmerchant.utils.SPUtils;
 
 import java.lang.ref.WeakReference;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
-
-public class MineFragment extends BaseFragment{
+public class MineFragment extends BaseFragment implements View.OnClickListener {
 
 
-    @InjectView(R.id.btn_logout) Button btnLogout;
     private int MSG_USER_SUCCESS = 0;
     private int MSG_USER_FAIL = 1;
     private int MSG_PHONE_SUCCESS = 2;
     private int MSG_REGISTER_SUCCESS = 3;
     private Handler mHandler = new Myhandler(getActivity());
     private Context context = getActivity();
+    private View view;
+    private Button btnLogout;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_mine, container, false);
-        ButterKnife.inject(this, view);
+        view = inflater.inflate(R.layout.activity_mine, container, false);
+        initView();
+        initListener();
         return view;
+    }
+
+    private void initListener() {
+        btnLogout.setOnClickListener(this);
+    }
+
+    private void initView() {
+        btnLogout = (Button) view.findViewById(R.id.btn_logout);
     }
 
     @Override
@@ -64,11 +70,15 @@ public class MineFragment extends BaseFragment{
 
     }
 
-    @OnClick(R.id.btn_logout)
-    public void onClick() {
-        SPUtils.deleteParams(getActivity());
-        startActivity(new Intent(getActivity(),LoginActivity.class));
-        getActivity().finish();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_logout:
+                SPUtils.deleteParams(getActivity());
+                startActivity(new Intent(getActivity(),LoginActivity.class));
+                getActivity().finish();
+                break;
+        }
     }
 
 
