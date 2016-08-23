@@ -983,7 +983,6 @@ public class PublishDetailActivity extends BaseActivity {
                 return false;
             }
         }
-        //qualificationSelected welfareSelected partjobSelected
 
 
         start_time = String.valueOf(DateUtils.getLongTime(tvDateStart.getText().toString() + " " + tvTimeStart.getText().toString(), "yyyy-MM-dd HH:mm"));
