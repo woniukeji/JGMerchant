@@ -61,7 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <LinearLayout
-                    android:layout_above="@id/tv_total"
+                    android:layout_above="@+id/tv_total"
                     android:layout_marginBottom="10dp"
                     android:layout_centerHorizontal="true"
                     android:orientation="horizontal"
@@ -107,7 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <LinearLayout
-                    android:layout_above="@id/tv_people"
+                    android:layout_above="@+id/tv_people"
                     android:layout_marginBottom="10dp"
                     android:layout_centerHorizontal="true"
                     android:orientation="horizontal"

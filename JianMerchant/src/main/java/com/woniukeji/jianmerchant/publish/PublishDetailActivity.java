@@ -819,7 +819,7 @@ public class PublishDetailActivity extends BaseActivity {
                                         HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
                                                 only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
                                                 address, mode, money, term, limit_sex, etBoyCount.getText().toString(),etGirlCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
-                                                job_model, qualificationJsonObj.toString(), welfareJsonObj.toString(), labelJsonObj.toString());
+                                                job_model, qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
                                     } else {
                                         alike = "0";
                                         SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
@@ -838,7 +838,7 @@ public class PublishDetailActivity extends BaseActivity {
                                         HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
                                                 only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
                                                 address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
-                                                job_model, qualificationJsonObj.toString(), welfareJsonObj.toString(), labelJsonObj.toString());
+                                                job_model, qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
                                     }
                                 }
                             })
@@ -874,7 +874,7 @@ public class PublishDetailActivity extends BaseActivity {
                         HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
                                 only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
                                 address, mode, money, term, limit_sex, etBoyCount.getText().toString(),etGirlCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
-                                "0", qualificationJsonObj.toString(), welfareJsonObj.toString(), labelJsonObj.toString());
+                                "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
 
                     } else {
                         alike = "0";
@@ -895,7 +895,7 @@ public class PublishDetailActivity extends BaseActivity {
                         HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
                                 only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
                                 address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
-                                "0", qualificationJsonObj.toString(), welfareJsonObj.toString(), labelJsonObj.toString());
+                                "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
 
                     }
                 }
@@ -968,7 +968,7 @@ public class PublishDetailActivity extends BaseActivity {
         } else if (stop_time == null || stop_time.equals("")) {
             showShortToast("请选择工作结束时间");
             return false;
-        } else if (limit_sex.equals("3")) {//男女分别招收
+        }  else if (limit_sex.equals("3")) {//男女分别招收
             if (etBoyCount.getText().toString().equals("") || etBoyCount.getText().toString() == null || etBoyCount.getText().toString().equals("0")) {
                 showShortToast("请输入男生人数");
                 return false;
@@ -982,8 +982,6 @@ public class PublishDetailActivity extends BaseActivity {
                 showShortToast("请输入需要录取的人数");
                 return false;
             }
-        } else if (flow_qualification.getSelectedList() == null || flow_welfare.getSelectedList() == null || flow_partjob.getSelectedList() == null) {
-            showShortToast("限制条件、福利待遇、兼职标签这三项必选");
         }
         //qualificationSelected welfareSelected partjobSelected
 
