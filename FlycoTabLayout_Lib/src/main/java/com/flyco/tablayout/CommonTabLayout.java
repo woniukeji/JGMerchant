@@ -235,6 +235,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);
         tv_tab_title.setText(mTabEntitys.get(position).getTabTitle());
         ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);
+
         iv_tab_icon.setImageResource(mTabEntitys.get(position).getTabUnselectedIcon());
 
         tabView.setOnClickListener(new OnClickListener() {
@@ -261,16 +262,36 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         if (mTabWidth > 0) {
             lp_tab = new LinearLayout.LayoutParams((int) mTabWidth, LayoutParams.MATCH_PARENT);
         }
-        mTabsContainer.addView(tabView, position, lp_tab);
+        //中间图标参数需要单独设置
+//        if (position == 2 && mTabCount==5) {
+//            tv_tab_title.setVisibility(View.GONE);
+//            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) iv_tab_icon.getLayoutParams();
+//            lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+//            lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+//            //外边距
+//            lp.setMargins(dp2px(5), dp2px(5), dp2px(5), dp2px(5));
+//            iv_tab_icon.setLayoutParams(lp);
+//            mTabsContainer.addView(tabView, position, lp);
+//        }
+//        else {
+            mTabsContainer.addView(tabView, position, lp_tab);
+//        }
+
     }
+
+
 
     private void updateTabStyles() {
         for (int i = 0; i < mTabCount; i++) {
             View tabView = mTabsContainer.getChildAt(i);
             tabView.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);
             TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);
-            tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectColor : mTextUnselectColor);
-            tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextsize);
+            if (i == 2 && mTabCount == 5) {
+                tv_tab_title.setVisibility(View.GONE);
+            } else {
+                tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectColor : mTextUnselectColor);
+                tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextsize);
+            }
 //            tv_tab_title.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);
             if (mTextAllCaps) {
                 tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());
@@ -299,8 +320,16 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
                 } else {
                     lp.bottomMargin = (int) mIconMargin;
                 }
+                if (i == 2 && mTabCount == 5) {
+                    lp.bottomMargin = 0;
+                    lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                    iv_tab_icon.setLayoutParams(lp);
+                } else {
+                    iv_tab_icon.setLayoutParams(lp);
+                }
 
-                iv_tab_icon.setLayoutParams(lp);
+
             } else {
                 iv_tab_icon.setVisibility(View.GONE);
             }

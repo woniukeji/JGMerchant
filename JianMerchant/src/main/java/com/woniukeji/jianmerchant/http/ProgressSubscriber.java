@@ -45,9 +45,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
 
     @Override
     public void onError(Throwable e) {
-        Log.i("onError subscriber", "onError: "+e.getMessage().toString());
-        Toast.makeText(context, "请检查网络！", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(context, e.getMessage().toString(), Toast.LENGTH_LONG).show();
         dismissProgress();
     }
 

@@ -4,6 +4,7 @@ package com.woniukeji.jianmerchant.base;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.woniukeji.jianmerchant.chat.CustomUserProvider;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -39,6 +40,7 @@ public class Application extends android.app.Application {
 
 //        AVOSCloud.setDebugLogEnabled(true);
         LCChatKit.getInstance().init(getApplicationContext(), "AtwJtfIJPKQFtti8D3gNjMmb-gzGzoHsz","spNrDrtGWAXP633DkMMWT65B");
+        Fresco.initialize(this);
     }
     public void UmengConfig(){
 

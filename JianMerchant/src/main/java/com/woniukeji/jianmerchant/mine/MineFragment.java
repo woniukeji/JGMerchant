@@ -2,6 +2,7 @@ package com.woniukeji.jianmerchant.mine;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,10 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseFragment;
+import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.User;
@@ -20,6 +25,8 @@ import com.woniukeji.jianmerchant.login.LoginActivity;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 
 import java.lang.ref.WeakReference;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MineFragment extends BaseFragment implements View.OnClickListener {
 
@@ -32,22 +39,38 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private Context context = getActivity();
     private View view;
     private Button btnLogout;
+    private RelativeLayout rlLogout;
+    private String avatarUrl;
+    private SimpleDraweeView avatar;
+    private TextView userName ;
+    private TextView department;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_mine, container, false);
+//        view = inflater.inflate(R.layout.activity_mine, container, false);
+        view = inflater.inflate(R.layout.activity_mine_new, container, false);
         initView();
         initListener();
         return view;
     }
 
     private void initListener() {
-        btnLogout.setOnClickListener(this);
+//        btnLogout.setOnClickListener(this);
+        rlLogout.setOnClickListener(this);
     }
 
     private void initView() {
-        btnLogout = (Button) view.findViewById(R.id.btn_logout);
+//        btnLogout = (Button) view.findViewById(R.id.btn_logout);
+        rlLogout = (RelativeLayout) view.findViewById(R.id.rl_logout);
+        userName = (TextView) view.findViewById(R.id.user_name);
+        userName.setText((String)SPUtils.getParam(getActivity(), Constants.USER_INFO, "nickname", ""));
+        department = (TextView) view.findViewById(R.id.department);
+        //暂无数据
+        avatarUrl = (String) SPUtils.getParam(getActivity(), Constants.USER_INFO, "name_image", "");
+        avatar = (SimpleDraweeView) view.findViewById(R.id.avatar);
+        Uri uri = Uri.parse(avatarUrl);
+        avatar.setImageURI(uri);
     }
 
     @Override
@@ -77,6 +100,24 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 SPUtils.deleteParams(getActivity());
                 startActivity(new Intent(getActivity(),LoginActivity.class));
                 getActivity().finish();
+                break;
+            case R.id.rl_logout:
+                SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(getActivity());
+                sweetAlertDialog.setCancelable(false);
+                sweetAlertDialog
+                        .setTitleText("确定要退出吗？")
+                        .setConfirmText("确定")
+                        .setCancelText("取消")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                SPUtils.deleteParams(getActivity());
+                                startActivity(new Intent(getActivity(),LoginActivity.class));
+                                getActivity().finish();
+                            }
+                        })
+                        .show();
+
                 break;
         }
     }

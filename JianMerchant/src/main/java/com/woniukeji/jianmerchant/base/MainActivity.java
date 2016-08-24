@@ -15,7 +15,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.adapter.MyPagerAdapter;
 import com.woniukeji.jianmerchant.entity.TabEntity;
-import com.woniukeji.jianmerchant.fragment.MainVPFragment;
+import com.woniukeji.jianmerchant.fragment.FinancialManagementFragment;
 import com.woniukeji.jianmerchant.fragment.ManagerFragment;
 import com.woniukeji.jianmerchant.fragment.PublishFragment;
 import com.woniukeji.jianmerchant.mine.MineFragment;
@@ -77,7 +77,8 @@ public class MainActivity extends BaseActivity {
                     mFragments.add(new ManagerFragment());
                     break;
                 case 1:
-                    mFragments.add(new MainVPFragment().newInstance("财务"));
+//                    mFragments.add(new MainVPFragment().newInstance("财务"));
+                    mFragments.add(new FinancialManagementFragment().newInstance("财务"));
                     break;
                 case 2:
                     mFragments.add(new PublishFragment());
@@ -113,8 +114,8 @@ public class MainActivity extends BaseActivity {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
         mTabLayout.setTabData(mTabEntities);
-        TextView titleView = mTabLayout.getTitleView(2);
-        titleView.setVisibility(View.GONE);
+//        TextView titleView = mTabLayout.getTitleView(2);
+//        titleView.setVisibility(View.GONE);
 
         mTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -162,6 +163,7 @@ public class MainActivity extends BaseActivity {
 //        }
         if (mTabLayout.getCurrentTab() != 3) {
             mTabLayout.showMsg(3, ++msgCount);
+            mTabLayout.setMsgMargin(3,-5,-1);
         } else {
             msgCount = 0;
             mTabLayout.hideMsg(3);
