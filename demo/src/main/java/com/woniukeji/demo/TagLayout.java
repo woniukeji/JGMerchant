@@ -21,8 +21,8 @@ public class TagLayout extends FlowLayout implements OnDataChangedListener {
 
     public TagLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray a = context.obtainStyledAttributes(R.styleable.TagLayout);
-        mMaxSelect = a.getInt(R.styleable.TagLayout_max_select, -1);
+        TypedArray a = context.obtainStyledAttributes(R.styleable.TagFlowLayout);
+        mMaxSelect = a.getInt(R.styleable.TagFlowLayout_max_select, -1);
         a.recycle();
     }
     @Override

@@ -38,6 +38,7 @@ import com.woniukeji.jianmerchant.entity.JobDetails;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.PickType;
+import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
@@ -393,6 +394,7 @@ public class PublishDetailActivity extends BaseActivity {
     private StringBuffer qualificationOther;
     private StringBuffer welfareOther;
     private StringBuffer labelOther;
+    private boolean isFromActivity;
 
 
     @Override
@@ -1016,7 +1018,28 @@ public class PublishDetailActivity extends BaseActivity {
     public void initViews() {
 
         intent = getIntent();
-        if (intent.getAction().equals("fromFragment")) {
+        if (intent.getStringExtra("type").equals("change")) {
+            //从兼职详情过来，需要修改
+            isFromItem = true;//目的是不走下面的判断
+            isFromActivity = true;
+            getCategoryToBean();
+            //限制只能修改不能发布
+            llPublish.setVisibility(View.GONE);
+            llChange.setVisibility(View.VISIBLE);
+            String jobid = intent.getStringExtra("jobid");
+            //获取单个id的兼职信息
+            BackgroundSubscriber<Model> subscriber = new BackgroundSubscriber<Model>(new SubscriberOnNextListener<Model>() {
+                @Override
+                public void onNext(Model model) {
+                    modle = model.getT_job();
+                    //最后在去初始化界面
+                    initModleData(modle);
+                }
+            },mContext);
+            HttpMethods.getInstance().singleJobDetail(subscriber, jobid);
+
+
+        }else if (intent.getAction().equals("fromFragment")) {
             Bundle bundle = intent.getExtras();
             region = bundle.getString("region");
             region_id = bundle.getInt("region_id");//地区id
@@ -1034,6 +1057,7 @@ public class PublishDetailActivity extends BaseActivity {
             getCategoryToBean();
             isFromItem = true;
         }
+
         if (!isFromItem) {
             //这以下设置流布局标签
             quaAdapter = new TagAdapter(qualification) {
@@ -1122,7 +1146,11 @@ public class PublishDetailActivity extends BaseActivity {
                 };
                 flow_partjob.setAdapter(partAdapter);
                 //这以上设置流布局标签
-                initModleData(modle);
+                if (isFromItem) {
+                    //如果是从item过来的走下面
+                    initModleData(modle);
+                }
+
             }
         };
 

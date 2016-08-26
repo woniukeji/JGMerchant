@@ -133,6 +133,9 @@
             android:label=""
             android:name=".talk.ChatActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".login.RegistActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!-- 实时通信模块、推送（若使用该功能，需添加以下声明）START -->
         <service android:name="com.avos.avoscloud.PushService" />

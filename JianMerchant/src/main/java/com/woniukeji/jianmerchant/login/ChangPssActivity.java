@@ -206,11 +206,11 @@ public class ChangPssActivity extends BaseActivity {
             showShortToast("验证码不正确");
             return false;
         }
-        else if (smsCode.getCode().equals("")
-                ||!phoneCode.getText().toString().trim().equals(smsCode.getText())){
-            showShortToast("验证码不正确");
-            return false;
-        }
+//        else if (smsCode.getCode().equals("")
+//                ||!phoneCode.getText().toString().trim().equals(smsCode.getText())){
+//            showShortToast("验证码不正确");
+//            return false;
+//        }
         return true;
     }
 

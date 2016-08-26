@@ -124,6 +124,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                         });
                     }
                     list.setAdapter(historyJobAdapter);
+                    refreshLayout.setRefreshing(false);
                     break;
 
             }
@@ -191,7 +192,9 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    refreshLayout.setRefreshing(false);
+                    //刷新数据
+                    checkOutPage = 0;
+                    getHistroyJobs(checkOutPage);
                 }
             });
             linearLayoutManager = new LinearLayoutManager(getHoldingContext());
@@ -227,7 +230,9 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    refreshLayout.setRefreshing(false);
+                    //刷新数据
+                    checkOutPage = 0;
+                    getHistroyJobs(checkOutPage);
                 }
             });
             linearLayoutManager = new LinearLayoutManager(getHoldingContext());
@@ -278,6 +283,9 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             @Override
             public void onNext(Model model) {
                 List<Model.ListTJobEntity> list_t_job = model.getList_t_job();
+                if (count == 0) {
+                    modelList.clear();
+                }
                 if (list_t_job != null && list_t_job.size()>0) {
                     modelList.addAll(list_t_job);
                 }
@@ -370,6 +378,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
 //        intent = new Intent(getHoldingContext(), TestActivity.class);
         intent = new Intent(getHoldingContext(), PublishDetailActivity.class);
         intent.setAction("fromFragment");
+        intent.putExtra("type", "fromFragment");
 
 
         for (int i = 0; i < regionBaseBean.getData().size(); i++) {

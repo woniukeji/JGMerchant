@@ -7,6 +7,8 @@ import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
+import com.woniukeji.jianmerchant.entity.SmsCode;
+import com.woniukeji.jianmerchant.entity.User;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 
 import java.util.List;
@@ -184,6 +186,35 @@ public class HttpMethods {
         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
         methodsInterface.markPigeon(only,job_id,login_id,merchant_id)
                 .map(new BaseBeanFun<Pigeon>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void singleJobDetail(Subscriber<Model> subscriber, String job_id) {
+        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+        methodsInterface.singleJobDetail(only, job_id)
+                .map(new BaseBeanFun<Model>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void getCodes(Subscriber<SmsCode> subscriber, String tel) {
+        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+        methodsInterface.getCodes(only, tel)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void registAccount(Subscriber<User> subscriber,String tel,String password) {
+        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+        methodsInterface.registAccount(only,tel,password)
+                .map(new BaseBeanFun<User>())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

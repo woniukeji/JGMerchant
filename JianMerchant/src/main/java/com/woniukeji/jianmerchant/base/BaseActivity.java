@@ -70,8 +70,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         float scale = context.getResources().getDisplayMetrics().density;
         return (int) (scale * dipValue + 0.5f);
     }
+    Toast toast = null;
     public void showShortToast(String text) {
-        Toast toast = null;
+
         if (toast == null) {
             toast = Toast.makeText(BaseActivity.this, text, Toast.LENGTH_SHORT);
         } else {

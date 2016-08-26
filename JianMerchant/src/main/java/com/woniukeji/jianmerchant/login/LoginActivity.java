@@ -4,10 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.ViewCompat;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,8 +33,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 import cn.leancloud.chatkit.LCChatKit;
@@ -50,6 +45,7 @@ import okhttp3.Response;
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
 
+    private static final int REQUEST_CODE = 1;
     private Context context=LoginActivity.this;
     // UI references.
     private EditText mPasswordView;
@@ -58,6 +54,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private EditText phoneNumber;
     private EditText password;
     private Button signInButton;
+    private Button registerButton;
     private int MSG_USER_SUCCESS = 0;
     private int MSG_USER_FAIL = 1;
     private int MSG_AUTH_COMPLETE = 2;
@@ -128,15 +125,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //为了设置全屏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        ViewGroup mContentView = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
-        View mChildView = mContentView.getChildAt(0);
-        if (mChildView != null) {
-            //注意不是设置 ContentView 的 FitsSystemWindows, 而是设置 ContentView 的第一个子 View . 使其不为系统 View 预留空间.
-            ViewCompat.setFitsSystemWindows(mChildView, false);
-
-        }
+//        ViewGroup mContentView = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
+//        View mChildView = mContentView.getChildAt(0);
+//        if (mChildView != null) {
+//            //注意不是设置 ContentView 的 FitsSystemWindows, 而是设置 ContentView 的第一个子 View . 使其不为系统 View 预留空间.
+//            ViewCompat.setFitsSystemWindows(mChildView, false);
+//
+//        }
         setContentView(R.layout.activity_login);
-        ButterKnife.inject(this);
     }
 
     @Override
@@ -159,6 +155,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
             }
         });
+        registerButton = (Button) findViewById(R.id.register_in_button);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,RegistActivity.class);
+                startActivityForResult(intent,REQUEST_CODE);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2) {
+            String tel = data.getStringExtra("tel");
+            if (tel != null) {
+                phoneNumber.setText(tel);
+            }
+        }
+
     }
 
     @Override
@@ -232,26 +248,28 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //            userLoginTask.execute();
         }
 
-    @OnClick({R.id.sign_in_button, R.id.register_in_button, R.id.wechat, R.id.qq,R.id.forget_pass, R.id.quick_login})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.sign_in_button:
-//                String phone = phoneNumber.getText().toString().trim();
-//                String pass = password.getText().toString().trim();
-//                if (CheckStatus()) {
-//                    PhoneLoginTask phoneLoginTask = new PhoneLoginTask(phone, MD5Util.MD5(pass));
-//                    phoneLoginTask.execute();
-//                }
-                break;
-
-            case R.id.forget_pass:
-                startActivity(new Intent(LoginActivity.this,ChangPssActivity.class));
-                break;
-//            case R.id.quick_login:
-//                startActivity(new Intent(LoginActivity.this,QuickLoginActivity.class));
+//    @OnClick({R.id.sign_in_button, R.id.register_in_button, R.id.wechat, R.id.qq,R.id.forget_pass, R.id.quick_login})
+//    public void onClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.sign_in_button:
+////                String phone = phoneNumber.getText().toString().trim();
+////                String pass = password.getText().toString().trim();
+////                if (CheckStatus()) {
+////                    PhoneLoginTask phoneLoginTask = new PhoneLoginTask(phone, MD5Util.MD5(pass));
+////                    phoneLoginTask.execute();
+////                }
 //                break;
-        }
-    }
+//
+//            case R.id.forget_pass:
+//                startActivity(new Intent(LoginActivity.this,ChangPssActivity.class));
+//                break;
+////            case R.id.quick_login:
+////                startActivity(new Intent(LoginActivity.this,QuickLoginActivity.class));
+////                break;
+//            case R.id.register_in_button:
+//                break;
+//        }
+//    }
 
     private boolean CheckStatus() {
 //        if (!CommonUtils.isMobileNO(phoneNumber.getText().toString().trim())) {
@@ -323,6 +341,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
                 });
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
 

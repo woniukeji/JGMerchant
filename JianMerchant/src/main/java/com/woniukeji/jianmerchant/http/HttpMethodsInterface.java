@@ -8,6 +8,8 @@ import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
+import com.woniukeji.jianmerchant.entity.SmsCode;
+import com.woniukeji.jianmerchant.entity.User;
 
 import java.util.List;
 
@@ -82,5 +84,19 @@ public interface HttpMethodsInterface {
     @GET("T_UserPigeon_Servlet")
     Observable<BaseBean<Pigeon>> markPigeon(@Query("only") String only, @Query("job_id") String job_id, @Query("login_id") String login_id,@Query("merchant_id") String merchant_id);
 
+    /**
+     * 获取单个兼职的详细信息
+     */
+    @GET("T_job_Id_Servlet")
+    Observable<BaseBean<Model>> singleJobDetail(@Query("only") String only,@Query("job_id") String job_id);
+
+    /**
+     * 获取验证码
+     */
+    @GET("T_user_login_Check_Tel_Servlet")
+    Observable<SmsCode> getCodes(@Query("only") String only, @Query("tel") String tel);
+
+    @GET("T_user_login_Insert_Servlet")
+    Observable<BaseBean<User>> registAccount(@Query("only") String only,@Query("tel") String tel,@Query("password") String password);
 
 }
