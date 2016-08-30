@@ -166,6 +166,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onStart() {
+
         // 在当前的界面变为用户可见的时候调用的方法
         new Thread() {
             public void run() {

@@ -332,6 +332,31 @@
                     android:layout_height="wrap_content" />
 
             </RelativeLayout>
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#beb6b6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+            <RelativeLayout
+                android:id="@+id/rl_shift"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="43dp">
+                <ImageView
+                    android:id="@+id/iv_shift"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:src="@android:drawable/star_on"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Spinner
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/iv_shift"
+                    android:id="@+id/spinner_shift"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></Spinner>
+            </RelativeLayout>
         </LinearLayout>
 
 

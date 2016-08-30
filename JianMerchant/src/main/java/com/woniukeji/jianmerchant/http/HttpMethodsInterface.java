@@ -99,4 +99,25 @@ public interface HttpMethodsInterface {
     @GET("T_user_login_Insert_Servlet")
     Observable<BaseBean<User>> registAccount(@Query("only") String only,@Query("tel") String tel,@Query("password") String password);
 
+    /**
+     * 更改兼职信息
+     */
+    @GET("T_job_Update_Servlet")
+    Observable<BaseBean> updateJob(@Query("only") String only, @Query("city_id") String city_id,
+                                   @Query("aera_id") String aera_id, @Query("type_id") String type_id,
+                                   @Query("merchant_id") String merchant_id, @Query("name") String name,
+                                   @Query("name_image") String name_image, @Query("start_date") String start_date,
+                                   @Query("stop_date") String stop_date, @Query("address") String address,
+                                   @Query("mode") String mode, @Query("money") String money,
+                                   @Query("term") String term, @Query("limit_sex") String limit_sex,
+                                   @Query("sum") String sum, @Query("girl_sum") String girl_sum, @Query("max") String max,
+                                   @Query("alike") String alike, @Query("lon") String lon,
+                                   @Query("lat") String lat, @Query("tel") String tel,
+                                   @Query("start_time") String start_time, @Query("stop_time") String stop_time,
+                                   @Query("set_place") String set_place, @Query("set_time") String set_time,
+                                   @Query("other") String other, @Query("work_content") String work_content,
+                                   @Query("work_require") String work_require, @Query("job_model") String job_model,
+                                   @Query("json_limit") String json_limit, @Query("json_welfare") String json_welfare,
+                                   @Query("json_label") String json_label);
+
 }

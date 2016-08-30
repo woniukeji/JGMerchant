@@ -130,8 +130,8 @@
             android:name=".affordwages.PassWordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:label=""
             android:name=".talk.ChatActivity"
+            android:label=""
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".login.RegistActivity"
@@ -256,9 +256,15 @@
 
         <activity android:name=".mine.PersonExitActivity" />
         <activity android:name=".TestActivity" />
-        <activity android:name=".base.MainActivity"
+        <activity
+            android:name=".base.MainActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activity.HistoryRecords"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
+
+        </activity>
     </application>
 
 </manifest>

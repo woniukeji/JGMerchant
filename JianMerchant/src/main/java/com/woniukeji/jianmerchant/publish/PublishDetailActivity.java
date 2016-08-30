@@ -38,6 +38,7 @@ import com.woniukeji.jianmerchant.entity.JobDetails;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.PickType;
+import com.woniukeji.jianmerchant.eventbus.ChangeJobEvent;
 import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
@@ -73,6 +74,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.greenrobot.event.EventBus;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 import okhttp3.Call;
 import okhttp3.Response;
@@ -400,8 +402,6 @@ public class PublishDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.inject(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
@@ -857,7 +857,6 @@ public class PublishDetailActivity extends BaseActivity {
 
                 if (CheckStatus()) {
                     if (limit_sex.equals("3")) {
-                        // TODO: 2016/7/27 男女各需情况，暂不考虑
                         alike = String.valueOf(System.currentTimeMillis());
                         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
                         SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
@@ -906,12 +905,34 @@ public class PublishDetailActivity extends BaseActivity {
                 //修改
                 if (CheckStatus()) {
                     if (limit_sex.equals("3")) {
+                        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
                         alike = String.valueOf(System.currentTimeMillis());
-                        postChangeInfo(etGirlCount.getText().toString(), "31", String.valueOf(listTJobEntity.getId()));
-//                        postChangeInfo(etBoyCount.getText().toString(), "30", String.valueOf(listTJobEntity.getNv_job_id()));
+                        SubscriberOnNextListener<BaseBean> nextListenner = new SubscriberOnNextListener<BaseBean>() {
+                            @Override
+                            public void onNext(BaseBean baseBean) {
+                                showShortToast(baseBean.getMessage());
+                            }
+                        };
+                        //job_model =0  不是模板
+                        HttpMethods.getInstance().updateJob(new ProgressSubscriber<BaseBean>(nextListenner, PublishDetailActivity.this),only,
+                                String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
+                                address, mode, money, term, limit_sex, etBoyCount.getText().toString(),etGirlCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
+                                "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
+
                     } else {
                         alike = "0";
-                        postChangeInfo(etCount.getText().toString(), limit_sex, String.valueOf(listTJobEntity.getId()));
+                        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+                        SubscriberOnNextListener<BaseBean> nextListenner = new SubscriberOnNextListener<BaseBean>() {
+                            @Override
+                            public void onNext(BaseBean baseBean) {
+                                showShortToast(baseBean.getMessage());
+                            }
+                        };
+                        //job_model =0  不是模板
+                        HttpMethods.getInstance().updateJob(new ProgressSubscriber<BaseBean>(nextListenner, PublishDetailActivity.this),only,
+                                String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
+                                address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
+                                "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
                     }
                 }
                 break;
@@ -1012,31 +1033,20 @@ public class PublishDetailActivity extends BaseActivity {
     public void setContentView() {
         setContentView(R.layout.activity_publish_detail);
         ButterKnife.inject(this);
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void initViews() {
+
 
         intent = getIntent();
         if (intent.getStringExtra("type").equals("change")) {
             //从兼职详情过来，需要修改
             isFromItem = true;//目的是不走下面的判断
             isFromActivity = true;
-            getCategoryToBean();
-            //限制只能修改不能发布
-            llPublish.setVisibility(View.GONE);
-            llChange.setVisibility(View.VISIBLE);
-            String jobid = intent.getStringExtra("jobid");
-            //获取单个id的兼职信息
-            BackgroundSubscriber<Model> subscriber = new BackgroundSubscriber<Model>(new SubscriberOnNextListener<Model>() {
-                @Override
-                public void onNext(Model model) {
-                    modle = model.getT_job();
-                    //最后在去初始化界面
-                    initModleData(modle);
-                }
-            },mContext);
-            HttpMethods.getInstance().singleJobDetail(subscriber, jobid);
+            getCategoryToBeanNew();
+
 
 
         }else if (intent.getAction().equals("fromFragment")) {
@@ -1103,6 +1113,58 @@ public class PublishDetailActivity extends BaseActivity {
 //        }
 //        sweetAlertDialog = new SweetAlertDialog(PublishDetailActivity.this, SweetAlertDialog.PROGRESS_TYPE);
 
+    }
+
+    private void getCategoryToBeanNew() {
+        SubscriberOnNextListener<CityAndCategoryBean> onNextListenner = new SubscriberOnNextListener<CityAndCategoryBean>() {
+
+            @Override
+            public void onNext(CityAndCategoryBean cityAndCategoryBean) {
+                PublishDetailActivity.this.cityAndCategoryBean = cityAndCategoryBean;
+                qualification = getInfoForTag(cityAndCategoryBean, "qualification");
+                welfare = getInfoForTag(cityAndCategoryBean, "welfare");
+                partjob_tag = getInfoForTag(cityAndCategoryBean, "partjob_tag");
+                //这以下设置流布局标签
+                quaAdapter = new TagAdapter(qualification) {
+                    @Override
+                    public View getView(FlowLayout parent, int position, Object o) {
+                        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_qualification, false);
+                        textView.setText((String) o);
+                        return textView;
+                    }
+                };
+                flow_qualification.setAdapter(quaAdapter);
+                welAdapter = new TagAdapter(welfare) {
+                    @Override
+                    public View getView(FlowLayout parent, int position, Object o) {
+                        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_welfare, false);
+                        textView.setText((String) o);
+                        return textView;
+                    }
+                };
+                flow_welfare.setAdapter(welAdapter);
+                partAdapter = new TagAdapter(partjob_tag) {
+                    @Override
+                    public View getView(FlowLayout parent, int position, Object o) {
+                        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_partjob, false);
+                        textView.setText((String) o);
+                        return textView;
+                    }
+                };
+                flow_partjob.setAdapter(partAdapter);
+                EventBus.getDefault().post(new ChangeJobEvent());
+                //这以上设置流布局标签
+//                if (isFromItem) {
+//                    //如果是从item过来的走下面
+//                    initModleData(modle);
+//                }
+
+            }
+        };
+
+        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+        int loginId = (int) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
+        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<CityAndCategoryBean>(onNextListenner, this), only, String.valueOf(loginId));
     }
 
     /**
@@ -1261,6 +1323,23 @@ public class PublishDetailActivity extends BaseActivity {
         }
         labelJsonObj.add("list_t_label", partjobJsonArray);
 
+    }
+
+    public void onEventMainThread(ChangeJobEvent event) {
+        //限制只能修改不能发布
+        llPublish.setVisibility(View.GONE);
+        llChange.setVisibility(View.VISIBLE);
+        String jobid = intent.getStringExtra("jobid");
+        //获取单个id的兼职信息
+        BackgroundSubscriber<Model> subscriber = new BackgroundSubscriber<Model>(new SubscriberOnNextListener<Model>() {
+            @Override
+            public void onNext(Model model) {
+                modle = model.getT_job();
+                //最后在去初始化界面
+                initModleData(modle);
+            }
+        },mContext);
+        HttpMethods.getInstance().singleJobDetail(subscriber, jobid);
     }
 
     private Set<Integer> getCurrentSet(Model.ListTJobEntity modle,String name) {
@@ -1838,4 +1917,6 @@ public class PublishDetailActivity extends BaseActivity {
         }
         return false;
     }
+
+
 }

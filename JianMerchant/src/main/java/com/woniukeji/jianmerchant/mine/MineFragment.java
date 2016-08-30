@@ -9,8 +9,11 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +31,7 @@ import java.lang.ref.WeakReference;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class MineFragment extends BaseFragment implements View.OnClickListener {
+public class MineFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
 
     private int MSG_USER_SUCCESS = 0;
@@ -44,6 +47,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private SimpleDraweeView avatar;
     private TextView userName ;
     private TextView department;
+    private RelativeLayout rlShift;
+    private Spinner shift;
+    private ArrayAdapter<CharSequence> adapter;
 
 
     @Override
@@ -58,10 +64,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private void initListener() {
 //        btnLogout.setOnClickListener(this);
         rlLogout.setOnClickListener(this);
+
     }
 
     private void initView() {
 //        btnLogout = (Button) view.findViewById(R.id.btn_logout);
+        rlShift = (RelativeLayout) view.findViewById(R.id.rl_shift);
         rlLogout = (RelativeLayout) view.findViewById(R.id.rl_logout);
         userName = (TextView) view.findViewById(R.id.user_name);
         userName.setText((String)SPUtils.getParam(getActivity(), Constants.USER_INFO, "nickname", ""));
@@ -71,6 +79,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         avatar = (SimpleDraweeView) view.findViewById(R.id.avatar);
         Uri uri = Uri.parse(avatarUrl);
         avatar.setImageURI(uri);
+        shift = (Spinner) view.findViewById(R.id.spinner_shift);
+        adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.shift_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        shift.setAdapter(adapter);
+        shift.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -119,7 +133,52 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         .show();
 
                 break;
+            case R.id.rl_shift:
+
+                break;
         }
+    }
+
+
+    public void  performExit() {
+//        SPUtils.deleteParams(getActivity());
+//        getActivity().finish();
+//        android.os.Process.killProcess(android.os.Process.myPid());
+//        System.exit(0);
+        SPUtils.deleteParams(getActivity());
+        startActivity(new Intent(getActivity(),LoginActivity.class));
+        getActivity().finish();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch ((int) id) {
+            case 0:
+
+                break;
+            case 1:
+//                Constants.JIANGUO_USING = Constants.JIANGUO_xiao;
+                performExit();
+                break;
+            case 2:
+//                Constants.JIANGUO_USING = Constants.JIANGUO_TEST;
+                performExit();
+                break;
+            case 3:
+//                Constants.JIANGUO_USING = Constants.JIANGUO_TEST2;
+                performExit();
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
 

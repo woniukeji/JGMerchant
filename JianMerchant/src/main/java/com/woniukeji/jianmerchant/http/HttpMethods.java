@@ -221,6 +221,25 @@ public class HttpMethods {
                 .subscribe(subscriber);
     }
 
+    public void updateJob(Subscriber<BaseBean> subscriber,
+                          String only,
+                          String city_id,String aera_id,String type_id,
+                          String merchant_id,String name,String name_image,
+                          String start_date,String stop_date,String address,String mode,
+                          String money,String term,String limit_sex,String sum,String girl_sum,
+                          String hot,String alike,String lon,String lat,String tel,String start_time,String stop_time,
+                          String set_place,String set_time,String other,String work_content,String work_require,String job_model,
+                          String json_limit,String json_welfare,String json_label) {
+
+        methodsInterface.updateJob(only, city_id, aera_id, type_id, merchant_id, name, name_image, start_date, stop_date, address,
+                mode, money, term, limit_sex, sum, girl_sum, hot, alike, lon, lat, tel, start_time, stop_time, set_place, set_time,
+                other, work_content, work_require, job_model, json_limit, json_welfare, json_label)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
 
     private class APIExecption extends RuntimeException {
         public APIExecption(Integer code) {

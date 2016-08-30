@@ -251,6 +251,7 @@ private class Myhandler extends Handler {
      */
     public void getJobs(String merchantId, String status, final String count) {
         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+
         OkHttpUtils
                 .get()
                 .url(Constants.GET_PART_JOB_PUBLISH)

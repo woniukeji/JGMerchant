@@ -39,12 +39,13 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
         //分配的宽高
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-
+        MeasureSpec.makeMeasureSpec(50, MeasureSpec.AT_MOST);
         //如果父控件是wrap_content 宽高需要计算后在设置
 
         int width = 0;//控件最终宽度

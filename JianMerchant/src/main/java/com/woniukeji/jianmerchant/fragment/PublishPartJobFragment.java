@@ -61,7 +61,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     //设置此fragment的参数，创建新兼职，历史纪录，模板
     private String type;
     private List<RegionBean> dataSetRegion = Arrays.asList(new RegionBean("全国", 0), new RegionBean("三亚", 1), new RegionBean("海口", 2), new RegionBean("北京", 3), new RegionBean("西安", 4), new RegionBean("杭州", 5));
-    private List<TypeBean> dataSetType = Arrays.asList(new TypeBean("短期", 0), new TypeBean("长期", 1), new TypeBean("实习生", 2), new TypeBean("寒/暑假工", 3));
+    private List<TypeBean> dataSetType = Arrays.asList(new TypeBean("短期", 0), new TypeBean("长期", 1), new TypeBean("实习生", 2), new TypeBean("兼职旅行", 3));
     BaseBean<List<RegionBean>> regionBaseBean = new BaseBean<>();
     BaseBean<List<TypeBean>> typeBaseBean = new BaseBean<>();
     BaseBean<List<CityAndCategoryBean.ListTTypeBean>> categoryBean = new BaseBean<>();

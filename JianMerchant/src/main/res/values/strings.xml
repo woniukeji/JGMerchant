@@ -4,4 +4,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="swipe_text">标记鸽子</string>
+    <string-array name="shift_array">
+        <item>-选择切换版本-</item>
+        <item>本地</item>
+        <item>测试</item>
+        <item>正式</item>
+    </string-array>
 </resources>
