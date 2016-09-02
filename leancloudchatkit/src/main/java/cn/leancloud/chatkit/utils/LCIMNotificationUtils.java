@@ -26,6 +26,8 @@ public class LCIMNotificationUtils {
    * 比如已经在聊天页面了，实际就不应该再弹出 notification
    */
   private static List<String> notificationTagList = new LinkedList<String>();
+  private static Intent lastIntent;
+  private static Intent currentIntent;
 
   /**
    * 添加 tag 到 tag list，在 MessageHandler 弹出 notification 前会判断是否与此 tag 相等
@@ -59,26 +61,47 @@ public class LCIMNotificationUtils {
     return !notificationTagList.contains(tag);
   }
 
-  public static void showNotification(Context context, String title, String content, Intent intent) {
-    showNotification(context, title, content, null, intent);
-  }
+//  public static void showNotification(Context context, String title, String content, Intent intent) {
+//    showNotification(context, title, content, null, intent);
+//  }
 
-  public static void showNotification(Context context, String title, String content, String sound, Intent intent) {
-    PendingIntent contentIntent = PendingIntent.getActivity(context, REPLY_NOTIFY_ID, intent, 0);
-    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-        .setSmallIcon(context.getApplicationInfo().icon)
-        .setContentTitle(title).setAutoCancel(true).setContentIntent(contentIntent)
-        .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
-        .setContentText(content);
-    NotificationManager manager =
-      (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-    Notification notification = mBuilder.build();
-    if (sound != null && sound.trim().length() > 0) {
-      notification.sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + sound);
-    }
-    manager.notify(REPLY_NOTIFY_ID, notification);
+//  public static void showNotification(Context context, String title, String content, String sound, Intent intent) {
+////    PendingIntent contentIntent = PendingIntent.getActivity(context, REPLY_NOTIFY_ID, intent, 0);
+//    PendingIntent contentIntent = PendingIntent.getActivity(context, REPLY_NOTIFY_ID, intent, PendingIntent.FLAG_ONE_SHOT);
+//    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+//        .setSmallIcon(context.getApplicationInfo().icon)
+//        .setContentTitle(title).setAutoCancel(true).setContentIntent(contentIntent)
+//        .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
+//        .setContentText(content);
+//    NotificationManager manager =
+//      (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+//    Notification notification = mBuilder.build();
+//
+//    if (sound != null && sound.trim().length() > 0) {
+//      notification.sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + sound);
+//    }
+//    manager.notify(REPLY_NOTIFY_ID, notification);
+//    currentIntent = intent;
+//    if (currentIntent != lastIntent) {
+//      lastIntent = currentIntent;
+//    }
+//  }
+public static void showNotification(Context context, int requestCode,String title, String content, String sound, Intent intent) {
+  PendingIntent contentIntent = PendingIntent.getActivity(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+  NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+          .setSmallIcon(context.getApplicationInfo().icon)
+          .setContentTitle(title).setAutoCancel(true).setContentIntent(contentIntent)
+          .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
+          .setContentText(content);
+  NotificationManager manager =
+          (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+  Notification notification = mBuilder.build();
+  if (sound != null && sound.trim().length() > 0) {
+    notification.sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + sound);
   }
+  manager.notify(requestCode, notification);
 
+}
   public static void cancelNotification(Context context) {
     NotificationManager nMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     nMgr.cancel(REPLY_NOTIFY_ID);

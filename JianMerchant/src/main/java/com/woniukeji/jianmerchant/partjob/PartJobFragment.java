@@ -23,7 +23,7 @@ import com.woniukeji.jianmerchant.utils.SPUtils;
 import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -34,19 +34,19 @@ import butterknife.OnClick;
 public class PartJobFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    @InjectView(R.id.img_back) ImageView imgBack;
-    @InjectView(R.id.tv_title) TextView tvTitle;
-    @InjectView(R.id.img_share) ImageView imgShare;
-    @InjectView(R.id.img_top) ImageView imgTop;
-    @InjectView(R.id.img_fabu) ImageView imgFabu;
-    @InjectView(R.id.publish) RelativeLayout publish;
-    @InjectView(R.id.img_gaunli) ImageView imgGaunli;
-    @InjectView(R.id.management) RelativeLayout management;
-    @InjectView(R.id.img_money) ImageView imgMoney;
-    @InjectView(R.id.money_management) RelativeLayout moneyManagement;
-    @InjectView(R.id.img_person) ImageView imgPerson;
-    @InjectView(R.id.manpower) RelativeLayout manpower;
-    @InjectView(R.id.rl_null) RelativeLayout rlNull;
+    @BindView(R.id.img_back) ImageView imgBack;
+    @BindView(R.id.tv_title) TextView tvTitle;
+    @BindView(R.id.img_share) ImageView imgShare;
+    @BindView(R.id.img_top) ImageView imgTop;
+    @BindView(R.id.img_fabu) ImageView imgFabu;
+    @BindView(R.id.publish) RelativeLayout publish;
+    @BindView(R.id.img_gaunli) ImageView imgGaunli;
+    @BindView(R.id.management) RelativeLayout management;
+    @BindView(R.id.img_money) ImageView imgMoney;
+    @BindView(R.id.money_management) RelativeLayout moneyManagement;
+    @BindView(R.id.img_person) ImageView imgPerson;
+    @BindView(R.id.manpower) RelativeLayout manpower;
+    @BindView(R.id.rl_null) RelativeLayout rlNull;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -63,7 +63,6 @@ public class PartJobFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
     }
 
     @OnClick({R.id.publish, R.id.management, R.id.money_management, R.id.manpower})
@@ -135,7 +134,7 @@ public class PartJobFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_part_job, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         initview();
         return view;
 

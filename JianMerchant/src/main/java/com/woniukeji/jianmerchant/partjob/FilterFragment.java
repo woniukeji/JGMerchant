@@ -13,8 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +37,6 @@ import com.woniukeji.jianmerchant.utils.ExcelUtil;
 import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.PopupUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -48,8 +45,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import cn.leancloud.chatkit.LCChatKit;
 import cn.leancloud.chatkit.activity.LCIMConversationActivity;
@@ -58,6 +55,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
 import okhttp3.Call;
 import okhttp3.Response;
+import ui.EmptyRecyclerView;
 
 /**
  * Activities that contain this fragment must implement the
@@ -68,13 +66,10 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
 
     private static String params1 = "type";
     private static String params2 = "jobid";
-    @InjectView(R.id.img_renwu) ImageView imgRenwu;
-    @InjectView(R.id.rl_null) RelativeLayout rlNull;
-//    @InjectView(R.id.list) FixedRecyclerView list;
-    @InjectView(R.id.list)
-    SwipeMenuRecyclerView list;
-    @InjectView(R.id.refresh_layout) SwipeRefreshLayout refreshLayout;
-    @InjectView(R.id.btn_out_info) TextView btnOutInfo;
+    @BindView(R.id.list)
+    EmptyRecyclerView list;
+    @BindView(R.id.refresh_layout) SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.btn_out_info) TextView btnOutInfo;
     private int MSG_GET_SUCCESS = 0;
     private int MSG_GET_FAIL = 1;
     private int MSG_POST_SUCCESS = 5;
@@ -84,7 +79,7 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
     private List<PublishUser.ListTUserInfoEntity> modleList = new ArrayList<>();
     private int lastVisibleItem;
     //    private FilterAdapter adapter;
-    private NewFilterAdapter adapter;
+    private NewNewFilterAdapter adapter;
     private LinearLayoutManager mLayoutManager;
     private int mPosition;
     private int type = 0;
@@ -95,12 +90,12 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
     private SubscriberOnNextListener<BaseBean> listenner;
     private android.view.ActionMode mActionMode;
     private int merchantId;
+    private ViewGroup container;
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
-        ButterKnife.reset(this);
     }
 
 
@@ -136,19 +131,6 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
                         refreshLayout.setRefreshing(false);
                     }
                     modleList.addAll(modelBaseBean.getData().getList_t_user_info());
-
-                    if (modleList.size() > 0) {//判断录取人数 是否显示图片
-                        if (rlNull != null) {
-                            rlNull.setVisibility(View.GONE);
-                        }
-//                        if (type==1){//导出录取人信息按钮=
-                            btnOutInfo.setVisibility(View.VISIBLE);
-//                        }
-                    } else {
-                        if (rlNull != null) {
-                            rlNull.setVisibility(View.VISIBLE);
-                        }
-                    }
 
                     adapter.notifyDataSetChanged();
                     loadOk=true;
@@ -218,8 +200,9 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        this.container = container;
         View view = inflater.inflate(R.layout.fragment_admit, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         initview();
         return view;
 
@@ -229,7 +212,9 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
     private void initview() {
 
 //        adapter = new FilterAdapter(modleList, getActivity(), type, jobid, this);
-        adapter = new NewFilterAdapter(modleList,getActivity(),type,jobid);
+//        adapter = new NewFilterAdapter(modleList,getActivity(),type,jobid);
+        adapter = new NewNewFilterAdapter(modleList,getActivity(),type,jobid);
+
         adapter.setEnrollOrRefuseClickListener(new EnrollOrRefuseClickListener() {
             @Override
             public void onClick(int position, int login_id, int type, View view) {
@@ -303,6 +288,7 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
 //        recycleList.addItemDecoration(new DividerItemDecoration(
 //                getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
+        list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content,container,false));
         //设置adapter
         list.setAdapter(adapter);
 
@@ -326,8 +312,6 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
             }
         };
         subscriber = new ProgressSubscriber<>(listenner,getActivity(),false);
-
-
     }
 
     public void onEvent(FilterEvent filterEvent) {

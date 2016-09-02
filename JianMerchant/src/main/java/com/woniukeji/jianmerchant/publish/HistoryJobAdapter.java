@@ -21,7 +21,7 @@ import com.woniukeji.jianmerchant.utils.SPUtils;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 public class HistoryJobAdapter extends RecyclerView.Adapter<HistoryJobAdapter.ViewHolder> {
 
@@ -30,19 +30,19 @@ public class HistoryJobAdapter extends RecyclerView.Adapter<HistoryJobAdapter.Vi
     private  String mType;
     public static final int NORMAL = 1;
     public static final int IS_FOOTER = 2;
-    @InjectView(R.id.tv_merchant_name) TextView tvTitle;
-    @InjectView(R.id.tv_date) TextView tvDate;
-    @InjectView(R.id.tv_location) TextView tvLocation;
-    @InjectView(R.id.ll_publish_time) LinearLayout llPublishTime;
-    @InjectView(R.id.tv_human) TextView tvHuman;
-    @InjectView(R.id.tv_name) TextView tvName;
-    @InjectView(R.id.ll_publisher) LinearLayout llPublisher;
-    @InjectView(R.id.tv_enroll_num) TextView tvEnrollNum;
-    @InjectView(R.id.btn_muban_use) Button btnMubanUse;
-    @InjectView(R.id.btn_muban_delete) Button btnMubanDelete;
-    @InjectView(R.id.ll_muban) LinearLayout llMuban;
-    @InjectView(R.id.img_his) ImageView imgHis;
-    @InjectView(R.id.rl_job) RelativeLayout rlJob;
+    @BindView(R.id.tv_merchant_name) TextView tvTitle;
+    @BindView(R.id.tv_date) TextView tvDate;
+    @BindView(R.id.tv_location) TextView tvLocation;
+    @BindView(R.id.ll_publish_time) LinearLayout llPublishTime;
+    @BindView(R.id.tv_human) TextView tvHuman;
+    @BindView(R.id.tv_name) TextView tvName;
+    @BindView(R.id.ll_publisher) LinearLayout llPublisher;
+    @BindView(R.id.tv_enroll_num) TextView tvEnrollNum;
+    @BindView(R.id.btn_muban_use) Button btnMubanUse;
+    @BindView(R.id.btn_muban_delete) Button btnMubanDelete;
+    @BindView(R.id.ll_muban) LinearLayout llMuban;
+    @BindView(R.id.img_his) ImageView imgHis;
+    @BindView(R.id.rl_job) RelativeLayout rlJob;
 
     private AnimationDrawable mAnimationDrawable;
     private boolean isFooterChange = false;
@@ -182,19 +182,19 @@ public class HistoryJobAdapter extends RecyclerView.Adapter<HistoryJobAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @InjectView(R.id.tv_merchant_name) TextView tvTitle;
-        @InjectView(R.id.tv_date) TextView tvDate;
-        @InjectView(R.id.tv_location) TextView tvLocation;
-        @InjectView(R.id.ll_publish_time) LinearLayout llPublishTime;
-        @InjectView(R.id.tv_human) TextView tvHuman;
-        @InjectView(R.id.tv_name) TextView tvName;
-        @InjectView(R.id.ll_publisher) LinearLayout llPublisher;
-        @InjectView(R.id.tv_enroll_num) TextView tvEnrollNum;
-        @InjectView(R.id.btn_muban_use) Button btnMubanUse;
-        @InjectView(R.id.btn_muban_delete) Button btnMubanDelete;
-        @InjectView(R.id.ll_muban) LinearLayout llMuban;
-        @InjectView(R.id.img_his) ImageView imgHis;
-        @InjectView(R.id.rl_job) RelativeLayout rlJob;
+        @BindView(R.id.tv_merchant_name) TextView tvTitle;
+        @BindView(R.id.tv_date) TextView tvDate;
+        @BindView(R.id.tv_location) TextView tvLocation;
+        @BindView(R.id.ll_publish_time) LinearLayout llPublishTime;
+        @BindView(R.id.tv_human) TextView tvHuman;
+        @BindView(R.id.tv_name) TextView tvName;
+        @BindView(R.id.ll_publisher) LinearLayout llPublisher;
+        @BindView(R.id.tv_enroll_num) TextView tvEnrollNum;
+        @BindView(R.id.btn_muban_use) Button btnMubanUse;
+        @BindView(R.id.btn_muban_delete) Button btnMubanDelete;
+        @BindView(R.id.ll_muban) LinearLayout llMuban;
+        @BindView(R.id.img_his) ImageView imgHis;
+        @BindView(R.id.rl_job) RelativeLayout rlJob;
 
         private ImageView animLoading;
         private TextView loading;
@@ -204,10 +204,10 @@ public class HistoryJobAdapter extends RecyclerView.Adapter<HistoryJobAdapter.Vi
 
             switch (type) {
                 case NORMAL:
-                    ButterKnife.inject(this, view);
+                    ButterKnife.bind(this, view);
                     break;
                 case IS_FOOTER:
-                    animLoading = (ImageView) view.findViewById(R.id.anim_loading);
+//                    animLoading = (ImageView) view.findViewById(R.id.anim_loading);
                     loading = (TextView) view.findViewById(R.id.tv_loading);
                     break;
             }

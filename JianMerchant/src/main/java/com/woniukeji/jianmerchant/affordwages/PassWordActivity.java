@@ -27,22 +27,22 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 
 public class PassWordActivity extends BaseActivity {
 
-    @InjectView(R.id.img_back) ImageView imgBack;
-    @InjectView(R.id.tv_title) TextView tvTitle;
-    @InjectView(R.id.tv_confirm) TextView tvConfirm;
-    @InjectView(R.id.et_pass_one) EditText etPassOne;
-    @InjectView(R.id.et_pass_two) EditText etPassTwo;
-    @InjectView(R.id.ll_change) LinearLayout llChange;
-    @InjectView(R.id.btn_change_pay_pass) Button btnChangePayPass;
-    @InjectView(R.id.ll_changed) LinearLayout llChanged;
-    @InjectView(R.id.et_pass_old) EditText etPassOld;
+    @BindView(R.id.img_back) ImageView imgBack;
+    @BindView(R.id.tv_title) TextView tvTitle;
+    @BindView(R.id.tv_confirm) TextView tvConfirm;
+    @BindView(R.id.et_pass_one) EditText etPassOne;
+    @BindView(R.id.et_pass_two) EditText etPassTwo;
+    @BindView(R.id.ll_change) LinearLayout llChange;
+    @BindView(R.id.btn_change_pay_pass) Button btnChangePayPass;
+    @BindView(R.id.ll_changed) LinearLayout llChanged;
+    @BindView(R.id.et_pass_old) EditText etPassOld;
     private int MSG_USER_SUCCESS = 0;
     private int MSG_USER_FAIL = 1;
     private Handler mHandler = new Myhandler(this);
@@ -55,7 +55,7 @@ public class PassWordActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
 
@@ -97,7 +97,7 @@ public class PassWordActivity extends BaseActivity {
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_pass_word);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override

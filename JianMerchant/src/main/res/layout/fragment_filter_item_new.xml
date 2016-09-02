@@ -54,35 +54,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <LinearLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
                 android:background="@drawable/gz"
                 android:id="@+id/user_gezi1"
-                android:layout_width="10dp"
-                android:layout_height="10dp" />
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
             <ImageView
                 android:background="@drawable/gz"
                 android:id="@+id/user_gezi2"
-                android:layout_width="10dp"
-                android:layout_height="10dp" />
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
             <ImageView
                 android:background="@drawable/gz"
                 android:id="@+id/user_gezi3"
-                android:layout_width="10dp"
-                android:layout_height="10dp" />
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
             <ImageView
                 android:background="@drawable/gz"
                 android:id="@+id/user_gezi4"
-                android:layout_width="10dp"
-                android:layout_height="10dp" />
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
             <ImageView
                 android:background="@drawable/gz"
                 android:id="@+id/user_gezi5"
-                android:layout_width="10dp"
-                android:layout_height="10dp" />
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
         </LinearLayout>
     </LinearLayout>
     <TextView
@@ -130,7 +130,7 @@
         android:layout_marginRight="9dp"
         android:layout_alignTop="@id/user_phone"
         android:layout_toLeftOf="@id/fgx"
-        android:src="@drawable/chat"
+        android:src="@drawable/chat_item"
         android:id="@+id/user_talk"
         android:layout_width="20dp"
         android:layout_height="20dp" />

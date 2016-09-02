@@ -7,6 +7,13 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#3498db</item>
     </style>
+
+    <style name="APPSplash" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimary">@color/app_bg</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">#3498db</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
     <style name="title_bar_style">
     <item name="android:background">@color/app_bg</item>
     <item name="android:paddingLeft">0.0dip</item>
@@ -34,5 +41,6 @@
         <item name="android:layout_marginTop">17.5dp</item>
         <item name="android:textSize">14dp</item>
     </style>
+
 
 </resources>

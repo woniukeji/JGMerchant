@@ -29,7 +29,7 @@ import com.woniukeji.jianmerchant.utils.TimeCount;
 import java.util.regex.Pattern;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 /**
  * Created by Se7enGM on 2016/8/25.
@@ -38,37 +38,37 @@ public class RegistActivity extends BaseActivity {
     private Context mContext = RegistActivity.this;
     private static final int RESULT_CODE = 2;
     private SmsCode smsCode;
-    @InjectView(R.id.img_back)
+    @BindView(R.id.img_back)
     ImageView imgBack;
-    @InjectView(R.id.tv_title)
+    @BindView(R.id.tv_title)
     TextView tvTitle;
-    @InjectView(R.id.img_share)
+    @BindView(R.id.img_share)
     ImageView imgShare;
-    @InjectView(R.id.phoneNumber)
+    @BindView(R.id.phoneNumber)
     EditText phoneNumber;
-    @InjectView(R.id.btn_get_code)
+    @BindView(R.id.btn_get_code)
     Button btnGetCode;
-    @InjectView(R.id.phoneCode)
+    @BindView(R.id.phoneCode)
     EditText phoneCode;
-    @InjectView(R.id.passWord1)
+    @BindView(R.id.passWord1)
     EditText passWord1;
-    @InjectView(R.id.passWord2)
+    @BindView(R.id.passWord2)
     EditText passWord2;
-    @InjectView(R.id.cb_rule)
+    @BindView(R.id.cb_rule)
     CheckBox cbRule;
-    @InjectView(R.id.tv_rule)
+    @BindView(R.id.tv_rule)
     TextView tvRule;
-    @InjectView(R.id.user_rule)
+    @BindView(R.id.user_rule)
     LinearLayout userRule;
-    @InjectView(R.id.phone_sign_in_button)
+    @BindView(R.id.phone_sign_in_button)
     Button phoneSignInButton;
-    @InjectView(R.id.email_login_form)
+    @BindView(R.id.email_login_form)
     LinearLayout emailLoginForm;
 
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_regist);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
     }
 

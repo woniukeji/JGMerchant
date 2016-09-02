@@ -13,19 +13,19 @@ import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class HistoryRecords extends BaseActivity {
 
 
-    @InjectView(R.id.img_back)
+    @BindView(R.id.img_back)
     ImageView imgBack;
-    @InjectView(R.id.tv_title)
+    @BindView(R.id.tv_title)
     TextView tvTitle;
-    @InjectView(R.id.tv_search)
+    @BindView(R.id.tv_search)
     TextView tvSearch;
-    @InjectView(R.id.rv_history)
+    @BindView(R.id.rv_history)
     RecyclerView rvHistory;
 
     @Override
@@ -37,7 +37,7 @@ public class HistoryRecords extends BaseActivity {
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_hostory_records);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override

@@ -31,7 +31,7 @@ import java.lang.ref.WeakReference;
 import java.util.Set;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 import cn.leancloud.chatkit.LCChatKit;
@@ -40,7 +40,7 @@ import okhttp3.Response;
 
 public class SplashActivity extends BaseActivity {
 
-    @InjectView(R.id.img_splash) ImageView imgSplash;
+    @BindView(R.id.img_splash) ImageView imgSplash;
     private int MSG_USER_SUCCESS = 0;
     private int MSG_USER_FAIL = 1;
     private int MSG_PHONE_SUCCESS = 2;
@@ -91,12 +91,12 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void setContentView() {
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            getWindow().setStatusBarColor(Color.TRANSPARENT);
 //        }
         setContentView(R.layout.activity_splash);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override

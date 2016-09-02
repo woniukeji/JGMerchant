@@ -36,7 +36,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
@@ -46,15 +46,15 @@ import okhttp3.Call;
  */
 public class ChangPssActivity extends BaseActivity {
 
-    @InjectView(R.id.img_back) ImageView imgBack;
-    @InjectView(R.id.tv_merchant_name) TextView title;
-    @InjectView(R.id.phoneNumber) EditText phoneNumber;
-    @InjectView(R.id.btn_get_code) Button btnGetCode;
-    @InjectView(R.id.phoneCode) EditText phoneCode;
-    @InjectView(R.id.passWord1) EditText passWord1;
-    @InjectView(R.id.passWord2) EditText passWord2;
-    @InjectView(R.id.phone_sign_in_button) Button phoneSignInButton;
-    @InjectView(R.id.email_login_form) LinearLayout emailLoginForm;
+    @BindView(R.id.img_back) ImageView imgBack;
+    @BindView(R.id.tv_merchant_name) TextView title;
+    @BindView(R.id.phoneNumber) EditText phoneNumber;
+    @BindView(R.id.btn_get_code) Button btnGetCode;
+    @BindView(R.id.phoneCode) EditText phoneCode;
+    @BindView(R.id.passWord1) EditText passWord1;
+    @BindView(R.id.passWord2) EditText passWord2;
+    @BindView(R.id.phone_sign_in_button) Button phoneSignInButton;
+    @BindView(R.id.email_login_form) LinearLayout emailLoginForm;
     private String patternCoder = "(?<!\\d)\\d{6}(?!\\d)";
     private BroadcastReceiver smsReceiver;
     private IntentFilter filter2;
@@ -116,7 +116,7 @@ public class ChangPssActivity extends BaseActivity {
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_regist);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override

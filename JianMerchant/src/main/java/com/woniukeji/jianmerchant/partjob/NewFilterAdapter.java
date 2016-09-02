@@ -95,7 +95,6 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
             if (onChatClickListener!=null) {
                 holder.setOnChatClickListener(onChatClickListener);
             }
-
         }
 
     }
@@ -136,12 +135,15 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
         private ImageView userGezi5;
         private TextView loading;
 
-        private FilterItemClickListener filterItemClickListener;
         private ImageView userChat;
-        private onChatClickListener onChatClickListener;
         private PublishUser.ListTUserInfoEntity userInfo;
 
 
+        private onChatClickListener onChatClickListener;
+        public void setOnChatClickListener(com.woniukeji.jianmerchant.partjob.onChatClickListener onChatClickListener) {
+            this.onChatClickListener = onChatClickListener;
+        }
+        private FilterItemClickListener filterItemClickListener;
         public void setFilterItemClickListener(FilterItemClickListener filterItemClickListener) {
             this.filterItemClickListener = filterItemClickListener;
         }
@@ -325,9 +327,7 @@ public class NewFilterAdapter extends SwipeMenuAdapter<NewFilterAdapter.ViewHold
             });
         }
 
-        public void setOnChatClickListener(com.woniukeji.jianmerchant.partjob.onChatClickListener onChatClickListener) {
-            this.onChatClickListener = onChatClickListener;
-        }
+
 
         private void showPigeonCount(int count) {
             if (count == 1) {

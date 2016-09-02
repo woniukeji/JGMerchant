@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 android {
     //为了解决部分第三方库重复打包了META-INF的问题
     packagingOptions {
@@ -55,9 +56,9 @@ dependencies {
     compile project(':flowlayout-lib')
     compile project(path: ':recyclerview-swipe')
     compile project(':leancloudchatkit')
-    compile 'com.jakewharton:butterknife:6.1.0'
     compile project(':FlycoTabLayout_Lib')
-    compile 'com.jakewharton:butterknife:6.1.0'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.zhy:okhttputils:2.6.2'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.google.code.gson:gson:2.7'

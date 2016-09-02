@@ -26,7 +26,7 @@ import com.woniukeji.jianmerchant.utils.SPUtils;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import de.greenrobot.event.EventBus;
 
 public class CalculateAdapter extends RecyclerView.Adapter<CalculateAdapter.ViewHolder> {
@@ -185,15 +185,15 @@ public class CalculateAdapter extends RecyclerView.Adapter<CalculateAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @InjectView(R.id.img_head) ImageView imgHead;
-        @InjectView(R.id.tv_user_name) TextView userName;
-        @InjectView(R.id.tv_phone) TextView tvPhone;
-        @InjectView(R.id.ll_publish_time) LinearLayout llPublishTime;
-        @InjectView(R.id.tv_wages) TextView tvWages;
-        @InjectView(R.id.ll_wages) LinearLayout llWages;
-        @InjectView(R.id.rl_job) RelativeLayout rlJob;
-        @InjectView(R.id.cb_user) CheckBox cbUser;
-        @InjectView(R.id.btn_change_item) Button button;
+        @BindView(R.id.img_head) ImageView imgHead;
+        @BindView(R.id.tv_user_name) TextView userName;
+        @BindView(R.id.tv_phone) TextView tvPhone;
+        @BindView(R.id.ll_publish_time) LinearLayout llPublishTime;
+        @BindView(R.id.tv_wages) TextView tvWages;
+        @BindView(R.id.ll_wages) LinearLayout llWages;
+        @BindView(R.id.rl_job) RelativeLayout rlJob;
+        @BindView(R.id.cb_user) CheckBox cbUser;
+        @BindView(R.id.btn_change_item) Button button;
 
 
         private ImageView animLoading;
@@ -204,10 +204,10 @@ public class CalculateAdapter extends RecyclerView.Adapter<CalculateAdapter.View
             LogUtils.d("谁先调用----","ViewHolder");
             switch (type) {
                 case NORMAL:
-                    ButterKnife.inject(this, view);
+                    ButterKnife.bind(this, view);
                     break;
                 case IS_FOOTER:
-                    animLoading = (ImageView) view.findViewById(R.id.anim_loading);
+//                    animLoading = (ImageView) view.findViewById(R.id.anim_loading);
                     loading = (TextView) view.findViewById(R.id.tv_loading);
                     break;
             }

@@ -24,38 +24,38 @@ import com.woniukeji.jianmerchant.widget.CircleImageView;
 import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class PreviewJobActivity extends BaseActivity {
 
-    @InjectView(R.id.img_back) ImageView imgBack;
-    @InjectView(R.id.tv_title) TextView tvTitle;
-    @InjectView(R.id.img_share) ImageView img_share;
-    @InjectView(R.id.user_head) ImageView userHead;
-    @InjectView(R.id.business_name) TextView businessName;
-    @InjectView(R.id.tv_wage) TextView tvWage;
-    @InjectView(R.id.tv_hiring_count) TextView tvHiringCount;
-    @InjectView(R.id.tv_enroll_num) TextView tvEnrollNum;
-    @InjectView(R.id.tv_work_location) TextView tvWorkLocation;
-    @InjectView(R.id.tv_location_detail) TextView tvLocationDetail;
-    @InjectView(R.id.tv_work_date) TextView tvWorkDate;
-    @InjectView(R.id.tv_work_time) TextView tvWorkTime;
-    @InjectView(R.id.tv_collection_sites) TextView tvCollectionSites;
-    @InjectView(R.id.tv_collection_time) TextView tvCollectionTime;
-    @InjectView(R.id.tv_sex) TextView tvSex;
-    @InjectView(R.id.tv_pay_method) TextView tvPayMethod;
-    @InjectView(R.id.tv_other) TextView tvOther;
-    @InjectView(R.id.tv_notic) TextView tvNotic;
-    @InjectView(R.id.tv_work_content) TextView tvWorkContent;
-    @InjectView(R.id.rl_work) RelativeLayout rlWork;
-    @InjectView(R.id.tv_work_require) TextView tvWorkRequire;
-    @InjectView(R.id.tv_worker) TextView tvWorker;
-    @InjectView(R.id.cirimg_work) CircleImageView cirimgWork;
-    @InjectView(R.id.tv_company_name) TextView tvCompanyName;
-    @InjectView(R.id.tv_jobs_count) TextView tvJobsCount;
-    @InjectView(R.id.rl_company) RelativeLayout rlCompany;
-    @InjectView(R.id.tv_signup) TextView tvSignup;
+    @BindView(R.id.img_back) ImageView imgBack;
+    @BindView(R.id.tv_title) TextView tvTitle;
+    @BindView(R.id.img_share) ImageView img_share;
+    @BindView(R.id.user_head) ImageView userHead;
+    @BindView(R.id.business_name) TextView businessName;
+    @BindView(R.id.tv_wage) TextView tvWage;
+    @BindView(R.id.tv_hiring_count) TextView tvHiringCount;
+    @BindView(R.id.tv_enroll_num) TextView tvEnrollNum;
+    @BindView(R.id.tv_work_location) TextView tvWorkLocation;
+    @BindView(R.id.tv_location_detail) TextView tvLocationDetail;
+    @BindView(R.id.tv_work_date) TextView tvWorkDate;
+    @BindView(R.id.tv_work_time) TextView tvWorkTime;
+    @BindView(R.id.tv_collection_sites) TextView tvCollectionSites;
+    @BindView(R.id.tv_collection_time) TextView tvCollectionTime;
+    @BindView(R.id.tv_sex) TextView tvSex;
+    @BindView(R.id.tv_pay_method) TextView tvPayMethod;
+    @BindView(R.id.tv_other) TextView tvOther;
+    @BindView(R.id.tv_notic) TextView tvNotic;
+    @BindView(R.id.tv_work_content) TextView tvWorkContent;
+    @BindView(R.id.rl_work) RelativeLayout rlWork;
+    @BindView(R.id.tv_work_require) TextView tvWorkRequire;
+    @BindView(R.id.tv_worker) TextView tvWorker;
+    @BindView(R.id.cirimg_work) CircleImageView cirimgWork;
+    @BindView(R.id.tv_company_name) TextView tvCompanyName;
+    @BindView(R.id.tv_jobs_count) TextView tvJobsCount;
+    @BindView(R.id.rl_company) RelativeLayout rlCompany;
+    @BindView(R.id.tv_signup) TextView tvSignup;
     private JobDetails.TMerchantEntity merchantInfo;
     private JobDetails.TJobInfoEntity jobinfo;
     private int MSG_GET_SUCCESS = 0;
@@ -195,7 +195,7 @@ public class PreviewJobActivity extends BaseActivity {
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_job_detail);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override

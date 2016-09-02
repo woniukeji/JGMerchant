@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
@@ -51,21 +51,21 @@ import okhttp3.Response;
 
 public class CalculateActivity extends BaseActivity implements CalculateAdapter.deleteCallBack {
 
-    @InjectView(R.id.img_back) ImageView imgBack;
-    @InjectView(R.id.tv_title) TextView tvTitle;
-    @InjectView(R.id.img_share) ImageView imgShare;
-    @InjectView(R.id.list) FixedRecyclerView list;
-    @InjectView(R.id.tv_job_name) TextView tvJobName;
-    @InjectView(R.id.tv_job_date) TextView tvJobDate;
-    @InjectView(R.id.ll_jobname) LinearLayout llJobname;
-    @InjectView(R.id.tv_title_sum) TextView tvTitleSum;
-    @InjectView(R.id.tv_job_wages) TextView tvJobWages;
-    @InjectView(R.id.btn_change_wages) Button btnChangeWages;
-    @InjectView(R.id.ll_jobinfo) LinearLayout llJobinfo;
-    @InjectView(R.id.ch_all) CheckBox chAll;
-    @InjectView(R.id.btn_pay_wages) Button btnPayWages;
-    @InjectView(R.id.tv_wages_sum) TextView tvWagesSum;
-    @InjectView(R.id.tv_choose_sum) TextView tvChooseSum;
+    @BindView(R.id.img_back) ImageView imgBack;
+    @BindView(R.id.tv_title) TextView tvTitle;
+    @BindView(R.id.img_share) ImageView imgShare;
+    @BindView(R.id.list) FixedRecyclerView list;
+    @BindView(R.id.tv_job_name) TextView tvJobName;
+    @BindView(R.id.tv_job_date) TextView tvJobDate;
+    @BindView(R.id.ll_jobname) LinearLayout llJobname;
+    @BindView(R.id.tv_title_sum) TextView tvTitleSum;
+    @BindView(R.id.tv_job_wages) TextView tvJobWages;
+    @BindView(R.id.btn_change_wages) Button btnChangeWages;
+    @BindView(R.id.ll_jobinfo) LinearLayout llJobinfo;
+    @BindView(R.id.ch_all) CheckBox chAll;
+    @BindView(R.id.btn_pay_wages) Button btnPayWages;
+    @BindView(R.id.tv_wages_sum) TextView tvWagesSum;
+    @BindView(R.id.tv_choose_sum) TextView tvChooseSum;
     private int MSG_GET_SUCCESS = 0;
     private int MSG_GET_FAIL = 1;
     private int MSG_DELETE_SUCCESS = 2;
@@ -220,7 +220,7 @@ public class CalculateActivity extends BaseActivity implements CalculateAdapter.
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_pay_wages);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         Intent intent = getIntent();
         jobName = intent.getStringExtra("name");
@@ -362,7 +362,6 @@ public class CalculateActivity extends BaseActivity implements CalculateAdapter.
 
     @Override
     protected void onDestroy() {
-        ButterKnife.reset(this);
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }

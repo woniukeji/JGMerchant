@@ -23,7 +23,7 @@ import com.woniukeji.jianmerchant.widget.CircleImageView;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder> {
@@ -278,18 +278,18 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
     static
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.circleimg_head) CircleImageView circleimgHead;
-        @InjectView(R.id.tv_user_name) TextView tvUserName;
-        @InjectView(R.id.img_sex) ImageView imgSex;
-        @InjectView(R.id.ll_user_info) LinearLayout llUserInfo;
-        @InjectView(R.id.tv_school_name) TextView tvSchoolName;
-        @InjectView(R.id.tv_finish_job_count) TextView tvFinishJobCount;
-        @InjectView(R.id.tv_publish_date) TextView tvPublishDate;
-        @InjectView(R.id.tv_credit_info) TextView tvCredit;
-        @InjectView(R.id.tv_author_info) TextView tvAuthorInfo;
-        @InjectView(R.id.btn_cancel) Button btnCancel;
-        @InjectView(R.id.btn_confirm) Button btnConfirm;
-        @InjectView(R.id.rl_job) RelativeLayout rlJob;
+        @BindView(R.id.circleimg_head) CircleImageView circleimgHead;
+        @BindView(R.id.tv_user_name) TextView tvUserName;
+        @BindView(R.id.img_sex) ImageView imgSex;
+        @BindView(R.id.ll_user_info) LinearLayout llUserInfo;
+        @BindView(R.id.tv_school_name) TextView tvSchoolName;
+        @BindView(R.id.tv_finish_job_count) TextView tvFinishJobCount;
+        @BindView(R.id.tv_publish_date) TextView tvPublishDate;
+        @BindView(R.id.tv_credit_info) TextView tvCredit;
+        @BindView(R.id.tv_author_info) TextView tvAuthorInfo;
+        @BindView(R.id.btn_cancel) Button btnCancel;
+        @BindView(R.id.btn_confirm) Button btnConfirm;
+        @BindView(R.id.rl_job) RelativeLayout rlJob;
 
         private ImageView animLoading;
         private TextView loading;
@@ -299,10 +299,10 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
 
             switch (type) {
                 case NORMAL:
-                    ButterKnife.inject(this, view);
+                    ButterKnife.bind(this, view);
                     break;
                 case IS_FOOTER:
-                    animLoading = (ImageView) view.findViewById(R.id.anim_loading);
+//                    animLoading = (ImageView) view.findViewById(R.id.anim_loading);
                     loading = (TextView) view.findViewById(R.id.tv_loading);
                     break;
             }

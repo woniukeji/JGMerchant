@@ -65,7 +65,7 @@
         tools:replace="android:icon, android:theme">
         <activity
             android:name=".login.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/APPSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

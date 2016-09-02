@@ -27,6 +27,7 @@ import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.RegionBean;
 import com.woniukeji.jianmerchant.entity.TypeBean;
+import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
@@ -43,20 +44,20 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import rx.Subscriber;
 
 public class PublishPartJobFragment extends BaseFragment implements View.OnClickListener {
 
     private static final String PARAM = "type";
     private static final int FIRST = 0;
-    @InjectView(R.id.recycler_region)
+    @BindView(R.id.recycler_region)
     RecyclerView recyclerRegion;
-    @InjectView(R.id.recycler_type)
+    @BindView(R.id.recycler_type)
     RecyclerView recyclerType;
-    @InjectView(R.id.recycler_jobs)
+    @BindView(R.id.recycler_jobs)
     RecyclerView recyclerJobs;
-    @InjectView(R.id.next_page)
+    @BindView(R.id.next_page)
     TextView nextPage;
     //设置此fragment的参数，创建新兼职，历史纪录，模板
     private String type;
@@ -157,7 +158,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (type.equals("cjxjz")) {
             View view = inflater.inflate(R.layout.fragment_create_partjob, container, false);
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
 
             GridLayoutManager regionGridManager = new GridLayoutManager(getHoldingContext(), 4);
             recyclerRegion.setLayoutManager(regionGridManager);
@@ -299,7 +300,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                 }
             }
         };
-        ProgressSubscriber<Model> modelProgressSubscriber = new ProgressSubscriber<Model>(listenner,getHoldingContext());
+        BackgroundSubscriber<Model> modelProgressSubscriber = new BackgroundSubscriber<Model>(listenner,getHoldingContext());
         //0代表第一页，10代表第二页，20代表第三页
         if (type.equals("mb")) {
             HttpMethods.getInstance().getHistroyJobFromServer(modelProgressSubscriber, only, String.valueOf(merchantid), "1", String.valueOf(count));
@@ -334,7 +335,6 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     public void onDestroyView() {
         super.onDestroyView();
 //        saveStateToArguments();
-        ButterKnife.reset(this);
     }
 
     @Override

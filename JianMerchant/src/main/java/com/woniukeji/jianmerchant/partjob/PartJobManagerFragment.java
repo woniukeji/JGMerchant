@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -48,13 +48,13 @@ public class PartJobManagerFragment extends BaseFragment implements PartJobManag
      * params1 0完成 1录取
      */
     private static String params1;
-    @InjectView(R.id.img_renwu)
+    @BindView(R.id.img_renwu)
     ImageView imgRenwu;
-    @InjectView(R.id.rl_null)
+    @BindView(R.id.rl_null)
     RelativeLayout rlNull;
-    @InjectView(R.id.list)
+    @BindView(R.id.list)
     FixedRecyclerView list;
-    @InjectView(R.id.refresh_layout)
+    @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
 //    @InjectView(R.id.list)
 //    SwipeMenuRecyclerView list;
@@ -124,7 +124,6 @@ private class Myhandler extends Handler {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
     }
 
 
@@ -153,7 +152,7 @@ private class Myhandler extends Handler {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_part_manager, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         initview();
         return view;
 

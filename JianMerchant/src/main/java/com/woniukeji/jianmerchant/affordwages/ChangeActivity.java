@@ -26,27 +26,27 @@ import com.woniukeji.jianmerchant.utils.CropCircleTransfermation;
 import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class ChangeActivity extends BaseActivity {
 
 
-    @InjectView(R.id.img_back) ImageView imgBack;
-    @InjectView(R.id.tv_title) TextView tvTitle;
-    @InjectView(R.id.img_share) ImageView imgShare;
-    @InjectView(R.id.img_head) ImageView imgHead;
-    @InjectView(R.id.tv_user_name) TextView userName;
-    @InjectView(R.id.tv_phone) TextView tvPhone;
-    @InjectView(R.id.ll_publish_time) LinearLayout llPublishTime;
-    @InjectView(R.id.tv_wages) TextView tvWages;
-    @InjectView(R.id.ll_wages) LinearLayout llWages;
-    @InjectView(R.id.rl_info) RelativeLayout rlInfo;
-    @InjectView(R.id.tv_base_wages) TextView tvBaseWages;
-    @InjectView(R.id.et_pay_wages) EditText etPayWages;
-    @InjectView(R.id.tv_change_sum) TextView tvChangeSum;
-    @InjectView(R.id.et_note) EditText etNote;
-    @InjectView(R.id.btn_confirm_change) Button btnConfirmChange;
+    @BindView(R.id.img_back) ImageView imgBack;
+    @BindView(R.id.tv_title) TextView tvTitle;
+    @BindView(R.id.img_share) ImageView imgShare;
+    @BindView(R.id.img_head) ImageView imgHead;
+    @BindView(R.id.tv_user_name) TextView userName;
+    @BindView(R.id.tv_phone) TextView tvPhone;
+    @BindView(R.id.ll_publish_time) LinearLayout llPublishTime;
+    @BindView(R.id.tv_wages) TextView tvWages;
+    @BindView(R.id.ll_wages) LinearLayout llWages;
+    @BindView(R.id.rl_info) RelativeLayout rlInfo;
+    @BindView(R.id.tv_base_wages) TextView tvBaseWages;
+    @BindView(R.id.et_pay_wages) EditText etPayWages;
+    @BindView(R.id.tv_change_sum) TextView tvChangeSum;
+    @BindView(R.id.et_note) EditText etNote;
+    @BindView(R.id.btn_confirm_change) Button btnConfirmChange;
     private int MSG_USER_SUCCESS = 0;
     private int MSG_USER_FAIL = 1;
     private int MSG_PHONE_SUCCESS = 2;
@@ -60,7 +60,7 @@ public class ChangeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
 
@@ -100,7 +100,7 @@ public class ChangeActivity extends BaseActivity {
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_change_wages);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override

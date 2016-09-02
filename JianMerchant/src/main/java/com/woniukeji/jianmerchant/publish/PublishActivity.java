@@ -31,7 +31,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -39,15 +39,15 @@ import butterknife.OnClick;
  */
 public class PublishActivity extends BaseActivity {
 
-    @InjectView(R.id.img_back)
+    @BindView(R.id.img_back)
     ImageView imgBack;
-    @InjectView(R.id.tv_title)
+    @BindView(R.id.tv_title)
     TextView tvTitle;
-    @InjectView(R.id.img_share)
+    @BindView(R.id.img_share)
     ImageView imgShare;
-    @InjectView(R.id.tl_new)
+    @BindView(R.id.tl_new)
     CommonTabLayout tlNew;
-    @InjectView(R.id.vp_publish_partjob)
+    @BindView(R.id.vp_publish_partjob)
     ViewPager vpPublishPartjob;
     private int MSG_USER_SUCCESS = 0;
     private int MSG_USER_FAIL = 1;
@@ -128,7 +128,7 @@ public class PublishActivity extends BaseActivity {
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_publish_new);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override

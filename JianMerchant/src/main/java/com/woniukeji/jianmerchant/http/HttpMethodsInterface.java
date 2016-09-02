@@ -103,7 +103,7 @@ public interface HttpMethodsInterface {
      * 更改兼职信息
      */
     @GET("T_job_Update_Servlet")
-    Observable<BaseBean> updateJob(@Query("only") String only, @Query("city_id") String city_id,
+    Observable<BaseBean> updateJob(@Query("only") String only,@Query("job_id") String job_id, @Query("city_id") String city_id,
                                    @Query("aera_id") String aera_id, @Query("type_id") String type_id,
                                    @Query("merchant_id") String merchant_id, @Query("name") String name,
                                    @Query("name_image") String name_image, @Query("start_date") String start_date,

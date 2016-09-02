@@ -71,7 +71,7 @@ import java.util.List;
 import java.util.Set;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
@@ -83,179 +83,179 @@ public class PublishDetailActivity extends BaseActivity {
 
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 9;
-    @InjectView(R.id.img_job)
+    @BindView(R.id.img_job)
     CircleImageView imgJob;
-    @InjectView(R.id.tv_loc)
+    @BindView(R.id.tv_loc)
     TextView tvLoc;
-    @InjectView(R.id.split)
+    @BindView(R.id.split)
     ImageView split;
-    @InjectView(R.id.img)
+    @BindView(R.id.img)
     ImageView img;
-    @InjectView(R.id.tv_publish_location)
+    @BindView(R.id.tv_publish_location)
     TextView tvPublishLocation;
-    @InjectView(R.id.rl_location)
+    @BindView(R.id.rl_location)
     RelativeLayout rlLocation;
-    @InjectView(R.id.tv_lev)
+    @BindView(R.id.tv_lev)
     TextView tvLev;
-    @InjectView(R.id.level_split)
+    @BindView(R.id.level_split)
     ImageView levelSplit;
-    @InjectView(R.id.level_img)
+    @BindView(R.id.level_img)
     ImageView levelImg;
-    @InjectView(R.id.tv_hot)
+    @BindView(R.id.tv_hot)
     TextView tvHot;
-    @InjectView(R.id.rl_part_level)
+    @BindView(R.id.rl_part_level)
     RelativeLayout rlPartClass;
-    @InjectView(R.id.tv_cate)
+    @BindView(R.id.tv_cate)
     TextView tvCate;
-    @InjectView(R.id.categorysplit)
+    @BindView(R.id.categorysplit)
     ImageView categorysplit;
-    @InjectView(R.id.img_category)
+    @BindView(R.id.img_category)
     ImageView imgCategory;
-    @InjectView(R.id.tv_category)
+    @BindView(R.id.tv_category)
     TextView tvCategory;
-    @InjectView(R.id.rl_category)
+    @BindView(R.id.rl_category)
     RelativeLayout rlCategory;
-    @InjectView(R.id.tv_ti)
+    @BindView(R.id.tv_ti)
     TextView tvTi;
-    @InjectView(R.id.titlesplit)
+    @BindView(R.id.titlesplit)
     ImageView titlesplit;
-    @InjectView(R.id.et_title)
+    @BindView(R.id.et_title)
     EditText etTitle;
-    @InjectView(R.id.rl_title)
+    @BindView(R.id.rl_title)
     RelativeLayout rlTitle;
-    @InjectView(R.id.tv_pay)
+    @BindView(R.id.tv_pay)
     TextView tvPay;
-    @InjectView(R.id.paysplit)
+    @BindView(R.id.paysplit)
     ImageView paysplit;
-    @InjectView(R.id.img_title)
+    @BindView(R.id.img_title)
     ImageView imgTitle;
-    @InjectView(R.id.tv_pay_method)
+    @BindView(R.id.tv_pay_method)
     TextView tvPayMethod;
-    @InjectView(R.id.rl_pay_method)
+    @BindView(R.id.rl_pay_method)
     RelativeLayout rlPayMethod;
-    @InjectView(R.id.tv_wa)
+    @BindView(R.id.tv_wa)
     TextView tvWa;
-    @InjectView(R.id.wagesplit)
+    @BindView(R.id.wagesplit)
     ImageView wagesplit;
-    @InjectView(R.id.tv_wages_method)
+    @BindView(R.id.tv_wages_method)
     TextView tvWagesMethod;
-    @InjectView(R.id.et_wages)
+    @BindView(R.id.et_wages)
     EditText etWages;
-    @InjectView(R.id.rl_wages)
+    @BindView(R.id.rl_wages)
     RelativeLayout rlWages;
-    @InjectView(R.id.tv_s)
+    @BindView(R.id.tv_s)
     TextView tvS;
-    @InjectView(R.id.sex_split)
+    @BindView(R.id.sex_split)
     ImageView sexSplit;
-    @InjectView(R.id.img_sex)
+    @BindView(R.id.img_sex)
     ImageView imgSex;
-    @InjectView(R.id.tv_sex)
+    @BindView(R.id.tv_sex)
     TextView tvSex;
-    @InjectView(R.id.rl_sex)
+    @BindView(R.id.rl_sex)
     RelativeLayout rlSex;
-    @InjectView(R.id.tv_cou)
+    @BindView(R.id.tv_cou)
     TextView tvCou;
-    @InjectView(R.id.count_split)
+    @BindView(R.id.count_split)
     ImageView countSplit;
-    @InjectView(R.id.et_boy_count)
+    @BindView(R.id.et_boy_count)
     EditText etBoyCount;
-    @InjectView(R.id.tv_boy_unit)
+    @BindView(R.id.tv_boy_unit)
     TextView tvBoyUnit;
-    @InjectView(R.id.et_girl_count)
+    @BindView(R.id.et_girl_count)
     EditText etGirlCount;
-    @InjectView(R.id.rl_limits)
+    @BindView(R.id.rl_limits)
     RelativeLayout rlLimits;
-    @InjectView(R.id.count_split1)
+    @BindView(R.id.count_split1)
     ImageView countSplit1;
-    @InjectView(R.id.et_count)
+    @BindView(R.id.et_count)
     EditText etCount;
-    @InjectView(R.id.rl_no_limits)
+    @BindView(R.id.rl_no_limits)
     RelativeLayout rlNoLimits;
-    @InjectView(R.id.rl_count)
+    @BindView(R.id.rl_count)
     RelativeLayout rlCount;
-    @InjectView(R.id.tv_pos)
+    @BindView(R.id.tv_pos)
     TextView tvPos;
-    @InjectView(R.id.position_split)
+    @BindView(R.id.position_split)
     ImageView positionSplit;
-    @InjectView(R.id.img_loc)
+    @BindView(R.id.img_loc)
     ImageView imgLoc;
-    @InjectView(R.id.tv_position)
+    @BindView(R.id.tv_position)
     TextView tvPosition;
-    @InjectView(R.id.et_detail_position)
+    @BindView(R.id.et_detail_position)
     EditText etDetailPosition;
-    @InjectView(R.id.rl_position)
+    @BindView(R.id.rl_position)
     RelativeLayout rlPosition;
-    @InjectView(R.id.tv_da)
+    @BindView(R.id.tv_da)
     TextView tvDa;
-    @InjectView(R.id.datesplit)
+    @BindView(R.id.datesplit)
     ImageView datesplit;
-    @InjectView(R.id.tv_date_start)
+    @BindView(R.id.tv_date_start)
     TextView tvDateStart;
-    @InjectView(R.id.tv_center)
+    @BindView(R.id.tv_center)
     TextView tvCenter;
-    @InjectView(R.id.tv_date_end)
+    @BindView(R.id.tv_date_end)
     TextView tvDateEnd;
-    @InjectView(R.id.rl_date)
+    @BindView(R.id.rl_date)
     RelativeLayout rlDate;
-    @InjectView(R.id.tv_tim)
+    @BindView(R.id.tv_tim)
     TextView tvTim;
-    @InjectView(R.id.timesplit)
+    @BindView(R.id.timesplit)
     ImageView timesplit;
-    @InjectView(R.id.tv_time_start)
+    @BindView(R.id.tv_time_start)
     TextView tvTimeStart;
-    @InjectView(R.id.tv_time_center)
+    @BindView(R.id.tv_time_center)
     TextView tvTimeCenter;
-    @InjectView(R.id.tv_time_end)
+    @BindView(R.id.tv_time_end)
     TextView tvTimeEnd;
-    @InjectView(R.id.rl_time)
+    @BindView(R.id.rl_time)
     RelativeLayout rlTime;
-    @InjectView(R.id.tv_coll)
+    @BindView(R.id.tv_coll)
     TextView tvColl;
-    @InjectView(R.id.collectionsplit)
+    @BindView(R.id.collectionsplit)
     ImageView collectionsplit;
-    @InjectView(R.id.et_collection_position)
+    @BindView(R.id.et_collection_position)
     EditText etCollectionPosition;
-    @InjectView(R.id.rl_collection_position)
+    @BindView(R.id.rl_collection_position)
     RelativeLayout rlCollectionPosition;
-    @InjectView(R.id.tv_collti)
+    @BindView(R.id.tv_collti)
     TextView tvCollti;
-    @InjectView(R.id.colltimesplit)
+    @BindView(R.id.colltimesplit)
     ImageView colltimesplit;
-    @InjectView(R.id.img_collection_time)
+    @BindView(R.id.img_collection_time)
     ImageView imgCollectionTime;
-    @InjectView(R.id.et_collection_time)
+    @BindView(R.id.et_collection_time)
     EditText etCollectionTime;
-    @InjectView(R.id.rl_collection_time)
+    @BindView(R.id.rl_collection_time)
     RelativeLayout rlCollectionTime;
-    @InjectView(R.id.tv_t)
+    @BindView(R.id.tv_t)
     TextView tvT;
-    @InjectView(R.id.telsplit)
+    @BindView(R.id.telsplit)
     ImageView telsplit;
-    @InjectView(R.id.et_tel)
+    @BindView(R.id.et_tel)
     EditText etTel;
-    @InjectView(R.id.rl_tel)
+    @BindView(R.id.rl_tel)
     RelativeLayout rlTel;
-    @InjectView(R.id.et_work_content)
+    @BindView(R.id.et_work_content)
     EditText etWorkContent;
-    @InjectView(R.id.et_work_require)
+    @BindView(R.id.et_work_require)
     EditText etWorkRequire;
-    @InjectView(R.id.btn_preview)
+    @BindView(R.id.btn_preview)
     Button btnPreview;
-    @InjectView(R.id.btn_save)
+    @BindView(R.id.btn_save)
     Button btnSave;
-    @InjectView(R.id.btn_publish)
+    @BindView(R.id.btn_publish)
     Button btnPublish;
-    @InjectView(R.id.btn_change)
+    @BindView(R.id.btn_change)
     Button btnChange;
-    @InjectView(R.id.ll_change)
+    @BindView(R.id.ll_change)
     LinearLayout llChange;
-    @InjectView(R.id.ll_publish)
+    @BindView(R.id.ll_publish)
     LinearLayout llPublish;
-    @InjectView(R.id.tag_flow_qualification)
+    @BindView(R.id.tag_flow_qualification)
     TagFlowLayout flow_qualification;
-    @InjectView(R.id.tag_flow_welfare)
+    @BindView(R.id.tag_flow_welfare)
     TagFlowLayout flow_welfare;
-    @InjectView(R.id.tag_flow_partjob_tab)
+    @BindView(R.id.tag_flow_partjob_tab)
     TagFlowLayout flow_partjob;
     //顺序对应不能改变，否则id和服务器不同步
     private String[] partHot = new String[]{"短期", "长期", "实习生", "旅行"};
@@ -905,6 +905,7 @@ public class PublishDetailActivity extends BaseActivity {
                 //修改
                 if (CheckStatus()) {
                     if (limit_sex.equals("3")) {
+                        String jobid = intent.getStringExtra("jobid");
                         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
                         alike = String.valueOf(System.currentTimeMillis());
                         SubscriberOnNextListener<BaseBean> nextListenner = new SubscriberOnNextListener<BaseBean>() {
@@ -914,7 +915,7 @@ public class PublishDetailActivity extends BaseActivity {
                             }
                         };
                         //job_model =0  不是模板
-                        HttpMethods.getInstance().updateJob(new ProgressSubscriber<BaseBean>(nextListenner, PublishDetailActivity.this),only,
+                        HttpMethods.getInstance().updateJob(new ProgressSubscriber<BaseBean>(nextListenner, PublishDetailActivity.this),only,jobid,
                                 String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
                                 address, mode, money, term, limit_sex, etBoyCount.getText().toString(),etGirlCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
                                 "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
@@ -922,6 +923,7 @@ public class PublishDetailActivity extends BaseActivity {
                     } else {
                         alike = "0";
                         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+                        String jobid = intent.getStringExtra("jobid");
                         SubscriberOnNextListener<BaseBean> nextListenner = new SubscriberOnNextListener<BaseBean>() {
                             @Override
                             public void onNext(BaseBean baseBean) {
@@ -929,7 +931,7 @@ public class PublishDetailActivity extends BaseActivity {
                             }
                         };
                         //job_model =0  不是模板
-                        HttpMethods.getInstance().updateJob(new ProgressSubscriber<BaseBean>(nextListenner, PublishDetailActivity.this),only,
+                        HttpMethods.getInstance().updateJob(new ProgressSubscriber<BaseBean>(nextListenner, PublishDetailActivity.this),only,jobid,
                                 String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
                                 address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
                                 "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
@@ -1032,7 +1034,7 @@ public class PublishDetailActivity extends BaseActivity {
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_publish_detail);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         EventBus.getDefault().register(this);
     }
 
@@ -1046,9 +1048,6 @@ public class PublishDetailActivity extends BaseActivity {
             isFromItem = true;//目的是不走下面的判断
             isFromActivity = true;
             getCategoryToBeanNew();
-
-
-
         }else if (intent.getAction().equals("fromFragment")) {
             Bundle bundle = intent.getExtras();
             region = bundle.getString("region");
@@ -1067,7 +1066,6 @@ public class PublishDetailActivity extends BaseActivity {
             getCategoryToBean();
             isFromItem = true;
         }
-
         if (!isFromItem) {
             //这以下设置流布局标签
             quaAdapter = new TagAdapter(qualification) {
@@ -1262,7 +1260,8 @@ public class PublishDetailActivity extends BaseActivity {
             rlLimits.setVisibility(View.VISIBLE);
             rlNoLimits.setVisibility(View.GONE);
             etGirlCount.setText(modle.getGirl_sum()+"");
-            etBoyCount.setText(sum);
+//            etBoyCount.setText(sum);
+            etBoyCount.setText(modle.getBoySum());
         } else {
             tvSex.setText(sexs[modle.getLimit_sex()]);
             rlLimits.setVisibility(View.GONE);
@@ -1326,7 +1325,7 @@ public class PublishDetailActivity extends BaseActivity {
     }
 
     public void onEventMainThread(ChangeJobEvent event) {
-        //限制只能修改不能发布
+        //限制只能修改不能发布22
         llPublish.setVisibility(View.GONE);
         llChange.setVisibility(View.VISIBLE);
         String jobid = intent.getStringExtra("jobid");
@@ -1430,9 +1429,6 @@ public class PublishDetailActivity extends BaseActivity {
                         welfareJsonArray.add(1+next + "");
                     }
                     welfareJsonObj.add("list_t_welfare", welfareJsonArray);
-
-
-
             }
         });
         flow_partjob.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
@@ -1507,7 +1503,6 @@ public class PublishDetailActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        ButterKnife.reset(this);
         super.onDestroy();
     }
 

@@ -232,7 +232,7 @@
                     android:gravity="center"
                     android:text="已报名人数：20/30"
                     android:textColor="#9b9b9b"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <LinearLayout
                     android:id="@+id/ll_limit_sex"
@@ -241,7 +241,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="3dp"
                     android:orientation="horizontal"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <Button
                         android:id="@+id/btn_boy"

@@ -20,17 +20,17 @@ import com.woniukeji.jianmerchant.entity.User;
 import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class FinishActivity extends BaseActivity {
 
 
-    @InjectView(R.id.img_back) ImageView imgBack;
-    @InjectView(R.id.tv_title) TextView tvTitle;
-    @InjectView(R.id.img_share) ImageView imgShare;
-    @InjectView(R.id.tv_finish_pay_content) TextView tvFinishPayContent;
-    @InjectView(R.id.btn_continue_pay) Button btnContinuePay;
+    @BindView(R.id.img_back) ImageView imgBack;
+    @BindView(R.id.tv_title) TextView tvTitle;
+    @BindView(R.id.img_share) ImageView imgShare;
+    @BindView(R.id.tv_finish_pay_content) TextView tvFinishPayContent;
+    @BindView(R.id.btn_continue_pay) Button btnContinuePay;
     private int MSG_USER_SUCCESS = 0;
     private int MSG_USER_FAIL = 1;
     private int MSG_PHONE_SUCCESS = 2;
@@ -44,7 +44,7 @@ public class FinishActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @OnClick({R.id.img_back, R.id.btn_continue_pay})
@@ -97,7 +97,7 @@ public class FinishActivity extends BaseActivity {
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_pay_finish);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override

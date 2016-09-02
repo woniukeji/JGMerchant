@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
@@ -41,11 +41,11 @@ import okhttp3.Response;
 
 public class HistoryJobActivity extends BaseActivity implements HistoryJobAdapter.deleteCallBack{
 
-    @InjectView(R.id.img_back) ImageView imgBack;
-    @InjectView(R.id.tv_title) TextView tvTitle;
-    @InjectView(R.id.img_share) ImageView imgShare;
-    @InjectView(R.id.list) FixedRecyclerView list;
-    @InjectView(R.id.refresh_layout) SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.img_back) ImageView imgBack;
+    @BindView(R.id.tv_title) TextView tvTitle;
+    @BindView(R.id.img_share) ImageView imgShare;
+    @BindView(R.id.list) FixedRecyclerView list;
+    @BindView(R.id.refresh_layout) SwipeRefreshLayout refreshLayout;
     private int MSG_GET_SUCCESS = 0;
     private int MSG_GET_FAIL = 1;
     private int MSG_DELETE_SUCCESS = 2;
@@ -118,7 +118,7 @@ public class HistoryJobActivity extends BaseActivity implements HistoryJobAdapte
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_history_job);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         Intent intent=getIntent();
         type=intent.getStringExtra("type");
     }

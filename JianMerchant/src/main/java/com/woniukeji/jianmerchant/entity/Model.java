@@ -80,6 +80,7 @@ public class Model implements Serializable {
         private List<String> label_name;
         private List<String> limit_name;
         private List<String> welfare_name;
+        private String boySum;
 
         public List<String> getLabel_name() {
             return label_name;
@@ -473,6 +474,14 @@ public class Model implements Serializable {
 
         public void setGirl_sum(int girl_sum) {
             this.girl_sum = girl_sum;
+        }
+
+        public String getBoySum() {
+            return boySum;
+        }
+
+        public void setBoySum(String boySum) {
+            this.boySum = boySum;
         }
     }
 

@@ -22,7 +22,7 @@ import com.woniukeji.jianmerchant.utils.SPUtils;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 
 public class PartJobManagerAdapter extends RecyclerView.Adapter<PartJobManagerAdapter.ViewHolder> {
 
@@ -205,20 +205,20 @@ public class PartJobManagerAdapter extends RecyclerView.Adapter<PartJobManagerAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @InjectView(R.id.tv_merchant_name) TextView tvTitle;
-        @InjectView(R.id.img_type) ImageView imgType;
-        @InjectView(R.id.tv_manager_name) TextView tvManagerName;
-        @InjectView(R.id.tv_wages) TextView tvWages;
-        @InjectView(R.id.tv_date) TextView tvDate;
-        @InjectView(R.id.ll_publish_time) LinearLayout llPublishTime;
-        @InjectView(R.id.tv_chakan_browse) TextView tvChakanBrowse;
-        @InjectView(R.id.ll_browse) LinearLayout llBrowse;
-        @InjectView(R.id.tv_human) TextView tvHuman;
-        @InjectView(R.id.tv_count) TextView tvCount;
-        @InjectView(R.id.ll_publisher) LinearLayout llPublisher;
-        @InjectView(R.id.tv_message) TextView tvMessage;
-        @InjectView(R.id.btn_admit_action) Button btnAdmitAction;
-        @InjectView(R.id.rl_job) RelativeLayout rlJob;
+        @BindView(R.id.tv_merchant_name) TextView tvTitle;
+        @BindView(R.id.img_type) ImageView imgType;
+        @BindView(R.id.tv_manager_name) TextView tvManagerName;
+        @BindView(R.id.tv_wages) TextView tvWages;
+        @BindView(R.id.tv_date) TextView tvDate;
+        @BindView(R.id.ll_publish_time) LinearLayout llPublishTime;
+        @BindView(R.id.tv_chakan_browse) TextView tvChakanBrowse;
+        @BindView(R.id.ll_browse) LinearLayout llBrowse;
+        @BindView(R.id.tv_human) TextView tvHuman;
+        @BindView(R.id.tv_count) TextView tvCount;
+        @BindView(R.id.ll_publisher) LinearLayout llPublisher;
+        @BindView(R.id.tv_message) TextView tvMessage;
+        @BindView(R.id.btn_admit_action) Button btnAdmitAction;
+        @BindView(R.id.rl_job) RelativeLayout rlJob;
 
         private ImageView animLoading;
         private TextView loading;
@@ -228,10 +228,10 @@ public class PartJobManagerAdapter extends RecyclerView.Adapter<PartJobManagerAd
 
             switch (type) {
                 case NORMAL:
-                    ButterKnife.inject(this, view);
+                    ButterKnife.bind(this, view);
                     break;
                 case IS_FOOTER:
-                    animLoading = (ImageView) view.findViewById(R.id.anim_loading);
+//                    animLoading = (ImageView) view.findViewById(R.id.anim_loading);
                     loading = (TextView) view.findViewById(R.id.tv_loading);
                     break;
             }
