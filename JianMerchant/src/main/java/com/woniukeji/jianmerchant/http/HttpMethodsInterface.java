@@ -120,4 +120,6 @@ public interface HttpMethodsInterface {
                                    @Query("json_limit") String json_limit, @Query("json_welfare") String json_welfare,
                                    @Query("json_label") String json_label);
 
+    @GET("T_job_Merchant_Id_Zhong_Servlet")
+    Observable<BaseBean<Model>> merchantEmployStatus(@Query("only") String only, @Query("merchant_id") String merchant_id, @Query("count") String count, @Query("status") String status);
 }

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.woniukeji.jianmerchant.adapter.FilterFooterViewHolder;
+import com.woniukeji.jianmerchant.adapter.FooterViewHolder;
 import com.woniukeji.jianmerchant.adapter.FilterItemViewHolder;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 
@@ -52,7 +52,7 @@ public class NewNewFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (viewType==NORMAL) {
             return new FilterItemViewHolder(context, parent);
         } else if (viewType == IS_FOOTER) {
-            return new FilterFooterViewHolder(context, parent);
+            return new FooterViewHolder(context, parent);
         } else {
             return null;
         }
@@ -64,9 +64,9 @@ public class NewNewFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (mValues.size() == position) {
             //最后一条数据
             if (mValues.size()<=4&&mValues.size()>0) {
-                ((FilterFooterViewHolder)holder).bindData(1);
+                ((FooterViewHolder)holder).bindData(1);
             } else {
-                ((FilterFooterViewHolder)holder).bindData(0);
+                ((FooterViewHolder)holder).bindData(0);
             }
         } else {
             ((FilterItemViewHolder)holder).bindData(mValues.get(position));

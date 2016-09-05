@@ -13,14 +13,14 @@ import butterknife.BindView;
 /**
  * Created by Se7enGM on 2016/9/2.
  */
-public class FilterFooterViewHolder extends TopViewHolder<Integer> {
+public class FooterViewHolder extends TopViewHolder<Integer> {
 
     @BindView(R.id.tv_loading)
     TextView tvLoading;
     @BindView(R.id.pb_footer)
     ProgressBar pbFooter;
 
-    public FilterFooterViewHolder(Context context, ViewGroup root) {
+    public FooterViewHolder(Context context, ViewGroup root) {
         super(context, R.layout.recycle_footer, root);
     }
 

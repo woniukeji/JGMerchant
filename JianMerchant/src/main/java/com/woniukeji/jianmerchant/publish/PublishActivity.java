@@ -190,29 +190,6 @@ public class PublishActivity extends BaseActivity {
 
     }
 
-    //    @OnClick({R.id.img_back, R.id.btn_history, R.id.btn_modle, R.id.btn_new})
-//    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.img_back:
-//                finish();
-//                break;
-//            case R.id.btn_history:
-//                Intent intent=new Intent(PublishActivity.this,HistoryJobActivity.class);
-//                intent.putExtra("type","0");
-//                startActivity(intent);
-//                break;
-//            case R.id.btn_modle:
-//                Intent intent1=new Intent(PublishActivity.this,HistoryJobActivity.class);
-//                intent1.putExtra("type","1");
-//                startActivity(intent1);
-//                break;
-//            case R.id.btn_new:
-//                Intent intent2=new Intent(PublishActivity.this,PublishDetailActivity.class);
-//                intent2.putExtra("type","new");
-//                startActivity(intent2);
-//                break;
-//        }
-//    }
     @Override
     public void initData() {
 

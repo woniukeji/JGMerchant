@@ -1,11 +1,7 @@
 package com.woniukeji.jianmerchant.publish;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,16 +10,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.adapter.FooterViewHolder;
+import com.woniukeji.jianmerchant.adapter.HistoryJobItemViewHolder;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.BindView;
 
-public class HistoryJobAdapter extends RecyclerView.Adapter<HistoryJobAdapter.ViewHolder> {
+public class HistoryJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final List<Model.ListTJobEntity> mValues;
     private final Context mContext;
@@ -44,54 +41,31 @@ public class HistoryJobAdapter extends RecyclerView.Adapter<HistoryJobAdapter.Vi
     @BindView(R.id.img_his) ImageView imgHis;
     @BindView(R.id.rl_job) RelativeLayout rlJob;
 
-    private AnimationDrawable mAnimationDrawable;
-    private boolean isFooterChange = false;
     private String name;
-    private deleteCallBack deleCallBack;
 
-    public HistoryJobAdapter(List<Model.ListTJobEntity> items, Context context, String type, deleteCallBack callBack) {
+
+
+
+    public HistoryJobAdapter(List<Model.ListTJobEntity> items, Context context, String type) {
         mValues = items;
         mContext = context;
         mType=type;
         name= (String) SPUtils.getParam(mContext, Constants.USER_INFO,Constants.USER_NAME,"");
-        deleCallBack=callBack;
     }
 
-   public interface deleteCallBack{
-        public void deleOnClick(int job_id,int merchant_id,int position);
-    }
-    public void setFooterChange(boolean isChange) {
-        isFooterChange = isChange;
-    }
 
-    public void mmswoon(ViewHolder holder) {
-        if (isFooterChange) {
-            holder.loading.setText("已加载全部");
-        } else {
-            holder.loading.setText("已加载全部");
-            holder.animLoading.setVisibility(View.GONE);
-//            holder.animLoading.setBackgroundResource(R.drawable.loading_footer);
-//            mAnimationDrawable = (AnimationDrawable) holder.animLoading.getBackground();
-//            mAnimationDrawable.start();
-        }
-
-    }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        ViewHolder holder = null;
+        RecyclerView.ViewHolder holder = null;
         switch (viewType) {
             case NORMAL:
-                View VoteView = LayoutInflater.from(parent.getContext()).inflate(R.layout.history_jobitem, parent, false);
-                holder = new ViewHolder(VoteView, NORMAL);
+                holder = new HistoryJobItemViewHolder(mContext, parent,mType,name);
                 return holder;
-
             case IS_FOOTER:
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_footer, parent, false);
-                holder = new ViewHolder(view, IS_FOOTER);
+                holder = new FooterViewHolder(mContext, parent);
                 return holder;
-
             default:
                 break;
         }
@@ -99,69 +73,21 @@ public class HistoryJobAdapter extends RecyclerView.Adapter<HistoryJobAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        if (mValues.size() < 1) {//
-            holder.itemView.setVisibility(View.GONE);
-        }
-        if (mValues.size() == position) {
-            if (mValues.size() > 4) {
-                holder.loading.setText("已加载全部");
-                holder.animLoading.setVisibility(View.GONE);
-                holder.itemView.setVisibility(View.VISIBLE);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (position ==mValues.size()) {
+            //最后一条
+            if (mValues.size() > 0 && mValues.size() < 5||mValues.size()>0&&mValues.size()%10!=0) {
+                ((FooterViewHolder) holder).bindData(1);
+            } else {
+                ((FooterViewHolder) holder).bindData(0);
             }
         } else {
-            final Model.ListTJobEntity job = mValues.get(position);
-            if (mType.equals("0")){//历史纪录
-                holder.tvTitle.setText(job.getName());
-                holder.llMuban.setVisibility(View.GONE);
-                holder.imgHis.setVisibility(View.VISIBLE);
-            }else {
-                holder.tvTitle.setText(job.getModel_name());
-                holder.llMuban.setVisibility(View.VISIBLE);
-                holder.imgHis.setVisibility(View.GONE);
-            }
-
-            holder.tvName.setText(name);
-            if (null!=job.getRegedit_time()&& !job.getRegedit_time().equals("")){
-                String date = job.getRegedit_time().substring(5 ,11);
-                holder.tvDate.setText(date);
-            }
-
-
-            //性别限制（0=只招女，1=只招男，2=不限男女）
-            if (mType.equals("0")) {
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent=new Intent(mContext, PublishDetailActivity.class);
-                        intent.putExtra("job",job);
-                        intent.setAction("fromItem");
-                        intent.putExtra("type","old");
-                        mContext.startActivity(intent);
-                    }
-                });
-            }
-
-            holder.btnMubanUse.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent=new Intent(mContext, PublishDetailActivity.class);
-                    intent.putExtra("job",job);
-                    intent.setAction("fromItem");
-                    intent.putExtra("type","old");
-                    mContext.startActivity(intent);
-                }
-            });
-            holder.btnMubanDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    deleCallBack.deleOnClick(job.getId(),job.getMerchant_id(),position);
-                }
-            });
-
-
+            ((HistoryJobItemViewHolder)holder).bindData(mValues.get(position));
+            ((HistoryJobItemViewHolder)holder).setPosition(position);
+            ((HistoryJobItemViewHolder)holder).setDeleteCallBack(deleteCallback);
         }
     }
+
 
     @Override
     public int getItemCount() {
@@ -178,46 +104,8 @@ public class HistoryJobAdapter extends RecyclerView.Adapter<HistoryJobAdapter.Vi
         }
     }
 
-    static
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        @BindView(R.id.tv_merchant_name) TextView tvTitle;
-        @BindView(R.id.tv_date) TextView tvDate;
-        @BindView(R.id.tv_location) TextView tvLocation;
-        @BindView(R.id.ll_publish_time) LinearLayout llPublishTime;
-        @BindView(R.id.tv_human) TextView tvHuman;
-        @BindView(R.id.tv_name) TextView tvName;
-        @BindView(R.id.ll_publisher) LinearLayout llPublisher;
-        @BindView(R.id.tv_enroll_num) TextView tvEnrollNum;
-        @BindView(R.id.btn_muban_use) Button btnMubanUse;
-        @BindView(R.id.btn_muban_delete) Button btnMubanDelete;
-        @BindView(R.id.ll_muban) LinearLayout llMuban;
-        @BindView(R.id.img_his) ImageView imgHis;
-        @BindView(R.id.rl_job) RelativeLayout rlJob;
-
-        private ImageView animLoading;
-        private TextView loading;
-
-        public ViewHolder(View view, int type) {
-            super(view);
-
-            switch (type) {
-                case NORMAL:
-                    ButterKnife.bind(this, view);
-                    break;
-                case IS_FOOTER:
-//                    animLoading = (ImageView) view.findViewById(R.id.anim_loading);
-                    loading = (TextView) view.findViewById(R.id.tv_loading);
-                    break;
-            }
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + "'";
-        }
+    private HistoryJobItemViewHolder.DeleteCallBack deleteCallback;
+    public void setDeleteCallback(HistoryJobItemViewHolder.DeleteCallBack deleteCallback) {
+        this.deleteCallback = deleteCallback;
     }
-
-
 }

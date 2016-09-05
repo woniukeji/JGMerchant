@@ -241,6 +241,20 @@ public class HttpMethods {
     }
 
 
+    /**
+     * 商家录用状态信息，录取or完成
+     */
+    public void merchantEmployStatus(Subscriber<Model> subscriber, String merchant_id, String count, String status) {
+        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+        methodsInterface.merchantEmployStatus(only,merchant_id,count,status)
+                .map(new BaseBeanFun<Model>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
     private class APIExecption extends RuntimeException {
         public APIExecption(Integer code) {
             this(getAPIExecptionMessage(code));

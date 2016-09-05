@@ -11,8 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -22,9 +20,11 @@ import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.Model;
+import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
+import com.woniukeji.jianmerchant.http.HttpMethods;
+import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
-import com.woniukeji.jianmerchant.widget.FixedRecyclerView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -32,28 +32,25 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
+import ui.EmptyRecyclerView;
 
 /**
  * Activities that contain this fragment must implement the
  * to handle interaction events.
  * create an instance of this fragment.
  */
-public class PartJobManagerFragment extends BaseFragment implements PartJobManagerAdapter.RecyCallBack {
+public class PartJobManagerFragment extends BaseFragment {
 
     /**
      * params1 0完成 1录取
      */
     private static String params1;
-    @BindView(R.id.img_renwu)
-    ImageView imgRenwu;
-    @BindView(R.id.rl_null)
-    RelativeLayout rlNull;
     @BindView(R.id.list)
-    FixedRecyclerView list;
+    EmptyRecyclerView list;
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
 //    @InjectView(R.id.list)
@@ -63,8 +60,9 @@ public class PartJobManagerFragment extends BaseFragment implements PartJobManag
     private int MSG_DELETE_SUCCESS = 5;
     private int MSG_DELETE_FAIL = 6;
         private Handler mHandler = new Myhandler(this.getActivity());
+    private ViewGroup container;
 
-private class Myhandler extends Handler {
+    private class Myhandler extends Handler {
     private WeakReference<Context> reference;
 
     public Myhandler(Context context) {
@@ -127,11 +125,6 @@ private class Myhandler extends Handler {
     }
 
 
-    @Override
-    public void RecyOnClick(int job_id, int merchant_id, int position) {
-
-    }
-
     public static PartJobManagerFragment newInstance(int pid) {
         //通过Bundle保存数据
         Bundle args = new Bundle();
@@ -151,6 +144,7 @@ private class Myhandler extends Handler {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        this.container = container;
         View view = inflater.inflate(R.layout.fragment_part_manager, container, false);
         ButterKnife.bind(this, view);
         initview();
@@ -159,40 +153,29 @@ private class Myhandler extends Handler {
     }
 
     private void initview() {
-        adapter = new PartJobManagerAdapter(modleList, getActivity(), type, this);
+        adapter = new PartJobManagerAdapter(modleList, getActivity(), type);
         mLayoutManager = new LinearLayoutManager(getActivity());
-//设置布局管理器
         list.setLayoutManager(mLayoutManager);
-//设置adapter
         list.setAdapter(adapter);
-//设置Item增加、移除动画
         list.setItemAnimator(new DefaultItemAnimator());
-//添加分割线
-//        recycleList.addItemDecoration(new RecyclerView.ItemDecoration() {
-//        });
-//        recycleList.addItemDecoration(new DividerItemDecoration(
-//                getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content,container,false));
         refreshLayout.setColorSchemeResources(R.color.app_bg);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                GetTask getTask=new GetTask(String.valueOf(merchant_id),String.valueOf(type),"0");
-//                getTask.execute();
-                getJobs(String.valueOf(merchant_id), String.valueOf(type), "0");
+                getMerchantEmployStatus(String.valueOf(type),"0");
             }
         });
         merchant_id = (int) SPUtils.getParam(getActivity(), Constants.USER_INFO, Constants.USER_MERCHANT_ID, 0);//userinfo sp文件中保存着3
 
-//        list.setSwipeMenuCreator(swipeMenuCreator);
-//        list.setSwipeMenuItemClickListener(swipeMenuClickListener);
 
         list.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (modleList.size() > 5 && lastVisibleItem == modleList.size()) {
-                    getJobs(String.valueOf(merchant_id), String.valueOf(type), String.valueOf(lastVisibleItem));
+                if (modleList.size() > 4 && lastVisibleItem == modleList.size()) {
+                    getMerchantEmployStatus(String.valueOf(type),String.valueOf(lastVisibleItem));
                 }
             }
 
@@ -208,9 +191,30 @@ private class Myhandler extends Handler {
     @Override
     public void onResume() {
         super.onResume();
-        getJobs(String.valueOf(merchant_id), String.valueOf(type), "0");
-//        GetTask getTask=new GetTask(String.valueOf(merchant_id),String.valueOf(type),"0");
-//        getTask.execute();
+        getMerchantEmployStatus(String.valueOf(type),"0");
+    }
+
+    /**
+     * 获取商家录录取和完成信息列表
+     */
+    private void getMerchantEmployStatus(String type, final String count) {
+        BackgroundSubscriber<Model> subscriber = new BackgroundSubscriber<>(new SubscriberOnNextListener<Model>() {
+            @Override
+            public void onNext(Model model) {
+                if (refreshLayout!=null&& refreshLayout.isRefreshing()){
+                    refreshLayout.setRefreshing(false);
+                }
+                if (model.getList_t_job().size() > 0 && model != null && Integer.valueOf(count) == 0) {
+                    modleList.clear();
+                } else if (model!=null&&model.getList_t_job().size()<10){
+
+
+                }
+                modleList.addAll(model.getList_t_job());
+                adapter.notifyDataSetChanged();
+            }
+        }, getHoldingContext());
+        HttpMethods.getInstance().merchantEmployStatus(subscriber,String.valueOf(merchant_id),count,type);
     }
 
     @Override

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.adapter.HistoryJobItemViewHolder;
 import com.woniukeji.jianmerchant.adapter.JobsAdapter;
 import com.woniukeji.jianmerchant.adapter.MyTypeAdapter;
 import com.woniukeji.jianmerchant.adapter.RegionAdapter;
@@ -36,16 +37,16 @@ import com.woniukeji.jianmerchant.publish.PublishDetailActivity;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
-import com.woniukeji.jianmerchant.widget.FixedRecyclerView;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.Subscriber;
+import ui.EmptyRecyclerView;
 
 public class PublishPartJobFragment extends BaseFragment implements View.OnClickListener {
 
@@ -70,9 +71,8 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     private Intent intent;
     private Bundle bundle = new Bundle();
     ;
-    private boolean isFirst = true;
     private SwipeRefreshLayout refreshLayout;
-    private FixedRecyclerView list;
+    private EmptyRecyclerView list;
     /**
      * 历史兼职信息集合
      */
@@ -93,15 +93,15 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                 case FIRST:
                     if (type.equals("mb")) {
                         final String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-                        historyJobAdapter = new HistoryJobAdapter(modelList, getHoldingContext(), "1", new HistoryJobAdapter.deleteCallBack() {
+                        historyJobAdapter = new HistoryJobAdapter(modelList, getHoldingContext(), "1");
+                        historyJobAdapter.setDeleteCallback(new HistoryJobItemViewHolder.DeleteCallBack() {
                             @Override
-                            public void deleOnClick(int job_id, int merchant_id, final int position) {
+                            public void onDelete(int job_id, int merchant_id, final int position) {
                                 HttpMethods.getInstance().deleteModelInfo(new Subscriber<BaseBean>() {
                                     @Override
                                     public void onCompleted() {
 
                                     }
-
                                     @Override
                                     public void onError(Throwable e) {
                                         Toast.makeText(getHoldingContext(), "删除失败了。。。", Toast.LENGTH_SHORT).show();
@@ -117,12 +117,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                             }
                         });
                     } else {
-                        historyJobAdapter = new HistoryJobAdapter(modelList, getHoldingContext(), "0", new HistoryJobAdapter.deleteCallBack() {
-                            @Override
-                            public void deleOnClick(int job_id, int merchant_id, int position) {
-                                //删除模板
-                            }
-                        });
+                        historyJobAdapter = new HistoryJobAdapter(modelList, getHoldingContext(), "0");
                     }
                     list.setAdapter(historyJobAdapter);
                     refreshLayout.setRefreshing(false);
@@ -159,7 +154,6 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
         if (type.equals("cjxjz")) {
             View view = inflater.inflate(R.layout.fragment_create_partjob, container, false);
             ButterKnife.bind(this, view);
-
             GridLayoutManager regionGridManager = new GridLayoutManager(getHoldingContext(), 4);
             recyclerRegion.setLayoutManager(regionGridManager);
             recyclerRegion.setItemAnimator(new DefaultItemAnimator());
@@ -177,13 +171,9 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             GridLayoutManager jobsGridManager = new GridLayoutManager(getHoldingContext(), 4);
             recyclerJobs.setLayoutManager(jobsGridManager);
             recyclerJobs.setItemAnimator(new DefaultItemAnimator());
-
-
             //访问网络+设置recyclerjobs的数据
             getCategoryToBean();
             nextPage.setOnClickListener(this);
-
-
             return view;
 
         } else if (type.equals("lsjl")) {
@@ -201,6 +191,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             linearLayoutManager = new LinearLayoutManager(getHoldingContext());
             list.setLayoutManager(linearLayoutManager);
             list.setItemAnimator(new DefaultItemAnimator());
+            list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content,container,false));
             list.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -220,7 +211,6 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             });
             //访问网络获取数据
             getHistroyJobs(checkOutPage);
-
             return view;
 
 
@@ -239,6 +229,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             linearLayoutManager = new LinearLayoutManager(getHoldingContext());
             list.setLayoutManager(linearLayoutManager);
             list.setItemAnimator(new DefaultItemAnimator());
+            list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content,container,false));
             list.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -269,8 +260,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
 
     private void initHistoryView(View view) {
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
-        list = (FixedRecyclerView) view.findViewById(R.id.list);
-
+        list = (EmptyRecyclerView) view.findViewById(R.id.list);
     }
 
     /**
@@ -292,7 +282,6 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                 }
                 if (count==0) {//第一次
                     mHandler.sendEmptyMessage(FIRST);
-                    isFirst = false;
                 } else if (list_t_job != null && list_t_job.size() > 0) {//有数据
                     historyJobAdapter.notifyDataSetChanged();
                 } else {//没数据
@@ -334,12 +323,13 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        saveStateToArguments();
     }
 
     @Override
     protected void visiableToUser() {
-
+        if (!type.equals("cjxjz")) {
+            getHistroyJobs(0);
+        }
     }
 
     @Override
@@ -421,27 +411,5 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        if (isFirst) {
-//            isFirst = false;
-//        } else {
-//            restoreStateFromArguments();
-//        }
     }
-
-//    private void restoreStateFromArguments() {
-//        Bundle bundleRestore = getArguments();
-//        if (bundleRestore != null) {
-//            ArrayList<RegionBean> regionList = bundleRestore.getParcelableArrayList("region");
-//            regionBaseBean.setData(regionList);
-//            ArrayList<TypeBean> typeList =bundleRestore.getParcelableArrayList("type");
-//            typeBaseBean.setData(typeList);
-//        }
-//    }
-//
-//    private void saveStateToArguments() {
-//        Bundle bundleSave = getArguments();
-//        bundleSave.putParcelableArrayList("region", (ArrayList<? extends Parcelable>) regionBaseBean.getData());
-//        bundleSave.putParcelableArrayList("type", (ArrayList<? extends Parcelable>) typeBaseBean.getData());
-//    }
-
 }
