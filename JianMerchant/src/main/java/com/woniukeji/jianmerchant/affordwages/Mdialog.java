@@ -35,18 +35,15 @@ public class Mdialog extends Dialog {
         public Mdialog(Context context) {
             this(context, R.style.myDialogTheme);
             this.context = context;
-
         }
 
         public Mdialog(Context context, boolean cancelable,
                                 OnCancelListener cancelListener) {
-
             super(context, cancelable, cancelListener);
             this.context = context;
         }
 
         public Mdialog(Context context, int theme) {
-
             super(context, theme);
             this.context = context;
             setDialogContentView();
@@ -57,22 +54,17 @@ public class Mdialog extends Dialog {
          */
         private void setDialogContentView()
         {
-
             // 加载自己定义的布局
             View view = LayoutInflater.from(context).inflate(R.layout.save_dialog, null);
             titleText = (TextView) view.findViewById(R.id.title_text);
             passEText = (EditText) view.findViewById(R.id.et_pass);
             okBtn = (Button) view.findViewById(R.id.ok_btn);
             cancelBtn = (Button) view.findViewById(R.id.cancel_btn);
-
-
             final String password = (String) SPUtils.getParam(context, Constants.USER_INFO, Constants.USER_PAY_PASS, "");
             cancelBtn.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View view) {
                     Mdialog.this.dismiss();
-
                 }
             });
             okBtn.setOnClickListener(new View.OnClickListener() {
@@ -85,9 +77,6 @@ public class Mdialog extends Dialog {
                         EventBus.getDefault().post(payPassWordEvent);
                         Mdialog.this.dismiss();
                     }else {
-//                        PayPassWordEvent payPassWordEvent=new PayPassWordEvent();
-//                        payPassWordEvent.isCorrect=false;
-//                        EventBus.getDefault().post(payPassWordEvent);
                         Toast.makeText(context,"密码输入错误，请重新输入",Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -141,13 +130,9 @@ public class Mdialog extends Dialog {
          * 设置显示的标题（传入resId）
          */
         public Mdialog setAlertTitle(int resId) {
-
             if (null != titleText) {
                 titleText.setText(context.getString(resId));
             }
-
             return this;
-
         }
-
 }

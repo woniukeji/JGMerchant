@@ -21,7 +21,7 @@ public class Constants {
     public static final String JIANGUO_FACTORY="http://192.168.1.132/JianGuo_Server/";
     public static final String JIANGUO_TEST="http://101.200.195.147:8080/";
     public static final String JIANGUO_TEST2="http://v3.jianguojob.com:8080/";
-    public static final String JIANGUO_xiao="http://192.168.1.118/JianGuo_Server/";
+    public static final String JIANGUO_xiao="http://192.168.1.118:8080/";
     public static final String JIANGUO_xiao_new="http://192.168.43.90/JianGuo_Server/";
     public static final String JIANGUO_USING=JIANGUO_xiao;
     public static final String MARK_PIGEON= JIANGUO_USING+"T_UserPigeon_Servlet";//

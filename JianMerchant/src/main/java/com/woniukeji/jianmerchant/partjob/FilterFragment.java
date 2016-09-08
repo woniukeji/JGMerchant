@@ -62,7 +62,7 @@ import ui.EmptyRecyclerView;
  * to handle interaction events.
  * create an instance of this fragment.
  */
-public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCallBack {
+public class FilterFragment extends BaseFragment {
 
     private static String params1 = "type";
     private static String params2 = "jobid";
@@ -98,12 +98,6 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
         EventBus.getDefault().unregister(this);
     }
 
-
-    @Override
-    public void RecyOnClick(int loginid, int offer, int position) {
-        postAdmit(String.valueOf(loginid), jobid, String.valueOf(offer));
-    }
-
     @OnClick(R.id.btn_out_info)
     public void onClick() {
         exportUser();
@@ -131,7 +125,6 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
                         refreshLayout.setRefreshing(false);
                     }
                     modleList.addAll(modelBaseBean.getData().getList_t_user_info());
-
                     adapter.notifyDataSetChanged();
                     loadOk=true;
                     break;
@@ -152,9 +145,6 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
                     Toast.makeText(getActivity(), me, Toast.LENGTH_SHORT).show();
                     FilterEvent filterEvent = new FilterEvent();
                     EventBus.getDefault().post(filterEvent);
-//                    GetTask getTask=new GetTask(jobid,String.valueOf(type),String.valueOf(lastVisibleItem));
-//                    getTask.execute();
-//                    modleList.remove(mPosition);
                     break;
                 case 6:
                     String mes = (String) msg.obj;
@@ -210,11 +200,7 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
 
 
     private void initview() {
-
-//        adapter = new FilterAdapter(modleList, getActivity(), type, jobid, this);
-//        adapter = new NewFilterAdapter(modleList,getActivity(),type,jobid);
         adapter = new NewNewFilterAdapter(modleList,getActivity(),type,jobid);
-
         adapter.setEnrollOrRefuseClickListener(new EnrollOrRefuseClickListener() {
             @Override
             public void onClick(int position, int login_id, int type, View view) {
@@ -225,13 +211,11 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
         adapter.setFilterItemClickListener(new FilterItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                LogUtils.i("onItemClick",String.valueOf(position));
             }
 
             @Override
             public boolean onItemLongClick(final int position, View view, final int login_id) {
                 //用popupwindow
-//                Toast.makeText(getHoldingContext(), "长按了", Toast.LENGTH_SHORT).show();
                 PopupUtils popupUtils = new PopupUtils(getHoldingContext());
                 popupUtils.setOnSetupDove(new PopupUtils.onSetupDove() {
                     @Override
@@ -276,22 +260,10 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
             }
         });
         mLayoutManager = new LinearLayoutManager(getActivity());
-//设置布局管理器
         list.setLayoutManager(mLayoutManager);
-
-
-//设置Item增加、移除动画
         list.setItemAnimator(new DefaultItemAnimator());
-//添加分割线
-//        recycleList.addItemDecoration(new RecyclerView.ItemDecoration() {
-//        });
-//        recycleList.addItemDecoration(new DividerItemDecoration(
-//                getActivity(), DividerItemDecoration.VERTICAL_LIST));
-
-        list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content,container,false));
-        //设置adapter
+        list.setEmptyView(View.inflate(getHoldingContext(),R.layout.null_content,container));
         list.setAdapter(adapter);
-
         refreshLayout.setColorSchemeResources(R.color.app_bg);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -300,9 +272,9 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
                 getTask.execute();
             }
         });
-//        merchant_id= (int) SPUtils.getParam(getActivity(),Constants.USER_INFO,Constants.USER_MERCHANT_ID,0);
         GetTask getTask = new GetTask(jobid, String.valueOf(type), "0");
         getTask.execute();
+        //标记鸽子
         listenner = new SubscriberOnNextListener<BaseBean>() {
             @Override
             public void onNext(BaseBean baseBean) {
@@ -332,22 +304,13 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-
-
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItem + 1 == adapter.getItemCount()&&loadOk) {
-
                     GetTask getTask = new GetTask(jobid, String.valueOf(type), String.valueOf(lastVisibleItem));
                     getTask.execute();
                     refreshLayout.setRefreshing(true);
                     loadOk=false;
-                    LogUtils.e("position",lastVisibleItem+"开始"+modleList.size());
                 }
-//                if (modleList.size() > 5 && lastVisibleItem == modleList.size()) {
-//                    GetTask getTask = new GetTask(jobid, String.valueOf(type), String.valueOf(lastVisibleItem));
-//                    getTask.execute();
-//                    LogUtils.e("position",lastVisibleItem+"开始"+modleList.size());
-//                }
             }
 
             @Override
@@ -414,7 +377,6 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
 
         @Override
         protected Void doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
             try {
                 getJobs();
             } catch (Exception e) {
@@ -463,7 +425,6 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
                         @Override
                         public void onResponse(BaseBean<PublishUser> response, int id) {
                             if (response.getCode().equals("200")) {
-//                                SPUtils.setParam(AuthActivity.this, Constants.LOGIN_INFO, Constants.SP_TYPE, "0");
                                 Message message = new Message();
                                 message.obj = response;
                                 message.arg1 = Integer.parseInt(count);
@@ -482,60 +443,5 @@ public class FilterFragment extends BaseFragment implements FilterAdapter.RecyCa
                     });
         }
     }
-
-
-        /**
-         * postInfo
-         */
-        public void postAdmit(String loginid, String jobid, String offer) {
-            String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-            OkHttpUtils
-                    .get()
-                    .url(Constants.POST_ADMIT)
-                    .addParams("only", only)
-                    .addParams("job_id", jobid)
-                    .addParams("login_id", loginid)
-                    .addParams("offer", offer)
-                    .build()
-                    .connTimeOut(60000)
-                    .readTimeOut(20000)
-                    .writeTimeOut(20000)
-                    .execute(new Callback<BaseBean<PublishUser>>() {
-                        @Override
-                        public BaseBean<PublishUser> parseNetworkResponse(Response response, int id) throws Exception {
-                            String string = response.body().string();
-                            BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean<PublishUser>>() {
-                            }.getType());
-                            return baseBean;
-                        }
-
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            Message message = new Message();
-                            message.obj = e.toString();
-                            message.what = MSG_POST_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-
-                        @Override
-                        public void onResponse(BaseBean<PublishUser> response, int id) {
-                            if (response.getCode().equals("200")) {
-                                Message message = new Message();
-                                message.obj = response.getMessage();
-                                message.what = MSG_POST_SUCCESS;
-                                mHandler.sendMessage(message);
-                            } else {
-                                Message message = new Message();
-                                message.obj = response.getMessage();
-                                message.what = MSG_POST_FAIL;
-                                mHandler.sendMessage(message);
-                            }
-                        }
-                    });
-        }
-
-
-
-
 
 }

@@ -61,7 +61,7 @@ public interface HttpMethodsInterface {
     Observable<BaseBean> overOrRemoveOffShelves(@Query("only")String only,@Query("job_id")String job_id,@Query("offer")String offer);
 
     @GET("T_enroll_Job_User_Servlet")
-    Observable<BaseBean<AffordUser>> getPayList(@Query("only")String only,@Query("job_id")String job_id,@Query("nv_job_id")String nv_job_id,@Query("count")String count);
+    Observable<BaseBean<AffordUser>> getPayList(@Query("only")String only,@Query("job_id")String job_id,@Query("count")String count);
 
     @GET("T_job_Merchant_Id_Zhong_Servlet")
     Observable<BaseBean<Model>> getPublishJobs(@Query("only")String only,@Query("merchant_id")String merchant_id,@Query("count")String count,@Query("status")String status);
@@ -122,4 +122,7 @@ public interface HttpMethodsInterface {
 
     @GET("T_job_Merchant_Id_Zhong_Servlet")
     Observable<BaseBean<Model>> merchantEmployStatus(@Query("only") String only, @Query("merchant_id") String merchant_id, @Query("count") String count, @Query("status") String status);
+
+    @GET("T_wages_Insert_ChangServlet")
+    Observable<BaseBean> checkout(@Query("only") String only, @Query("job_id") String job_id, @Query("json") String json);
 }

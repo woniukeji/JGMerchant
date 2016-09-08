@@ -119,6 +119,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".affordwages.CalculateActivity"
+            android:parentActivityName=".partjob.JobItemDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".affordwages.ChangeActivity"
@@ -260,11 +261,15 @@
             android:name=".base.MainActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".activity.HistoryRecords"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            >
-
-        </activity>
+        <activity
+            android:name=".activity.HistoryRecords"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".affordwages.AddPersonActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".affordwages.AddPersonDialog"
+            android:theme="@style/translucentDialog"
+            ></activity>
     </application>
 
 </manifest>

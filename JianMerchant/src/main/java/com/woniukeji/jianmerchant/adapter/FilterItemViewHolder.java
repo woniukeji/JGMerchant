@@ -58,6 +58,8 @@ public class FilterItemViewHolder extends TopViewHolder<PublishUser.ListTUserInf
     Button btnCancel;
     private PublishUser.ListTUserInfoEntity userInfo;
     private EnrollOrRefuseClickListener enrollOrRefuseClickListener;
+    private int position;
+
     public void setEnrollOrRefuseClickListener(EnrollOrRefuseClickListener enrollOrRefuseClickListener) {
         this.enrollOrRefuseClickListener = enrollOrRefuseClickListener;
     }
@@ -69,6 +71,17 @@ public class FilterItemViewHolder extends TopViewHolder<PublishUser.ListTUserInf
 
     public FilterItemViewHolder(Context context, ViewGroup root) {
         super(context, R.layout.fragment_filter_item_new, root);
+        setOnClick();
+    }
+
+    private void setOnClick() {
+        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                filterItemClickListener.onItemLongClick(position, v,userInfo.getLogin_id());
+                return true;
+            }
+        });
     }
 
     private onChatClickListener onChatClickListener;
@@ -243,5 +256,10 @@ public class FilterItemViewHolder extends TopViewHolder<PublishUser.ListTUserInf
                 enrollOrRefuseClickListener.onClick(getAdapterPosition(),userInfo.getLogin_id(),type,view);
                 break;
         }
+    }
+
+    public void setPosition(int position) {
+
+        this.position = position;
     }
 }

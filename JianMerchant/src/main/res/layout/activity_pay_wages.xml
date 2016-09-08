@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-    <include
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
         android:id="@+id/top"
-        layout="@layout/app_title_bar"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
     <LinearLayout
         android:id="@+id/ll_jobname"
         android:layout_below="@+id/top"
@@ -23,7 +23,6 @@
        android:layout_width="0dp"
        android:layout_height="match_parent"
        android:id="@+id/tv_job_name"
-       android:text="凯宾斯基酒店会听服务员"
        android:gravity="center|left"
        android:textSize="14dp"
        android:layout_marginLeft="15dp"
@@ -55,7 +54,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/tv_title_sum"
-            android:text="总计3人"
             android:gravity="center|left"
             android:textSize="14dp"
             android:layout_marginLeft="15dp"
@@ -66,7 +64,6 @@
             android:layout_weight="0.4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="150/天"
             android:textColor="#f87c7c"
             android:textSize="12dp"
             android:gravity="center|right"
@@ -146,14 +143,8 @@
                 />
 
         </LinearLayout>
-
-
-        <include
-            android:id="@+id/top"
-            layout="@layout/split_line"
-            />
     </RelativeLayout>
-    <com.woniukeji.jianmerchant.widget.FixedRecyclerView
+    <ui.EmptyRecyclerView
         android:id="@+id/list"
         android:layout_below="@+id/ll_jobinfo"
         android:layout_above="@+id/rl_bott"

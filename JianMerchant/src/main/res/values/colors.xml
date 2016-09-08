@@ -64,5 +64,6 @@
     <color name="tab_unselected_bg">#ffffff</color>
     <color name="tab_selected_text">#ffffff</color>
     <color name="tab_unselected_text">#666666</color>
+    <color name="translucent">#80000000</color>
 
 </resources>

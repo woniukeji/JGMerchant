@@ -116,7 +116,6 @@ public class JobItemDetailActivity extends BaseActivity {
                 intent1.putExtra("money", tvWages.getText().toString());
                 intent1.putExtra("name", tvMerchantName.getText().toString());
                 intent1.putExtra("jobid", String.valueOf(jobinfo.getJob_id()));
-                intent1.putExtra("jobNid", String.valueOf(jobinfo.getNv_job_id()));
                 startActivity(intent1);
                 break;
             case R.id.img_back:

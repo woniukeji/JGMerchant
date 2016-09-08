@@ -70,6 +70,7 @@ public class NewNewFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
         } else {
             ((FilterItemViewHolder)holder).bindData(mValues.get(position));
+            ((FilterItemViewHolder) holder).setPosition(position);
             if (filterItemClickListener != null) {
                 ((FilterItemViewHolder)holder).setFilterItemClickListener(filterItemClickListener);
             }

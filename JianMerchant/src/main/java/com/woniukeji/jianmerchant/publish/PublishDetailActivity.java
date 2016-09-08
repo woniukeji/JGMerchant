@@ -744,28 +744,29 @@ public class PublishDetailActivity extends BaseActivity {
                     jobinfo.setWork_content(etWorkContent.getText().toString());
                     jobinfo.setWork_require(etWorkRequire.getText().toString());
                     jobinfo.setWages(money + tvWagesMethod.getText().toString());
+                    //其他信息
                     qualificationOther = new StringBuffer();
                     welfareOther = new StringBuffer();
                     labelOther = new StringBuffer();
                     if (qualicationSelected != null&&intent.getAction().equals("fromFragment")) {
                         qualificationOther.append(qualicationSelected);
                     } else {
-                        for (int i = 0; i < modle.getWelfare_name().size(); i++) {
-                            qualificationOther.append(qualification[Integer.valueOf(modle.getLimit_name().get(i))]);
+                        for (int i = 0; i < modle.getLimit_name().size(); i++) {
+                            qualificationOther.append(qualification[Integer.valueOf(modle.getLimit_name().get(i))-1]);
                         }
                     }
                     if (welfareSelected != null&&intent.getAction().equals("fromFragment")) {
                         labelOther.append(welfareSelected);
                     } else {
                         for (int i = 0; i < modle.getWelfare_name().size(); i++) {
-                            welfareOther.append(welfare[Integer.valueOf(modle.getWelfare_name().get(i))]);
+                            welfareOther.append(welfare[Integer.valueOf(modle.getWelfare_name().get(i))-1]);
                         }
                     }
                     if (partjobSelected != null&&intent.getAction().equals("fromFragment")) {
                         labelOther.append(partjobSelected);
                     } else {
                         for (int i = 0; i < modle.getLabel_name().size(); i++) {
-                            labelOther.append(partjob_tag[Integer.valueOf(modle.getLabel_name().get(i))]);
+                            labelOther.append(partjob_tag[Integer.valueOf(modle.getLabel_name().get(i))-1]);
                         }
                     }
                     jobinfo.setOther(qualificationOther.toString()+"-"+welfareOther.toString()+"-"+labelOther.toString());
@@ -868,7 +869,7 @@ public class PublishDetailActivity extends BaseActivity {
                                 LogUtils.i("jobs", new Gson().toJson(jobs).toString());
                                 String sucessMessage = "发布成功！";
                                 Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
-//                                PublishDetailActivity.this.finish();
+                                PublishDetailActivity.this.finish();
                             }
                         };
                         //job_model =0  不是模板

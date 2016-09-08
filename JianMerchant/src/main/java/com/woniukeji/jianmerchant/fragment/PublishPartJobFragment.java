@@ -120,6 +120,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                         historyJobAdapter = new HistoryJobAdapter(modelList, getHoldingContext(), "0");
                     }
                     list.setAdapter(historyJobAdapter);
+                    list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content,container,false));
                     refreshLayout.setRefreshing(false);
                     break;
 
@@ -127,6 +128,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
         }
     };
     private boolean isCanLoadDate =true;
+    private ViewGroup container;
 
 
     public static PublishPartJobFragment newInstance(String type) {
@@ -151,6 +153,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.container = container;
         if (type.equals("cjxjz")) {
             View view = inflater.inflate(R.layout.fragment_create_partjob, container, false);
             ButterKnife.bind(this, view);
@@ -191,7 +194,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             linearLayoutManager = new LinearLayoutManager(getHoldingContext());
             list.setLayoutManager(linearLayoutManager);
             list.setItemAnimator(new DefaultItemAnimator());
-            list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content,container,false));
+
             list.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

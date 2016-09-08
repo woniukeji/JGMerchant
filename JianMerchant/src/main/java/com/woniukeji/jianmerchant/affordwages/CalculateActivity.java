@@ -2,13 +2,12 @@ package com.woniukeji.jianmerchant.affordwages;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,237 +18,208 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.adapter.CalculateViewHolder;
 import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.AffordUser;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.eventbus.PayPassWordEvent;
 import com.woniukeji.jianmerchant.eventbus.UserWagesEvent;
+import com.woniukeji.jianmerchant.http.HttpMethods;
+import com.woniukeji.jianmerchant.http.ProgressSubscriber;
+import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
-import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
-import com.woniukeji.jianmerchant.widget.FixedRecyclerView;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.ButterKnife;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
-import okhttp3.Call;
-import okhttp3.Response;
+import ui.EmptyRecyclerView;
 
-public class CalculateActivity extends BaseActivity implements CalculateAdapter.deleteCallBack {
+public class CalculateActivity extends BaseActivity implements CalculateViewHolder.ChangeMoney {
 
-    @BindView(R.id.img_back) ImageView imgBack;
-    @BindView(R.id.tv_title) TextView tvTitle;
-    @BindView(R.id.img_share) ImageView imgShare;
-    @BindView(R.id.list) FixedRecyclerView list;
-    @BindView(R.id.tv_job_name) TextView tvJobName;
-    @BindView(R.id.tv_job_date) TextView tvJobDate;
-    @BindView(R.id.ll_jobname) LinearLayout llJobname;
-    @BindView(R.id.tv_title_sum) TextView tvTitleSum;
-    @BindView(R.id.tv_job_wages) TextView tvJobWages;
-    @BindView(R.id.btn_change_wages) Button btnChangeWages;
-    @BindView(R.id.ll_jobinfo) LinearLayout llJobinfo;
-    @BindView(R.id.ch_all) CheckBox chAll;
-    @BindView(R.id.btn_pay_wages) Button btnPayWages;
-    @BindView(R.id.tv_wages_sum) TextView tvWagesSum;
-    @BindView(R.id.tv_choose_sum) TextView tvChooseSum;
-    private int MSG_GET_SUCCESS = 0;
-    private int MSG_GET_FAIL = 1;
-    private int MSG_DELETE_SUCCESS = 2;
-    private int MSG_DELETE_FAIL = 3;
-    private int MSG_POST_SUCCESS = 5;
-    private int MSG_POST_FAIL = 6;
-    private Handler mHandler = new Myhandler(this);
+    @BindView(R.id.list)
+    EmptyRecyclerView list;
+    @BindView(R.id.tv_job_name)
+    TextView tvJobName;
+    @BindView(R.id.tv_job_date)
+    TextView tvJobDate;
+    @BindView(R.id.ll_jobname)
+    LinearLayout llJobname;
+    @BindView(R.id.tv_title_sum)
+    TextView tvTitleSum;
+    @BindView(R.id.tv_job_wages)
+    TextView tvJobWages;
+    @BindView(R.id.btn_change_wages)
+    Button btnChangeWages;
+    @BindView(R.id.ll_jobinfo)
+    LinearLayout llJobinfo;
+    @BindView(R.id.ch_all)
+    CheckBox chAll;
+    @BindView(R.id.btn_pay_wages)
+    Button btnPayWages;
+    @BindView(R.id.tv_wages_sum)
+    TextView tvWagesSum;
+    @BindView(R.id.tv_choose_sum)
+    TextView tvChooseSum;
+    @BindView(R.id.top)
+    Toolbar top;
     private Context mContext = CalculateActivity.this;
     private CalculateAdapter adapter;
     private int merchantid;
-    private List<Boolean> isSelected=new ArrayList<>();
+    private List<Boolean> isSelected = new ArrayList<>();
     private List<AffordUser.ListTUserInfoEntity> userList = new ArrayList<>();
-//  private List<HashMap<AffordUser.ListTUserInfoEntity,Boolean>> userList = new ArrayList<>();
-    private int mPosition;
-    private SweetAlertDialog sweetAlertDialog;
     private int lastVisibleItem;
     private LinearLayoutManager mLayoutManager;
     private String jobid;
-    private String jobNid = "0";
     private String moneyStr;
     private String jobName;
     private double money;
-    private boolean noData;
     private String str;
+    private ActionBar actionBar;
+    private ImageView back;
+    private TextView title;
+    private TextView add_person;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-
     }
 
-    @OnClick({R.id.btn_change_wages, R.id.ch_all, R.id.btn_pay_wages,R.id.img_back})
+    @OnClick({R.id.btn_change_wages, R.id.ch_all, R.id.btn_pay_wages})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_change_wages:
-                new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE)
-                        .setTitleText("修改应发工资")
-                        .setInputType("number")
-                        .setContentEdit("请输入应发工资数目")
-                        .setCancelText("取消")
-                        .setConfirmText("确定")
-                        .showCancelButton(true)
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.cancel();
-                              money = Double.parseDouble(sweetAlertDialog.getEditContent());
-                             tvJobWages.setText(money+str);
-                             for (int i=0; i<userList.size();i++){
-                                 userList.get(i).setReal_money(money);
-                             }
-                                Calculate();
-                                adapter.notifyDataSetChanged();
-
-                            }
-                        })
-                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                sDialog.cancel();
-                            }
-                        })
-                        .show();
+                showSweetDialog();
                 break;
             case R.id.btn_pay_wages:
-                Mdialog mdialog=new Mdialog(mContext);
-                mdialog.show();
-                break;
-            case R.id.img_back:
-                finish();
+                if (checkStatus()) {
+                    Mdialog mdialog = new Mdialog(mContext);
+                    mdialog.show();
+                }
                 break;
         }
     }
 
-
-
-
-    private static class Myhandler extends Handler {
-        private WeakReference<Context> reference;
-
-        public Myhandler(Context context) {
-            reference = new WeakReference<>(context);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            CalculateActivity activity = (CalculateActivity) reference.get();
-            switch (msg.what) {
-                case 0:
-                    BaseBean<AffordUser> modleBaseBean = (BaseBean<AffordUser>) msg.obj;
-                    List<AffordUser.ListTUserInfoEntity> tempList = null;
-                    if (msg.arg1!=0){
-                        tempList = modleBaseBean.getData().getList_t_user_info();
-                        for (int i = 0; i <tempList.size() ; i++) {
-                            activity.isSelected.add(activity.userList.size()+i,false);
-                        }
-                    }else {//第一次请求
-                        tempList = modleBaseBean.getData().getList_t_user_info();
-                        activity.userList.clear();
-                        for (int i = 0; i <tempList.size() ; i++) {
-                            activity.isSelected.add(i,false);
-                        }
-                    }
-                    if (tempList.size()<10){
-                        activity.noData=true;
-                    }else {
-                        activity.noData=false;
-                    }
-                    activity.userList.addAll(tempList);
-                    for (int i=0; i<activity.userList.size();i++){
-                        activity.userList.get(i).setReal_money(activity.money);
-                    }
-                    activity.tvTitleSum.setText("总计"+modleBaseBean.getData().getUser_sum()+"人");
-                    activity.adapter.notifyDataSetChanged();
-
-                    break;
-                case 1:
-                    String ErrorMessage = (String) msg.obj;
-                    Toast.makeText(activity, ErrorMessage, Toast.LENGTH_SHORT).show();
-                    break;
-                case 2:
-                    BaseBean baseBean = (BaseBean) msg.obj;
-                    activity.userList.remove(activity.mPosition);
-                    activity.adapter.notifyDataSetChanged();
-                    activity.showShortToast("刪除模板成功！");
-                    break;
-                case 3:
-                    String sms = (String) msg.obj;
-                    Toast.makeText(activity, sms, Toast.LENGTH_SHORT).show();
-                    break;
-                case 5:
-                    BaseBean Bean = (BaseBean) msg.obj;
-                    String sum=Bean.getSum();
-                    Toast.makeText(activity, "结算成功", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(activity,FinishActivity.class);
-                    intent.putExtra("sum",sum);
-                    activity.startActivityForResult(intent,0);
-//                    activity.finish();
-                    break;
-                case 6:
-                    String sms6 = (String) msg.obj;
-                    Toast.makeText(activity, sms6, Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    break;
+    /**
+     * 检查是否有勾选
+     */
+    private boolean checkStatus() {
+        Boolean b = false;
+        for (int i = 0; i < isSelected.size(); i++) {
+            if (isSelected.get(i)) {
+                b = true;
+                return true;
             }
+
         }
+        if (!b) {
+            showShortToast("请至少勾选一人进行结算");
+        }
+        return false;
+    }
+
+    private void showSweetDialog() {
+        new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE)
+                .setTitleText("修改应发工资")
+                .setInputType("number")
+                .setContentEdit("请输入应发工资数目")
+                .setCancelText("取消")
+                .setConfirmText("确定")
+                .showCancelButton(true)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.cancel();
+                        money = Double.parseDouble(sweetAlertDialog.getEditContent());
+                        tvJobWages.setText(money + str);
+                        for (int i = 0; i < userList.size(); i++) {
+                            userList.get(i).setReal_money(money);
+                        }
+                        Calculate();
+                        adapter.notifyDataSetChanged();
+                    }
+                })
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.cancel();
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void onChangeMoney(String money, AffordUser.ListTUserInfoEntity user, int position) {
+        Intent intent = new Intent(mContext, ChangeActivity.class);
+        intent.putExtra("money", money);
+        intent.putExtra("user", user);
+        intent.putExtra("position", position);
+        startActivityForResult(intent, 1);
     }
 
     @Override
     public void setContentView() {
         setContentView(R.layout.activity_pay_wages);
         ButterKnife.bind(this);
+        setSupportActionBar(top);
+        actionBar = getSupportActionBar();
         EventBus.getDefault().register(this);
         Intent intent = getIntent();
         jobName = intent.getStringExtra("name");
         moneyStr = intent.getStringExtra("money");
-        str=moneyStr.substring(moneyStr.indexOf("/"));
-        money= Double.parseDouble(moneyStr.substring(0,moneyStr.indexOf("/")));
+        str = moneyStr.substring(moneyStr.indexOf("/"));
+        money = Double.parseDouble(moneyStr.substring(0, moneyStr.indexOf("/")));
         jobid = intent.getStringExtra("jobid");
-        jobNid = intent.getStringExtra("jobNid");
-        if (jobNid==null||jobNid.equals("null")){
-            jobNid="0";
-        }
     }
 
     @Override
     public void initViews() {
-        tvTitle.setText("结算");
+        setupToolBar();
         tvJobName.setText(jobName);
         tvJobWages.setText(moneyStr);
-        adapter = new CalculateAdapter(userList, isSelected,this, String.valueOf(money), this);
+        adapter = new CalculateAdapter(userList, isSelected, this, String.valueOf(money));
+        adapter.setChangeMoney(this);
         mLayoutManager = new LinearLayoutManager(this);
-//设置布局管理器
         list.setLayoutManager(mLayoutManager);
-//设置adapter
-        list.setAdapter(adapter);
-//设置Item增加、移除动画
         list.setItemAnimator(new DefaultItemAnimator());
-//添加分割线
+        list.setEmptyView(View.inflate(this, R.layout.null_content, null));
+        list.setAdapter(adapter);
+    }
 
-        sweetAlertDialog = new SweetAlertDialog(CalculateActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+    private void setupToolBar() {
+        View view = View.inflate(this, R.layout.app_title_bar_new, null);
+        top.addView(view,new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
+        top.setContentInsetsAbsolute(0,0);
+        back = (ImageView) top.findViewById(R.id.img_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        title = (TextView) top.findViewById(R.id.tv_title);
+        title.setText("结算");
+        add_person = (TextView) top.findViewById(R.id.add_person);
+        add_person.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CalculateActivity.this, AddPersonActivity.class);
+                intent.putExtra("job_id", jobid);
+                intent.putExtra("job_name", jobName);
+                //这里不用forResult启动，用eventbus代替
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -257,15 +227,14 @@ public class CalculateActivity extends BaseActivity implements CalculateAdapter.
         chAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     for (int i = 0; i < isSelected.size(); i++) {
-                        isSelected.set(i,true);
+                        isSelected.set(i, true);
                     }
-                }else {
+                } else {
                     for (int i = 0; i < isSelected.size(); i++) {
-                        isSelected.set(i,false);
+                        isSelected.set(i, false);
                     }
-
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -275,8 +244,38 @@ public class CalculateActivity extends BaseActivity implements CalculateAdapter.
     @Override
     public void initData() {
         merchantid = (int) SPUtils.getParam(mContext, Constants.USER_INFO, Constants.USER_MERCHANT_ID, 0);
-        GetTask getTask = new GetTask("0");
-        getTask.execute();
+        getEmployeeInfo(0);
+    }
+
+    /**
+     * 获取结算人员信息表
+     */
+    private void getEmployeeInfo(final int count) {
+        ProgressSubscriber<AffordUser> subscriber = new ProgressSubscriber<>(new SubscriberOnNextListener<AffordUser>() {
+            @Override
+            public void onNext(AffordUser affordUser) {
+                int size = affordUser.getList_t_user_info().size();
+                if (count == 0) {
+                    //首次获取
+                    userList.clear();
+                    userList.addAll(affordUser.getList_t_user_info());
+                    for (int i = 0; i < size; i++) {
+                        isSelected.add(i, false);
+                    }
+                } else {
+                    userList.addAll(affordUser.getList_t_user_info());
+                    for (int i = 0; i < size; i++) {
+                        isSelected.add(userList.size() + i, false);
+                    }
+                }
+                for (int i = 0; i < userList.size(); i++) {
+                    userList.get(i).setReal_money(money);
+                }
+                tvTitleSum.setText("总计" + affordUser.getUser_sum() + "人");
+                adapter.notifyDataSetChanged();
+            }
+        }, this, false);
+        HttpMethods.getInstance().paywage(subscriber, jobid, String.valueOf(count));
     }
 
     @Override
@@ -292,10 +291,8 @@ public class CalculateActivity extends BaseActivity implements CalculateAdapter.
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (userList.size() > 5 && lastVisibleItem == userList.size()&&!noData) {
-                    noData=true;//防止数据还未取回的时候重新触发数据接口
-                    GetTask getTask = new GetTask(String.valueOf(lastVisibleItem));
-                    getTask.execute();
+                if (userList.size() > 5 && lastVisibleItem == userList.size() && userList.size() % 10 == 0) {
+                    getEmployeeInfo(lastVisibleItem);
                 }
             }
 
@@ -310,55 +307,59 @@ public class CalculateActivity extends BaseActivity implements CalculateAdapter.
     @Override
     public void addActivity() {
         ActivityManager.getActivityManager().addActivity(this);
-
     }
-    public void  onEvent(UserWagesEvent event){
+
+    public void onEvent(UserWagesEvent event) {
         Calculate();
     }
 
     private void Calculate() {
         int sum = 0;
-        int person=0;
-        for (int i = 0; i <userList.size() ; i++) {
-            if (isSelected.get(i)){
-                sum+= userList.get(i).getReal_money();
+        int person = 0;
+        for (int i = 0; i < userList.size(); i++) {
+            if (isSelected.get(i)) {
+                sum += userList.get(i).getReal_money();
                 person++;
             }
         }
-        tvWagesSum.setText("合计："+sum+"元");
-        tvChooseSum.setText("选中"+person+"人");
+        tvWagesSum.setText("合计：" + sum + "元");
+        tvChooseSum.setText("选中" + person + "人");
     }
 
-    public void  onEventMainThread(PayPassWordEvent event){
+    /**
+     * 当确认结算并且密码输入正确之后会走这里
+     */
+    public void onEventMainThread(PayPassWordEvent event) {
 
-        if (event.isCorrect){
-            if (!sweetAlertDialog.isShowing()){
-                sweetAlertDialog.setTitleText("结算提交中，请稍后");
-                sweetAlertDialog.getProgressHelper().setBarColor(R.color.app_bg);
-                sweetAlertDialog.show();
-            }
-            Map  map=new HashMap();
-            List tempList=new ArrayList();
-            for (int i = 0; i <userList.size() ; i++) {
-                if (isSelected.get(i)){
-                    tempList.add(userList.get(i));
-                    LogUtils.e("json",userList.get(i).getReal_money()+"元");
+        if (event.isCorrect) {
+            Map map = new HashMap();
+            ArrayList list = new ArrayList();
+            for (int i = 0; i < userList.size(); i++) {
+                if (isSelected.get(i)) {
+                    list.add(userList.get(i));
                 }
             }
-            map.put("list_t_wages_Bean",tempList);
-            String json=new Gson().toJson(map);
-            PostTask postTask= new PostTask(jobid,jobNid,json
-            );
-
-            postTask.execute();
+            map.put("list_t_wages_Bean", list);
+            String json = new Gson().toJson(map);
+            checkout(jobid, json);
         }
     }
-//    @Override
-//    public void deleOnClick(int job_id, int merchant_id, int position) {
-//        mPosition = position;
-//        DeleteTask deleteTask = new DeleteTask(String.valueOf(job_id), String.valueOf(merchant_id));
-//        deleteTask.execute();
-//    }
+
+    /**
+     * 确认结算
+     */
+    private void checkout(String jobid, String json) {
+        ProgressSubscriber<BaseBean> subscriber = new ProgressSubscriber<BaseBean>(new SubscriberOnNextListener<BaseBean>() {
+            @Override
+            public void onNext(BaseBean baseBean) {
+                Toast.makeText(mContext, "结算成功", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, FinishActivity.class);
+                intent.putExtra("sum", baseBean.getSum());
+                startActivityForResult(intent, 0);
+            }
+        }, mContext, false);
+        HttpMethods.getInstance().checkout(subscriber, jobid, json);
+    }
 
     @Override
     protected void onDestroy() {
@@ -366,229 +367,23 @@ public class CalculateActivity extends BaseActivity implements CalculateAdapter.
         super.onDestroy();
     }
 
-    public class GetTask extends AsyncTask<Void, Void, Void> {
-        private String count = "0";
-
-        GetTask(String mCount) {
-            this.count = mCount;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-            try {
-                getJobUsers();
-            } catch (Exception e) {
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-//            sweetAlertDialog.dismissWithAnimation();
-        }
-
-        /**
-         * postInfo
-         */
-        public void getJobUsers() {
-            String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-            OkHttpUtils
-                    .get()
-                    .url(Constants.GET_PAY_LIST)
-                    .addParams("only", only)
-                    .addParams("job_id", jobid)
-                    .addParams("nv_job_id", jobNid)
-                    .addParams("count", count)
-                    .build()
-                    .connTimeOut(60000)
-                    .readTimeOut(20000)
-                    .writeTimeOut(20000)
-                    .execute(new Callback<BaseBean<AffordUser>>() {
-                        @Override
-                        public BaseBean<AffordUser> parseNetworkResponse(Response response, int id) throws Exception {
-                            String string = response.body().string();
-                            LogUtils.e("calculate",count);
-                            BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean<AffordUser>>() {
-                            }.getType());
-                            return baseBean;
-                        }
-
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            Message message = new Message();
-                            message.obj = e.toString();
-                            message.what = MSG_GET_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-
-                        @Override
-                        public void onResponse(BaseBean<AffordUser> response, int id) {
-                            if (response.getCode().equals("200")) {
-//                                SPUtils.setParam(AuthActivity.this, Constants.LOGIN_INFO, Constants.SP_TYPE, "0");
-                                Message message = new Message();
-                                message.obj = response;
-                                message.arg1= Integer.parseInt(count);
-                                message.what = MSG_GET_SUCCESS;
-                                mHandler.sendMessage(message);
-                            } else {
-                                Message message = new Message();
-                                message.obj = response.getMessage();
-                                message.what = MSG_GET_FAIL;
-                                mHandler.sendMessage(message);
-                            }
-                        }
-
-
-
-                    });
-        }
-    }
-
-    public class PostTask extends AsyncTask<Void, Void, Void> {
-        private  String jobid;
-        private  String loginid;
-        private  String houle;
-        private  String jobnid="";
-        private String remarks="";
-        private  String json;
-        PostTask(String jobid, String jobnid,String json) {
-            this.jobid = jobid;
-            this.json=json;
-            if (jobnid!=null){
-                this.jobnid=jobnid;
-            }
-
-        }
-        @Override
-        protected Void doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-            try {
-                PostJobWages();
-            } catch (Exception e) {
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            if (!sweetAlertDialog.isShowing()){
-
-                sweetAlertDialog.setTitleText("结算提交中，请稍后");
-                sweetAlertDialog.getProgressHelper().setBarColor(R.color.app_bg);
-                sweetAlertDialog.show();
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            if (sweetAlertDialog.isShowing()){
-                sweetAlertDialog.dismiss();
-            }
-        }
-
-        /**
-         */
-        public void PostJobWages() {
-            String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-             OkHttpUtils
-                        .post()
-                        .url(Constants.POST_PART_JOB_WAGES)
-//                        .content(json)
-                        .addParams("only", only)
-//                        .addParams("hould_money", houle)
-//                        .addParams("real_money", real)
-                        .addParams("nv_job_id", jobnid)
-                        .addParams("job_id", jobid)
-                        .addParams("json", json)
-                        .build()
-                        .connTimeOut(50000)
-                        .readTimeOut(300000)
-                        .writeTimeOut(300000)
-                     .execute(new Callback<BaseBean<AffordUser>>() {
-                         @Override
-                         public BaseBean<AffordUser> parseNetworkResponse(Response response, int id) throws Exception {
-                             String string = response.body().string();
-//                             LogUtils.e("calculate",count);
-                             BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean<AffordUser>>() {
-                             }.getType());
-                             return baseBean;
-                         }
-
-                         @Override
-                         public void onError(Call call, Exception e, int id) {
-                             Message message = new Message();
-                             message.obj = e.toString();
-                             message.what = MSG_GET_FAIL;
-                             mHandler.sendMessage(message);
-                         }
-
-                         @Override
-                         public void onResponse(BaseBean<AffordUser> response, int id) {
-                             if (response.getCode().equals("200")) {
-//                                SPUtils.setParam(AuthActivity.this, Constants.LOGIN_INFO, Constants.SP_TYPE, "0");
-                                 Message message = new Message();
-                                 message.obj = response;
-//                                 message.arg1= Integer.parseInt(count);
-                                 message.what = MSG_POST_SUCCESS;
-                                 mHandler.sendMessage(message);
-                             } else {
-                                 Message message = new Message();
-                                 message.obj = response.getMessage();
-                                 message.what = MSG_GET_FAIL;
-                                 mHandler.sendMessage(message);
-                             }
-
-                         }
-
-                     });
-
-
-        }
-    }
-
-
-    @Override
-    public void deleOnClick(String money, AffordUser.ListTUserInfoEntity user, int position) {
-        Intent intent = new Intent(mContext, ChangeActivity.class);
-        intent.putExtra("money",money);
-        intent.putExtra("user", user);
-        intent.putExtra("position", position);
-//        startActivity(intent);
-        startActivityForResult(intent,1);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==1){//修改界面返回值
-            if (resultCode==RESULT_OK){
-                int position= data.getIntExtra("position",0);
-                AffordUser.ListTUserInfoEntity user= (AffordUser.ListTUserInfoEntity) data.getSerializableExtra("user");
-                userList.set(position,user);
+        if (requestCode == 1) {//修改界面返回值
+            if (resultCode == RESULT_OK) {
+                int position = data.getIntExtra("position", 0);
+                AffordUser.ListTUserInfoEntity user = (AffordUser.ListTUserInfoEntity) data.getSerializableExtra("user");
+                userList.set(position, user);
                 Calculate();
-                LogUtils.e("json","修改"+user.getReal_money());
+                LogUtils.e("json", "修改" + user.getReal_money());
                 adapter.notifyDataSetChanged();
             }
-        }else {
-            if (resultCode==RESULT_OK){
-                GetTask getTask = new GetTask("0");
-                getTask.execute();
+        } else {
+            if (resultCode == RESULT_OK) {
+                //结算成功后，重新拉取列表
+                getEmployeeInfo(0);
             }
         }
-
-
-
-
     }
 }

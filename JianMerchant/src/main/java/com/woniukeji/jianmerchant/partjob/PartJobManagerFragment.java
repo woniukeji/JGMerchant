@@ -156,9 +156,9 @@ public class PartJobManagerFragment extends BaseFragment {
         adapter = new PartJobManagerAdapter(modleList, getActivity(), type);
         mLayoutManager = new LinearLayoutManager(getActivity());
         list.setLayoutManager(mLayoutManager);
-        list.setAdapter(adapter);
         list.setItemAnimator(new DefaultItemAnimator());
         list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content,container,false));
+        list.setAdapter(adapter);
         refreshLayout.setColorSchemeResources(R.color.app_bg);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

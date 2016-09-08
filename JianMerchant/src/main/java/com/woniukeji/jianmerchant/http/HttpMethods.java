@@ -1,6 +1,7 @@
 package com.woniukeji.jianmerchant.http;
 
 import com.woniukeji.jianmerchant.base.Constants;
+import com.woniukeji.jianmerchant.entity.AffordUser;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.Jobs;
@@ -252,6 +253,32 @@ public class HttpMethods {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
+    }
+
+    /**
+     * 获取支付工资人员列表
+     */
+    public void paywage(Subscriber<AffordUser> subscriber,String job_id,String count) {
+        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+        methodsInterface.getPayList(only,job_id,count)
+                .map(new BaseBeanFun<AffordUser>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 结算
+     */
+    public void checkout(Subscriber<BaseBean> subscriber,String job_id,String json) {
+        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+        methodsInterface.checkout(only,job_id,json)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
     }
 
 

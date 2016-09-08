@@ -82,7 +82,6 @@ public class FinishActivity extends BaseActivity {
                     Toast.makeText(activity, ErrorMessage, Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
-
                     break;
                 case 3:
                     String sms = (String) msg.obj;
@@ -105,7 +104,6 @@ public class FinishActivity extends BaseActivity {
         Intent intent=getIntent();
         String sum=intent.getStringExtra("sum");
         tvFinishPayContent.setText("结算成功，还有"+sum+"人未结算");
-//        Picasso.with(FinishActivity.this).load(user.getName_image()).transform(new CropCircleTransfermation()).error(R.drawable.default_head).into(imgHead);
     }
 
     @Override
@@ -123,21 +121,4 @@ public class FinishActivity extends BaseActivity {
 
     }
 
-//    @OnClick({R.id.img_back, R.id.btn_confirm_change})
-//    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.img_back:
-//                finish();
-//                break;
-//            case R.id.btn_confirm_change:
-////                Intent intent=getIntent();
-////                user.setReal_money(Double.parseDouble(etPayWages.getText().toString().trim()));
-////                user.setNote(etNote.getText().toString().trim());
-////                intent.putExtra("user",user);
-////                intent.putExtra("position",position);
-////                setResult(RESULT_OK,intent);
-////                finish();
-//                break;
-//        }
-//    }
 }
