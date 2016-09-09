@@ -8,11 +8,16 @@ import android.widget.TextView;
 
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
+import com.woniukeji.jianmerchant.entity.AddPerson;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
+import com.woniukeji.jianmerchant.utils.LogUtils;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import ui.AddFloatingActionButton;
 import ui.EmptyRecyclerView;
 
@@ -28,10 +33,19 @@ public class AddPersonActivity extends BaseActivity {
     EmptyRecyclerView emptyList;
     @BindView(R.id.add_plus)
     AddFloatingActionButton addPlus;
+    private ArrayList<AddPerson> mAddPersons = new ArrayList<>();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    public void onEventMainThread(AddPerson addPerson) {
+        if (addPerson != null) {
+            mAddPersons.add(addPerson);
+        }
+        LogUtils.i("1111",mAddPersons.toString());
     }
 
     @Override
@@ -44,7 +58,6 @@ public class AddPersonActivity extends BaseActivity {
     public void initViews() {
 
     }
-
     @Override
     public void initListeners() {
 

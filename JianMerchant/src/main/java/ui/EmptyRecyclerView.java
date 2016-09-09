@@ -55,10 +55,10 @@ public class EmptyRecyclerView extends RecyclerView {
         if (oldAdapter != null) {
             oldAdapter.unregisterAdapterDataObserver(observer);
         }
+        super.setAdapter(adapter);
         if (adapter != null) {
             adapter.registerAdapterDataObserver(observer);
         }
-        super.setAdapter(adapter);
         checkIfEmpty();
     }
 

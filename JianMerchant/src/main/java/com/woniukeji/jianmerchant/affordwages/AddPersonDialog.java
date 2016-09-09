@@ -9,10 +9,12 @@ import android.widget.RelativeLayout;
 
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
+import com.woniukeji.jianmerchant.entity.AddPerson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 public class AddPersonDialog extends BaseActivity {
 
@@ -65,9 +67,13 @@ public class AddPersonDialog extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.confirm_add:
+                String name = addName.getText().toString().trim();
+                String tel = addTel.getText().toString().trim();
+                AddPerson addPerson = new AddPerson(name,tel);
+                EventBus.getDefault().post(addPerson);
                 break;
             case R.id.exit:
-
+                finish();
                 break;
         }
     }
