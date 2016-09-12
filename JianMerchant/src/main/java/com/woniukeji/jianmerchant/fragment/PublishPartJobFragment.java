@@ -93,6 +93,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                 case FIRST:
                     if (type.equals("mb")) {
                         final String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+                        list.setEmptyView(mEmptyView);
                         historyJobAdapter = new HistoryJobAdapter(modelList, getHoldingContext(), "1");
                         historyJobAdapter.setDeleteCallback(new HistoryJobItemViewHolder.DeleteCallBack() {
                             @Override
@@ -102,6 +103,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                                     public void onCompleted() {
 
                                     }
+
                                     @Override
                                     public void onError(Throwable e) {
                                         Toast.makeText(getHoldingContext(), "删除失败了。。。", Toast.LENGTH_SHORT).show();
@@ -113,14 +115,15 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                                         historyJobAdapter.notifyDataSetChanged();
                                         Toast.makeText(getHoldingContext(), baseBean.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
-                                }, only,String.valueOf(merchant_id), String.valueOf(job_id));
+                                }, only, String.valueOf(merchant_id), String.valueOf(job_id));
                             }
                         });
                     } else {
+                        list.setEmptyView(mEmptyView);
                         historyJobAdapter = new HistoryJobAdapter(modelList, getHoldingContext(), "0");
                     }
                     list.setAdapter(historyJobAdapter);
-                    list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content,container,false));
+                    historyJobAdapter.notifyDataSetChanged();
                     refreshLayout.setRefreshing(false);
                     break;
 
@@ -129,6 +132,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     };
     private boolean isCanLoadDate =true;
     private ViewGroup container;
+    private View mEmptyView;
 
 
     public static PublishPartJobFragment newInstance(String type) {
@@ -194,7 +198,6 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             linearLayoutManager = new LinearLayoutManager(getHoldingContext());
             list.setLayoutManager(linearLayoutManager);
             list.setItemAnimator(new DefaultItemAnimator());
-
             list.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -216,7 +219,6 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             getHistroyJobs(checkOutPage);
             return view;
 
-
         } else if (type.equals("mb")) {
             View view = inflater.inflate(R.layout.activity_history_job, container, false);
             initHistoryView(view);
@@ -228,11 +230,13 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                     checkOutPage = 0;
                     getHistroyJobs(checkOutPage);
                 }
+
             });
             linearLayoutManager = new LinearLayoutManager(getHoldingContext());
             list.setLayoutManager(linearLayoutManager);
             list.setItemAnimator(new DefaultItemAnimator());
-            list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content,container,false));
+//
+            LogUtils.i("父布局",list.getParent().toString());
             list.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -264,6 +268,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     private void initHistoryView(View view) {
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
         list = (EmptyRecyclerView) view.findViewById(R.id.list);
+        mEmptyView = view.findViewById(R.id.null_content);
     }
 
     /**

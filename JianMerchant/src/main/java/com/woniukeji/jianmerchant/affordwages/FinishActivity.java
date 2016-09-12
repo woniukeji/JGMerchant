@@ -24,8 +24,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class FinishActivity extends BaseActivity {
-
-
     @BindView(R.id.img_back) ImageView imgBack;
     @BindView(R.id.tv_title) TextView tvTitle;
     @BindView(R.id.img_share) ImageView imgShare;

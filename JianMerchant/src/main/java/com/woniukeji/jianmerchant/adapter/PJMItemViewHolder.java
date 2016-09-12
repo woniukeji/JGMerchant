@@ -7,11 +7,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.entity.Model;
+import com.woniukeji.jianmerchant.partjob.FilterActivity;
 import com.woniukeji.jianmerchant.partjob.JobItemDetailActivity;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 
@@ -50,7 +52,10 @@ public class PJMItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
     Button btnAdmitAction;
     @BindView(R.id.rl_job)
     RelativeLayout rlJob;
+    @BindView(R.id.progress_admit)
+    ProgressBar progressAdmit;
     private Model.ListTJobEntity job;
+    private int maxProgress;
 
     public PJMItemViewHolder(Context context, ViewGroup root) {
         super(context, R.layout.admit_jobitem, root);
@@ -67,51 +72,63 @@ public class PJMItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
         tvManagerName.setText(job.getMerchant_id_name());
         tvChakanBrowse.setText(job.getLook());
         tvMessage.setText(job.getRemarks());
-
-        if (job.getHot()==1){
+        maxProgress = job.getCount();
+        if (job.getHot() == 1) {
             imgType.setImageResource(R.mipmap.icon_hot);
-        }else if(job.getHot()==2){
+        } else if (job.getHot() == 2) {
             imgType.setImageResource(R.mipmap.icon_jing);
-        }else if(job.getHot()==3){
+        } else if (job.getHot() == 3) {
             imgType.setImageResource(R.mipmap.icon_travel);
         }
-        tvCount.setText(job.getCount()+"/"+job.getSum());
-        if (job.getTerm()==0){//0=月结，1=周结，2=日结，3=小时结，4=次，5=义工
-            tvWages.setText(job.getMoney()+"/月");
-        }else if(job.getTerm()==1){
-            tvWages.setText(job.getMoney()+"/周");
-        }else if(job.getTerm()==2){
-            tvWages.setText(job.getMoney()+"/日");
-        }else if(job.getTerm()==3){
-            tvWages.setText(job.getMoney()+"/小时");
-        }else if(job.getTerm()==4){
-            tvWages.setText(job.getMoney()+"/次");
-        }else if(job.getTerm()==5){
+        tvCount.setText(job.getCount() + "/" + job.getSum());
+        if (job.getTerm() == 0) {//0=月结，1=周结，2=日结，3=小时结，4=次，5=义工
+            tvWages.setText(job.getMoney() + "/月");
+        } else if (job.getTerm() == 1) {
+            tvWages.setText(job.getMoney() + "/周");
+        } else if (job.getTerm() == 2) {
+            tvWages.setText(job.getMoney() + "/日");
+        } else if (job.getTerm() == 3) {
+            tvWages.setText(job.getMoney() + "/小时");
+        } else if (job.getTerm() == 4) {
+            tvWages.setText(job.getMoney() + "/次");
+        } else if (job.getTerm() == 5) {
             tvWages.setText("义工");
-        }else if(job.getTerm()==6){
-             tvWages.setText("面议");
+        } else if (job.getTerm() == 6) {
+            tvWages.setText("面议");
         }
-        if (job.getStatus()==0){
-            btnAdmitAction.setText("录取中");}
-        else if(job.getStatus()==1){
+        if (job.getStatus() == 0) {
+            btnAdmitAction.setText("录取中");
+        } else if (job.getStatus() == 1) {
             btnAdmitAction.setText("已招满");
-        }else if(job.getStatus()==2){
+        } else if (job.getStatus() == 2) {
             btnAdmitAction.setText("工作中");
-        }else if(job.getStatus()==3){
+        } else if (job.getStatus() == 3) {
             btnAdmitAction.setText("去结算");
-        }else if(job.getStatus()==4){
+        } else if (job.getStatus() == 4) {
             btnAdmitAction.setText("去评价");
-        }else if(job.getStatus()==5){
+        } else if (job.getStatus() == 5) {
             btnAdmitAction.setText("已完成");
-        }else if(job.getStatus()==6){
+        } else if (job.getStatus() == 6) {
             btnAdmitAction.setText("已下架");
         }
+
+        progressAdmit.setMax(job.getSum());
+        if (job.getCount() > job.getSum()) {
+            maxProgress = job.getSum();
+        }
+        progressAdmit.setProgress(maxProgress);
     }
 
-    @OnClick({R.id.btn_admit_action})
+    @OnClick({R.id.btn_admit_action,R.id.progress_admit})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_admit_action:
+                break;
+            case R.id.progress_admit:
+                Intent Intent = new Intent(getContext(), FilterActivity.class);
+                Intent.putExtra("jobid",job.getId());
+                Intent.putExtra("jobname", job.getName());
+                getContext().startActivity(Intent);
                 break;
         }
     }
@@ -131,4 +148,7 @@ public class PJMItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
         });
     }
 
+    @OnClick(R.id.progress_admit)
+    public void onClick() {
+    }
 }

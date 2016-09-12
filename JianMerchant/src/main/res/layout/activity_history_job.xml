@@ -16,13 +16,20 @@
         android:layout_height="match_parent"
         >
 
-        <ui.EmptyRecyclerView
-            android:id="@+id/list"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fastScrollEnabled="true"
-            android:listSelector="@color/transparent"
-            android:overScrollMode="never"
-            android:scrollbarStyle="outsideOverlay" />
+            android:layout_height="match_parent">
+            <include
+                android:id="@+id/null_content"
+                layout="@layout/null_content" />
+            <ui.EmptyRecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:listSelector="@color/transparent"
+                android:overScrollMode="never"
+                android:scrollbarStyle="outsideOverlay" />
+
+        </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

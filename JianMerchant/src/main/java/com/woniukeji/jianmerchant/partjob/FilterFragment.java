@@ -70,6 +70,7 @@ public class FilterFragment extends BaseFragment {
     EmptyRecyclerView list;
     @BindView(R.id.refresh_layout) SwipeRefreshLayout refreshLayout;
     @BindView(R.id.btn_out_info) TextView btnOutInfo;
+    @BindView(R.id.null_content) View mEmptyView;
     private int MSG_GET_SUCCESS = 0;
     private int MSG_GET_FAIL = 1;
     private int MSG_POST_SUCCESS = 5;
@@ -203,9 +204,20 @@ public class FilterFragment extends BaseFragment {
         adapter = new NewNewFilterAdapter(modleList,getActivity(),type,jobid);
         adapter.setEnrollOrRefuseClickListener(new EnrollOrRefuseClickListener() {
             @Override
-            public void onClick(int position, int login_id, int type, View view) {
+            public void onClick(final int position, int login_id, int type, View view) {
                 String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-                HttpMethods.getInstance().admitOrRefuseUser(subscriber,only,jobid,String.valueOf(login_id),String.valueOf(type));
+                ProgressSubscriber<BaseBean> subscriber1= new ProgressSubscriber<BaseBean>(new SubscriberOnNextListener<BaseBean>() {
+
+                    @Override
+                    public void onNext(BaseBean baseBean) {
+                        if (baseBean != null) {
+                            modleList.remove(position);
+                            adapter.notifyDataSetChanged();
+                            Toast.makeText(getHoldingContext(),baseBean.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },getHoldingContext(),false);
+                HttpMethods.getInstance().admitOrRefuseUser(subscriber1,only,jobid,String.valueOf(login_id),String.valueOf(type));
             }
         });
         adapter.setFilterItemClickListener(new FilterItemClickListener() {
@@ -243,7 +255,8 @@ public class FilterFragment extends BaseFragment {
         adapter.setOnChatClickListener(new onChatClickListener() {
             @Override
             public void onChat(int postion, final int login_id, View v) {
-                Toast.makeText(getHoldingContext(), "postion  "+postion+"  login_id  "+login_id, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getHoldingContext(), "postion  "+postion+"  login_id  "+login_id, Toast.LENGTH_SHORT).show();
+                LogUtils.i("onChat","position-->"+postion+"    login_id-->"+login_id);
                 LCChatKit.getInstance().open(String.valueOf(merchantId), new AVIMClientCallback() {
                     @Override
                     public void done(AVIMClient avimClient, AVIMException e) {
@@ -262,7 +275,7 @@ public class FilterFragment extends BaseFragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         list.setLayoutManager(mLayoutManager);
         list.setItemAnimator(new DefaultItemAnimator());
-        list.setEmptyView(View.inflate(getHoldingContext(),R.layout.null_content,container));
+        list.setEmptyView(mEmptyView);
         list.setAdapter(adapter);
         refreshLayout.setColorSchemeResources(R.color.app_bg);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -304,8 +317,7 @@ public class FilterFragment extends BaseFragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && lastVisibleItem + 1 == adapter.getItemCount()&&loadOk) {
+                if (lastVisibleItem  == adapter.getItemCount()&&loadOk) {
                     GetTask getTask = new GetTask(jobid, String.valueOf(type), String.valueOf(lastVisibleItem));
                     getTask.execute();
                     refreshLayout.setRefreshing(true);

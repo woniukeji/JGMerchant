@@ -3,6 +3,7 @@ package com.woniukeji.jianmerchant.affordwages;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -73,6 +74,8 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
     TextView tvChooseSum;
     @BindView(R.id.top)
     Toolbar top;
+    @BindView(R.id.refresh)
+    SwipeRefreshLayout refresh;
     private Context mContext = CalculateActivity.this;
     private CalculateAdapter adapter;
     private int merchantid;
@@ -89,6 +92,8 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
     private ImageView back;
     private TextView title;
     private TextView add_person;
+    private int lastSize;
+    private View mEmptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,6 +178,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
         ButterKnife.bind(this);
         setSupportActionBar(top);
         actionBar = getSupportActionBar();
+        mEmptyView = findViewById(R.id.null_content);
         EventBus.getDefault().register(this);
         Intent intent = getIntent();
         jobName = intent.getStringExtra("name");
@@ -187,19 +193,26 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
         setupToolBar();
         tvJobName.setText(jobName);
         tvJobWages.setText(moneyStr);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getEmployeeInfo(0);
+            }
+        });
         adapter = new CalculateAdapter(userList, isSelected, this, String.valueOf(money));
         adapter.setChangeMoney(this);
         mLayoutManager = new LinearLayoutManager(this);
         list.setLayoutManager(mLayoutManager);
         list.setItemAnimator(new DefaultItemAnimator());
-        list.setEmptyView(View.inflate(this, R.layout.null_content, null));
+        LogUtils.i("calculateActivity",list.getParent().toString());
+        list.setEmptyView(mEmptyView);
         list.setAdapter(adapter);
     }
 
     private void setupToolBar() {
         View view = View.inflate(this, R.layout.app_title_bar_new, null);
-        top.addView(view,new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
-        top.setContentInsetsAbsolute(0,0);
+        top.addView(view, new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
+        top.setContentInsetsAbsolute(0, 0);
         back = (ImageView) top.findViewById(R.id.img_back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,6 +223,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
         title = (TextView) top.findViewById(R.id.tv_title);
         title.setText("结算");
         add_person = (TextView) top.findViewById(R.id.add_person);
+        add_person.setVisibility(View.GONE);
         add_person.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -255,6 +269,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
             @Override
             public void onNext(AffordUser affordUser) {
                 int size = affordUser.getList_t_user_info().size();
+                lastSize = userList.size();
                 if (count == 0) {
                     //首次获取
                     userList.clear();
@@ -263,16 +278,17 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
                         isSelected.add(i, false);
                     }
                 } else {
-                    userList.addAll(affordUser.getList_t_user_info());
                     for (int i = 0; i < size; i++) {
                         isSelected.add(userList.size() + i, false);
                     }
+                    userList.addAll(affordUser.getList_t_user_info());
                 }
-                for (int i = 0; i < userList.size(); i++) {
+                for (int i =lastSize; i < userList.size(); i++) {
                     userList.get(i).setReal_money(money);
                 }
                 tvTitleSum.setText("总计" + affordUser.getUser_sum() + "人");
                 adapter.notifyDataSetChanged();
+                refresh.setRefreshing(false);
             }
         }, this, false);
         HttpMethods.getInstance().paywage(subscriber, jobid, String.valueOf(count));
@@ -352,12 +368,23 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
         ProgressSubscriber<BaseBean> subscriber = new ProgressSubscriber<BaseBean>(new SubscriberOnNextListener<BaseBean>() {
             @Override
             public void onNext(BaseBean baseBean) {
-                Toast.makeText(mContext, "结算成功", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, FinishActivity.class);
                 intent.putExtra("sum", baseBean.getSum());
                 startActivityForResult(intent, 0);
             }
-        }, mContext, false);
+        }, mContext, false){
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                finish();
+            }
+
+            @Override
+            public void onCompleted() {
+                super.onCompleted();
+                Toast.makeText(mContext, "结算成功", Toast.LENGTH_SHORT).show();
+            }
+        };
         HttpMethods.getInstance().checkout(subscriber, jobid, json);
     }
 

@@ -436,12 +436,12 @@
         "source": "C:\\StudioProjects\\JGMerchant\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice5.png"
     },
     {
-        "merged": "C:\\StudioProjects\\JGMerchant\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\lcim_record_icon_voice5.png",
-        "source": "C:\\StudioProjects\\JGMerchant\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice5.png"
-    },
-    {
         "merged": "C:\\StudioProjects\\JGMerchant\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\lcim_record_icon_voice2.png",
         "source": "C:\\StudioProjects\\JGMerchant\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice2.png"
+    },
+    {
+        "merged": "C:\\StudioProjects\\JGMerchant\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\lcim_record_icon_voice5.png",
+        "source": "C:\\StudioProjects\\JGMerchant\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice5.png"
     },
     {
         "merged": "C:\\StudioProjects\\JGMerchant\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",

@@ -79,12 +79,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         avatar = (SimpleDraweeView) view.findViewById(R.id.avatar);
         Uri uri = Uri.parse(avatarUrl);
         avatar.setImageURI(uri);
-        shift = (Spinner) view.findViewById(R.id.spinner_shift);
-        adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.shift_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        shift.setAdapter(adapter);
-        shift.setOnItemSelectedListener(this);
+//        shift = (Spinner) view.findViewById(R.id.spinner_shift);
+//        adapter = ArrayAdapter.createFromResource(getActivity(),
+//                R.array.shift_array, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        shift.setAdapter(adapter);
+//        shift.setOnItemSelectedListener(this);
     }
 
     @Override

@@ -144,14 +144,30 @@
 
         </LinearLayout>
     </RelativeLayout>
-    <ui.EmptyRecyclerView
-        android:id="@+id/list"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_below="@+id/ll_jobinfo"
         android:layout_above="@+id/rl_bott"
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fastScrollEnabled="true"
-        android:listSelector="@color/transparent"
-        android:overScrollMode="never"
-        android:scrollbarStyle="outsideOverlay" />
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include
+                android:id="@+id/null_content"
+                layout="@layout/null_content" />
+            <ui.EmptyRecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:listSelector="@color/transparent"
+                android:overScrollMode="never"
+                android:scrollbarStyle="outsideOverlay" />
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
 </RelativeLayout>

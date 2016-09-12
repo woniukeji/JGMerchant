@@ -24,6 +24,7 @@ import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.DateUtils;
+import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
@@ -61,6 +62,7 @@ public class PartJobManagerFragment extends BaseFragment {
     private int MSG_DELETE_FAIL = 6;
         private Handler mHandler = new Myhandler(this.getActivity());
     private ViewGroup container;
+    private boolean loadOk = true;
 
     private class Myhandler extends Handler {
     private WeakReference<Context> reference;
@@ -145,6 +147,7 @@ public class PartJobManagerFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.container = container;
+        LogUtils.i("container",container.toString());
         View view = inflater.inflate(R.layout.fragment_part_manager, container, false);
         ButterKnife.bind(this, view);
         initview();
@@ -157,7 +160,7 @@ public class PartJobManagerFragment extends BaseFragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         list.setLayoutManager(mLayoutManager);
         list.setItemAnimator(new DefaultItemAnimator());
-        list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content,container,false));
+//        list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content, (ViewGroup) list.getParent(),false));
         list.setAdapter(adapter);
         refreshLayout.setColorSchemeResources(R.color.app_bg);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -174,11 +177,11 @@ public class PartJobManagerFragment extends BaseFragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (modleList.size() > 4 && lastVisibleItem == modleList.size()) {
+                if (modleList.size() > 4 && lastVisibleItem == modleList.size()&&modleList.size()%10==0&&loadOk) {
                     getMerchantEmployStatus(String.valueOf(type),String.valueOf(lastVisibleItem));
+                    loadOk = false;
                 }
             }
-
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -208,12 +211,13 @@ public class PartJobManagerFragment extends BaseFragment {
                     modleList.clear();
                 } else if (model!=null&&model.getList_t_job().size()<10){
 
-
                 }
                 modleList.addAll(model.getList_t_job());
                 adapter.notifyDataSetChanged();
+                loadOk = true;
             }
         }, getHoldingContext());
+
         HttpMethods.getInstance().merchantEmployStatus(subscriber,String.valueOf(merchant_id),count,type);
     }
 

@@ -63,7 +63,7 @@ public class NewNewFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         if (mValues.size() == position) {
             //最后一条数据
-            if (mValues.size()<=4&&mValues.size()>0) {
+            if (mValues.size()<=4&&mValues.size()>0||mValues.size()>0&&mValues.size()%10!=0) {
                 ((FooterViewHolder)holder).bindData(1);
             } else {
                 ((FooterViewHolder)holder).bindData(0);

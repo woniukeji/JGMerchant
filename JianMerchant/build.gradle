@@ -12,6 +12,17 @@ android {
     compileSdkVersion 23
     buildToolsVersion '23.0.1'
 
+    signingConfigs {
+        release {
+            storeFile file("jianguo_keystore.keystore")
+            storePassword "Jaren950308"
+            keyAlias "兼果"
+            keyPassword "Jaren950308"
+        }
+    }
+
+
+
     dexOptions {
         javaMaxHeapSize "4g"
     }
@@ -24,10 +35,18 @@ android {
         multiDexEnabled true
     }
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+
+            debug {
+                signingConfig signingConfigs.release
+            }
+            release {
+                signingConfig signingConfigs.release
+            }
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            debuggable false
+//        }
     }
 
     sourceSets {

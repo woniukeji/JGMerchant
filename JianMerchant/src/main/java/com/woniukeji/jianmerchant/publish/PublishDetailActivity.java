@@ -38,7 +38,6 @@ import com.woniukeji.jianmerchant.entity.JobDetails;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.PickType;
-import com.woniukeji.jianmerchant.eventbus.ChangeJobEvent;
 import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
@@ -70,11 +69,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import butterknife.ButterKnife;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import de.greenrobot.event.EventBus;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 import okhttp3.Call;
 import okhttp3.Response;
@@ -397,6 +395,7 @@ public class PublishDetailActivity extends BaseActivity {
     private StringBuffer welfareOther;
     private StringBuffer labelOther;
     private boolean isFromActivity;
+    private String jobid;
 
 
     @Override
@@ -869,7 +868,7 @@ public class PublishDetailActivity extends BaseActivity {
                                 LogUtils.i("jobs", new Gson().toJson(jobs).toString());
                                 String sucessMessage = "发布成功！";
                                 Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
-                                PublishDetailActivity.this.finish();
+                                finish();
                             }
                         };
                         //job_model =0  不是模板
@@ -889,7 +888,7 @@ public class PublishDetailActivity extends BaseActivity {
                                 LogUtils.i("jobs", new Gson().toJson(jobs).toString());
                                 String sucessMessage = "发布成功！";
                                 Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
-//                                PublishDetailActivity.this.finish();
+                                PublishDetailActivity.this.finish();
                             }
                         };
                         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
@@ -1036,7 +1035,7 @@ public class PublishDetailActivity extends BaseActivity {
     public void setContentView() {
         setContentView(R.layout.activity_publish_detail);
         ButterKnife.bind(this);
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -1045,6 +1044,7 @@ public class PublishDetailActivity extends BaseActivity {
 
         intent = getIntent();
         if (intent.getStringExtra("type").equals("change")) {
+            jobid = intent.getStringExtra("jobid");
             //从兼职详情过来，需要修改
             isFromItem = true;//目的是不走下面的判断
             isFromActivity = true;
@@ -1151,7 +1151,8 @@ public class PublishDetailActivity extends BaseActivity {
                     }
                 };
                 flow_partjob.setAdapter(partAdapter);
-                EventBus.getDefault().post(new ChangeJobEvent());
+//                EventBus.getDefault().post(new ChangeJobEvent());
+                changeJob();
                 //这以上设置流布局标签
 //                if (isFromItem) {
 //                    //如果是从item过来的走下面
@@ -1164,6 +1165,22 @@ public class PublishDetailActivity extends BaseActivity {
         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
         int loginId = (int) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
         HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<CityAndCategoryBean>(onNextListenner, this), only, String.valueOf(loginId));
+    }
+
+    private void changeJob() {
+        llPublish.setVisibility(View.GONE);
+        llChange.setVisibility(View.VISIBLE);
+
+        //获取单个id的兼职信息
+        BackgroundSubscriber<Model> subscriber = new BackgroundSubscriber<Model>(new SubscriberOnNextListener<Model>() {
+            @Override
+            public void onNext(Model model) {
+                modle = model.getT_job();
+                //最后在去初始化界面
+                initModleData(modle);
+            }
+        },mContext);
+        HttpMethods.getInstance().singleJobDetail(subscriber, intent.getStringExtra("jobid"));
     }
 
     /**
@@ -1296,68 +1313,70 @@ public class PublishDetailActivity extends BaseActivity {
         quaAdapter.setSelectedList(getCurrentSet(modle,"qualification"));
         welAdapter.setSelectedList(getCurrentSet(modle,"welfare"));
         partAdapter.setSelectedList(getCurrentSet(modle,"label"));
-
-        Iterator<Integer> qualificationIterator = flow_qualification.getSelectedList().iterator();
-        qualificationJsonObj = new JsonObject();
-        qualificationJsonArray = new JsonArray();
-        while (qualificationIterator.hasNext()) {
-            qualificationJsonArray.add(1+qualificationIterator.next()+"");
-        }
-        qualificationJsonObj.add("list_t_limit", qualificationJsonArray);
-
-
-        Iterator<Integer> welfareIterator = flow_welfare.getSelectedList().iterator();
-        welfareJsonObj = new JsonObject();
-        welfareJsonArray = new JsonArray();
-        while (welfareIterator.hasNext()) {
-            welfareJsonArray.add(1+welfareIterator.next()+"");
-        }
-        welfareJsonObj.add("list_t_welfare", welfareJsonArray);
-
-
-        Iterator<Integer> labelIterator = flow_partjob.getSelectedList().iterator();
-        labelJsonObj = new JsonObject();
-        partjobJsonArray = new JsonArray();
-        while (labelIterator.hasNext()) {
-            partjobJsonArray.add(1+labelIterator.next()+"");
-        }
-        labelJsonObj.add("list_t_label", partjobJsonArray);
-
-    }
-
-    public void onEventMainThread(ChangeJobEvent event) {
-        //限制只能修改不能发布22
-        llPublish.setVisibility(View.GONE);
-        llChange.setVisibility(View.VISIBLE);
-        String jobid = intent.getStringExtra("jobid");
-        //获取单个id的兼职信息
-        BackgroundSubscriber<Model> subscriber = new BackgroundSubscriber<Model>(new SubscriberOnNextListener<Model>() {
-            @Override
-            public void onNext(Model model) {
-                modle = model.getT_job();
-                //最后在去初始化界面
-                initModleData(modle);
+        if (flow_qualification.getSelectedList().size()>0) {
+            Iterator<Integer> qualificationIterator = flow_qualification.getSelectedList().iterator();
+            qualificationJsonObj = new JsonObject();
+            qualificationJsonArray = new JsonArray();
+            while (qualificationIterator.hasNext()) {
+                qualificationJsonArray.add(1+qualificationIterator.next()+"");
             }
-        },mContext);
-        HttpMethods.getInstance().singleJobDetail(subscriber, jobid);
+            qualificationJsonObj.add("list_t_limit", qualificationJsonArray);
+        }
+
+        if (flow_welfare.getSelectedList().size() > 0) {
+            Iterator<Integer> welfareIterator = flow_welfare.getSelectedList().iterator();
+            welfareJsonObj = new JsonObject();
+            welfareJsonArray = new JsonArray();
+            while (welfareIterator.hasNext()) {
+                welfareJsonArray.add(1+welfareIterator.next()+"");
+            }
+            welfareJsonObj.add("list_t_welfare", welfareJsonArray);
+        }
+
+        if (flow_partjob.getSelectedList().size() > 0) {
+            Iterator<Integer> labelIterator = flow_partjob.getSelectedList().iterator();
+            labelJsonObj = new JsonObject();
+            partjobJsonArray = new JsonArray();
+            while (labelIterator.hasNext()) {
+                partjobJsonArray.add(1+labelIterator.next()+"");
+            }
+            labelJsonObj.add("list_t_label", partjobJsonArray);
+        }
     }
+
+//    public void onEventMainThread(ChangeJobEvent event) {
+//        //限制只能修改不能发布22
+//
+//    }
 
     private Set<Integer> getCurrentSet(Model.ListTJobEntity modle,String name) {
         HashSet<Integer> set = new HashSet<>();
         if (name.equals("qualification")) {
-            for (int i = 0; i < modle.getLimit_name().size(); i++) {
-                set.add(Integer.valueOf(modle.getLimit_name().get(i))-1);
+            if (modle.getLimit_name().size() != 0 && !modle.getLimit_name().get(0).equals("")) {
+                for (int i = 0; i < modle.getLimit_name().size(); i++) {
+                    set.add(Integer.valueOf(modle.getLimit_name().get(i)) - 1);
+                }
+            } else {
+                return null;
             }
         } else if (name.equals("welfare")) {
-            for (int i = 0; i < modle.getWelfare_name().size(); i++) {
-                set.add(Integer.valueOf(modle.getWelfare_name().get(i))-1);
+            if (modle.getWelfare_name().size() != 0 && !modle.getWelfare_name().get(0).equals("")) {
+                for (int i = 0; i < modle.getWelfare_name().size(); i++) {
+                    set.add(Integer.valueOf(modle.getWelfare_name().get(i)) - 1);
+                }
+            } else {
+                return null;
             }
+
         } else if (name.equals("label")) {
-            for (int i = 0; i < modle.getLabel_name().size(); i++) {
-                set.add(Integer.valueOf(modle.getLabel_name().get(i))-1);
+            if (modle.getLabel_name().size() != 0 && !modle.getLabel_name().get(0).equals("")) {
+                for (int i = 0; i < modle.getLabel_name().size(); i++) {
+                    set.add(Integer.valueOf(modle.getLabel_name().get(i)) - 1);
+                }
+            } else {
+                return null;
             }
         }
-
         return set;
     }
 
@@ -1475,9 +1494,7 @@ public class PublishDetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
         merchantid = (int) SPUtils.getParam(mContext, Constants.USER_INFO, Constants.USER_MERCHANT_ID, 0);
-
     }
 
     @Override

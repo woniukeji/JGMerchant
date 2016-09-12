@@ -82,7 +82,6 @@
             android:name=".publish.PublishActivity"
             android:configChanges="keyboardHidden"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".partjob.demoActivity" />
         <activity
             android:name=".publish.PublishDetailActivity"
             android:configChanges="keyboardHidden"
@@ -106,9 +105,6 @@
             android:configChanges="keyboardHidden"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".publish.HistoryJobActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
             android:name=".partjob.PartJobManagerActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
@@ -129,10 +125,6 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".affordwages.PassWordActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".talk.ChatActivity"
-            android:label=""
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".login.RegistActivity"
