@@ -94,6 +94,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
     private TextView add_person;
     private int lastSize;
     private View mEmptyView;
+    private boolean loadOk = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -278,17 +279,18 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
                         isSelected.add(i, false);
                     }
                 } else {
-                    for (int i = 0; i < size; i++) {
-                        isSelected.add(userList.size() + i, false);
-                    }
                     userList.addAll(affordUser.getList_t_user_info());
+                    for (int i = lastSize; i < userList.size(); i++) {
+                        isSelected.add(i, false);
+                    }
                 }
-                for (int i =lastSize; i < userList.size(); i++) {
+                for (int i =0; i < userList.size(); i++) {
                     userList.get(i).setReal_money(money);
                 }
                 tvTitleSum.setText("总计" + affordUser.getUser_sum() + "人");
                 adapter.notifyDataSetChanged();
                 refresh.setRefreshing(false);
+                loadOk = true;
             }
         }, this, false);
         HttpMethods.getInstance().paywage(subscriber, jobid, String.valueOf(count));
@@ -307,8 +309,9 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (userList.size() > 5 && lastVisibleItem == userList.size() && userList.size() % 10 == 0) {
+                if (userList.size() > 5 && lastVisibleItem == userList.size() && userList.size() % 10 == 0&&loadOk) {
                     getEmployeeInfo(lastVisibleItem);
+                    loadOk = false;
                 }
             }
 
