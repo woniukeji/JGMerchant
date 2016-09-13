@@ -241,10 +241,9 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                     super.onScrollStateChanged(recyclerView, newState);
-                    if (modelList.size() > 5 && lastVisibleItem == modelList.size()) {
-                        if (isCanLoadDate) {
-                            getHistroyJobs(++checkOutPage);
-                        }
+                    if (modelList.size() > 5 && lastVisibleItem == modelList.size()&&isCanLoadDate) {
+                        isCanLoadDate = false;
+                        getHistroyJobs(++checkOutPage);
                     }
                 }
 
@@ -292,9 +291,8 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                     mHandler.sendEmptyMessage(FIRST);
                 } else if (list_t_job != null && list_t_job.size() > 0) {//有数据
                     historyJobAdapter.notifyDataSetChanged();
-                } else {//没数据
-                    isCanLoadDate = false;
                 }
+                isCanLoadDate = true;
             }
         };
         BackgroundSubscriber<Model> modelProgressSubscriber = new BackgroundSubscriber<Model>(listenner,getHoldingContext());
