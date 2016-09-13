@@ -16,6 +16,7 @@ import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.partjob.FilterActivity;
 import com.woniukeji.jianmerchant.partjob.JobItemDetailActivity;
 import com.woniukeji.jianmerchant.utils.DateUtils;
+import com.woniukeji.jianmerchant.utils.LogUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -125,10 +126,11 @@ public class PJMItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
             case R.id.btn_admit_action:
                 break;
             case R.id.progress_admit:
-                Intent Intent = new Intent(getContext(), FilterActivity.class);
-                Intent.putExtra("jobid",job.getId());
-                Intent.putExtra("jobname", job.getName());
-                getContext().startActivity(Intent);
+                Intent intent = new Intent(getContext(), FilterActivity.class);
+                intent.putExtra("jobid",String.valueOf(job.getId()));
+                intent.putExtra("jobname", job.getName());
+                LogUtils.d("progressbar","jobid："+job.getId()+"  jobname:"+job.getName());
+                getContext().startActivity(intent);
                 break;
         }
     }

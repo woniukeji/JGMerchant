@@ -25,6 +25,7 @@ import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.publish.PublishDetailActivity;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 import com.woniukeji.jianmerchant.utils.DateUtils;
+import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.widget.CircleImageView;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -137,6 +138,7 @@ public class JobItemDetailActivity extends BaseActivity {
                 Intent Intent = new Intent(this, FilterActivity.class);
                 Intent.putExtra("jobid", String.valueOf(jobid));
                 Intent.putExtra("jobname", modleJob.getName());
+                LogUtils.d("button","jobid："+jobid+"  jobname:"+modleJob.getName());
                 startActivity(Intent);
                 break;
             case R.id.btn_change:
