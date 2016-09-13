@@ -224,7 +224,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
         title = (TextView) top.findViewById(R.id.tv_title);
         title.setText("结算");
         add_person = (TextView) top.findViewById(R.id.add_person);
-        add_person.setVisibility(View.GONE);
+        add_person.setVisibility(View.VISIBLE);
         add_person.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

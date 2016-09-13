@@ -1,5 +1,6 @@
 package com.woniukeji.jianmerchant.affordwages;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,12 +10,12 @@ import android.widget.RelativeLayout;
 
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
-import com.woniukeji.jianmerchant.entity.AddPerson;
+import com.woniukeji.jianmerchant.listener.ActivityExchangeManager;
+import com.woniukeji.jianmerchant.utils.ActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
 
 public class AddPersonDialog extends BaseActivity {
 
@@ -35,6 +36,7 @@ public class AddPersonDialog extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_person_dialog);
+        Intent intent = getIntent();
         ButterKnife.bind(this);
     }
 
@@ -60,7 +62,7 @@ public class AddPersonDialog extends BaseActivity {
 
     @Override
     public void addActivity() {
-
+        ActivityManager.getActivityManager().addActivity(this);
     }
 
     @OnClick({R.id.confirm_add, R.id.exit})
@@ -69,8 +71,11 @@ public class AddPersonDialog extends BaseActivity {
             case R.id.confirm_add:
                 String name = addName.getText().toString().trim();
                 String tel = addTel.getText().toString().trim();
-                AddPerson addPerson = new AddPerson(name,tel);
-                EventBus.getDefault().post(addPerson);
+                //发送数据
+                Bundle bundle = new Bundle();
+                bundle.putString("name", name);
+                bundle.putString("tel", tel);
+                ActivityExchangeManager.getInstance().sendDataSet(bundle);
                 break;
             case R.id.exit:
                 finish();

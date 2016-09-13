@@ -48,11 +48,22 @@
             android:visibility="visible"
             />
     </RelativeLayout>
-    <ui.EmptyRecyclerView
-        android:id="@+id/empty_list"
+
+    <RelativeLayout
         android:layout_below="@id/rl_top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ui.EmptyRecyclerView>
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/null_content"
+            layout="@layout/null_content" />
+        <ui.EmptyRecyclerView
+            android:id="@+id/empty_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="@color/transparent"
+            android:overScrollMode="never"
+            android:scrollbarStyle="outsideOverlay" />
+    </RelativeLayout>
 
     <ui.AddFloatingActionButton
         android:id="@+id/add_plus"
