@@ -125,4 +125,7 @@ public interface HttpMethodsInterface {
 
     @GET("T_wages_Insert_ChangServlet")
     Observable<BaseBean> checkout(@Query("only") String only, @Query("job_id") String job_id, @Query("json") String json);
+
+//    @POST("PayWageServlet")
+//    Observable<BaseBean> checkout(@Query("only") String only, @Query("job_id") String job_id, @Query("json") String json);
 }

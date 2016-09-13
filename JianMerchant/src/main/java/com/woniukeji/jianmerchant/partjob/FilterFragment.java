@@ -317,11 +317,11 @@ public class FilterFragment extends BaseFragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (lastVisibleItem  == adapter.getItemCount()&&loadOk) {
+                if (lastVisibleItem +1 == adapter.getItemCount()&&loadOk) {
+                    loadOk=false;
                     GetTask getTask = new GetTask(jobid, String.valueOf(type), String.valueOf(lastVisibleItem));
                     getTask.execute();
                     refreshLayout.setRefreshing(true);
-                    loadOk=false;
                 }
             }
 
