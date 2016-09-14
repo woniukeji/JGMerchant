@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ui.AddFloatingActionButton;
 import ui.EmptyRecyclerView;
+import ui.PinnedHeaderItemDecoration;
 
 public class AddPersonActivity extends BaseActivity implements ActivityExchange {
 
@@ -38,9 +39,9 @@ public class AddPersonActivity extends BaseActivity implements ActivityExchange 
     @BindView(R.id.add_plus)
     AddFloatingActionButton addPlus;
     @BindView(R.id.rl_null)
-    RelativeLayout rlNull;
+    RelativeLayout mRlNull;
     private ArrayList<AddPerson> mAddPersons = new ArrayList<>();
-    private AddPersonAdapter adapter;
+    private AddPersonAdapter mAdapter;
     ;
 
     @Override
@@ -60,13 +61,18 @@ public class AddPersonActivity extends BaseActivity implements ActivityExchange 
     @Override
     public void initViews() {
         tvTitle.setText("补录信息");
-        emptyList.setEmptyView(rlNull);
+        emptyList.setEmptyView(mRlNull);
         emptyList.setHasFixedSize(true);
         emptyList.setLayoutManager(new LinearLayoutManager(this));
         emptyList.setItemAnimator(new DefaultItemAnimator());
-//        emptyList.addItemDecoration(new );
-        adapter = new AddPersonAdapter(this,null);
-        emptyList.setAdapter(adapter);
+        for (int i = 0; i < 10; i++) {
+            mAddPersons.add(new AddPerson("高明"+i,"18645980292#" + i));
+        }
+
+        mAdapter = new AddPersonAdapter(this, mAddPersons);
+        emptyList.setAdapter(mAdapter);
+        PinnedHeaderItemDecoration itemDecoration = new PinnedHeaderItemDecoration();
+        emptyList.addItemDecoration(itemDecoration);
     }
 
     @Override
@@ -110,5 +116,6 @@ public class AddPersonActivity extends BaseActivity implements ActivityExchange 
         AddPerson addPerson = new AddPerson(name, tel);
         mAddPersons.add(addPerson);
         //刷新数据
+        mAdapter.notifyDataSetChanged();
     }
 }
