@@ -238,6 +238,7 @@ public class JobItemDetailActivity extends BaseActivity {
 //                    jobDetailActivity.tvSignup.setBackgroundResource(R.color.gray);
                     break;
                 case 5:
+                    //下架成功
                     String Message = (String) msg.obj;
                     Toast.makeText(jobDetailActivity, Message, Toast.LENGTH_SHORT).show();
                     int offer = msg.arg1;
@@ -246,6 +247,7 @@ public class JobItemDetailActivity extends BaseActivity {
                         jobDetailActivity.btnChange.setVisibility(View.GONE);
                         jobDetailActivity.btnDown.setText("已下架");
                         jobDetailActivity.btnDown.setClickable(false);
+                        jobDetailActivity.finish();
                     }
                     break;
                 case 6:
