@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.entity.BaseBean;
-import com.woniukeji.jianmerchant.entity.RegionBean;
+import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 
 import java.util.List;
 
@@ -21,12 +21,11 @@ import java.util.List;
  */
 public class RegionAdapter extends RecyclerView.Adapter<RegionAdapter.ViewHolder> {
 
-    private BaseBean<List<RegionBean>> dataSet;
+    private BaseBean<List<CityAndCategoryBean.ListTCity2Bean>> dataSet;
     private Context context;
 
 
-    public RegionAdapter(BaseBean<List<RegionBean>> dataSet, Context context) {
-
+    public RegionAdapter(BaseBean<List<CityAndCategoryBean.ListTCity2Bean>> dataSet, Context context) {
         this.dataSet = dataSet;
         this.context = context;
     }
@@ -40,7 +39,7 @@ public class RegionAdapter extends RecyclerView.Adapter<RegionAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.tv_select.setText(dataSet.getData().get(position).getRegion());
+        holder.tv_select.setText(dataSet.getData().get(position).getCity());
         if (dataSet.getData().get(position).isSelect()) {
             holder.tv_select.setTextColor(context.getResources().getColor(R.color.tab_selected_text));
             holder.tv_select.setBackgroundColor(context.getResources().getColor(R.color.tab_selected_bg));
@@ -52,9 +51,9 @@ public class RegionAdapter extends RecyclerView.Adapter<RegionAdapter.ViewHolder
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
-                    holder.tv_select.setTextColor(Color.parseColor("#ffffff"));
-                    holder.tv_select.setBackgroundColor(Color.parseColor("#3c9cff"));
-                    dataSet.getData().get(position).setSelect(true);
+                holder.tv_select.setTextColor(Color.parseColor("#ffffff"));
+                holder.tv_select.setBackgroundColor(Color.parseColor("#3c9cff"));
+                dataSet.getData().get(position).setSelect(true);
                 if (position == 0) {
                     if (dataSet.getData().get(0).isSelect()) {
                         for (int i = 1; i < dataSet.getData().size(); i++) {
@@ -65,19 +64,16 @@ public class RegionAdapter extends RecyclerView.Adapter<RegionAdapter.ViewHolder
                 }
                 if (position != 0) {
                     if (dataSet.getData().get(position).isSelect()) {
-                        for (int i=0;i<position;i++) {
+                        for (int i = 0; i < position; i++) {
                             dataSet.getData().get(i).setSelect(false);
                         }
-                        for (int i=5;i>position;i--) {
+                        for (int i = 5; i > position; i--) {
                             dataSet.getData().get(i).setSelect(false);
                         }
                     }
                     notifyDataSetChanged();
                 }
-
-
-
-                }
+            }
         });
     }
 

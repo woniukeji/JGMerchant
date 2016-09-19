@@ -26,7 +26,6 @@ import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.Model;
-import com.woniukeji.jianmerchant.entity.RegionBean;
 import com.woniukeji.jianmerchant.entity.TypeBean;
 import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
@@ -62,9 +61,9 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     TextView nextPage;
     //设置此fragment的参数，创建新兼职，历史纪录，模板
     private String type;
-    private List<RegionBean> dataSetRegion = Arrays.asList(new RegionBean("全国", 0), new RegionBean("三亚", 1), new RegionBean("海口", 2), new RegionBean("北京", 3), new RegionBean("西安", 4), new RegionBean("杭州", 5));
+//    private List<RegionBean> dataSetRegion = Arrays.asList(new RegionBean("全国", 0), new RegionBean("三亚", 1), new RegionBean("海口", 2), new RegionBean("北京", 3), new RegionBean("西安", 4), new RegionBean("杭州", 5));
     private List<TypeBean> dataSetType = Arrays.asList(new TypeBean("短期", 0), new TypeBean("长期", 1), new TypeBean("实习生", 2), new TypeBean("兼职旅行", 3));
-    BaseBean<List<RegionBean>> regionBaseBean = new BaseBean<>();
+    BaseBean<List<CityAndCategoryBean.ListTCity2Bean>> regionBaseBean = new BaseBean<>();
     BaseBean<List<TypeBean>> typeBaseBean = new BaseBean<>();
     BaseBean<List<CityAndCategoryBean.ListTTypeBean>> categoryBean = new BaseBean<>();
     //next step Activity
@@ -164,9 +163,8 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             GridLayoutManager regionGridManager = new GridLayoutManager(getHoldingContext(), 4);
             recyclerRegion.setLayoutManager(regionGridManager);
             recyclerRegion.setItemAnimator(new DefaultItemAnimator());
-            regionBaseBean.setData(dataSetRegion);
-            RegionAdapter adapterRegion = new RegionAdapter(regionBaseBean, getHoldingContext());
-            recyclerRegion.setAdapter(adapterRegion);
+
+
 
             GridLayoutManager typeGridManager = new GridLayoutManager(getHoldingContext(), 4);
             recyclerType.setLayoutManager(typeGridManager);
@@ -315,6 +313,12 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             @Override
             public void onNext(CityAndCategoryBean cityAndCategoryBean) {
                 List<CityAndCategoryBean.ListTTypeBean> typeList = cityAndCategoryBean.getList_t_type();
+                List<CityAndCategoryBean.ListTCity2Bean> cityList = cityAndCategoryBean.getList_t_city2();
+
+                regionBaseBean.setData(cityList);
+                RegionAdapter adapterRegion = new RegionAdapter(regionBaseBean, getHoldingContext());
+                recyclerRegion.setAdapter(adapterRegion);
+
                 categoryBean.setData(typeList);
                 JobsAdapter jobsAdapter = new JobsAdapter(categoryBean, getHoldingContext());
                 recyclerJobs.setAdapter(jobsAdapter);
@@ -380,7 +384,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
         for (int i = 0; i < regionBaseBean.getData().size(); i++) {
             LogUtils.i("regionBaseBean", regionBaseBean.getData().get(i).toString());
             if (regionBaseBean.getData().get(i).isSelect()) {
-                bundle.putString("region", regionBaseBean.getData().get(i).getRegion());
+                bundle.putString("region", regionBaseBean.getData().get(i).getCity());
                 bundle.putInt("region_id", regionBaseBean.getData().get(i).getId());
                 break;
             } else if (i == regionBaseBean.getData().size() - 1) {

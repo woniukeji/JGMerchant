@@ -89,6 +89,16 @@ public class CityAndCategoryBean implements Parcelable {
         private String city;
         private String code;
         private int id;
+        private boolean isSelect;
+
+        public boolean isSelect() {
+            return isSelect;
+        }
+
+        public void setSelect(boolean select) {
+            isSelect = select;
+        }
+
         /**
          * area_name : 市辖区
          * city_id : 1
