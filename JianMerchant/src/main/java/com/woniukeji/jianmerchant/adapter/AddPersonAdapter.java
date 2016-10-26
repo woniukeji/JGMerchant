@@ -25,7 +25,7 @@ public class AddPersonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public AddPersonAdapter(Context context, List<AddPerson> dataSet) {
         this.mContext = context;
         this.mValues = dataSet;
-        merchantId = (int) SPUtils.getParam(context, Constants.USER_INFO, Constants.USER_MERCHANT_ID, 0);
+        merchantId = (int) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
         merchantName = (String) SPUtils.getParam(context, Constants.USER_INFO, Constants.USER_NAME, "");
     }
 

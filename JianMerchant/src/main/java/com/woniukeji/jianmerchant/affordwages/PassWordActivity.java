@@ -113,7 +113,7 @@ public class PassWordActivity extends BaseActivity {
     @Override
     public void initData() {
 //        SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_MERCHANT_ID,user.getT_merchant().getId());
-        merchartid = (int) SPUtils.getParam(context, Constants.USER_INFO, Constants.USER_MERCHANT_ID, 0);
+        merchartid = (int) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
         password = (String) SPUtils.getParam(context, Constants.USER_INFO, Constants.USER_PAY_PASS,"");
 
     }

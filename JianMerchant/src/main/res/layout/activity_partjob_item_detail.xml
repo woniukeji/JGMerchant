@@ -656,7 +656,20 @@
             android:layout_weight="1"
             android:background="@drawable/btn_gray_bg"
             android:text="修改" />
-
+        <Button
+            android:id="@+id/btn_down"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_gray_bg"
+            android:text="暂停招聘" />
+        <Button
+            android:id="@+id/btn_finish"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_gray_bg"
+            android:text="已招满" />
         <Button
             android:id="@+id/btn_clearing"
             android:layout_width="0dp"
@@ -667,21 +680,9 @@
             android:text="结算"
             android:visibility="visible" />
 
-        <Button
-            android:id="@+id/btn_finish"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/btn_gray_bg"
-            android:text="结束" />
 
-        <Button
-            android:id="@+id/btn_down"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/btn_gray_bg"
-            android:text="下架" />
+
+
     </LinearLayout>
 
 </RelativeLayout>

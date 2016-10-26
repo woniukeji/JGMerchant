@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -15,10 +15,13 @@ import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.activity.certification.ChooseActivity;
+import com.woniukeji.jianmerchant.activity.login.LoginNewActivity;
 import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.entity.BaseBean;
+import com.woniukeji.jianmerchant.entity.MerchantBean;
 import com.woniukeji.jianmerchant.entity.User;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 import com.woniukeji.jianmerchant.utils.DateUtils;
@@ -63,14 +66,14 @@ public class SplashActivity extends BaseActivity {
             SplashActivity splashActivity = (SplashActivity) reference.get();
             switch (msg.what) {
                 case 0:
-                    BaseBean<User> user = (BaseBean<User>) msg.obj;
-                    splashActivity.saveToSP(user.getData());
+                    BaseBean<MerchantBean> merchantBean = (BaseBean<MerchantBean>) msg.obj;
+                    splashActivity.saveToSP(merchantBean.getData());
 //                    Intent intent = new Intent(splashActivity, MainActivity.class);
 //                    splashActivity.startActivity(intent);
 //                    splashActivity.finish();
                     break;
                 case 1:
-                    splashActivity.startActivity(new Intent(splashActivity, LoginActivity.class));
+                    splashActivity.startActivity(new Intent(splashActivity, LoginNewActivity.class));
                     String ErrorMessage = (String) msg.obj;
                     Toast.makeText(splashActivity, ErrorMessage, Toast.LENGTH_SHORT).show();
                     splashActivity.finish();
@@ -121,39 +124,48 @@ public class SplashActivity extends BaseActivity {
         ActivityManager.getActivityManager().addActivity(SplashActivity.this);
     }
 
-    private void saveToSP(User user) {
-        SPUtils.setParam(context, Constants.LOGIN_INFO, Constants.SP_WQTOKEN, user.getT_user_login().getQqwx_token() != null ? user.getT_user_login().getQqwx_token() : "");
-        SPUtils.setParam(context, Constants.LOGIN_INFO, Constants.SP_TEL, user.getT_user_login().getTel() != null ? user.getT_user_login().getTel() : "");
-        SPUtils.setParam(context, Constants.LOGIN_INFO, Constants.SP_PASSWORD, user.getT_user_login().getPassword() != null ? user.getT_user_login().getPassword() : "");
-        SPUtils.setParam(context, Constants.LOGIN_INFO, Constants.SP_USERID, user.getT_user_login().getId());
-        SPUtils.setParam(context, Constants.LOGIN_INFO, Constants.SP_STATUS, user.getT_user_login().getStatus());
-        SPUtils.setParam(context, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getT_user_login().getQiniu());
-        SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_MERCHANT_ID,user.getT_merchant().getId());
-        SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_PAY_PASS,user.getT_merchant().getPay_password());
-        SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_NAME,user.getT_merchant().getName()!=null?user.getT_merchant().getName():"");
-        SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_IMG,user.getT_merchant().getName_image()!=null?user.getT_merchant().getName_image():"");
-        JPushInterface.setAlias(getApplicationContext(), "jianguo"+user.getT_user_login().getId(), new TagAliasCallback() {
-            @Override
-            public void gotResult(int i, String s, Set<String> set) {
-                LogUtils.e("jpush",s+",code="+i);
+    private void saveToSP(MerchantBean user) {
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_WQTOKEN, user.getToken() != null ? user.getToken() : "");
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, user.getTel() != null ? user.getTel() : "");
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PASSWORD, user.getPassword() != null ? user.getPassword() : "");
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, user.getLoginId());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, user.getMerchantId());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getMerchantInfoStatus());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getPermissions());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PAYSTATUS, user.getPayStatus());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniuToken());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PROVINCE, user.getProvince());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_CITY, user.getCity());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_ADDRESS, user.getCompanyAddress());   if (!TextUtils.isEmpty(String.valueOf(user.getLoginId()))) {
+            if (JPushInterface.isPushStopped(this.getApplicationContext())) {
+                JPushInterface.resumePush(this.getApplicationContext());
             }
-        });
-
-
-        LCChatKit.getInstance().open(String.valueOf(user.getT_user_login().getId()), new AVIMClientCallback() {
-            @Override
-            public void done(AVIMClient avimClient, AVIMException e) {
-                if (null == e) {
-                    showShortToast("登录成功");
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(SplashActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+            //登陆leancloud服务器 给极光设置别名
+            LCChatKit.getInstance().open(String.valueOf(user.getLoginId()), new AVIMClientCallback() {
+                @Override
+                public void done(AVIMClient avimClient, AVIMException e) {
+                    if (null != e) {
+                        Toast.makeText(SplashActivity.this, "聊天服务启动失败，稍后请重新登录", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
-
+            });
+            JPushInterface.setAlias(this.getApplicationContext(), "jianguo" + user.getLoginId(), new TagAliasCallback() {
+                @Override
+                public void gotResult(int i, String s, Set<String> set) {
+                    LogUtils.e("jpush", s + ",code=" + i);
+                }
+            });
+        }
+        if (user.getMerchantInfoStatus()==0){
+            Intent intent = new Intent(this, ChooseActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            Intent intent1 = new Intent(this, MainActivity.class);
+            intent1.putExtra("login",true);
+            startActivity(intent1);
+           finish();
+        }
     }
 
 
@@ -191,11 +203,11 @@ public class SplashActivity extends BaseActivity {
         int loginType = (int) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
 
         if (loginType==0){
-            startActivity(new Intent(context, LoginActivity.class));
+            startActivity(new Intent(context, LoginNewActivity.class));
             finish();
         }else {
             String phone= (String) SPUtils.getParam(context,Constants.LOGIN_INFO,Constants.SP_TEL,"");
-            String pass= (String) SPUtils.getParam(context,Constants.LOGIN_INFO,Constants.SP_PASSWORD,"");
+            String pass= (String) SPUtils.getParam(context,Constants.LOGIN_INFO,Constants.SP_WQTOKEN,"");
             PhoneLogin(phone, pass);
         }
     }
@@ -211,22 +223,20 @@ public class SplashActivity extends BaseActivity {
          * @param pass
          */
         public void PhoneLogin(String phone, String pass) {
-            String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
             OkHttpUtils
-                    .get()
+                    .post()
                     .url(Constants.LOGIN)
-                    .addParams("only", only)
                     .addParams("tel", phone)
-                    .addParams("password", pass)
+                    .addParams("token", pass)
                     .build()
                     .connTimeOut(60000)
                     .readTimeOut(20000)
                     .writeTimeOut(20000)
-                    .execute(new Callback<BaseBean<User>>() {
+                    .execute(new Callback<BaseBean<MerchantBean>>() {
                         @Override
-                        public BaseBean<User> parseNetworkResponse(Response response, int id) throws Exception {
+                        public BaseBean<MerchantBean> parseNetworkResponse(Response response, int id) throws Exception {
                             String string = response.body().string();
-                            BaseBean user = new Gson().fromJson(string, new TypeToken<BaseBean<User>>() {
+                            BaseBean user = new Gson().fromJson(string, new TypeToken<BaseBean<MerchantBean>>() {
                             }.getType());
                             return user;
                         }
@@ -240,7 +250,7 @@ public class SplashActivity extends BaseActivity {
                         }
 
                         @Override
-                        public void onResponse(BaseBean<User> response, int id) {
+                        public void onResponse(BaseBean<MerchantBean> response, int id) {
                             if (response.getCode().equals("200")) {
                                 SPUtils.setParam(context, Constants.LOGIN_INFO, Constants.SP_TYPE, "0");
                                 Message message = new Message();

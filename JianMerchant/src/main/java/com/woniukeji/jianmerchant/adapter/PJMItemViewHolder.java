@@ -71,7 +71,7 @@ public class PJMItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
         //性别限制（0=只招女，1=只招男，2=不限男女）
         tvManagerName.setText(job.getMerchant_id_name());
         tvChakanBrowse.setText(job.getLook());
-        tvMessage.setText(job.getRemarks());
+//        tvMessage.setText(job.getRemarks());
         maxProgress = job.getCount();
         if (job.getHot() == 1) {
             imgType.setImageResource(R.mipmap.icon_hot);
@@ -119,14 +119,15 @@ public class PJMItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
         progressAdmit.setProgress(maxProgress);
     }
 
-    @OnClick({R.id.btn_admit_action,R.id.progress_admit})
+    @OnClick({R.id.btn_admit_action,R.id.progress_admit,R.id.ll_publisher})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_admit_action:
                 break;
             case R.id.progress_admit:
+            case R.id.ll_publisher:
                 Intent Intent = new Intent(getContext(), FilterActivity.class);
-                Intent.putExtra("jobid",job.getId());
+                Intent.putExtra("jobid",job.getId()+"");
                 Intent.putExtra("jobname", job.getName());
                 getContext().startActivity(Intent);
                 break;

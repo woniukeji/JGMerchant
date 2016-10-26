@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.woniukeji.jianmerchant.chat.CustomUserProvider;
+import com.woniukeji.jianmerchant.widget.city.dao.DBManager;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -25,7 +26,9 @@ public class Application extends android.app.Application {
         //默认是本地
         UmengConfig();
         init();
-
+        //导入数据库
+        DBManager dbHelper = new DBManager(this);
+        dbHelper.openDatabase();
 //        CrashReport.initCrashReport(getApplicationContext(), "注册时申请的APPID", false);
     }
     private void init(){

@@ -174,7 +174,7 @@ public class RegistActivity extends BaseActivity {
         SPUtils.setParam(mContext, Constants.LOGIN_INFO, Constants.SP_STATUS, user.getT_user_login().getStatus());
         SPUtils.setParam(mContext, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getT_user_login().getQiniu());
         SPUtils.setParam(mContext, Constants.USER_INFO, Constants.USER_NICK, user.getT_merchant().getName() != null ? user.getT_merchant().getName() : "");
-        SPUtils.setParam(mContext, Constants.USER_INFO, Constants.USER_MERCHANT_ID, user.getT_merchant().getId());
+        SPUtils.setParam(mContext, Constants.USER_INFO, Constants.SP_MERCHANT_ID, user.getT_merchant().getId());
         SPUtils.setParam(mContext, Constants.USER_INFO, Constants.USER_PAY_PASS, user.getT_merchant().getPay_password());
         SPUtils.setParam(mContext, Constants.USER_INFO, Constants.USER_IMG, user.getT_merchant().getName_image() != null ? user.getT_merchant().getName_image() : "");
     }

@@ -172,8 +172,9 @@ public class JobItemDetailActivity extends BaseActivity {
 
                 break;
             case R.id.btn_down:
+               if(modleJob.getStatus() == 0){
                     new SweetAlertDialog(JobItemDetailActivity.this, SweetAlertDialog.WARNING_TYPE)
-                            .setTitleText("您确认将当前兼职下架吗？")
+                            .setTitleText("确认暂停招聘么？")
                             .setConfirmText("确定")
                             .setCancelText("取消")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -183,6 +184,20 @@ public class JobItemDetailActivity extends BaseActivity {
                                     postDown(String.valueOf(loginId), String.valueOf(jobid), "13");
                                 }
                             }).show();
+                }else if(modleJob.getStatus() == 2){
+                    new SweetAlertDialog(JobItemDetailActivity.this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("确认恢复招聘么？")
+                            .setConfirmText("确定")
+                            .setCancelText("取消")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                    postDown(String.valueOf(loginId), String.valueOf(jobid), "0");
+                                }
+                            }).show();
+                }
+
 
 
                 break;
@@ -240,10 +255,15 @@ public class JobItemDetailActivity extends BaseActivity {
                     Toast.makeText(jobDetailActivity, Message, Toast.LENGTH_SHORT).show();
                     int offer = msg.arg1;
                     if (offer == 13) {
+                        jobDetailActivity.modleJob.setStatus(2);
+                        jobDetailActivity.btnDown.setText("恢复招聘");
+                    }else if(offer == 0){
+                        jobDetailActivity.modleJob.setStatus(0);
+                        jobDetailActivity.btnDown.setText("暂停招聘");
+                } else if (offer == 9) {
                         jobDetailActivity.btnFinish.setVisibility(View.GONE);
                         jobDetailActivity.btnChange.setVisibility(View.GONE);
-                        jobDetailActivity.btnDown.setText("已下架");
-                        jobDetailActivity.btnDown.setClickable(false);
+                        jobDetailActivity. btnDown.setVisibility(View.GONE);
                     }
                     break;
                 case 6:
@@ -260,17 +280,18 @@ public class JobItemDetailActivity extends BaseActivity {
 
     private void fillData() {
 
-        if (modleJob.getStatus() == 6) {
-            btnFinish.setVisibility(View.GONE);
-            btnChange.setVisibility(View.GONE);
-            btnDown.setText("已下架");
+        if (modleJob.getStatus() == 2) {
+            btnDown.setText("恢复招聘");
+        } else if (modleJob.getStatus() == 0) {
+            btnDown.setText("暂停招聘");
         } else if (modleJob.getStatus() == 5) {
             btnFinish.setVisibility(View.GONE);
             btnChange.setVisibility(View.GONE);
-        } else if (modleJob.getStatus() == 4) {
+            btnDown.setVisibility(View.GONE);
+        } else if (modleJob.getStatus() == 6) {
             btnFinish.setVisibility(View.GONE);
             btnChange.setVisibility(View.GONE);
-            btnDown.setText("去评价");
+            btnDown.setVisibility(View.GONE);
         } else if (modleJob.getStatus() == 3) {
             btnFinish.setVisibility(View.GONE);
             btnChange.setVisibility(View.GONE);

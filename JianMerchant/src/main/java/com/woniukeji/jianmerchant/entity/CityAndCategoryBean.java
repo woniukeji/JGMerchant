@@ -88,7 +88,7 @@ public class CityAndCategoryBean implements Parcelable {
     public static class ListTCity2Bean implements Parcelable {
         private String city;
         private String code;
-        private int id;
+        private String id;
         /**
          * area_name : 市辖区
          * city_id : 1
@@ -113,14 +113,6 @@ public class CityAndCategoryBean implements Parcelable {
             this.code = code;
         }
 
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
         public List<ListTAreaBean> getList_t_area() {
             return list_t_area;
         }
@@ -129,10 +121,35 @@ public class CityAndCategoryBean implements Parcelable {
             this.list_t_area = list_t_area;
         }
 
+
         public static class ListTAreaBean implements Parcelable {
+
+
+            /**
+             * id : 1
+             * city_id : 0899
+             * area_name : 市辖区
+             */
+
+            private String id;
+            private String city_id;
             private String area_name;
-            private int city_id;
-            private int id;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getCity_id() {
+                return city_id;
+            }
+
+            public void setCity_id(String city_id) {
+                this.city_id = city_id;
+            }
 
             public String getArea_name() {
                 return area_name;
@@ -142,21 +159,6 @@ public class CityAndCategoryBean implements Parcelable {
                 this.area_name = area_name;
             }
 
-            public int getCity_id() {
-                return city_id;
-            }
-
-            public void setCity_id(int city_id) {
-                this.city_id = city_id;
-            }
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
 
             @Override
             public int describeContents() {
@@ -166,8 +168,8 @@ public class CityAndCategoryBean implements Parcelable {
             @Override
             public void writeToParcel(Parcel dest, int flags) {
                 dest.writeString(this.area_name);
-                dest.writeInt(this.city_id);
-                dest.writeInt(this.id);
+                dest.writeString(this.city_id);
+                dest.writeString(this.id);
             }
 
             public ListTAreaBean() {
@@ -175,8 +177,8 @@ public class CityAndCategoryBean implements Parcelable {
 
             protected ListTAreaBean(Parcel in) {
                 this.area_name = in.readString();
-                this.city_id = in.readInt();
-                this.id = in.readInt();
+                this.city_id = in.readString();
+                this.id = in.readString();
             }
 
             public static final Creator<ListTAreaBean> CREATOR = new Creator<ListTAreaBean>() {
@@ -201,7 +203,7 @@ public class CityAndCategoryBean implements Parcelable {
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(this.city);
             dest.writeString(this.code);
-            dest.writeInt(this.id);
+            dest.writeString(this.id);
             dest.writeList(this.list_t_area);
         }
 
@@ -211,7 +213,7 @@ public class CityAndCategoryBean implements Parcelable {
         protected ListTCity2Bean(Parcel in) {
             this.city = in.readString();
             this.code = in.readString();
-            this.id = in.readInt();
+            this.id = in.readString();
             this.list_t_area = new ArrayList<ListTAreaBean>();
             in.readList(this.list_t_area, ListTAreaBean.class.getClassLoader());
         }

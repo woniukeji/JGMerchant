@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.activity.DemoActivity;
 import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.MainActivity;
@@ -50,6 +52,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private RelativeLayout rlShift;
     private Spinner shift;
     private ArrayAdapter<CharSequence> adapter;
+    private ImageView mine_shezhi;
 
 
     @Override
@@ -72,6 +75,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         rlShift = (RelativeLayout) view.findViewById(R.id.rl_shift);
         rlLogout = (RelativeLayout) view.findViewById(R.id.rl_logout);
         userName = (TextView) view.findViewById(R.id.user_name);
+        mine_shezhi= (ImageView) view.findViewById(R.id.mine_shezhi);
         userName.setText((String)SPUtils.getParam(getActivity(), Constants.USER_INFO, "nickname", ""));
         department = (TextView) view.findViewById(R.id.department);
         //暂无数据
@@ -85,6 +89,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        shift.setAdapter(adapter);
 //        shift.setOnItemSelectedListener(this);
+        mine_shezhi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                startActivity(new Intent(getActivity(), DemoActivity.class));
+            }
+        });
     }
 
     @Override

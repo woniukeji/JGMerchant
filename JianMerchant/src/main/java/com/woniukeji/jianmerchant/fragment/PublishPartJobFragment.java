@@ -62,7 +62,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     TextView nextPage;
     //设置此fragment的参数，创建新兼职，历史纪录，模板
     private String type;
-    private List<RegionBean> dataSetRegion = Arrays.asList(new RegionBean("全国", 0), new RegionBean("三亚", 1), new RegionBean("海口", 2), new RegionBean("北京", 3), new RegionBean("西安", 4), new RegionBean("杭州", 5));
+    private List<RegionBean> dataSetRegion = Arrays.asList(new RegionBean("全国", "0"), new RegionBean("三亚", "0899"), new RegionBean("海口", "0898"), new RegionBean("北京", "010"), new RegionBean("西安", "029"), new RegionBean("杭州", "0571"), new RegionBean("武汉", "027"));
     private List<TypeBean> dataSetType = Arrays.asList(new TypeBean("短期", 0), new TypeBean("长期", 1), new TypeBean("实习生", 2), new TypeBean("兼职旅行", 3));
     BaseBean<List<RegionBean>> regionBaseBean = new BaseBean<>();
     BaseBean<List<TypeBean>> typeBaseBean = new BaseBean<>();
@@ -70,7 +70,6 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     //next step Activity
     private Intent intent;
     private Bundle bundle = new Bundle();
-    ;
     private SwipeRefreshLayout refreshLayout;
     private EmptyRecyclerView list;
     /**
@@ -277,7 +276,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     private void getHistroyJobs(int pagecount) {
         final int count = 10 * pagecount;
         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-        final int merchantid= (int) SPUtils.getParam(getHoldingContext(),Constants.USER_INFO,Constants.USER_MERCHANT_ID,0);
+        final int merchantid= (int) SPUtils.getParam(getHoldingContext(),Constants.LOGIN_INFO,Constants.SP_MERCHANT_ID,0);
         SubscriberOnNextListener<Model> listenner = new SubscriberOnNextListener<Model>() {
             @Override
             public void onNext(Model model) {
@@ -383,7 +382,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             LogUtils.i("regionBaseBean", regionBaseBean.getData().get(i).toString());
             if (regionBaseBean.getData().get(i).isSelect()) {
                 bundle.putString("region", regionBaseBean.getData().get(i).getRegion());
-                bundle.putInt("region_id", regionBaseBean.getData().get(i).getId());
+                bundle.putString("region_id", regionBaseBean.getData().get(i).getId());
                 break;
             } else if (i == regionBaseBean.getData().size() - 1) {
                 Toast.makeText(getHoldingContext(), "请选择地区", Toast.LENGTH_SHORT).show();

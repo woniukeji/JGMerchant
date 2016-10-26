@@ -449,9 +449,6 @@ public class FilterFragment extends BaseFragment {
                                 mHandler.sendMessage(message);
                             }
                         }
-
-
-
                     });
         }
     }

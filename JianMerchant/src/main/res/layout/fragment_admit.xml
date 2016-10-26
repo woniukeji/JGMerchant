@@ -63,7 +63,7 @@
         android:layout_marginRight="19dp"
         android:text="导出"
         android:textSize="14dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:drawableTop="@mipmap/forword"
         android:layout_marginEnd="19dp"
         android:layout_alignParentBottom="true"

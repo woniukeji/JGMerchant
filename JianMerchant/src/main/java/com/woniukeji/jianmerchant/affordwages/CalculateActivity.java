@@ -258,7 +258,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
 
     @Override
     public void initData() {
-        merchantid = (int) SPUtils.getParam(mContext, Constants.USER_INFO, Constants.USER_MERCHANT_ID, 0);
+        merchantid = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
         getEmployeeInfo(0);
     }
 

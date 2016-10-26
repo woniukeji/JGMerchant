@@ -5,6 +5,7 @@ import com.woniukeji.jianmerchant.entity.AffordUser;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.Jobs;
+import com.woniukeji.jianmerchant.entity.MerchantBean;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
@@ -54,7 +55,7 @@ public class HttpMethods {
 //    }
 
     private HttpMethods() {
-        OkHttpClient.Builder ok = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS);
+        OkHttpClient.Builder ok = new OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS);
         Retrofit.Builder builder = new Retrofit.Builder();
         Retrofit retrofit = builder.baseUrl(Constants.JIANGUO_USING)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -73,6 +74,83 @@ public class HttpMethods {
             }
             return baseBean.getData();
         }
+
+    }
+    /**
+    *商家注册
+    *@param tel
+    *@param smsCode
+     * @param password
+    *@author invinjun
+    *created at 2016/10/21 15:27
+    */
+    public void register(Subscriber<String> subscriber, String tel,String smsCode,String password) {
+        Observable<BaseBean> cityCategory = methodsInterface.register(tel, smsCode,password);
+        cityCategory.map(new BaseBeanFun())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
+    /**
+     *短信验证码
+     *@param tel
+     *@author invinjun
+     *created at 2016/10/21 15:27
+     */
+    public void sms(Subscriber<String> subscriber, String tel, String type) {
+        Observable<BaseBean> cityCategory = methodsInterface.sendMS(tel,type);
+        cityCategory.map(new BaseBeanFun())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
+    /**
+     *账户密码登陆
+     *@param tel
+     *@author invinjun
+     *created at 2016/10/21 15:27
+     */
+    public void passLogin(Subscriber<MerchantBean> subscriber, String tel, String password) {
+        Observable<BaseBean<MerchantBean>> cityCategory = methodsInterface.passwordLogin(tel,password);
+        cityCategory.map(new BaseBeanFun<MerchantBean>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
+    /**
+     *账户密码登陆
+     *@param tel
+     *@author invinjun
+     *created at 2016/10/21 15:27
+     */
+    public void smsLogin(Subscriber<MerchantBean> subscriber, String tel, String code) {
+        Observable<BaseBean<MerchantBean>> cityCategory = methodsInterface.smsLogin(tel,code);
+        cityCategory.map(new BaseBeanFun<MerchantBean>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
+    /**
+     *自动登录
+     *@param tel
+     *@author invinjun
+     *created at 2016/10/21 15:27
+     */
+    public void autoLogin(Subscriber<MerchantBean> subscriber, String tel, String token) {
+        Observable<BaseBean<MerchantBean>> cityCategory = methodsInterface.passwordLogin(tel,token);
+        cityCategory.map(new BaseBeanFun<MerchantBean>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
 
     }
 

@@ -169,7 +169,7 @@ public class PartJobManagerFragment extends BaseFragment {
                 getMerchantEmployStatus(String.valueOf(type),"0");
             }
         });
-        merchant_id = (int) SPUtils.getParam(getActivity(), Constants.USER_INFO, Constants.USER_MERCHANT_ID, 0);//userinfo sp文件中保存着3
+        merchant_id = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);//userinfo sp文件中保存着3
         list.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override

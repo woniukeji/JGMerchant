@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.activity.login.LoginNewActivity;
 import com.woniukeji.jianmerchant.login.LoginActivity;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 
@@ -28,7 +29,7 @@ public class PersonExitActivity extends Activity {
     @OnClick(R.id.btn_logout)
     public void onClick() {
         SPUtils.deleteParams(this);
-        startActivity(new Intent(PersonExitActivity.this,LoginActivity.class));
+        startActivity(new Intent(PersonExitActivity.this,LoginNewActivity.class));
         finish();
     }
 }

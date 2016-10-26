@@ -54,7 +54,8 @@ public class User  implements Serializable {
             this.t_merchant = t_merchant;
         }
 
-        public static class TUserLoginEntity {
+
+    public static class TUserLoginEntity {
             private int id;
             private String tel;
             private String password;

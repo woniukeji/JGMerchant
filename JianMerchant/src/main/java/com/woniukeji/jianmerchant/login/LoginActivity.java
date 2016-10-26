@@ -70,7 +70,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     BaseBean<User> user = (BaseBean<User>) msg.obj;
                     //每次登录后保存用户信息
                         saveToSP(user.getData());
-//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                        Intent intent = new Intent(LoginNewActivity.this, MainActivity.class);
 ////                        intent.putExtra("user", user);
 //                        startActivity(intent);
 //                        finish();
@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         SPUtils.setParam(context,Constants.LOGIN_INFO,Constants.SP_QNTOKEN,user.getT_user_login().getQiniu());
 
         SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_NICK,user.getT_merchant().getName()!=null?user.getT_merchant().getName():"");
-        SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_MERCHANT_ID,user.getT_merchant().getId());
+        SPUtils.setParam(context,Constants.USER_INFO,Constants.SP_MERCHANT_ID,user.getT_merchant().getId());
         SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_PAY_PASS,user.getT_merchant().getPay_password());
         SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_IMG,user.getT_merchant().getName_image()!=null?user.getT_merchant().getName_image():"");
             JPushInterface.setAlias(getApplicationContext(), "jianguo"+user.getT_user_login().getId(), new TagAliasCallback() {
@@ -188,7 +188,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
 //    private void authorize(Platform plat) {
-//        Toast.makeText(LoginActivity.this, "正在登录，请稍后...", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(LoginNewActivity.this, "正在登录，请稍后...", Toast.LENGTH_SHORT).show();
 ////        if (plat.isValid()) {
 ////            String userId = plat.getDb().getUserId();
 ////            if (!TextUtils.isEmpty(userId)) {
@@ -261,10 +261,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //                break;
 //
 //            case R.id.forget_pass:
-//                startActivity(new Intent(LoginActivity.this,ChangPssActivity.class));
+//                startActivity(new Intent(LoginNewActivity.this,ChangPssActivity.class));
 //                break;
 ////            case R.id.quick_login:
-////                startActivity(new Intent(LoginActivity.this,QuickLoginActivity.class));
+////                startActivity(new Intent(LoginNewActivity.this,QuickLoginActivity.class));
 ////                break;
 //            case R.id.register_in_button:
 //                break;

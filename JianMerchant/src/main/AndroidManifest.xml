@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.woniukeji.jianmerchant">
+<manifest package="com.woniukeji.jianmerchant"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
 
     <uses-sdk
         android:minSdkVersion="18"
-        android:targetSdkVersion="23" />
+        android:targetSdkVersion="23"/>
 
     <permission
         android:name="${applicationId}.permission.JPUSH_MESSAGE"
-        android:protectionLevel="signature" />
+        android:protectionLevel="signature"/>
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="21" />
+        android:maxSdkVersion="21"/>
     <!-- 基础模块（必须加入以下声明）START -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <!-- 基础模块 END -->
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
     <!-- 极光推送权限 开始 -->
-    <uses-permission android:name="${applicationId}.permission.JPUSH_MESSAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="${applicationId}.permission.JPUSH_MESSAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <!-- 极光推送权限 结束 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:name=".base.Application"
@@ -67,76 +67,85 @@
             android:name=".login.SplashActivity"
             android:theme="@style/APPSplash">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.login.LoginNewActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.login.ForgetPassActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.login.RegistActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".login.ChangPssActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".publish.PublishActivity"
             android:configChanges="keyboardHidden"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".publish.PublishDetailActivity"
             android:configChanges="keyboardHidden"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
-                <action android:name="fromFragment" />
-                <action android:name="fromItem" />
+                <action android:name="fromFragment"/>
+                <action android:name="fromItem"/>
             </intent-filter>
         </activity>
         <activity
             android:name="me.nereo.multi_image_selector.PreviewPicturesActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".publish.PreviewJobActivity"
             android:configChanges="keyboardHidden"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".partjob.PartJobManagerActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".partjob.JobItemDetailActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".partjob.FilterActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".affordwages.CalculateActivity"
             android:parentActivityName=".partjob.JobItemDetailActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".affordwages.ChangeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".affordwages.FinishActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".affordwages.PassWordActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".login.RegistActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <!-- 实时通信模块、推送（若使用该功能，需添加以下声明）START -->
-        <service android:name="com.avos.avoscloud.PushService" />
+        <service android:name="com.avos.avoscloud.PushService"/>
 
         <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
             </intent-filter>
         </receiver>
         <!-- 实时通信模块、推送 END -->
@@ -148,10 +157,10 @@
             android:exported="false"
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
-                <action android:name="cn.jpush.android.ui.PushActivity" />
+                <action android:name="cn.jpush.android.ui.PushActivity"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="${applicationId}" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="${applicationId}"/>
             </intent-filter>
         </activity>
 
@@ -159,16 +168,16 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false"/>
         <service
             android:name="cn.jpush.android.service.PushService"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTER" />
-                <action android:name="cn.jpush.android.intent.REPORT" />
-                <action android:name="cn.jpush.android.intent.PushService" />
-                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+                <action android:name="cn.jpush.android.intent.REGISTER"/>
+                <action android:name="cn.jpush.android.intent.REPORT"/>
+                <action android:name="cn.jpush.android.intent.PushService"/>
+                <action android:name="cn.jpush.android.intent.PUSH_TIME"/>
             </intent-filter>
         </service>
 
@@ -178,9 +187,9 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.DaemonService" />
+                <action android:name="cn.jpush.android.intent.DaemonService"/>
 
-                <category android:name="${applicationId}" />
+                <category android:name="${applicationId}"/>
             </intent-filter>
         </service>
 
@@ -190,44 +199,44 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter android:priority="1000">
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY"/>
                 <!-- Required  显示通知栏 -->
-                <category android:name="${applicationId}" />
+                <category android:name="${applicationId}"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
             <!-- Optional -->
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
 
-                <data android:scheme="package" />
+                <data android:scheme="package"/>
             </intent-filter>
         </receiver>
 
         <!-- Required SDK核心功能 -->
         <receiver
             android:name="cn.jpush.android.service.AlarmReceiver"
-            android:exported="false" />
+            android:exported="false"/>
         <receiver
             android:name=".jpush.CustomJpushReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.REGISTRATION"/>
                 <!-- Required 用户注册SDK的intent -->
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/>
                 <!-- Required 用户接收SDK消息的intent -->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/>
                 <!-- Required 用户接收SDK通知栏信息的intent -->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/>
                 <!-- Required 用户打开自定义通知栏的intent -->
-                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK"/>
                 <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
-                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION"/>
                 <!-- 接收网络变化 连接/断开 since 1.6.3 -->
-                <category android:name="${applicationId}" />
+                <category android:name="${applicationId}"/>
             </intent-filter>
         </receiver>
 
@@ -235,33 +244,54 @@
         <!-- 极光推送配置 开始 -->
         <meta-data
             android:name="JPUSH_CHANNEL"
-            android:value="developer-default" />
+            android:value="developer-default"/>
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="b7b12502ea5672f603fb80c1" />
+            android:value="b7b12502ea5672f603fb80c1"/>
         <!-- 极光推送配置 结束 -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5732f43f67e58e1080000240" />
+            android:value="5732f43f67e58e1080000240"/>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Channel ID" />
+            android:value="Channel ID"/>
 
-        <activity android:name=".mine.PersonExitActivity" />
-        <activity android:name=".TestActivity" />
+        <activity android:name=".mine.PersonExitActivity"/>
+        <activity android:name=".TestActivity"/>
         <activity
             android:name=".base.MainActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".activity.HistoryRecords"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".affordwages.AddPersonActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".affordwages.AddPersonDialog"
-            android:theme="@style/translucentDialog"
-            ></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".affordwages.AddPersonDialog"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".activity.DemoActivity"
+            android:theme="@style/transcutestyle">
+        </activity>
+        <activity
+            android:name=".activity.certification.ChooseActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activity.certification.PersonalActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name=".activity.certification.PersonalDetailActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+
+            />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropHeadActivity"
+
+            />
     </application>
 
 </manifest>

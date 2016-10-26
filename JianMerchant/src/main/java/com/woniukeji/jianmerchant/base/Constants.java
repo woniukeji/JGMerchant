@@ -24,9 +24,9 @@ public class Constants {
     public static final String JIANGUO_xiao="http://192.168.1.115:8080/";
     public static final String JIANGUO_xiao_new="http://192.168.43.90/JianGuo_Server/";
     public static final String JIANGUO_jun="http://192.168.1.118:8080/";
-    public static final String JIANGUO_USING=JIANGUO_xiao;
+    public static final String JIANGUO_USING=JIANGUO_jun;
     public static final String MARK_PIGEON= JIANGUO_USING+"T_UserPigeon_Servlet";//
-    public static final String LOGIN= JIANGUO_USING+"T_user_login_Login_Merchant_Servlet";//
+    public static final String LOGIN= JIANGUO_USING+"AutoLoginServlet";//
     public static final String REC_SMS= JIANGUO_USING+"T_user_login_Check_BackTel_Servlet";//忘记密码 快速登录
     public static final String GET_CITY_CATEGORY= JIANGUO_USING+"T_Job_Area_City_List_Servlet";//地区类型信息 兼 职种类
 
@@ -46,7 +46,8 @@ public class Constants {
     public static final String GET_QINIU_TOKEN= JIANGUO_USING+"T_QiNiu_Servlet";//七牛token 接口
     public static final String LOGIN_PHONE =JIANGUO_USING+ "T_user_login_Login_Tel_Servlet";//手机号密码登录
     public static final String LOGIN_QUICK =JIANGUO_USING+ "T_user_login_FastLogin_Servlet";//手机号快速登录
-    public static final String CHANGE_PASSWORD =JIANGUO_USING+ "T_user_login_Update_Psd_Servlet";//修改密码
+//    public static final String CHANGE_PASSWORD =JIANGUO_USING+ "T_user_login_Update_Psd_Servlet";//修改密码
+    public static final String CHANGE_PASSWORD =JIANGUO_USING+ "ResetPasswordServlet";
     public static final String CHECK_PHONE_BLACK= JIANGUO_USING+"T_user_login_Check_BackTel_Servlet";//快速登录忘记密码
     public static final String POST_BIND_PHONE= JIANGUO_USING+"T_user_login_BindingTel_Servlet";//绑定手机号
     public static final String ONLY_PART1 = "xse2iowiowdg3542d49z";
@@ -74,7 +75,11 @@ public class Constants {
     public static final String SP_TEL="tel";
     public static final String SP_PASSWORD="password";
     public static final String SP_USERID="id";
+    public static final String SP_MERCHANT_ID="merchantid";
     public static final String SP_STATUS="status";
+    public static final String SP_MERCHANT_STATUS="merchantInfoStatus";
+    public static final String SP_PERMISSIONS="permissions";
+    public static final String SP_PAYSTATUS="payStatus";
     public static final String SP_WQTOKEN="qqwx_token";
 
     public static final String SP_QNTOKEN="qn_token";
@@ -83,11 +88,10 @@ public class Constants {
     public static final String USER_NICK ="nickname";
     public static final String USER_NAME ="name";
     public static final String USER_IMG ="name_image";
-    public static final String SP_SCHOOL="school";
-    public static final String SP_INTEGRAL="integral";
-    public static final String SP_CREDIT="credit";
+    public static final String SP_PROVINCE="province";
+    public static final String SP_CITY="city";
+    public static final String SP_ADDRESS="address";
 
-    public static final String USER_MERCHANT_ID ="merchantid";
     public static final String USER_PAY_PASS ="pay_password";
     private static final String LEANMESSAGE_CONSTANTS_PREFIX = "com.leancloud.im.guide";
     public static final String IMG_PATH = Environment.getExternalStorageDirectory() + File.separator + "jianguoMer"+ File.separator;

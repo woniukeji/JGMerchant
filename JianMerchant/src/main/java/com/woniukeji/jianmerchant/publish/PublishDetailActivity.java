@@ -355,7 +355,7 @@ public class PublishDetailActivity extends BaseActivity {
     /**
      * 城市ID-->modify
      */
-    private int region_id;
+    private String region_id;
     /**
      * 类型ID-->modify 短期长期实习生寒暑假工
      */
@@ -465,9 +465,6 @@ public class PublishDetailActivity extends BaseActivity {
                     Toast.makeText(activity, ErrorMessage, Toast.LENGTH_SHORT).show();
                     break;
 
-//                case 4:
-//                    activity.cityAndCategoryBean = (CityAndCategoryBean) msg.obj;
-//                    break;
                 case 5:
                     String Message = (String) msg.obj;
                     Toast.makeText(activity, Message, Toast.LENGTH_SHORT).show();
@@ -523,16 +520,6 @@ public class PublishDetailActivity extends BaseActivity {
                             activity.tvPosition.setHint("请选择工作地点");
                             activity.tvPosition.setHintTextColor(activity.getResources().getColor(R.color.hint));
                             break;
-//                        case 1://兼职级别 实习生什么东西的
-//                            activity.tvHot.setText(pickType.getPickName());
-//                            activity.tvHot.setTextColor(activity.getResources().getColor(R.color.black));
-//                            activity.hot = pickType.getPickId();
-//                            break;
-//                        case 2://兼职种类
-//                            activity.tvCategory.setText(pickType.getPickName());
-//                            activity.tvCategory.setTextColor(activity.getResources().getColor(R.color.black));
-//                            activity.type_id = pickType.getPickId();
-//                            break;
                         case 3://结算方式
                             activity.tvPayMethod.setText(pickType.getPickName());
                             activity.tvPayMethod.setTextColor(activity.getResources().getColor(R.color.black));
@@ -575,45 +562,6 @@ public class PublishDetailActivity extends BaseActivity {
                 MultiImageSelectorActivity.startSelect(PublishDetailActivity.this, 0, 1, 0);
                 break;
 
-//            case R.id.rl_location:
-//                List<PickType> listLoc = new ArrayList<>();
-//                for (int i = 0; i < cityAndCategoryBean.getList_t_city2().size(); i++) {
-//                    PickType pickType = new PickType();
-//                    pickType.setPickId(String.valueOf(cityAndCategoryBean.getList_t_city2().get(i).getId()));
-//                    pickType.setPickName(cityAndCategoryBean.getList_t_city2().get(i).getCity());
-//                    listLoc.add(pickType);
-//                }
-//                TypePickerPopuWin pickerLoc = new TypePickerPopuWin(context, listLoc, mHandler, 0);
-//                pickerLoc.showShareWindow();
-//                pickerLoc.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
-//                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-//                break;
-//            case R.id.rl_part_level:
-//                List<PickType> listTemp = new ArrayList<>();
-//                for (int i = 0; i < partHot.length; i++) {
-//                    PickType pickType = new PickType();
-//                    pickType.setPickId(String.valueOf(i));
-//                    pickType.setPickName(partHot[i]);
-//                    listTemp.add(pickType);
-//                }
-//                TypePickerPopuWin pickerPopup = new TypePickerPopuWin(context, listTemp, mHandler, 1);
-//                pickerPopup.showShareWindow();
-//                pickerPopup.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
-//                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-//                break;
-//            case R.id.rl_category:
-//                List<PickType> listCate = new ArrayList<>();
-//                for (int i = 0; i < cityAndCategoryBean.getList_t_type().size(); i++) {
-//                    PickType pickType = new PickType();
-//                    pickType.setPickId(String.valueOf(cityAndCategoryBean.getList_t_type().get(i).getId()));
-//                    pickType.setPickName(cityAndCategoryBean.getList_t_type().get(i).getType_name());
-//                    listCate.add(pickType);
-//                }
-//                TypePickerPopuWin pickerCategory = new TypePickerPopuWin(context, listCate, mHandler, 2);
-//                pickerCategory.showShareWindow();
-//                pickerCategory.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
-//                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-//                break;
             case R.id.rl_pay_method:
                 List<PickType> listpay = new ArrayList<>();
                 for (int i = 0; i < payMethods.length; i++) {
@@ -658,10 +606,17 @@ public class PublishDetailActivity extends BaseActivity {
                 //城市id选择后才能选择区域
                 if (String.valueOf(region_id) != null && !String.valueOf(region_id).equals("")) {
                     List<PickType> listAre = new ArrayList<>();
-                    for (int i = 0; i < cityAndCategoryBean.getList_t_city2().get(region_id - 1).getList_t_area().size(); i++) {
+                    List<CityAndCategoryBean.ListTCity2Bean.ListTAreaBean> list_t_area = new ArrayList<>();
+                    for (int i = 0; i < cityAndCategoryBean.getList_t_city2().size(); i++) {
+                        if (cityAndCategoryBean.getList_t_city2().get(i).getCode().equals(region_id)){
+                            list_t_area = cityAndCategoryBean.getList_t_city2().get(i).getList_t_area();
+                            break;
+                        }
+                    }
+                    for (int i = 0; i < list_t_area.size(); i++) {
                         PickType pickType = new PickType();
-                        pickType.setPickId(String.valueOf(cityAndCategoryBean.getList_t_city2().get(region_id - 1).getList_t_area().get(i).getId()));
-                        pickType.setPickName(cityAndCategoryBean.getList_t_city2().get(region_id - 1).getList_t_area().get(i).getArea_name());
+                        pickType.setPickId(String.valueOf(list_t_area.get(i).getId()));
+                        pickType.setPickName(list_t_area.get(i).getArea_name());
                         listAre.add(pickType);
                     }
                     TypePickerPopuWin pickerAre = new TypePickerPopuWin(context, listAre, mHandler, 6);
@@ -1052,7 +1007,7 @@ public class PublishDetailActivity extends BaseActivity {
         }else if (intent.getAction().equals("fromFragment")) {
             Bundle bundle = intent.getExtras();
             region = bundle.getString("region");
-            region_id = bundle.getInt("region_id");//地区id
+            region_id = bundle.getString("region_id");//地区id
             type = bundle.getString("type");
             type_id1 = bundle.getInt("type_id");//兼职类型id
             category = bundle.getString("category");
@@ -1494,7 +1449,7 @@ public class PublishDetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        merchantid = (int) SPUtils.getParam(mContext, Constants.USER_INFO, Constants.USER_MERCHANT_ID, 0);
+        merchantid = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
     }
 
     @Override

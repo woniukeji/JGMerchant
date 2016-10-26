@@ -5,6 +5,7 @@ import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.JobDetails;
 import com.woniukeji.jianmerchant.entity.Jobs;
+import com.woniukeji.jianmerchant.entity.MerchantBean;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import cn.leancloud.chatkit.LCChatKitUser;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -24,6 +26,23 @@ import rx.Observable;
 public interface HttpMethodsInterface {
     //    @GET("top250")
 //    rx.Observable<HttpResult<List<Subject>>> getTopMovie(@Query("start") int start, @Query("count") int count);
+    @POST("RegisterServlet")
+    Observable<BaseBean> register(@Query("tel") String tel, @Query("smsCode") String smsCode, @Query("password") String password);
+
+    @POST("QuickSmsServlet")
+    Observable<BaseBean> sendMS(@Query("tel") String tel,@Query("type") String type);
+
+    @POST("PasswordLoginServlet")
+    Observable<BaseBean<MerchantBean>> passwordLogin(@Query("tel") String tel, @Query("password") String password);
+
+    @POST("LoginServlet")
+    Observable<BaseBean<MerchantBean>> smsLogin(@Query("tel") String tel,@Query("smsCode") String smsCode);
+
+    @POST("AutoLoginServlet")
+    Observable<BaseBean<MerchantBean>> autoLogin(@Query("tel") String tel,@Query("token") String token);
+
+
+
     @GET("T_Job_Area_City_List_Servlet")
     Observable<BaseBean<CityAndCategoryBean>> getCityCategory(@Query("only") String only, @Query("login_id") String loginId);
 

@@ -9,18 +9,19 @@ import android.os.Parcelable;
 public class RegionBean implements Parcelable {
     String region;
 
-    public int getId() {
+    private String id;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    private int id;
     boolean isSelect = false;
 
-    public RegionBean(String region,int id) {
+    public RegionBean(String region,String id) {
         this.region = region;
         this.id = id;
     }
@@ -58,13 +59,13 @@ public class RegionBean implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.region);
-        dest.writeInt(this.id);
+        dest.writeString(this.id);
         dest.writeByte(this.isSelect ? (byte) 1 : (byte) 0);
     }
 
     protected RegionBean(Parcel in) {
         this.region = in.readString();
-        this.id = in.readInt();
+        this.id = in.readString();
         this.isSelect = in.readByte() != 0;
     }
 

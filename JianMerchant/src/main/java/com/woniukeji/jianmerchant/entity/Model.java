@@ -32,8 +32,8 @@ public class Model implements Serializable {
     public static class ListTJobEntity implements Serializable {
 
         private int id;
-        private int city_id;
-        private int area_id;
+        private String city_id;
+        private String area_id;
         private int type_id;
         private int merchant_id;
         private String name;
@@ -188,19 +188,19 @@ public class Model implements Serializable {
             this.id = id;
         }
 
-        public int getCity_id() {
+        public String getCity_id() {
             return city_id;
         }
 
-        public void setCity_id(int city_id) {
+        public void setCity_id(String city_id) {
             this.city_id = city_id;
         }
 
-        public int getArea_id() {
+        public String getArea_id() {
             return area_id;
         }
 
-        public void setArea_id(int area_id) {
+        public void setArea_id(String area_id) {
             this.area_id = area_id;
         }
 
