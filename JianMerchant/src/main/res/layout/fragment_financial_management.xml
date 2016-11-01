@@ -45,7 +45,7 @@
             android:textColor="#ffffff"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:visibility="visible"
+            android:visibility="gone"
             />
     </RelativeLayout>
 
@@ -54,7 +54,9 @@
         android:background="#ffffff"
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="60dp">
+
         <RelativeLayout
             android:background="#ffffff"
             android:layout_weight="1"
@@ -95,6 +97,7 @@
 
 
         </RelativeLayout>
+
         <TextView
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
@@ -149,12 +152,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:background="#beb6b6"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="1dp" />
     <LinearLayout
         android:background="#ffffff"
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="60dp">
         <RelativeLayout
             android:background="#ffffff"
@@ -250,12 +255,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:background="#beb6b6"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="1dp" />
     <LinearLayout
         android:background="#ffffff"
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="60dp">
         <RelativeLayout
             android:background="#ffffff"
@@ -347,6 +354,27 @@
 
 
     </LinearLayout>
+    <ImageView
+        android:id="@+id/img_status"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@mipmap/toexamine"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        />
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="财务管理暂未开放"
+    android:gravity="center"
+    android:layout_marginTop="20dp"
+    />
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="敬请期待"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:id="@+id/textView2"/>
 </LinearLayout>

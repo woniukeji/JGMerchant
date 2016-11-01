@@ -184,6 +184,7 @@
             android:layout_height="match_parent"
             android:textSize="16dp"
             android:hint="请输入联系人电话"
+            android:inputType="number"
             android:layout_marginLeft="15dp"
             android:background="@color/transparent"
             android:textColorHint="#cccccc"
@@ -249,6 +250,7 @@
             android:textSize="16dp"
             android:hint="请输入身份证号"
             android:layout_marginLeft="15dp"
+            android:inputType="number"
             android:background="@color/transparent"
             android:textColorHint="#cccccc"
             />

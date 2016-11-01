@@ -1,6 +1,9 @@
 package com.woniukeji.jianmerchant.activity.certification;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,22 +13,42 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UpProgressHandler;
+import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.UploadOptions;
 import com.sdsmdg.tastytoast.TastyToast;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
+import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.MerchantBean;
+import com.woniukeji.jianmerchant.utils.ActivityManager;
+import com.woniukeji.jianmerchant.utils.BitmapUtils;
+import com.woniukeji.jianmerchant.utils.FileUtils;
+import com.woniukeji.jianmerchant.utils.MD5Coder;
+import com.woniukeji.jianmerchant.utils.SPUtils;
+import com.woniukeji.jianmerchant.widget.CircleImageView;
 import com.woniukeji.jianmerchant.widget.city.CityBean;
 import com.woniukeji.jianmerchant.widget.city.RegionInfo;
 import com.woniukeji.jianmerchant.widget.city.dao.RegionDAO;
 import com.woniukeji.jianmerchant.widget.city.view.OptionsPickerView;
 import com.woniukeji.jianmerchant.widget.city.view.TimePickerView;
 
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 public class PersonalActivity extends BaseActivity {
     @BindView(R.id.img_back) ImageView imgBack;
@@ -38,10 +61,11 @@ public class PersonalActivity extends BaseActivity {
     @BindView(R.id.gd) EditText gd;
     @BindView(R.id.btn_next) Button btnNext;
     @BindView(R.id.activity_personal) LinearLayout activityPersonal;
+    @BindView(R.id.add_head) CircleImageView addHead;
     private TextView tvTime, tvOptions;
     TimePickerView pvTime;
     OptionsPickerView pvOptions;
-    private MerchantBean merchantBean=new MerchantBean();
+    private MerchantBean merchantBean = new MerchantBean();
 
     static ArrayList<RegionInfo> item1;
 
@@ -62,6 +86,8 @@ public class PersonalActivity extends BaseActivity {
 
         ;
     };
+    private int merchantId;
+    private String filePath="";
 
     @Override
     public void setContentView() {
@@ -133,57 +159,120 @@ public class PersonalActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        merchantId = (int) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
     }
 
     @Override
     public void addActivity() {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-
+        ActivityManager.getActivityManager().addActivity(this);
     }
 
 
-    @OnClick(R.id.btn_next)
-    public void onClick() {
-        if (checkInfo()) {
-            Intent intent=new Intent(PersonalActivity.this,PersonalDetailActivity.class);
-            intent.putExtra("merchant",merchantBean);
-            startActivity(intent);
+    @OnClick({R.id.add_head, R.id.btn_next})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.add_head:
+                MultiImageSelectorActivity.startSelect(PersonalActivity.this,0,1,0);
+                break;
+            case R.id.btn_next:
+                if (checkInfo()) {
+                    String key = MD5Coder.getQiNiuName(String.valueOf(merchantId));
+                    String url1 = "http://7xlell.com2.z0.glb.qiniucdn.com/" + key;
+                    merchantBean.setUserImage(url1);
+                    upLoadQiNiu(this, key, filePath);
+                    Intent intent = new Intent(PersonalActivity.this, PersonalDetailActivity.class);
+                    intent.putExtra("merchant", merchantBean);
+                    startActivity(intent);
+                }
+                break;
         }
-
     }
+
+
 
     private boolean checkInfo() {
-        String nickName=etName.getText().toString();
-        String groupName=etGroupName.getText().toString();
-        String emailStr=email.getText().toString();
-        String address=etAddress.getText().toString();
-        String jdStr=gd.getText().toString();
-        if (null==nickName||nickName.equals("")) {
+        String nickName = etName.getText().toString();
+        String groupName = etGroupName.getText().toString();
+        String emailStr = email.getText().toString();
+        String address = etAddress.getText().toString();
+        String jdStr = gd.getText().toString();
+        if (null == nickName || nickName.equals("")) {
             TastyToast.makeText(this, "请填写昵称", TastyToast.LENGTH_LONG, TastyToast.WARNING);
             return false;
-        }else if (null==groupName||groupName.equals("")){
+        } else if (null == groupName || groupName.equals("")) {
             TastyToast.makeText(this, "请填写团队名称", TastyToast.LENGTH_LONG, TastyToast.WARNING);
             return false;
-        }else if (null==emailStr||emailStr.equals("")){
+        } else if (null == emailStr || emailStr.equals("")) {
             TastyToast.makeText(this, "请填写邮箱", TastyToast.LENGTH_LONG, TastyToast.WARNING);
             return false;
-        }
-        else if (null==merchantBean.getProvince()||merchantBean.getProvince().equals("")){
+        } else if( !emailStr.matches("\\w+@\\w+[.]((com))")){
+            TastyToast.makeText(this, "邮箱格式错误", TastyToast.LENGTH_LONG, TastyToast.WARNING);
+            return false;
+        }else if (null == merchantBean.getProvince() || merchantBean.getProvince().equals("")) {
             TastyToast.makeText(this, "请填写所在省市", TastyToast.LENGTH_LONG, TastyToast.WARNING);
             return false;
-        }else if (null==address||address.equals("")){
+        } else if (null == address || address.equals("")) {
             TastyToast.makeText(this, "请填写详细地址", TastyToast.LENGTH_LONG, TastyToast.WARNING);
+            return false;
+        }else if(filePath.equals("")){
+            TastyToast.makeText(this, "请上传头像", TastyToast.LENGTH_LONG, TastyToast.WARNING);
             return false;
         }
         merchantBean.setName(nickName);
         merchantBean.setEmail(emailStr);
         merchantBean.setCompanyAddress(address);
-        merchantBean.setAbout(jdStr==null?"":jdStr);
+        merchantBean.setCompanyName(groupName);
+        merchantBean.setAbout(jdStr == null ? "" : jdStr);
         return true;
     }
+
+    public void upLoadQiNiu(final Context context, final String key, final String filePath) {
+        String commonUploadToken = (String) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, "");
+        // 重用 uploadManager。一般地，只需要创建一个 uploadManager 对象
+        UploadManager uploadManager = new UploadManager();
+        uploadManager.put(filePath, key, commonUploadToken, new UpCompletionHandler() {
+            @Override
+            public void complete(String key, ResponseInfo info, JSONObject response) {
+            }
+        }, new UploadOptions(null, null, false,
+                new UpProgressHandler() {
+                    public void progress(String key, double percent) {
+
+                    }
+                }, null));
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                // 获取返回的图片列表
+                List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+                // 处理你自己的逻辑 ....
+                File file = new File(path.get(0));
+                Uri imgSource = Uri.fromFile(file);
+                startCropImageActivity(imgSource, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE1);
+            }
+        }
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE1) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                filePath = FileUtils.getRealFilePath(this, result.getUri());
+                Bitmap bitmap= BitmapUtils.compressBitmap(filePath,1080, 720);
+                addHead.setImageBitmap(bitmap);
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Toast.makeText(this, "Cropping failed: " + result.getError(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void startCropImageActivity(Uri imageUri,int requestCode) {
+        CropImage.activity(imageUri)
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .start(this,requestCode,false);
+    }
+
+
 }

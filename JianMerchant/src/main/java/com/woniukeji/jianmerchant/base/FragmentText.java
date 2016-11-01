@@ -16,6 +16,7 @@ public class FragmentText extends Fragment {
         TextView text = new TextView(container.getContext());
         text.setText("Fragment content");
         text.setGravity(Gravity.CENTER);
+        text.setVisibility(View.GONE);
 
         return text;
     }

@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.activity.certification.ChooseActivity;
+import com.woniukeji.jianmerchant.activity.certification.StatusActivity;
 import com.woniukeji.jianmerchant.activity.login.LoginNewActivity;
 import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.base.Constants;
@@ -132,11 +133,13 @@ public class SplashActivity extends BaseActivity {
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, user.getMerchantId());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getMerchantInfoStatus());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getPermissions());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, user.getCompanyName());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, user.getUserImage());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PAYSTATUS, user.getPayStatus());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniuToken());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PROVINCE, user.getProvince());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_CITY, user.getCity());
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_ADDRESS, user.getCompanyAddress());   if (!TextUtils.isEmpty(String.valueOf(user.getLoginId()))) {
+        SPUtils.setParam(this, Constants.LOGIN_INFO,Constants.SP_ADDRESS, user.getCompanyAddress());   if (!TextUtils.isEmpty(String.valueOf(user.getLoginId()))) {
             if (JPushInterface.isPushStopped(this.getApplicationContext())) {
                 JPushInterface.resumePush(this.getApplicationContext());
             }
@@ -156,15 +159,21 @@ public class SplashActivity extends BaseActivity {
                 }
             });
         }
+        //是否填写商家资料信息 0未填写 1 正在审核 2审核拒绝 3审核通过
         if (user.getMerchantInfoStatus()==0){
             Intent intent = new Intent(this, ChooseActivity.class);
             startActivity(intent);
-            finish();
-        }else{
+            this.finish();
+        }else if (user.getMerchantInfoStatus()==1||user.getMerchantInfoStatus()==2){
+            Intent intent1 = new Intent(this, StatusActivity.class);
+            intent1.putExtra("type",user.getMerchantInfoStatus());
+            startActivity(intent1);
+            this.finish();
+        }else {
             Intent intent1 = new Intent(this, MainActivity.class);
             intent1.putExtra("login",true);
             startActivity(intent1);
-           finish();
+            this.finish();
         }
     }
 

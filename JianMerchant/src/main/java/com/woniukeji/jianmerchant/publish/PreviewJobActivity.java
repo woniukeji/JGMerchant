@@ -222,7 +222,7 @@ public class PreviewJobActivity extends BaseActivity {
 //        tvJobsCount.setText(count);
 
          loginId = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_USERID, 0);//3
-        img = (String) SPUtils.getParam(mContext, Constants.USER_INFO, Constants.USER_IMG, "");//商家图片地址
+        img = (String) SPUtils.getParam(mContext, Constants.USER_INFO, Constants.SP_GROUP_IMG, "");//商家图片地址
         name = (String) SPUtils.getParam(mContext, Constants.USER_INFO, Constants.USER_NAME, "");//王五
         fillData();
     }

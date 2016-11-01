@@ -26,6 +26,9 @@ import rx.Observable;
 public interface HttpMethodsInterface {
     //    @GET("top250")
 //    rx.Observable<HttpResult<List<Subject>>> getTopMovie(@Query("start") int start, @Query("count") int count);
+
+
+
     @POST("RegisterServlet")
     Observable<BaseBean> register(@Query("tel") String tel, @Query("smsCode") String smsCode, @Query("password") String password);
 
@@ -41,6 +44,12 @@ public interface HttpMethodsInterface {
     @POST("AutoLoginServlet")
     Observable<BaseBean<MerchantBean>> autoLogin(@Query("tel") String tel,@Query("token") String token);
 
+
+    @POST("CerficationServlet")
+    Observable<BaseBean> Cerfication( @Query("loginId") String loginId, @Query("merchantId") String merchantId, @Query("token") String token, @Query("merchantInfo") String merchantInfo);
+
+    @POST("UpLogoServlet")
+    Observable<BaseBean> UpLoadLogo(@Query("loginId") String loginId, @Query("merchantId") String merchantId, @Query("token") String token,@Query("logoUrl") String url );
 
 
     @GET("T_Job_Area_City_List_Servlet")

@@ -39,14 +39,17 @@ public class RegionDAO {
 	public static List<RegionInfo> getProvences(){
 		SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
 		List<RegionInfo> regionInfos = new ArrayList<RegionInfo>();//String.valueOf(type)
-		Cursor cursor = db.rawQuery("select name,adcode from province",null);
+		Cursor cursor = db.rawQuery("select id,name,adcode from province",null);
 	
 		while (cursor.moveToNext()) {
 			RegionInfo regionInfo = new RegionInfo();
 			String name = cursor.getString(cursor
 					.getColumnIndex("name"));
+			int id = cursor.getInt(cursor
+					.getColumnIndex("id"));
 			String adcode = cursor.getString(cursor
 					.getColumnIndex("adcode"));
+			regionInfo.setId(id);
 			regionInfo.setName(name);
 			regionInfo.setAdcode(adcode);
 			regionInfos.add(regionInfo);

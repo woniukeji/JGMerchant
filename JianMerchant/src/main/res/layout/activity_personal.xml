@@ -38,12 +38,42 @@
 
 
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        >
+        <com.woniukeji.jianmerchant.widget.CircleImageView
+            android:id="@+id/add_head"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/add_head"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="请上传头像"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/add_head"
+            android:layout_centerHorizontal="true"
 
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray1"
+        android:layout_marginLeft="15dp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@color/white"
-        android:layout_height="45dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="40dp"
         android:paddingLeft="10dp"
         android:orientation="horizontal"
         >
@@ -75,7 +105,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@color/white"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:paddingLeft="10dp"
         android:orientation="horizontal"
         >
@@ -107,7 +137,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@color/white"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:paddingLeft="10dp"
         android:orientation="horizontal"
         >
@@ -139,7 +169,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@color/white"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:paddingLeft="10dp"
         android:orientation="horizontal"
         >
@@ -173,7 +203,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@color/white"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:paddingLeft="10dp"
         android:orientation="horizontal"
         >
@@ -208,7 +238,7 @@
     <EditText
         android:id="@+id/gd"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:background="@color/white"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
@@ -222,7 +252,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/blue_bg"

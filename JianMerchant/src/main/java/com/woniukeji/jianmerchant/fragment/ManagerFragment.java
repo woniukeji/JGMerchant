@@ -33,7 +33,7 @@ public class ManagerFragment extends BaseFragment {
     private ImageView imgShare;
     private TextView tvTitle;
     private ArrayList<CustomTabEntity> mTabEntities ;
-    private String[] mTitles = {"录取", "完成"};
+    private String[] mTitles = {"录取中", "已完成"};
     private int[] mIconUnselectIds = {
             R.mipmap.tab_guo_talk_unselect,
             R.mipmap.tab_about_me_unselect};

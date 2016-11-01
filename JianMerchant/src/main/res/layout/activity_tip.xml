@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
+   >
+    <ImageView
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center"
+        android:padding="2dp"
+        android:textColor="#666666"
+        android:src="@mipmap/picture"
+        />
+
+<Button
+    android:id="@+id/btn_iknow"
+    android:layout_width="36dp"
+    android:layout_height="36dp"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:textSize="13dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginRight="6dp"
+    android:background="@mipmap/button"
+    />
+</RelativeLayout>

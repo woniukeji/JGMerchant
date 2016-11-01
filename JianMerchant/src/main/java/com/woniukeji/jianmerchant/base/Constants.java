@@ -35,7 +35,7 @@ public class Constants {
     public static final String DELETE_JOB_MODEL= JIANGUO_USING+"T_job_Model_Delete_Servlet";//删除兼职模板
     public static final String GET_PART_JOB_PUBLISH= JIANGUO_USING+"T_job_Merchant_Id_Zhong_Servlet";//获取发布的兼职列表
 
-    public static final String POST_PART_JOB_WAGES= JIANGUO_USING+"T_wages_Insert_ChangServlet";//jeisuan
+    public static final String FEED_BACK= JIANGUO_USING+"T_opinion_Insert_Servlet";//jeisuan
     public static final String POST_PART_JOB_DOWN= JIANGUO_USING+"T_enroll_Agree_Chang_Servlet";//下架
 
 
@@ -79,6 +79,7 @@ public class Constants {
     public static final String SP_STATUS="status";
     public static final String SP_MERCHANT_STATUS="merchantInfoStatus";
     public static final String SP_PERMISSIONS="permissions";
+    public static final String SP_GROUP_NAME="companyName";
     public static final String SP_PAYSTATUS="payStatus";
     public static final String SP_WQTOKEN="qqwx_token";
 
@@ -87,7 +88,7 @@ public class Constants {
     public static final String USER_INFO = "userInfo";
     public static final String USER_NICK ="nickname";
     public static final String USER_NAME ="name";
-    public static final String USER_IMG ="name_image";
+    public static final String SP_GROUP_IMG ="name_image";
     public static final String SP_PROVINCE="province";
     public static final String SP_CITY="city";
     public static final String SP_ADDRESS="address";

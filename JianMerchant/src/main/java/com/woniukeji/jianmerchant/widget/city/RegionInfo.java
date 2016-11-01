@@ -1,7 +1,16 @@
 package com.woniukeji.jianmerchant.widget.city;
 
 public class RegionInfo {
-	
+	private int id;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	private String name;
 	private String adcode;
 	public RegionInfo() {
@@ -46,7 +55,7 @@ public class RegionInfo {
     }
 	public String getPickerViewId() {
 		//这里还可以判断文字超长截断再提供显示
-		return adcode;
+		return String.valueOf(id);
 	}
 	
 

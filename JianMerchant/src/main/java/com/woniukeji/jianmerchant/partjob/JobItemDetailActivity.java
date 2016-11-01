@@ -100,6 +100,7 @@ public class JobItemDetailActivity extends BaseActivity {
     private int jobid;
     String alike;
     BaseBean<JobDetails> jobDetailsBaseBean;
+    private int permission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -297,6 +298,10 @@ public class JobItemDetailActivity extends BaseActivity {
             btnChange.setVisibility(View.GONE);
             btnDown.setVisibility(View.GONE);
         }
+        //1是外部商家，2是个人商户，0是内部
+        if (permission!=0){
+            btnClearing.setVisibility(View.GONE);
+        }
 
         tvTitle.setText("兼职详情");
         tvMerchantName.setText(modleJob.getName());
@@ -399,6 +404,8 @@ public class JobItemDetailActivity extends BaseActivity {
         jobid = modleJob.getId();
         int merchantid = intent.getIntExtra("merchantid", 0);
         loginId = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
+        //1是外部商家，2是个人商户，0是内部
+        permission = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, 1);
         getJobs(String.valueOf(loginId), String.valueOf(jobid), String.valueOf(merchantid), alike);
 
     }

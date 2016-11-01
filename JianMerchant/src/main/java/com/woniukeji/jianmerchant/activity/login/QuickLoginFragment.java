@@ -32,6 +32,7 @@ import com.google.gson.reflect.TypeToken;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.activity.certification.ChooseActivity;
+import com.woniukeji.jianmerchant.activity.certification.StatusActivity;
 import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.MainActivity;
@@ -203,6 +204,8 @@ public class QuickLoginFragment extends BaseFragment {
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, user.getMerchantId());
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getMerchantInfoStatus());
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getPermissions());
+        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, user.getCompanyName());
+        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, user.getUserImage());
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PAYSTATUS, user.getPayStatus());
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniuToken());
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PROVINCE, user.getProvince());
@@ -228,11 +231,16 @@ public class QuickLoginFragment extends BaseFragment {
                 }
             });
         }
+        //是否填写商家资料信息 0未填写 1 正在审核 2审核拒绝 3审核通过
         if (user.getMerchantInfoStatus()==0){
             Intent intent = new Intent(getActivity(), ChooseActivity.class);
             startActivity(intent);
             getActivity().finish();
-        }else{
+        }else if (user.getMerchantInfoStatus()==1||user.getMerchantInfoStatus()==2){
+            Intent intent1 = new Intent(getActivity(), StatusActivity.class);
+            intent1.putExtra("type",user.getMerchantInfoStatus());
+            startActivity(intent1);
+        }else {
             Intent intent1 = new Intent(getActivity(), MainActivity.class);
             intent1.putExtra("login",true);
             startActivity(intent1);

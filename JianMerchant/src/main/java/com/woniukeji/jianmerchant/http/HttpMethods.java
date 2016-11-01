@@ -154,6 +154,44 @@ public class HttpMethods {
 
     }
 
+    /**
+     *审核商家信息
+     *@param token
+     *@param merchantid
+     * @param merchantBean
+     *@author invinjun
+     *created at 2016/10/21 15:27
+     */
+    public void cerfication(Subscriber<String> subscriber,String loginId, String merchantid,String token,String merchantBean) {
+        Observable<BaseBean> cityCategory = methodsInterface.Cerfication(loginId,merchantid, token,merchantBean);
+        cityCategory.map(new BaseBeanFun())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
+    /**
+     *审核商家信息
+     *@param token
+     *@param merchantid
+     * @param loginId
+     *@author invinjun
+     *created at 2016/10/21 15:27
+     */
+    public void UpLoadLogo(Subscriber<String> subscriber,String loginId, String merchantid,String token,String url) {
+        Observable<BaseBean> cityCategory = methodsInterface.UpLoadLogo(loginId,merchantid, token,url);
+        cityCategory.map(new BaseBeanFun())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
+
+
+
+
     public void getCityAndCategory(Subscriber<CityAndCategoryBean> subscriber, String only,String loginId) {
         Observable<BaseBean<CityAndCategoryBean>> cityCategory = methodsInterface.getCityCategory(only, loginId);
         cityCategory.map(new BaseBeanFun<CityAndCategoryBean>())

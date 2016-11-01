@@ -280,18 +280,46 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
+            android:name=".activity.certification.TipExampleActivity"
+            android:theme="@style/Theme.AppCompat.Dialog">
+        </activity>
+        <activity
             android:name=".activity.certification.PersonalActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name=".activity.certification.PersonalDetailActivity"
+        <activity
+            android:name=".activity.certification.PersonalDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activity.certification.MerchantActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activity.certification.MerchantDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
+        <activity android:name="com.theartofdev.edmodo.cropper.CropHeadActivity"/>
+        <activity
+            android:name=".activity.certification.MerStatusActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".widget.WebViewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".mine.AboutActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".mine.FeedBackActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name=".activity.certification.StatusActivity"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-
-            />
-        <activity android:name="com.theartofdev.edmodo.cropper.CropHeadActivity"
-
-            />
     </application>
 
 </manifest>

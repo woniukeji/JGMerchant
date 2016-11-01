@@ -98,7 +98,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_NICK,user.getT_merchant().getName()!=null?user.getT_merchant().getName():"");
         SPUtils.setParam(context,Constants.USER_INFO,Constants.SP_MERCHANT_ID,user.getT_merchant().getId());
         SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_PAY_PASS,user.getT_merchant().getPay_password());
-        SPUtils.setParam(context,Constants.USER_INFO,Constants.USER_IMG,user.getT_merchant().getName_image()!=null?user.getT_merchant().getName_image():"");
+        SPUtils.setParam(context,Constants.USER_INFO,Constants.SP_GROUP_IMG,user.getT_merchant().getName_image()!=null?user.getT_merchant().getName_image():"");
             JPushInterface.setAlias(getApplicationContext(), "jianguo"+user.getT_user_login().getId(), new TagAliasCallback() {
                 @Override
                 public void gotResult(int i, String s, Set<String> set) {
@@ -250,7 +250,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 //    @OnClick({R.id.sign_in_button, R.id.register_in_button, R.id.wechat, R.id.qq,R.id.forget_pass, R.id.quick_login})
 //    public void onClick(View view) {
-//        switch (view.getId()) {
+//        switch_url (view.getId()) {
 //            case R.id.sign_in_button:
 ////                String phone = phoneNumber.getText().toString().trim();
 ////                String pass = password.getText().toString().trim();

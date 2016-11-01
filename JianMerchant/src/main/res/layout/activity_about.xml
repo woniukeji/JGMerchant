@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_btn_bg_color"
+   >
+    <include
+        layout="@layout/app_title_bar"
+        android:id="@+id/top"
+        />
+
+    <ImageView
+        android:id="@+id/img_log"
+        android:layout_below="@+id/top"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        />
+<TextView
+    android:id="@+id/tv_version"
+    android:layout_below="@+id/img_log"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="兼果：v3.00"
+    android:textSize="14dp"
+    android:gravity="center"
+    android:layout_marginTop="5dp"
+    />
+
+
+    <LinearLayout
+        android:id="@+id/rl_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/tv_version"
+       >
+
+        <com.woniukeji.jianmerchant.widget.AutoSplitTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="       兼果商家端是企业在大学生群体中跨越中介的垂直招聘平台，同时兼果作为一个连接企业与校园，企业与学生，校园与学生，学生与学生之间共享连接平台，共享的是大学生的专业技能，空余时间以及企业的弹性用功需求。"
+            android:background="@color/white"
+            />
+
+        <com.woniukeji.jianmerchant.widget.AutoSplitTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:textSize="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="       激发大学生在空余时间的实践创造力，促进自由职业的发展，改善企业弹性用工需求的方式。为更多的大学生创造自身价值，为企业提供多元化灵活用工的最优解决方案。"
+            android:background="@color/white"
+            />
+        <com.woniukeji.jianmerchant.widget.AutoSplitTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:textSize="14dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:text="       目前兼果已在北京，西安，杭州，武汉，三亚，海口等6个城市已开通线下服务公司，我们计划在全国开设200个城市为更多企业提供兼职招聘服务并不断努力的创新创造，优化体验，为企业服务！"
+            android:background="@color/white"
+            />
+        <com.woniukeji.jianmerchant.widget.AutoSplitTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="14dp"
+            android:layout_marginTop="10dp"
+            android:text="兼果，给你想要的！"
+            android:background="@color/white"
+            />
+    </LinearLayout>
+</RelativeLayout>

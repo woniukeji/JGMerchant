@@ -36,13 +36,13 @@ public class ChooseActivity extends BaseActivity {
 
     @Override
     public void initListeners() {
-        imgEnterprise.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(ChooseActivity.this,PersonalActivity.class);
-                startActivity(intent);
-            };
-        });
+//        imgEnterprise.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent= new Intent(ChooseActivity.this,PersonalActivity.class);
+//                startActivity(intent);
+//            };
+//        });
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ChooseActivity extends BaseActivity {
                 startActivity(new Intent(this,PersonalActivity.class));
                 break;
             case R.id.img_enterprise:
-                startActivity(new Intent(this,PersonalActivity.class));
+                startActivity(new Intent(this,MerchantActivity.class));
                 break;
         }
     }

@@ -2,10 +2,12 @@ package com.woniukeji.jianmerchant.mine;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,70 +21,127 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.Gson;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UpProgressHandler;
+import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.UploadOptions;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 import com.woniukeji.jianmerchant.R;
-import com.woniukeji.jianmerchant.activity.DemoActivity;
+import com.woniukeji.jianmerchant.activity.certification.PersonalActivity;
+import com.woniukeji.jianmerchant.affordwages.Mdialog;
 import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.User;
+import com.woniukeji.jianmerchant.eventbus.AvatarEvent;
+import com.woniukeji.jianmerchant.eventbus.PayPassWordEvent;
+import com.woniukeji.jianmerchant.http.HttpMethods;
+import com.woniukeji.jianmerchant.http.ProgressSubscriber;
+import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.login.LoginActivity;
+import com.woniukeji.jianmerchant.utils.BitmapUtils;
+import com.woniukeji.jianmerchant.utils.FileUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
+import com.woniukeji.jianmerchant.widget.CircleImageView;
+import com.woniukeji.jianmerchant.widget.UpDialog;
 
+import org.json.JSONObject;
+
+import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.greenrobot.event.EventBus;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 public class MineFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
 
-    private int MSG_USER_SUCCESS = 0;
-    private int MSG_USER_FAIL = 1;
-    private int MSG_PHONE_SUCCESS = 2;
-    private int MSG_REGISTER_SUCCESS = 3;
+    @BindView(R.id.iv_header_bg) ImageView ivHeaderBg;
+    @BindView(R.id.mine_shezhi) ImageView mineShezhi;
+    @BindView(R.id.avatar) CircleImageView avatar;
+    @BindView(R.id.user_name) TextView userName;
+    @BindView(R.id.department) TextView department;
+    @BindView(R.id.total_wage_number) TextView totalWageNumber;
+    @BindView(R.id.tv_total) TextView tvTotal;
+    @BindView(R.id.total_people_number) TextView totalPeopleNumber;
+    @BindView(R.id.tv_people) TextView tvPeople;
+    @BindView(R.id.iv_past) ImageView ivPast;
+    @BindView(R.id.iv_past_right) ImageView ivPastRight;
+    @BindView(R.id.rl_custom) RelativeLayout rlCustom;
+    @BindView(R.id.iv_feedback) ImageView ivFeedback;
+    @BindView(R.id.iv_rck_right) ImageView ivRckRight;
+    @BindView(R.id.rl_feedback) RelativeLayout rlFeedback;
+    @BindView(R.id.iv_shift) ImageView ivShift;
+    @BindView(R.id.spinner_shift) Spinner spinnerShift;
+    @BindView(R.id.rl_shift) RelativeLayout rlShift;
+    @BindView(R.id.iv_logout) ImageView ivLogout;
+    @BindView(R.id.iv_logout_right) ImageView ivLogoutRight;
+    @BindView(R.id.rl_down_url) RelativeLayout rlDownUrl;
+    @BindView(R.id.iv_ing) ImageView ivIng;
+    @BindView(R.id.iv_ing_right) ImageView ivIngRight;
+    @BindView(R.id.about) RelativeLayout about;
+    @BindView(R.id.rl_logout) Button rlLogout;
+    private SubscriberOnNextListener<String> baseBeanSubscriberOnNextListener;
     private Handler mHandler = new Myhandler(getActivity());
     private Context context = getActivity();
     private View view;
     private Button btnLogout;
-    private RelativeLayout rlLogout;
     private String avatarUrl;
-    private SimpleDraweeView avatar;
-    private TextView userName ;
-    private TextView department;
-    private RelativeLayout rlShift;
     private Spinner shift;
     private ArrayAdapter<CharSequence> adapter;
     private ImageView mine_shezhi;
+    private String filePath;
+    private int merchantId;
+    private int loginId;
+    private String token;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        view = inflater.inflate(R.layout.activity_mine, container, false);
         view = inflater.inflate(R.layout.activity_mine_new, container, false);
+        ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         initView();
         initListener();
         return view;
     }
 
     private void initListener() {
-//        btnLogout.setOnClickListener(this);
-        rlLogout.setOnClickListener(this);
+        merchantId = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
+        loginId = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID, 0);
+        token = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_WQTOKEN, "");
+        baseBeanSubscriberOnNextListener=new SubscriberOnNextListener<String>() {
+            @Override
+            public void onNext(String s) {
 
+            }
+        };
     }
 
     private void initView() {
 //        btnLogout = (Button) view.findViewById(R.id.btn_logout);
-        rlShift = (RelativeLayout) view.findViewById(R.id.rl_shift);
-        rlLogout = (RelativeLayout) view.findViewById(R.id.rl_logout);
-        userName = (TextView) view.findViewById(R.id.user_name);
-        mine_shezhi= (ImageView) view.findViewById(R.id.mine_shezhi);
-        userName.setText((String)SPUtils.getParam(getActivity(), Constants.USER_INFO, "nickname", ""));
-        department = (TextView) view.findViewById(R.id.department);
+        mine_shezhi = (ImageView) view.findViewById(R.id.mine_shezhi);
+        userName.setText((String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, ""));
         //暂无数据
-        avatarUrl = (String) SPUtils.getParam(getActivity(), Constants.USER_INFO, "name_image", "");
-        avatar = (SimpleDraweeView) view.findViewById(R.id.avatar);
-        Uri uri = Uri.parse(avatarUrl);
-        avatar.setImageURI(uri);
+        avatarUrl = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, "");
+        Picasso.with(getActivity()).load(avatarUrl)
+                .placeholder(R.mipmap.icon_head_defult)
+                .error(R.mipmap.icon_head_defult)
+                .into(avatar);
 //        shift = (Spinner) view.findViewById(R.id.spinner_shift);
 //        adapter = ArrayAdapter.createFromResource(getActivity(),
 //                R.array.shift_array, android.R.layout.simple_spinner_item);
@@ -117,46 +176,25 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_logout:
-                SPUtils.deleteParams(getActivity());
-                startActivity(new Intent(getActivity(),LoginActivity.class));
-                getActivity().finish();
-                break;
-            case R.id.rl_logout:
-                SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(getActivity());
-                sweetAlertDialog.setCancelable(false);
-                sweetAlertDialog
-                        .setTitleText("确定要退出吗？")
-                        .setConfirmText("确定")
-                        .setCancelText("取消")
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                SPUtils.deleteParams(getActivity());
-                                startActivity(new Intent(getActivity(),LoginActivity.class));
-                                getActivity().finish();
-                            }
-                        })
-                        .show();
+    /**
+     * 当确认结算并且密码输入正确之后会走这里
+     */
+    public void onEventMainThread(AvatarEvent event) {
+        if (event.getBitmap()!=null) {
+            avatar.setImageBitmap(event.getBitmap());
+            HttpMethods.getInstance().UpLoadLogo(new ProgressSubscriber<String>(baseBeanSubscriberOnNextListener,getActivity()), String.valueOf(loginId),String.valueOf(merchantId),token,event.getUrl());
 
-                break;
-            case R.id.rl_shift:
-
-                break;
         }
     }
 
 
-    public void  performExit() {
+    public void performExit() {
 //        SPUtils.deleteParams(getActivity());
 //        getActivity().finish();
 //        android.os.Process.killProcess(android.os.Process.myPid());
 //        System.exit(0);
         SPUtils.deleteParams(getActivity());
-        startActivity(new Intent(getActivity(),LoginActivity.class));
+        startActivity(new Intent(getActivity(), LoginActivity.class));
         getActivity().finish();
     }
 
@@ -189,6 +227,73 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @OnClick({R.id.avatar,R.id.rl_down_url, R.id.rl_custom, R.id.iv_feedback, R.id.iv_rck_right, R.id.rl_feedback, R.id.about, R.id.rl_logout})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.avatar:
+                MultiImageSelectorActivity.startSelect(getActivity(),0,1,0);
+                break;
+            case R.id.rl_custom:
+                Mdialog mdialog=new Mdialog(getActivity(),"01053350021");
+                mdialog.show();
+                break;
+            case R.id.iv_feedback:
+
+                break;
+            case R.id.iv_rck_right:
+                break;
+            case R.id.rl_feedback:
+                startActivity(new Intent(getActivity(),FeedBackActivity.class));
+                break;
+            case R.id.rl_down_url:
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("http://a.app.qq.com/o/simple.jsp?pkgname=com.woniukeji.jianguo");
+                intent.setData(content_url);
+                startActivity(intent);
+//                SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(getActivity());
+//                sweetAlertDialog.setCancelable(false);
+//                sweetAlertDialog
+//                        .setTitleText("确定要下载兼果用户端？")
+//                        .setConfirmText("确定")
+//                        .setCancelText("取消")
+//                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                            @Override
+//                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                                UpDialog upDataDialog = new UpDialog(getActivity(),"http://v3.jianguojob.com/jianguo.apk");
+//                                upDataDialog.setCanceledOnTouchOutside(false);
+//                                upDataDialog.setCanceledOnTouchOutside(false);
+//                                upDataDialog.show();
+//                            }
+//                        })
+//                        .show();
+//                apkurl = (String) SPUtils.getParam(SettingActivity.this, Constants.LOGIN_INFO, Constants.LOGIN_APK_URL, "");
+
+                break;
+            case R.id.about:
+                startActivity(new Intent(getActivity(),AboutActivity.class));
+                break;
+            case R.id.rl_logout:
+                SweetAlertDialog sweetAlertDialog1 = new SweetAlertDialog(getActivity());
+                sweetAlertDialog1.setCancelable(false);
+                sweetAlertDialog1
+                        .setTitleText("确定要退出吗？")
+                        .setConfirmText("确定")
+                        .setCancelText("取消")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                SPUtils.deleteParams(getActivity());
+                                startActivity(new Intent(getActivity(), LoginActivity.class));
+                                sweetAlertDialog.dismiss();
+                            }
+                        })
+                        .show();
+
+                break;
+        }
     }
 
 
@@ -224,7 +329,26 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
+    public void upLoadQiNiu(final Context context, final String key, final String filePath) {
+        String commonUploadToken = (String) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, "");
+        // 重用 uploadManager。一般地，只需要创建一个 uploadManager 对象
+        UploadManager uploadManager = new UploadManager();
+        uploadManager.put(filePath, key, commonUploadToken, new UpCompletionHandler() {
+            @Override
+            public void complete(String key, ResponseInfo info, JSONObject response) {
+            }
+        }, new UploadOptions(null, null, false,
+                new UpProgressHandler() {
+                    public void progress(String key, double percent) {
 
+                    }
+                }, null));
 
+    }
 
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }
