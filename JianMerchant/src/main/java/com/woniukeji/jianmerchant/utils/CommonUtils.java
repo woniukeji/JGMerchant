@@ -1,5 +1,9 @@
 package com.woniukeji.jianmerchant.utils;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -88,5 +92,21 @@ public class CommonUtils {
             e.printStackTrace();
         }
 
+    }
+    /**
+     * 获取版本号
+     *
+     * @return 当前应用的版本号
+     */
+    public static int getVersion(Context context) {
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            int version = info.versionCode;
+            return version;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

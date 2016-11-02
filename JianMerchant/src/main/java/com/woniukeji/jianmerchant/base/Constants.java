@@ -69,7 +69,7 @@ public class Constants {
     public static final String GET_PAY_LIST= JIANGUO_USING+"T_enroll_Job_User_Servlet";//获取发放工资用用户列表
     public static final String POST_WAGES= JIANGUO_USING+"T_wages_Insert_Servlet";//工资结算接口
     public static final String POST_PAY_PASSWORD= JIANGUO_USING+"T_mechant_pay_Update_Servlet";//结算密码
-    public static final String GET_CITY= JIANGUO_USING+"T_city_Select_Servlet";//城市和轮播图
+    public static final String CHECK_VERSION= JIANGUO_USING+"v_update";//城市和轮播图
     public static final String LOGIN_INFO = "loginInfo";
     public static final String SP_TYPE="type";//0代表手机登录 1微信 2未登录
     public static final String SP_TEL="tel";

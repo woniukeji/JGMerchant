@@ -109,7 +109,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
                 break;
             case R.id.btn_pay_wages:
                 if (checkStatus()) {
-                    Mdialog mdialog = new Mdialog(mContext);
+                    PayDialog mdialog = new PayDialog(mContext);
                     mdialog.show();
                 }
                 break;

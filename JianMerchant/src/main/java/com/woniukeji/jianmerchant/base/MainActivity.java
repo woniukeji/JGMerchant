@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UpProgressHandler;
@@ -28,6 +31,8 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.adapter.MyPagerAdapter;
+import com.woniukeji.jianmerchant.entity.BaseBean;
+import com.woniukeji.jianmerchant.entity.JobDetails;
 import com.woniukeji.jianmerchant.entity.TabEntity;
 import com.woniukeji.jianmerchant.eventbus.AvatarEvent;
 import com.woniukeji.jianmerchant.fragment.FinancialManagementFragment;
@@ -36,12 +41,17 @@ import com.woniukeji.jianmerchant.fragment.PublishFragment;
 import com.woniukeji.jianmerchant.mine.MineFragment;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 import com.woniukeji.jianmerchant.utils.BitmapUtils;
+import com.woniukeji.jianmerchant.utils.CommonUtils;
+import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.FileUtils;
 import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.MD5Coder;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.widget.NoScrollViewPager;
 import com.woniukeji.jianmerchant.widget.PublishPopupWindow;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
 
@@ -54,6 +64,8 @@ import cn.leancloud.chatkit.event.LCIMIMTypeMessageEvent;
 import cn.leancloud.chatkit.event.LCIMUnReadCountEvent;
 import de.greenrobot.event.EventBus;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class MainActivity extends BaseActivity {
 

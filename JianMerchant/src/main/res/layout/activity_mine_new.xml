@@ -19,7 +19,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:textColor="@color/white"
                 android:text="我的"
                 />
@@ -291,7 +291,42 @@
                     android:layout_height="match_parent"></Spinner>
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/rl_check"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <ImageView
+                    android:id="@+id/iv_check"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:src="@mipmap/edition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/iv_check"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="14dp"
+                    android:textColor="#666666"
+                    android:text="检查更新"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/go"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
+            </RelativeLayout>
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/gray1"
+                android:layout_width="match_parent"
+                android:layout_height="1px" />
             <RelativeLayout
                 android:id="@+id/rl_down_url"
                 android:clickable="true"
@@ -364,7 +399,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/blue_bg"

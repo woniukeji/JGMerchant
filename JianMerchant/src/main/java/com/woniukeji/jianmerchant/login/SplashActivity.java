@@ -140,6 +140,7 @@ public class SplashActivity extends BaseActivity {
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PROVINCE, user.getProvince());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_CITY, user.getCity());
         SPUtils.setParam(this, Constants.LOGIN_INFO,Constants.SP_ADDRESS, user.getCompanyAddress());   if (!TextUtils.isEmpty(String.valueOf(user.getLoginId()))) {
+            SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.USER_PAY_PASS, user.getPayPassword());
             if (JPushInterface.isPushStopped(this.getApplicationContext())) {
                 JPushInterface.resumePush(this.getApplicationContext());
             }

@@ -211,6 +211,7 @@ public class PasswordLoginFragment extends BaseFragment {
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PROVINCE, user.getProvince());
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_CITY, user.getCity());
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_ADDRESS, user.getCompanyAddress());
+        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.USER_PAY_PASS, user.getPayPassword());
         if (!TextUtils.isEmpty(String.valueOf(user.getLoginId()))) {
             if (JPushInterface.isPushStopped(getActivity().getApplicationContext())) {
                 JPushInterface.resumePush(getActivity().getApplicationContext());

@@ -1,5 +1,7 @@
 package com.woniukeji.jianmerchant.partjob;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -7,20 +9,33 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.sdsmdg.tastytoast.TastyToast;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
+import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.FragmentText;
+import com.woniukeji.jianmerchant.base.MainActivity;
+import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.TabEntity;
+import com.woniukeji.jianmerchant.entity.User;
+import com.woniukeji.jianmerchant.login.LoginActivity;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
+import com.woniukeji.jianmerchant.utils.CommonUtils;
+import com.woniukeji.jianmerchant.widget.UpDialog;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import okhttp3.Call;
 
 public class PartJobManagerActivity extends BaseActivity {
 
@@ -38,6 +53,36 @@ public class PartJobManagerActivity extends BaseActivity {
             R.mipmap.tab_about_me_select};
     private ViewPagerAdapter adapter;
 
+    private Handler handler = new Handler() {
+        // 处理子线程给我们发送的消息。
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    final String url= (String) msg.obj;
+                    new SweetAlertDialog(PartJobManagerActivity.this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("检测到新版本，是否更新？")
+                            .setConfirmText("确定")
+                            .setCancelText("取消")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                    UpDialog upDataDialog = new UpDialog(PartJobManagerActivity.this,url);
+                                    upDataDialog.setCanceledOnTouchOutside(false);
+                                    upDataDialog.setCanceledOnTouchOutside(false);
+                                    upDataDialog.show();
+                                }
+                            }).show();
+                    break;
+                case 1:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    };
 
     public int mType=1;//用于判断是录取还是完成的fragment（同一个对象实例化，需要区分）
     @Override
@@ -86,12 +131,14 @@ public class PartJobManagerActivity extends BaseActivity {
 
     @Override
     public void initListeners() {
+
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
     }
 
     @Override
@@ -137,4 +184,5 @@ public class PartJobManagerActivity extends BaseActivity {
             return 2;
         }
     }
+
 }

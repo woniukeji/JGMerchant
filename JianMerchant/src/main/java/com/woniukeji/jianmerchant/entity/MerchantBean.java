@@ -39,7 +39,15 @@ public class MerchantBean implements Serializable{
         private String bussinessImg;
         private String about;
          private String apkurl;
+    private String payPassword;
 
+    public String getPayPassword() {
+        return payPassword;
+    }
+
+    public void setPayPassword(String payPassword) {
+        this.payPassword = payPassword;
+    }
     public String getBussinessNum() {
         return bussinessNum;
     }

@@ -98,7 +98,9 @@ public class PersonalDetailActivity extends BaseActivity {
             @Override
             public void onNext(String s) {
                 TastyToast.makeText(PersonalDetailActivity.this,"审核信息提交成功",TastyToast.LENGTH_SHORT,TastyToast.SUCCESS);
-                startActivity(new Intent(PersonalDetailActivity.this, StatusActivity.class));
+                Intent intent1 = new Intent(PersonalDetailActivity.this, StatusActivity.class);
+                intent1.putExtra("type",1);
+                startActivity(intent1);
                 finish();
             }
         };

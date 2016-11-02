@@ -2,12 +2,10 @@ package com.woniukeji.jianmerchant.mine;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,43 +18,36 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UpProgressHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.qiniu.android.storage.UploadOptions;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 import com.woniukeji.jianmerchant.R;
-import com.woniukeji.jianmerchant.activity.certification.PersonalActivity;
-import com.woniukeji.jianmerchant.affordwages.Mdialog;
+import com.woniukeji.jianmerchant.widget.Mdialog;
 import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.User;
 import com.woniukeji.jianmerchant.eventbus.AvatarEvent;
-import com.woniukeji.jianmerchant.eventbus.PayPassWordEvent;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.login.LoginActivity;
-import com.woniukeji.jianmerchant.utils.BitmapUtils;
-import com.woniukeji.jianmerchant.utils.FileUtils;
+import com.woniukeji.jianmerchant.utils.CommonUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.widget.CircleImageView;
 import com.woniukeji.jianmerchant.widget.UpDialog;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
 
-import java.io.File;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -65,6 +56,7 @@ import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
+import okhttp3.Call;
 
 public class MineFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
@@ -93,6 +85,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     @BindView(R.id.iv_ing) ImageView ivIng;
     @BindView(R.id.iv_ing_right) ImageView ivIngRight;
     @BindView(R.id.about) RelativeLayout about;
+    @BindView(R.id.rl_check) RelativeLayout reCheck;
     @BindView(R.id.rl_logout) Button rlLogout;
     private SubscriberOnNextListener<String> baseBeanSubscriberOnNextListener;
     private Handler mHandler = new Myhandler(getActivity());
@@ -108,7 +101,36 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private int loginId;
     private String token;
 
+    private Handler handler = new Handler() {
+        // 处理子线程给我们发送的消息。
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    final String url= (String) msg.obj;
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("检测到新版本，是否更新？")
+                            .setConfirmText("确定")
+                            .setCancelText("取消")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                    UpDialog upDataDialog = new UpDialog(getActivity(),url);
+                                    upDataDialog.setCanceledOnTouchOutside(false);
+                                    upDataDialog.setCanceledOnTouchOutside(false);
+                                    upDataDialog.show();
+                                }
+                            }).show();
+                    break;
+                case 1:
+                    break;
+                default:
+                    break;
+            }
+        }
 
+    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        view = inflater.inflate(R.layout.activity_mine, container, false);
@@ -121,6 +143,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     private void initListener() {
+
         merchantId = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
         loginId = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID, 0);
         token = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_WQTOKEN, "");
@@ -229,7 +252,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     }
 
-    @OnClick({R.id.avatar,R.id.rl_down_url, R.id.rl_custom, R.id.iv_feedback, R.id.iv_rck_right, R.id.rl_feedback, R.id.about, R.id.rl_logout})
+    @OnClick({R.id.avatar,R.id.rl_check,R.id.rl_down_url, R.id.rl_custom, R.id.iv_feedback, R.id.iv_rck_right, R.id.rl_feedback, R.id.about, R.id.rl_logout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.avatar:
@@ -242,7 +265,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
             case R.id.iv_feedback:
 
                 break;
-            case R.id.iv_rck_right:
+            case R.id.rl_check:
+                checkVersion(CommonUtils.getVersion(getActivity()));
                 break;
             case R.id.rl_feedback:
                 startActivity(new Intent(getActivity(),FeedBackActivity.class));
@@ -350,5 +374,42 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+    /**
+     * getInfo
+     * @param version
+     */
+    public void checkVersion(int version) {
+        OkHttpUtils
+                .get()
+                .url(Constants.CHECK_VERSION)
+                .addParams("v", String.valueOf(version))
+                .build()
+                .connTimeOut(80000)
+                .readTimeOut(90000)
+                .writeTimeOut(90000)
+                .execute(new StringCallback() {
+                             @Override
+                             public void onError(Call call, Exception e, int id) {
+
+                             }
+
+                             @Override
+                             public void onResponse(String response, int id) {
+                                 Gson gson=new Gson();
+                                 Map<String, String> map = gson.fromJson(response, new TypeToken<Map<String, String>>() {}.getType());
+                                 if (!map.get("url").equals("")){
+                                     Message message=new Message();
+                                     message.what=0;
+                                     message.obj=map.get("url");
+                                     handler.sendMessage(message);
+                                 }else {
+                                     Message message=new Message();
+                                     message.what=1;
+                                     handler.sendMessage(message);
+                                 }
+                             }
+                         }
+                );
     }
 }

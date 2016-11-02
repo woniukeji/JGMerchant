@@ -155,6 +155,7 @@ public class UpDialog extends Dialog {
         intent.setAction(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(file),
                 "application/vnd.android.package-archive");
+        dismiss();
         context.startActivity(intent);
     }
 

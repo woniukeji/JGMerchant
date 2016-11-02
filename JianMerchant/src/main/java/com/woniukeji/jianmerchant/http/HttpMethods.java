@@ -11,6 +11,7 @@ import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.entity.SmsCode;
 import com.woniukeji.jianmerchant.entity.User;
+import com.woniukeji.jianmerchant.jpush.PushMessage;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 
 import java.util.List;
@@ -75,6 +76,22 @@ public class HttpMethods {
             return baseBean.getData();
         }
 
+    }
+    /**
+     *推送信息获取
+     *@param
+     *@param
+     *@author invinjun
+     *created at 2016/7/26 16:46
+     */
+    public void getPush(Subscriber<PushMessage> subscriber, String loginid){
+        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+        methodsInterface.getPush(only,loginid)
+                .map(new BaseBeanFun())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
     /**
     *商家注册

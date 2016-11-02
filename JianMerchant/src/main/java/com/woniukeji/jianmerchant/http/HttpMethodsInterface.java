@@ -11,6 +11,7 @@ import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.entity.SmsCode;
 import com.woniukeji.jianmerchant.entity.User;
+import com.woniukeji.jianmerchant.jpush.PushMessage;
 
 import java.util.List;
 
@@ -27,6 +28,13 @@ public interface HttpMethodsInterface {
     //    @GET("top250")
 //    rx.Observable<HttpResult<List<Subject>>> getTopMovie(@Query("start") int start, @Query("count") int count);
 
+    /**
+     *查询推送记录接口
+     *@author invinjun
+     *created at 2016/7/26 16:44
+     */
+    @GET("T_push_List_Servlet")
+    Observable<BaseBean<PushMessage>> getPush(@Query("only") String only, @Query("login_id") String login_id);
 
 
     @POST("RegisterServlet")
@@ -43,7 +51,6 @@ public interface HttpMethodsInterface {
 
     @POST("AutoLoginServlet")
     Observable<BaseBean<MerchantBean>> autoLogin(@Query("tel") String tel,@Query("token") String token);
-
 
     @POST("CerficationServlet")
     Observable<BaseBean> Cerfication( @Query("loginId") String loginId, @Query("merchantId") String merchantId, @Query("token") String token, @Query("merchantInfo") String merchantInfo);

@@ -320,6 +320,10 @@
         <activity android:name=".activity.certification.StatusActivity"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity android:name=".jpush.PushMessageActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
     </application>
 
 </manifest>
