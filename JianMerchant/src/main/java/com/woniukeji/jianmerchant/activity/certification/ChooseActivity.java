@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
+import com.woniukeji.jianmerchant.utils.ActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,7 +53,7 @@ public class ChooseActivity extends BaseActivity {
 
     @Override
     public void addActivity() {
-
+        ActivityManager.getActivityManager().addActivity(this);
     }
 
 

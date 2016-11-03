@@ -32,6 +32,7 @@ import com.woniukeji.jianmerchant.entity.MerchantBean;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
+import com.woniukeji.jianmerchant.utils.ActivityManager;
 import com.woniukeji.jianmerchant.utils.BitmapUtils;
 import com.woniukeji.jianmerchant.utils.EditCheckUtil;
 import com.woniukeji.jianmerchant.utils.FileUtils;
@@ -116,7 +117,7 @@ public class PersonalDetailActivity extends BaseActivity {
 
     @Override
     public void addActivity() {
-
+        ActivityManager.getActivityManager().addActivity(this);
     }
 
 

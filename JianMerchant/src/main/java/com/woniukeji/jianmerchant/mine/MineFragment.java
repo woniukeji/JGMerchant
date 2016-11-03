@@ -27,6 +27,7 @@ import com.qiniu.android.storage.UploadManager;
 import com.qiniu.android.storage.UploadOptions;
 import com.squareup.picasso.Picasso;
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.activity.login.LoginNewActivity;
 import com.woniukeji.jianmerchant.widget.Mdialog;
 import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
@@ -310,8 +311,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                             @Override
                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                 SPUtils.deleteParams(getActivity());
-                                startActivity(new Intent(getActivity(), LoginActivity.class));
+                                startActivity(new Intent(getActivity(), LoginNewActivity.class));
                                 sweetAlertDialog.dismiss();
+                                getActivity().finish();
                             }
                         })
                         .show();

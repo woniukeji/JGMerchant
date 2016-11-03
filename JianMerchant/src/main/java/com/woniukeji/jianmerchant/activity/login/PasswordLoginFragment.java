@@ -241,6 +241,7 @@ public class PasswordLoginFragment extends BaseFragment {
             Intent intent1 = new Intent(getActivity(), StatusActivity.class);
             intent1.putExtra("type",user.getMerchantInfoStatus());
             startActivity(intent1);
+            getActivity().finish();
         }else {
             Intent intent1 = new Intent(getActivity(), MainActivity.class);
             intent1.putExtra("login",true);
