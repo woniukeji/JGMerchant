@@ -62,7 +62,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     TextView nextPage;
     //设置此fragment的参数，创建新兼职，历史纪录，模板
     private String type;
-    private List<RegionBean> dataSetRegion = Arrays.asList(new RegionBean("全国", "0"), new RegionBean("三亚", "0899"), new RegionBean("海口", "0898"), new RegionBean("北京", "010"), new RegionBean("西安", "029"), new RegionBean("杭州", "0571"), new RegionBean("武汉", "027"));
+    private List<RegionBean> dataSetRegion = Arrays.asList(new RegionBean("三亚", "0899"), new RegionBean("海口", "0898"), new RegionBean("北京", "010"), new RegionBean("西安", "029"), new RegionBean("杭州", "0571"), new RegionBean("武汉", "027"));
     private List<TypeBean> dataSetType = Arrays.asList(new TypeBean("短期", 0), new TypeBean("长期", 1), new TypeBean("实习生", 2), new TypeBean("兼职旅行", 3));
     BaseBean<List<RegionBean>> regionBaseBean = new BaseBean<>();
     BaseBean<List<TypeBean>> typeBaseBean = new BaseBean<>();

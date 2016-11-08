@@ -169,6 +169,7 @@ public class QuickLoginFragment extends BaseFragment {
             @Override
             public void onNext(MerchantBean s) {
                 saveToSP(s);
+                SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_TYPE, 2);
             }
         };
         smsSubscriberOnNextListener=new SubscriberOnNextListener<String>() {
@@ -268,7 +269,7 @@ public class QuickLoginFragment extends BaseFragment {
                 boolean isOK = phone.length() == 11;
                 if (isOK) {
                     time.start();
-                    HttpMethods.getInstance().sms(new BackgroundSubscriber<String>(smsSubscriberOnNextListener,getActivity()),phone,"1");
+                    HttpMethods.getInstance().sms(new BackgroundSubscriber<String>(smsSubscriberOnNextListener,getActivity()),phone,"");
 
                 } else {
                     Toast.makeText(getActivity(), "请输入正确的手机号", Toast.LENGTH_SHORT).show();

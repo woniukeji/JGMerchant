@@ -89,11 +89,13 @@ public class PublishPopupWindow extends PopupWindow implements OnClickListener {
             case R.id.img_buss_icon:
             Intent intent = new Intent(context, PublishActivity.class);
              context.startActivity(intent);
+                dismiss();
                 break;
             case R.id.img_jianguo_icon:
                 Intent intent1 = new Intent(context, WebViewActivity.class);
                 intent1.putExtra("url", "https://jinshuju.net/f/TboSOV");
                 context.startActivity(intent1);
+                dismiss();
                 break;
             case R.id.img_dismiss:
               dismiss();

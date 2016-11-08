@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -168,11 +169,14 @@ public class PersonalActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.add_head, R.id.btn_next})
+    @OnClick({R.id.add_head, R.id.img_back,R.id.btn_next})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.add_head:
                 MultiImageSelectorActivity.startSelect(PersonalActivity.this,0,1,0);
+                break;
+            case R.id.img_back:
+                finish();
                 break;
             case R.id.btn_next:
                 if (checkInfo()) {
@@ -274,5 +278,18 @@ public class PersonalActivity extends BaseActivity {
                 .start(this,requestCode,false);
     }
 
-
+//如果城市选择器弹出式 按返回键则退出选择器 否则退出界面
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && KeyEvent.KEYCODE_BACK == keyCode) {
+            long currentTime = System.currentTimeMillis();
+            if (pvOptions.isShowing()){
+                pvOptions.dismiss();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

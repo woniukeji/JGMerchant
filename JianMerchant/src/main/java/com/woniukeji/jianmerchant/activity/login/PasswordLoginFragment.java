@@ -168,6 +168,7 @@ public class PasswordLoginFragment extends BaseFragment {
          @Override
          public void onNext(MerchantBean merchantBean) {
              saveToSP(merchantBean);
+             SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_TYPE, 2);
          }
      };
     }

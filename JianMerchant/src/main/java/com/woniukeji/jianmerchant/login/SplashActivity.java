@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.activity.certification.ChooseActivity;
 import com.woniukeji.jianmerchant.activity.certification.StatusActivity;
+import com.woniukeji.jianmerchant.activity.login.LeadActivity;
 import com.woniukeji.jianmerchant.activity.login.LoginNewActivity;
 import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.base.Constants;
@@ -69,9 +70,7 @@ public class SplashActivity extends BaseActivity {
                 case 0:
                     BaseBean<MerchantBean> merchantBean = (BaseBean<MerchantBean>) msg.obj;
                     splashActivity.saveToSP(merchantBean.getData());
-//                    Intent intent = new Intent(splashActivity, MainActivity.class);
-//                    splashActivity.startActivity(intent);
-//                    splashActivity.finish();
+                    SPUtils.setParam(splashActivity, Constants.LOGIN_INFO, Constants.SP_TYPE, 2);
                     break;
                 case 1:
                     splashActivity.startActivity(new Intent(splashActivity, LoginNewActivity.class));
@@ -210,9 +209,13 @@ public class SplashActivity extends BaseActivity {
      * 根据保存的登陆信息 跳转不同界面
      */
     private void chooseActivity() {
-        int loginType = (int) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
+        int loginType = (int) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_TYPE, 0);
 
-        if (loginType==0){
+        if (loginType==0) {
+            SPUtils.setParam(context, Constants.LOGIN_INFO, Constants.SP_TYPE, 1);
+            startActivity(new Intent(context, LeadActivity.class));
+            finish();
+        }else if(loginType==1){
             startActivity(new Intent(context, LoginNewActivity.class));
             finish();
         }else {
@@ -262,7 +265,6 @@ public class SplashActivity extends BaseActivity {
                         @Override
                         public void onResponse(BaseBean<MerchantBean> response, int id) {
                             if (response.getCode().equals("200")) {
-                                SPUtils.setParam(context, Constants.LOGIN_INFO, Constants.SP_TYPE, "0");
                                 Message message = new Message();
                                 message.obj = response;
                                 message.what = MSG_USER_SUCCESS;

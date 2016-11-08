@@ -10,6 +10,7 @@ import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.entity.SmsCode;
+import com.woniukeji.jianmerchant.entity.Status;
 import com.woniukeji.jianmerchant.entity.User;
 import com.woniukeji.jianmerchant.jpush.PushMessage;
 
@@ -36,6 +37,8 @@ public interface HttpMethodsInterface {
     @GET("T_push_List_Servlet")
     Observable<BaseBean<PushMessage>> getPush(@Query("only") String only, @Query("login_id") String login_id);
 
+    @POST("GetStatusServlet")
+    Observable<BaseBean<Status>> getStatus(@Query("merchantId") String merchantId);
 
     @POST("RegisterServlet")
     Observable<BaseBean> register(@Query("tel") String tel, @Query("smsCode") String smsCode, @Query("password") String password);

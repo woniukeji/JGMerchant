@@ -71,7 +71,7 @@ public class Constants {
     public static final String POST_PAY_PASSWORD= JIANGUO_USING+"T_mechant_pay_Update_Servlet";//结算密码
     public static final String CHECK_VERSION= JIANGUO_USING+"v_update";//城市和轮播图
     public static final String LOGIN_INFO = "loginInfo";
-    public static final String SP_TYPE="type";//0代表手机登录 1微信 2未登录
+    public static final String SP_TYPE="type";//0代表第一次登陆 1代表已经登陆过跳转主页面 2未登录跳转登陆界面
     public static final String SP_TEL="tel";
     public static final String SP_PASSWORD="password";
     public static final String SP_USERID="id";

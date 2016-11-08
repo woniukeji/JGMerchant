@@ -356,7 +356,7 @@ public class RegistActivity extends BaseActivity {
                         @Override
                         public void onResponse(BaseBean response,int id) {
                             if (response.getCode().equals("200")){
-                                SPUtils.setParam(context,Constants.LOGIN_INFO,Constants.SP_TYPE,"0");
+                                SPUtils.setParam(context,Constants.LOGIN_INFO,Constants.SP_TYPE,0);
                                 Message message = new Message();
                                 message.obj = response;
                                 message.what = MSG_USER_SUCCESS;

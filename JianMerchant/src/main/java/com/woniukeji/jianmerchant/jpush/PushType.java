@@ -12,15 +12,15 @@ public class PushType {
 
     private String html_url;
 
-    public int getJob_id() {
-        return job_id;
+    private String jobid;
+
+    public String getJobid() {
+        return jobid;
     }
 
-    public void setJob_id(int job_id) {
-        this.job_id = job_id;
+    public void setJobid(String jobid) {
+        this.jobid = jobid;
     }
-
-    private int job_id;
 
     public String getType() {
         return type;

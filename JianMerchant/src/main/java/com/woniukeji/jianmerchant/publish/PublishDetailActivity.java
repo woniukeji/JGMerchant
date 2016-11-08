@@ -1495,8 +1495,9 @@ public class PublishDetailActivity extends BaseActivity {
                 File file = new File(Environment.getExternalStorageDirectory() + "/" + fileName + ".png");
                 CommonUtils.copyfile(imgFile, file, true);
                 BitmapUtils.compressBitmap(file.getAbsolutePath(), 300, 300);
-                QiNiu.upLoadQiNiu(context, MD5Coder.getQiNiuName(fileName), file);
-                name_image = "http://7xlell.com2.z0.glb.qiniucdn.com/" + MD5Coder.getQiNiuName(fileName);
+                name_image = "http://7xlell.com2.z0.glb.qiniucdn.com/" + MD5Coder.getQiNiuName(String.valueOf(merchantid));
+                QiNiu.upLoadQiNiu(context, MD5Coder.getQiNiuName(String.valueOf(merchantid)), file);
+
             }
         } else if (requestCode == 1) {
 //            tvBirthday.setText(data.getStringExtra("date"));

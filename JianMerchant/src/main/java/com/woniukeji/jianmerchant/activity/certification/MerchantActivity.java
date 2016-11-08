@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -83,8 +84,6 @@ public class MerchantActivity extends BaseActivity {
             pvOptions.setSelectOptions(0, 0, 0);
             tvOptions.setClickable(true);
         }
-
-        ;
     };
     private int merchantId;
     private String filePath = "";
@@ -121,9 +120,7 @@ public class MerchantActivity extends BaseActivity {
                     item2.add((ArrayList<CityBean>) RegionDAO.getCityOnParent(regionInfo.getAdcode()));
 
                 }
-
                 handler.sendEmptyMessage(0x123);
-
             }
         }).start();
         // 设置选择的三级单位
@@ -168,11 +165,14 @@ public class MerchantActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.add_head, R.id.btn_next})
+    @OnClick({R.id.add_head,R.id.img_back, R.id.btn_next})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.add_head:
                 MultiImageSelectorActivity.startSelect(MerchantActivity.this, 0, 1, 0);
+                break;
+            case R.id.img_back:
+                finish();
                 break;
             case R.id.btn_next:
                 if (checkInfo()) {
@@ -270,10 +270,18 @@ public class MerchantActivity extends BaseActivity {
     }
 
 
+    //如果城市选择器弹出式 按返回键则退出选择器 否则退出界面
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && KeyEvent.KEYCODE_BACK == keyCode) {
+            long currentTime = System.currentTimeMillis();
+            if (pvOptions.isShowing()){
+                pvOptions.dismiss();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

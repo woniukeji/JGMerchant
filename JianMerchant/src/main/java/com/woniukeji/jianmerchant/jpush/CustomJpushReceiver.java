@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.gson.Gson;
+import com.woniukeji.jianmerchant.activity.certification.StatusActivity;
 import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.eventbus.MessageEvent;
 import com.woniukeji.jianmerchant.partjob.FilterActivity;
 import com.woniukeji.jianmerchant.widget.WebViewActivity;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.ui.PushActivity;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -37,25 +39,28 @@ import de.greenrobot.event.EventBus;
             } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
                 System.out.println("用户点击打开了通知");
                 Bundle extras = intent.getExtras();
-                String type = extras.getString(JPushInterface.EXTRA_EXTRA);//类型 0=报名，1=钱包，2=实名
+//                String type = extras.getString(JPushInterface.EXTRA_EXTRA);//类型 0=报名，1=钱包，2=实名
+                String type = extras.getString(JPushInterface.EXTRA_EXTRA);
                 Gson gson=new Gson();
                 PushType pushType = gson.fromJson(type, PushType.class);
             if (null!=pushType&&null!=pushType.getType()){
                 if (pushType.getType().equals("0")) {
-//                    context.startActivity(new Intent(context, SignUpActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    context.startActivity(new Intent(context, PushMessageActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 } else if (pushType.getType().equals("1")) {
-//                    context.startActivity(new Intent(context, WalletActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                } else if (pushType.getType().equals("2")) {
-//                    context.startActivity(new Intent(context, AuthActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                } else if (pushType.getType().equals("3")) {
                     context.startActivity(new Intent(context, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } else if (pushType.getType().equals("2")) {
+                    context.startActivity(new Intent(context, StatusActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } else if (pushType.getType().equals("3")) {
+                    Intent intent2=new Intent(context, FilterActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent2.putExtra("jobid",pushType.getJobid());
+                    context.startActivity(intent2);
                 } else if (pushType.getType().equals("4")) {
-                    Intent intent1=new Intent(context, WebViewActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent1.putExtra("url",pushType.getHtml_url());
+                    Intent intent1=new Intent(context, PushActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent1.putExtra("url",pushType.getHtml_url());
                     context.startActivity(intent1);
                 } else if (pushType.getType().equals("5")) {
                     Intent intent2=new Intent(context, FilterActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent2.putExtra("job",pushType.getJob_id());
+                    intent2.putExtra("jobid",pushType.getJobid());
                     context.startActivity(intent2);
                 }else{
                     context.startActivity(new Intent(context, PushMessageActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

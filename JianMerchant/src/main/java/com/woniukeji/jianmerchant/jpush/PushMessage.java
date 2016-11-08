@@ -37,13 +37,13 @@ public class PushMessage {
             private int type;//（0=报名，1=钱包，2=实名）
             private String time;
             private String html_url;
-            private int job_id;
+            private String job_id;
 
-            public int getJob_id() {
+            public String getJob_id() {
                 return job_id;
             }
 
-            public void setJob_id(int job_id) {
+            public void setJob_id(String job_id) {
                 this.job_id = job_id;
             }
 

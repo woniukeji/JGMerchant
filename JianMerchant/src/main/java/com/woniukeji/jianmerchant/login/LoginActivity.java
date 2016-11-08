@@ -324,7 +324,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onResponse(BaseBean<User> user, int id) {
                         if (user.getCode().equals("200")) {
-                            SPUtils.setParam(context, Constants.LOGIN_INFO, Constants.SP_TYPE, "0");
+                            SPUtils.setParam(context, Constants.LOGIN_INFO, Constants.SP_TYPE, 0);
                             Message message = new Message();
                             message.obj = user;
                             message.what = MSG_USER_SUCCESS;

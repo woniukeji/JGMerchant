@@ -10,6 +10,7 @@ import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.entity.SmsCode;
+import com.woniukeji.jianmerchant.entity.Status;
 import com.woniukeji.jianmerchant.entity.User;
 import com.woniukeji.jianmerchant.jpush.PushMessage;
 import com.woniukeji.jianmerchant.utils.DateUtils;
@@ -93,6 +94,23 @@ public class HttpMethods {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    /**
+     *审核状态
+     *@param
+     *@param
+     *@author invinjun
+     *created at 2016/7/26 16:46
+     */
+    public void getStatus(Subscriber<Status> subscriber, String loginid){
+        methodsInterface.getStatus(loginid)
+                .map(new BaseBeanFun())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
     /**
     *商家注册
     *@param tel

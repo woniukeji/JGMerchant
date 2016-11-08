@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.activity.certification.StatusActivity;
 import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.partjob.FilterActivity;
 import com.woniukeji.jianmerchant.widget.WebViewActivity;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.android.ui.PushActivity;
 
 public class PushMessageAdapter extends RecyclerView.Adapter<PushMessageAdapter.ViewHolder> {
 
@@ -113,25 +115,48 @@ public class PushMessageAdapter extends RecyclerView.Adapter<PushMessageAdapter.
 //                    2=实名
 //                    3=主页
 //                    4=活动H5
-                    if (message.getType()==0){
-//                        mContext.startActivity(new Intent(mContext, SignUpActivity.class));
-//                    }else if (message.getType()==1){
-//                        mContext.startActivity(new Intent(mContext, WalletActivity.class));
-//                    }else if(message.getType()==2){
-//                        mContext.startActivity(new Intent(mContext, AuthActivity.class));
-                    }else if(message.getType()==3){
-                        mContext.startActivity(new Intent(mContext, MainActivity.class));
-                    }else if(message.getType()==4){
-                        Intent intent=new Intent(mContext, WebViewActivity.class);
-                        intent.putExtra("url",message.getHtml_url());
-                        mContext.startActivity(intent);
-                    }else if(message.getType()==5){
-                        Intent intent=new Intent(mContext, FilterActivity.class);
-                        intent.putExtra("job",message.getJob_id());
-                        mContext.startActivity(intent);
-                    }else {
-                        mContext.startActivity(new Intent(mContext, MainActivity.class));
+                    if (null!=message){
+                        if (message.getType()==0) {
+                            mContext.startActivity(new Intent(mContext, PushMessageActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        } else if (message.getType()==1) {
+                            mContext.startActivity(new Intent(mContext, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        } else if (message.getType()==2) {
+                            mContext.startActivity(new Intent(mContext, StatusActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        } else if (message.getType()==3) {
+                            Intent intent2=new Intent(mContext, FilterActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent2.putExtra("jobid",message.getJob_id());
+                            mContext.startActivity(intent2);
+                        } else if (message.getType()==4) {
+                            Intent intent1=new Intent(mContext, PushActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent1.putExtra("url",pushType.getHtml_url());
+                            mContext.startActivity(intent1);
+                        } else if (message.getType()==5) {
+                            Intent intent2=new Intent(mContext, FilterActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent2.putExtra("jobid",message.getJob_id());
+                            mContext.startActivity(intent2);
+                        }else{
+                            mContext.startActivity(new Intent(mContext, PushMessageActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        }
                     }
+//                    if (message.getType()==0){
+////                        mContext.startActivity(new Intent(mContext, SignUpActivity.class));
+////                    }else if (message.getType()==1){
+////                        mContext.startActivity(new Intent(mContext, WalletActivity.class));
+////                    }else if(message.getType()==2){
+////                        mContext.startActivity(new Intent(mContext, AuthActivity.class));
+//                    }else if(message.getType()==3){
+//                        mContext.startActivity(new Intent(mContext, MainActivity.class));
+//                    }else if(message.getType()==4){
+//                        Intent intent=new Intent(mContext, WebViewActivity.class);
+//                        intent.putExtra("url",message.getHtml_url());
+//                        mContext.startActivity(intent);
+//                    }else if(message.getType()==5){
+//                        Intent intent=new Intent(mContext, FilterActivity.class);
+//                        intent.putExtra("job",message.getJob_id());
+//                        mContext.startActivity(intent);
+//                    }else {
+//                        mContext.startActivity(new Intent(mContext, MainActivity.class));
+//                    }
                 }
             });
         }
@@ -151,8 +176,6 @@ public class PushMessageAdapter extends RecyclerView.Adapter<PushMessageAdapter.
             return NORMAL;
         }
     }
-
-    static
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
