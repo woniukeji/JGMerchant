@@ -37,6 +37,7 @@ import com.woniukeji.jianmerchant.publish.PublishDetailActivity;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
+import com.woniukeji.jianmerchant.widget.WebViewActivity;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
@@ -60,6 +61,9 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     RecyclerView recyclerJobs;
     @BindView(R.id.next_page)
     TextView nextPage;
+    @BindView(R.id.tv_other_city)
+    TextView tvOtherCity;
+
     //设置此fragment的参数，创建新兼职，历史纪录，模板
     private String type;
     private List<RegionBean> dataSetRegion = Arrays.asList(new RegionBean("三亚", "0899"), new RegionBean("海口", "0898"), new RegionBean("北京", "010"), new RegionBean("西安", "029"), new RegionBean("杭州", "0571"), new RegionBean("武汉", "027"));
@@ -180,6 +184,14 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
             //访问网络+设置recyclerjobs的数据
             getCategoryToBean();
             nextPage.setOnClickListener(this);
+            tvOtherCity.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent1 = new Intent(getActivity(), WebViewActivity.class);
+                    intent1.putExtra("url", "https://jinshuju.net/f/TboSOV");
+                    getActivity().startActivity(intent1);
+                }
+            });
             return view;
 
         } else if (type.equals("lsjl")) {
@@ -362,6 +374,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                 if (CheckAndGet()) {
                     startActivity(intent);
                 }
+
                 break;
         }
     }
