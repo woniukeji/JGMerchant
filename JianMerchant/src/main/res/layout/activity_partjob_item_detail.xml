@@ -684,5 +684,22 @@
 
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_offlin_pay"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+android:background="@drawable/btn_gray_bg"
+        android:showDividers="middle"
+        android:visibility="gone"
+        >
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="请线下支付"
+            android:gravity="center"
+            />
+    </LinearLayout>
 </RelativeLayout>

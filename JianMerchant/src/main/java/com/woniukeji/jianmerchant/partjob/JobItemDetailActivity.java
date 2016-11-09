@@ -85,6 +85,8 @@ public class JobItemDetailActivity extends BaseActivity {
     @BindView(R.id.btn_no_limit) Button btnNoLimit;
     @BindView(R.id.btn_boy) Button btnBoy;
     @BindView(R.id.btn_girl) Button btnGirl;
+    @BindView(R.id.ll_offlin_pay) LinearLayout layoutOfflin ;
+
     private JobDetails.TMerchantEntity merchantInfo;
     private JobDetails.TJobInfoEntity jobinfo;
     private int MSG_GET_SUCCESS = 0;
@@ -289,14 +291,17 @@ public class JobItemDetailActivity extends BaseActivity {
             btnFinish.setVisibility(View.GONE);
             btnChange.setVisibility(View.GONE);
             btnDown.setVisibility(View.GONE);
+            layoutOfflin.setVisibility(View.VISIBLE);
         } else if (modleJob.getStatus() == 6) {
             btnFinish.setVisibility(View.GONE);
             btnChange.setVisibility(View.GONE);
             btnDown.setVisibility(View.GONE);
+            layoutOfflin.setVisibility(View.VISIBLE);
         } else if (modleJob.getStatus() == 3) {
             btnFinish.setVisibility(View.GONE);
             btnChange.setVisibility(View.GONE);
             btnDown.setVisibility(View.GONE);
+            layoutOfflin.setVisibility(View.VISIBLE);
         }
         //1是外部商家，2是个人商户，0是内部
         if (permission!=0){

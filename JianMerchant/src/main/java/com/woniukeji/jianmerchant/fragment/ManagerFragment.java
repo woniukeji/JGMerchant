@@ -259,7 +259,7 @@ public class ManagerFragment extends BaseFragment {
                              public void onResponse(String response, int id) {
                                  Gson gson=new Gson();
                                  Map<String, String> map = gson.fromJson(response, new TypeToken<Map<String, String>>() {}.getType());
-                                 if (!map.get("url").equals("")){
+                                 if (map!=null&&!map.get("url").equals("")){
                                      Message message=new Message();
                                      message.what=0;
                                      message.obj=map.get("url");
