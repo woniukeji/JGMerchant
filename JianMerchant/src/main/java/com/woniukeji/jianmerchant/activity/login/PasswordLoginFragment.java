@@ -188,7 +188,7 @@ public class PasswordLoginFragment extends BaseFragment {
         // 创建一个 SpannableString对象
         SpannableString sp = new SpannableString("我已阅读并同意《兼果用户协议》");
         // 设置超链接
-        sp.setSpan(new URLSpan("http://101.200.205.243:8080/user_agreement.jsp"), 7, 15,
+        sp.setSpan(new URLSpan("http://101.200.205.243:8080/user_agreement.html"), 7, 15,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         sp.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.app_bg)), 7, 15, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv.setText(sp);

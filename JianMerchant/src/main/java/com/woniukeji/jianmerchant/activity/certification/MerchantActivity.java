@@ -200,10 +200,11 @@ public class MerchantActivity extends BaseActivity {
         } else if (null == emailStr || emailStr.equals("")) {
             TastyToast.makeText(this, "请填写邮箱", TastyToast.LENGTH_LONG, TastyToast.WARNING);
             return false;
-        } else if( !emailStr.matches("\\w+@\\w+[.]((com))")){
-             TastyToast.makeText(this, "邮箱格式错误", TastyToast.LENGTH_LONG, TastyToast.WARNING);
-             return false;
-         }
+        }
+//         else if( !emailStr.matches("\\w+@\\w+[.]()")){
+//             TastyToast.makeText(this, "邮箱格式错误", TastyToast.LENGTH_LONG, TastyToast.WARNING);
+//             return false;
+//         }
         else if (null == merchantBean.getProvince() || merchantBean.getProvince().equals("")) {
             TastyToast.makeText(this, "请填写所在省市", TastyToast.LENGTH_LONG, TastyToast.WARNING);
             return false;

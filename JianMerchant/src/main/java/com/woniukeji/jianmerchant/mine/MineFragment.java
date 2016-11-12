@@ -43,6 +43,7 @@ import com.woniukeji.jianmerchant.utils.CommonUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.widget.CircleImageView;
 import com.woniukeji.jianmerchant.widget.UpDialog;
+import com.woniukeji.jianmerchant.widget.WebViewActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -88,6 +89,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     @BindView(R.id.about) RelativeLayout about;
     @BindView(R.id.rl_check) RelativeLayout reCheck;
     @BindView(R.id.rl_logout) Button rlLogout;
+    @BindView(R.id.rl_question) RelativeLayout rlQuestion;
+
     private SubscriberOnNextListener<String> baseBeanSubscriberOnNextListener;
     private Handler mHandler = new Myhandler(getActivity());
     private Context context = getActivity();
@@ -253,7 +256,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     }
 
-    @OnClick({R.id.avatar,R.id.rl_check,R.id.rl_down_url, R.id.rl_custom, R.id.iv_feedback, R.id.iv_rck_right, R.id.rl_feedback, R.id.about, R.id.rl_logout})
+    @OnClick({R.id.avatar,R.id.rl_question,R.id.rl_check,R.id.rl_down_url, R.id.rl_custom, R.id.iv_feedback, R.id.iv_rck_right, R.id.rl_feedback, R.id.about, R.id.rl_logout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.avatar:
@@ -265,6 +268,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 break;
             case R.id.iv_feedback:
 
+                break;
+            case R.id.rl_question:
+                Intent intent1 = new Intent(getActivity(), WebViewActivity.class);
+                intent1.putExtra("url", "http://101.200.205.243:8080/problem.html");
+                getActivity().startActivity(intent1);
                 break;
             case R.id.rl_check:
                 checkVersion(CommonUtils.getVersion(getActivity()));
@@ -278,23 +286,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 Uri content_url = Uri.parse("http://a.app.qq.com/o/simple.jsp?pkgname=com.woniukeji.jianguo");
                 intent.setData(content_url);
                 startActivity(intent);
-//                SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(getActivity());
-//                sweetAlertDialog.setCancelable(false);
-//                sweetAlertDialog
-//                        .setTitleText("确定要下载兼果用户端？")
-//                        .setConfirmText("确定")
-//                        .setCancelText("取消")
-//                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                            @Override
-//                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-//                                UpDialog upDataDialog = new UpDialog(getActivity(),"http://v3.jianguojob.com/jianguo.apk");
-//                                upDataDialog.setCanceledOnTouchOutside(false);
-//                                upDataDialog.setCanceledOnTouchOutside(false);
-//                                upDataDialog.show();
-//                            }
-//                        })
-//                        .show();
-//                apkurl = (String) SPUtils.getParam(SettingActivity.this, Constants.LOGIN_INFO, Constants.LOGIN_APK_URL, "");
 
                 break;
             case R.id.about:

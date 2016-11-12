@@ -303,9 +303,13 @@ public class JobItemDetailActivity extends BaseActivity {
             btnDown.setVisibility(View.GONE);
             layoutOfflin.setVisibility(View.VISIBLE);
         }
-        //1是外部商家，2是个人商户，0是内部
-        if (permission!=0){
+        //0是内部1是外部商家，2是个人商户
+        if (permission==0){
+            btnClearing.setVisibility(View.VISIBLE);
+            layoutOfflin.setVisibility(View.GONE);
+        }else {
             btnClearing.setVisibility(View.GONE);
+            layoutOfflin.setVisibility(View.VISIBLE);
         }
 
         tvTitle.setText("兼职详情");
