@@ -187,20 +187,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
 
-//    private void authorize(Platform plat) {
-//        Toast.makeText(LoginNewActivity.this, "正在登录，请稍后...", Toast.LENGTH_SHORT).show();
-////        if (plat.isValid()) {
-////            String userId = plat.getDb().getUserId();
-////            if (!TextUtils.isEmpty(userId)) {
-////                Register(true, plat.getName(), userId, null);
-////                return;
-////            }
-////        }
-//        plat.setPlatformActionListener(this);
-//        plat.SSOSetting(false);
-//        plat.showUser(null);
-//    }
-
     /*
          * 演示执行第三方登录/注册的方法
          * <p>

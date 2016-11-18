@@ -3,10 +3,14 @@ package com.woniukeji.jianmerchant.http;
 import com.woniukeji.jianmerchant.entity.AffordUser;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
+import com.woniukeji.jianmerchant.entity.JobBase;
 import com.woniukeji.jianmerchant.entity.JobDetails;
+import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.MerchantBean;
 import com.woniukeji.jianmerchant.entity.Model;
+import com.woniukeji.jianmerchant.entity.NewJobDetail;
+import com.woniukeji.jianmerchant.entity.NewMerchant;
 import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.entity.SmsCode;
@@ -19,6 +23,8 @@ import java.util.List;
 import cn.leancloud.chatkit.LCChatKitUser;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -37,8 +43,7 @@ public interface HttpMethodsInterface {
     @GET("T_push_List_Servlet")
     Observable<BaseBean<PushMessage>> getPush(@Query("only") String only, @Query("login_id") String login_id);
 
-    @POST("GetStatusServlet")
-    Observable<BaseBean<Status>> getStatus(@Query("merchantId") String merchantId);
+
 
     @POST("RegisterServlet")
     Observable<BaseBean> register(@Query("tel") String tel, @Query("smsCode") String smsCode, @Query("password") String password);
@@ -52,18 +57,14 @@ public interface HttpMethodsInterface {
     @POST("LoginServlet")
     Observable<BaseBean<MerchantBean>> smsLogin(@Query("tel") String tel,@Query("smsCode") String smsCode);
 
-    @POST("AutoLoginServlet")
-    Observable<BaseBean<MerchantBean>> autoLogin(@Query("tel") String tel,@Query("token") String token);
+//    @POST("AutoLoginServlet")
+//    Observable<BaseBean<MerchantBean>> autoLogin(@Query("tel") String tel,@Query("token") String token);
 
-    @POST("CerficationServlet")
-    Observable<BaseBean> Cerfication( @Query("loginId") String loginId, @Query("merchantId") String merchantId, @Query("token") String token, @Query("merchantInfo") String merchantInfo);
 
     @POST("UpLogoServlet")
     Observable<BaseBean> UpLoadLogo(@Query("loginId") String loginId, @Query("merchantId") String merchantId, @Query("token") String token,@Query("logoUrl") String url );
 
 
-    @GET("T_Job_Area_City_List_Servlet")
-    Observable<BaseBean<CityAndCategoryBean>> getCityCategory(@Query("only") String only, @Query("login_id") String loginId);
 
     @GET("T_Job_Insert_Servlet")
     Observable<BaseBean<Jobs>> saveJobInfoToServer(@Query("only") String only,@Query("city_id") String city_id,
@@ -83,8 +84,6 @@ public interface HttpMethodsInterface {
                                                    @Query("json_limit") String json_limit,@Query("json_welfare") String json_welfare,
                                                    @Query("json_label") String json_label);
 
-    @GET("T_job_Model_List_Servlet")
-    Observable<BaseBean<Model>> getHistroyJobFromServer(@Query("only") String only, @Query("merchant_id")String merchant_id, @Query("type")String type, @Query("count") String count);
 
     @GET("T_job_Model_Delete_Servlet")
     Observable<BaseBean> deleteModelInfo(@Query("only") String only,@Query("merchant_id")String merchant_id,@Query("job_id")String job_id);
@@ -166,4 +165,103 @@ public interface HttpMethodsInterface {
 
 //    @POST("PayWageServlet")
 //    Observable<BaseBean> checkout(@Query("only") String only, @Query("job_id") String job_id, @Query("json") String json);
+/**
+*新版接口
+*@author invinjun
+*created at 2016/11/14 12:07
+*/
+
+    @POST("sign")
+    Observable<BaseBean> sign(@Query("app_id") String app_id,@Query("tel") String tel, @Query("code") String smsCode, @Query("passwd") String password,@Query("type") String type);
+
+    @GET("validateCode")
+    Observable<BaseBean> sendCode(@Query("app_id") String app_id,@Query("tel") String tel,@Query("type") String type);
+
+    @POST("login")
+    Observable<BaseBean<NewMerchant>> passwdLogin(@Query("app_id") String app_id, @Query("tel") String tel, @Query("password") String password, @Query("type") String type);
+
+    @POST("login")
+    Observable<BaseBean<NewMerchant>> smsLogin(@Query("app_id") String app_id, @Query("tel") String tel, @Query("code") String code, @Query("type") String type);
+
+    @POST("login")
+    Observable<BaseBean<NewMerchant>> autoLogin(@Query("app_id") String app_id, @Query("token") String token,  @Query("type") String type);
+
+    @PUT("{app_id}/passwdReset")
+    Observable<BaseBean> passReset(@Path("app_id") String app_id,@Query("tel") String tel, @Query("code") String smsCode, @Query("passwd") String password);
+
+    @POST("auth/info/")
+    Observable<BaseBean> Cerfication( @Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp,
+                                      @Query("front_img_url") String front_img_url,@Query("head_img_url") String head_img_url,
+                                      @Query("realname") String realname, @Query("nickName") String nickName,
+                                      @Query("IDcard") String IDcard,
+                                      @Query("phone") String phone,
+                                      @Query("type") String type,//个人 1 机构 2 内部 3
+                                      @Query("company_img_url") String company_img_url,
+                                      @Query("hold_img_url") String hold_img_url,
+                                      @Query("companyAdress") String companyAdress,
+                                      @Query("companyName") String companyName,
+                                      @Query("bus_licence_num") String bus_licence_num,
+                                      @Query("contact_name") String contact_name,
+                                      @Query("contact_phone") String contact_phone,
+                                      @Query("email") String email,
+                                      @Query("province_id") String province_id,
+                                      @Query("city_id") String city_id,
+                                      @Query("Introduce") String Introduce
+                                      );
+
+    @GET("auth/status")
+    Observable<BaseBean<Status>> getStatus(@Query("app_id") String app_id, @Query("sign") String sign,  @Query("timestamp") String timestamp,  @Query("type") String type);
+
+    @GET("job/list/business")
+    Observable<BaseBean<List<JobInfo>>> getJobList(@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp, @Query("type") String type, @Query("pageNum") String pageNum);
+
+    @GET("join/history")
+    Observable<BaseBean<List<JobInfo>>> getHistroyJobFromServer(@Query("app_id") String app_id, @Query("sign") String sign,@Query("type") String type, @Query("timestamp") String timestamp,  @Query("pageNum") String pageNum);
+
+
+  /**
+  *查询兼职种类福利标签等
+  */
+    @GET("join/label")
+    Observable<BaseBean<JobBase>> getCityCategory(@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp);
+
+
+    @POST("job/new")
+    Observable<BaseBean> makeJob(@Query("app_id") String app_id, @Query("sign") String sign,
+                                         @Query("timestamp") String timestamp,
+                                         @Query("type") String type,
+                                                   @Query("job_name") String job_name,
+                                         @Query("job_type_id") String job_type_id,
+                                                   @Query("job_image") String name_image,
+                                         @Query("start_date") String start_date,
+                                                   @Query("stop_date") String stop_date,
+                                         @Query("address") String address,
+                                                   @Query("mode") String mode,
+                                         @Query("money") String money,
+                                                   @Query("term") String term,
+                                         @Query("limit_sex") String limit_sex,
+                                         @Query("girl_sum") String girl_sum,
+                                         @Query("boy_sum") String boy_sum,
+                                         @Query("sum") String sum,
+                                         @Query("city_id") String city_id,@Query("area_id") String area_id,
+                                         @Query("tel") String tel,
+                                         @Query("begin_time") String begin_time,@Query("end_time") String end_time,
+                                          @Query("set_place") String set_place,
+                                         @Query("set_time") String set_time,
+                                         @Query("content") String content,
+                                          @Query("require") String require,
+                                         @Query("json_limit") String json_limit,
+                                         @Query("json_welfare") String json_welfare,
+                                           @Query("json_label") String json_label,
+                                         @Query("job_model") String job_model);
+
+
+    /**
+     *兼职详情
+     */
+    @GET("job/detail/{job_id}")
+    Observable<BaseBean<NewJobDetail>>  jobDetail(@Path("job_id") String job_id, @Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp);
+
+
+
 }

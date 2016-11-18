@@ -1,8 +1,6 @@
 package com.woniukeji.jianmerchant.activity.login;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,11 +20,6 @@ import com.google.gson.reflect.TypeToken;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
-import com.woniukeji.jianmerchant.base.Constants;
-import com.woniukeji.jianmerchant.entity.BaseBean;
-import com.woniukeji.jianmerchant.entity.CodeCallback;
-import com.woniukeji.jianmerchant.entity.SmsCode;
-import com.woniukeji.jianmerchant.entity.User;
 import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
@@ -35,16 +28,12 @@ import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.utils.TimeCount;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 
 import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
-import okhttp3.Response;
 
 /**
  * A login screen that offers login via email/password.
@@ -62,15 +51,9 @@ public class ForgetPassActivity extends BaseActivity {
     @BindView(R.id.cb_rule) CheckBox cbRule;
     @BindView(R.id.tv_rule) TextView tvRule;
     private String patternCoder = "(?<!\\d)\\d{6}(?!\\d)";
-    private BroadcastReceiver smsReceiver;
-    private IntentFilter filter2;
-    private int MSG_USER_SUCCESS = 0;
-    private int MSG_USER_FAIL = 1;
-    private int MSG_PHONE_SUCCESS = 2;
-    private int MSG_REGISTER_SUCCESS = 3;
     private Handler mHandler = new Myhandler(this);
-    private Context context=ForgetPassActivity.this;
     private SubscriberOnNextListener<String> smsSubscriberOnNextListener;
+    private SubscriberOnNextListener<String> subscriberOnNextListener;
     @OnClick(R.id.tv_rule)
     public void onClick() {
     }
@@ -114,7 +97,6 @@ public class ForgetPassActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set up the login form.
     }
 
     @Override
@@ -126,11 +108,16 @@ public class ForgetPassActivity extends BaseActivity {
     @Override
     public void initViews() {
         userRule.setVisibility(View.GONE);
-//        createLink(tvRule);
     }
 
     @Override
     public void initListeners() {
+        subscriberOnNextListener=new SubscriberOnNextListener<String>() {
+            @Override
+            public void onNext(String message) {
+                    TastyToast.makeText(ForgetPassActivity.this, "密码修改成功", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+            }
+        };
         smsSubscriberOnNextListener=new SubscriberOnNextListener<String>() {
             @Override
             public void onNext(String s) {
@@ -149,21 +136,6 @@ public class ForgetPassActivity extends BaseActivity {
         ActivityManager.getActivityManager().addActivity(ForgetPassActivity.this);
     }
 
-    private void saveToSP(User user) {
-        SPUtils.setParam(context, Constants.LOGIN_INFO,Constants.SP_WQTOKEN,user.getT_user_login().getQqwx_token()!=null?user.getT_user_login().getQqwx_token():"");
-        SPUtils.setParam(context,Constants.LOGIN_INFO,Constants.SP_TEL,user.getT_user_login().getTel()!=null?user.getT_user_login().getTel():"");
-        SPUtils.setParam(context,Constants.LOGIN_INFO,Constants.SP_PASSWORD,user.getT_user_login().getPassword()!=null?user.getT_user_login().getPassword():"");
-        SPUtils.setParam(context,Constants.LOGIN_INFO,Constants.SP_USERID,user.getT_user_login().getId());
-        SPUtils.setParam(context,Constants.LOGIN_INFO,Constants.SP_STATUS,user.getT_user_login().getStatus());
-        SPUtils.setParam(context,Constants.LOGIN_INFO,Constants.SP_QNTOKEN,user.getT_user_login().getQiniu());
-
-//        SPUtils.setParam(context,Constants.USER_INFO,Constants.SP_NICK,user.getT_user_info().getNickname()!=null?user.getT_user_info().getNickname():"");
-//        SPUtils.setParam(context,Constants.USER_INFO,Constants.SP_NAME,user.getT_user_info().getName()!=null?user.getT_user_info().getName():"");
-//        SPUtils.setParam(context,Constants.USER_INFO,Constants.SP_IMG,user.getT_user_info().getName_image()!=null?user.getT_user_info().getName_image():"");
-//        SPUtils.setParam(context,Constants.USER_INFO,Constants.SP_SCHOOL,user.getT_user_info().getSchool()!=null?user.getT_user_info().getSchool():"");
-//        SPUtils.setParam(context,Constants.USER_INFO,Constants.SP_CREDIT,user.getT_user_info().getCredit());
-//        SPUtils.setParam(context,Constants.USER_INFO,Constants.SP_INTEGRAL,user.getT_user_info().getIntegral());
-    }
     /**
      * 创建一个超链接
      */
@@ -190,7 +162,7 @@ public class ForgetPassActivity extends BaseActivity {
                 if (isOK) {
 //                    showShortToast("正在发送验证码，请稍后");
                     new TimeCount(60000, 1000,btnGetCode).start();//构造CountDownTimer对象
-                    HttpMethods.getInstance().sms(new BackgroundSubscriber<String>(smsSubscriberOnNextListener,this),tel,"1");
+                    HttpMethods.getInstance().sms(new BackgroundSubscriber<String>(smsSubscriberOnNextListener,this),MD5Util.MD5(tel),tel,"2");
                 } else {
                     showLongToast("请输入正确的手机号");
                 }
@@ -199,8 +171,9 @@ public class ForgetPassActivity extends BaseActivity {
             case R.id.phone_sign_in_button:
                 String phone = phoneNumber.getText().toString();
                 String pass = passWord2.getText().toString();
+                String code=phoneCode.getText().toString();
                 if (CheckStatus()) {
-                    UserRegisterPhone(phone, MD5Util.MD5(pass),phoneCode.getText().toString());
+                    HttpMethods.getInstance().passReset(new BackgroundSubscriber<String>(subscriberOnNextListener,this),phone,code,pass);
                 }
                 break;
         }
@@ -233,93 +206,9 @@ public class ForgetPassActivity extends BaseActivity {
         return true;
     }
 
-        /**
-         * login
-         * 检查手机号是否存在
-         */
-        public void CheckPhone(String tel) {
-            String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-            OkHttpUtils
-                    .get()
-                    .url(Constants.CHECK_PHONE_BLACK)
-                    .addParams("tel", tel)
-                    .addParams("only", only)
-                    .build()
-                    .connTimeOut(6000)
-                    .readTimeOut(20000)
-                    .writeTimeOut(20000)
-                    .execute(new CodeCallback() {
-
-                        @Override
-                        public void onError(Call call, Exception e,int id) {
-                            Message message = new Message();
-                            message.obj = e.toString();
-                            message.what = MSG_USER_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-
-                        @Override
-                        public void onResponse(SmsCode response,int id) {
-                            Message message = new Message();
-                            message.obj = response;
-                            message.what = MSG_PHONE_SUCCESS;
-                            mHandler.sendMessage(message);
-                        }
 
 
-                    });
-        }
 
-
-        /**
-         * UserRegisterPhone
-         * 修改密码
-         * @param
-         * @param sms
-         * @param phone
-         */
-        public void UserRegisterPhone( String phone, String pass,String sms) {
-            OkHttpUtils
-                    .post()
-                    .url(Constants.CHANGE_PASSWORD)
-                    .addParams("tel", phone)
-                    .addParams("password", pass)
-                    .addParams("smsCode", sms)
-                    .build()
-                    .connTimeOut(30000)
-                    .readTimeOut(20000)
-                    .writeTimeOut(20000)
-                    .execute(new Callback<BaseBean>() {
-                        @Override
-                        public BaseBean parseNetworkResponse(Response response,int id) throws Exception {
-                            String string = response.body().string();
-                            BaseBean user = new Gson().fromJson( string, new TypeToken<BaseBean>(){}.getType());
-                            return user;
-                        }
-                        @Override
-                        public void onError(Call call, Exception e,int id) {
-                            Message message = new Message();
-                            message.obj = e.getMessage();
-                            message.what = MSG_USER_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-
-                        @Override
-                        public void onResponse(BaseBean response,int id) {
-                            if (response.getCode().equals("200")){
-                                Message message = new Message();
-                                message.obj = response;
-                                message.what = MSG_USER_SUCCESS;
-                                mHandler.sendMessage(message);
-                            }else{
-                                Message message = new Message();
-                                message.obj = response.getMessage();
-                                message.what = MSG_USER_FAIL;
-                                mHandler.sendMessage(message);
-                            }
-                        }
-                    });
-        }
     }
 
 

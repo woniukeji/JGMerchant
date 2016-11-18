@@ -201,7 +201,7 @@ public class RegistActivity extends BaseActivity {
                 if (isOK) {
 //                    showShortToast("正在发送验证码，请稍后");
                     new TimeCount(60000, 1000,btnGetCode).start();//构造CountDownTimer对象
-                    HttpMethods.getInstance().sms(new BackgroundSubscriber<String>(smsSubscriberOnNextListener,this),tel,"0");
+                    HttpMethods.getInstance().sms(new BackgroundSubscriber<String>(smsSubscriberOnNextListener,this),MD5Util.MD5(tel),tel,"3");
 
                 } else {
                     showLongToast("请输入正确的手机号");
@@ -213,7 +213,7 @@ public class RegistActivity extends BaseActivity {
                 String pass = passWord2.getText().toString();
                 String sms = phoneCode.getText().toString();
                 if (CheckStatus()) {
-                    HttpMethods.getInstance().register(new ProgressSubscriber<String>(subscriberOnNextListener,this),phone,sms ,MD5Util.MD5(pass));
+                    HttpMethods.getInstance().register(new ProgressSubscriber<String>(subscriberOnNextListener,this),MD5Util.MD5(phone),phone,sms ,pass,"2");
 //                    UserRegisterPhone(phone, MD5Util.MD5(pass));
                 }
                 break;

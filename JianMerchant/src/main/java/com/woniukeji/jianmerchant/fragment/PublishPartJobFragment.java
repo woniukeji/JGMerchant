@@ -25,6 +25,8 @@ import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
+import com.woniukeji.jianmerchant.entity.JobBase;
+import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.RegionBean;
 import com.woniukeji.jianmerchant.entity.TypeBean;
@@ -36,6 +38,7 @@ import com.woniukeji.jianmerchant.publish.HistoryJobAdapter;
 import com.woniukeji.jianmerchant.publish.PublishDetailActivity;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.LogUtils;
+import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.widget.WebViewActivity;
 
@@ -70,7 +73,8 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     private List<TypeBean> dataSetType = Arrays.asList(new TypeBean("短期", 0), new TypeBean("长期", 1), new TypeBean("实习生", 2), new TypeBean("兼职旅行", 3));
     BaseBean<List<RegionBean>> regionBaseBean = new BaseBean<>();
     BaseBean<List<TypeBean>> typeBaseBean = new BaseBean<>();
-    BaseBean<List<CityAndCategoryBean.ListTTypeBean>> categoryBean = new BaseBean<>();
+    BaseBean<List<JobBase.TypeListBean>> categoryBean = new BaseBean<>();
+    JobBase jobBase;
     //next step Activity
     private Intent intent;
     private Bundle bundle = new Bundle();
@@ -79,7 +83,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     /**
      * 历史兼职信息集合
      */
-    private List<Model.ListTJobEntity> modelList=new ArrayList<>();
+    private List<JobInfo> modelList=new ArrayList<>();
     private LinearLayoutManager linearLayoutManager;
     private int lastVisibleItem;
     private int checkOutPage = 0;
@@ -136,6 +140,8 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     private boolean isCanLoadDate =true;
     private ViewGroup container;
     private View mEmptyView;
+    private String phone;
+    private int pageNum=1;
 
 
     public static PublishPartJobFragment newInstance(String type) {
@@ -161,6 +167,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.container = container;
+        phone = String.valueOf(SPUtils.getParam(getHoldingContext(), Constants.LOGIN_INFO, Constants.SP_TEL, ""));
         if (type.equals("cjxjz")) {
             View view = inflater.inflate(R.layout.fragment_create_partjob, container, false);
             ButterKnife.bind(this, view);
@@ -287,12 +294,10 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
      */
     private void getHistroyJobs(int pagecount) {
         final int count = 10 * pagecount;
-        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-        final int merchantid= (int) SPUtils.getParam(getHoldingContext(),Constants.LOGIN_INFO,Constants.SP_MERCHANT_ID,0);
-        SubscriberOnNextListener<Model> listenner = new SubscriberOnNextListener<Model>() {
+        SubscriberOnNextListener<List<JobInfo>> listenner = new SubscriberOnNextListener<List<JobInfo>>() {
             @Override
-            public void onNext(Model model) {
-                List<Model.ListTJobEntity> list_t_job = model.getList_t_job();
+            public void onNext(List<JobInfo> model) {
+                List<JobInfo> list_t_job = model;
                 if (count == 0) {
                     modelList.clear();
                 }
@@ -306,14 +311,19 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                 } else {//没数据
                     isCanLoadDate = false;
                 }
+                pageNum = modelList.size() / 10+1;
             }
         };
-        BackgroundSubscriber<Model> modelProgressSubscriber = new BackgroundSubscriber<Model>(listenner,getHoldingContext());
+        BackgroundSubscriber<List<JobInfo>> modelProgressSubscriber = new BackgroundSubscriber<List<JobInfo>>(listenner,getHoldingContext());
         //0代表第一页，10代表第二页，20代表第三页
         if (type.equals("mb")) {
-            HttpMethods.getInstance().getHistroyJobFromServer(modelProgressSubscriber, only, String.valueOf(merchantid), "1", String.valueOf(count));
+            long times=System.currentTimeMillis();
+            String sign= MD5Util.getSign(getActivity(),times);
+            HttpMethods.getInstance().getHistroyJobFromServer(modelProgressSubscriber, phone,sign,"2",  String.valueOf(times), String.valueOf(pageNum));
         } else {
-            HttpMethods.getInstance().getHistroyJobFromServer(modelProgressSubscriber,only,String.valueOf(merchantid),"0",String.valueOf(count));
+            long times=System.currentTimeMillis();
+            String sign= MD5Util.getSign(getActivity(),times);
+            HttpMethods.getInstance().getHistroyJobFromServer(modelProgressSubscriber, phone,sign,"1",String.valueOf(times),String.valueOf(pageNum));
         }
 
     }
@@ -323,20 +333,22 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
      * 访问网络获取兼职类别
      */
     private void getCategoryToBean() {
-        SubscriberOnNextListener<CityAndCategoryBean> onNextListenner = new SubscriberOnNextListener<CityAndCategoryBean>() {
+        SubscriberOnNextListener<JobBase> onNextListenner = new SubscriberOnNextListener<JobBase>() {
 
             @Override
-            public void onNext(CityAndCategoryBean cityAndCategoryBean) {
-                List<CityAndCategoryBean.ListTTypeBean> typeList = cityAndCategoryBean.getList_t_type();
+            public void onNext(JobBase cityAndCategoryBean) {
+                List<JobBase.TypeListBean> typeList=new ArrayList<>();
+                typeList.addAll(cityAndCategoryBean.getType_list());
                 categoryBean.setData(typeList);
+                jobBase=cityAndCategoryBean;
                 JobsAdapter jobsAdapter = new JobsAdapter(categoryBean, getHoldingContext());
                 recyclerJobs.setAdapter(jobsAdapter);
                 bundle.putParcelable("CityAndCategoryBean", cityAndCategoryBean);
             }
         };
-        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-        int loginId = (int) SPUtils.getParam(getHoldingContext(), Constants.LOGIN_INFO, Constants.SP_USERID, 0);
-        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<CityAndCategoryBean>(onNextListenner, getHoldingContext()), only, String.valueOf(loginId));
+        long times=System.currentTimeMillis();
+        String sign= MD5Util.getSign(getActivity(),times);
+        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, getHoldingContext()), phone,sign,String.valueOf(times));
     }
 
     @Override
@@ -372,6 +384,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
         switch (v.getId()) {
             case R.id.next_page:
                 if (CheckAndGet()) {
+                    intent.putExtra("jobbase",jobBase);
                     startActivity(intent);
                 }
 
@@ -416,7 +429,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
         for (int i = 0; i < categoryBean.getData().size(); i++) {
             LogUtils.i("categoryBean", categoryBean.getData().get(i).toString());
             if (categoryBean.getData().get(i).isSelect()) {
-                bundle.putString("category", categoryBean.getData().get(i).getType_name());
+                bundle.putString("category", categoryBean.getData().get(i).getName());
                 bundle.putInt("category_id", categoryBean.getData().get(i).getId());
                 break;
             } else if (i == categoryBean.getData().size() - 1) {

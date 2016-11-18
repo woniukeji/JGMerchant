@@ -1,6 +1,14 @@
 package com.woniukeji.jianmerchant.utils;
 
+import android.content.Context;
+import android.provider.SyncStateContract;
+
+import com.woniukeji.jianmerchant.base.Constants;
+
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class MD5Util {
 
@@ -31,11 +39,14 @@ public class MD5Util {
             e.printStackTrace();  
             return null;  
         }  
-    }  
-    public static void main(String[] args) {  
-        System.out.print(MD5Util.MD5("password"));  
-    }  
-
-
+    }
+    public static String getSign(Context context, long timeMillis){
+        String signSecret = "He37o6TaD0N";
+        String token= (String) SPUtils.getParam(context, Constants.LOGIN_INFO,Constants.SP_WQTOKEN,"");
+        String tel= (String) SPUtils.getParam(context, Constants.LOGIN_INFO,Constants.SP_TEL,"");
+        String appid=MD5(tel);
+        String sign=MD5(appid+signSecret+timeMillis+token+"jianguo");
+        return sign;
+    }
 
 }

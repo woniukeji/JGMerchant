@@ -19,12 +19,14 @@ import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
+import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.LogUtils;
+import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
@@ -54,70 +56,18 @@ public class PartJobManagerFragment extends BaseFragment {
     EmptyRecyclerView list;
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
-//    @InjectView(R.id.list)
-//    SwipeMenuRecyclerView list;
-    private int MSG_GET_SUCCESS = 0;
-    private int MSG_GET_FAIL = 1;
-    private int MSG_DELETE_SUCCESS = 5;
-    private int MSG_DELETE_FAIL = 6;
-        private Handler mHandler = new Myhandler(this.getActivity());
     private ViewGroup container;
     private boolean loadOk = true;
+    BackgroundSubscriber<List<JobInfo>> subscriber;
+    int startPosition =0;
+    private int pageNum=1;
 
-    private class Myhandler extends Handler {
-    private WeakReference<Context> reference;
-
-    public Myhandler(Context context) {
-        reference = new WeakReference<>(context);
-    }
-
-    @Override
-    public void handleMessage(Message msg) {
-        super.handleMessage(msg);
-        switch (msg.what) {
-            case 0:
-                if (refreshLayout!=null&& refreshLayout.isRefreshing()){
-                    refreshLayout.setRefreshing(false);
-                }
-                if (msg.arg1==0){
-                    modleList.clear();
-                }
-                BaseBean<Model> modelBaseBean= (BaseBean<Model>) msg.obj;
-                modleList.addAll(modelBaseBean.getData().getList_t_job());
-                adapter.notifyDataSetChanged();
-                break;
-            case 1:
-                if ( refreshLayout.isRefreshing()){
-                    refreshLayout.setRefreshing(false);
-                }
-                String ErrorMessage = (String) msg.obj;
-                Toast.makeText(getActivity(), ErrorMessage, Toast.LENGTH_SHORT).show();
-                break;
-            case 2:
-                break;
-            case 3:
-                String sms = (String) msg.obj;
-                Toast.makeText(getActivity(), sms, Toast.LENGTH_SHORT).show();
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                String mes = (String) msg.obj;
-                Toast.makeText(getActivity(), mes, Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
-        }
-    }
-}
 
     private Context mContext = this.getActivity();
-    private List<Model.ListTJobEntity> modleList = new ArrayList<>();
+    private List<JobInfo> modleList = new ArrayList<>();
     private PartJobManagerAdapter adapter;
     private LinearLayoutManager mLayoutManager;
-    private int merchant_id;
+    private String tel;
     private int type = 1;//0完成 1录取
     private int lastVisibleItem;
 
@@ -160,16 +110,15 @@ public class PartJobManagerFragment extends BaseFragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         list.setLayoutManager(mLayoutManager);
         list.setItemAnimator(new DefaultItemAnimator());
-//        list.setEmptyView(LayoutInflater.from(getHoldingContext()).inflate(R.layout.null_content, (ViewGroup) list.getParent(),false));
         list.setAdapter(adapter);
         refreshLayout.setColorSchemeResources(R.color.app_bg);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getMerchantEmployStatus(String.valueOf(type),"0");
+                getMerchantEmployStatus(String.valueOf(type), String.valueOf(pageNum));
             }
         });
-        merchant_id = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);//userinfo sp文件中保存着3
+        tel = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_TEL, "");
         list.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
@@ -186,7 +135,23 @@ public class PartJobManagerFragment extends BaseFragment {
                 lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
             }
         });
+       subscriber = new BackgroundSubscriber<>(new SubscriberOnNextListener<List<JobInfo>>() {
+            @Override
+            public void onNext(List<JobInfo> model) {
+                if (refreshLayout!=null&& refreshLayout.isRefreshing()){
+                    refreshLayout.setRefreshing(false);
+                }
+                if (model.size() > 0 && model != null && Integer.valueOf(startPosition) == 0) {
+                    modleList.clear();
+                } else if (model!=null&&model.size()<10){
 
+                }
+                modleList.addAll(model);
+                adapter.notifyDataSetChanged();
+                pageNum = modleList.size() / 10+1;
+                loadOk = true;
+            }
+        }, getHoldingContext());
     }
 
     @Override
@@ -199,24 +164,10 @@ public class PartJobManagerFragment extends BaseFragment {
      * 获取商家录录取和完成信息列表
      */
     private void getMerchantEmployStatus(String type, final String count) {
-        BackgroundSubscriber<Model> subscriber = new BackgroundSubscriber<>(new SubscriberOnNextListener<Model>() {
-            @Override
-            public void onNext(Model model) {
-                if (refreshLayout!=null&& refreshLayout.isRefreshing()){
-                    refreshLayout.setRefreshing(false);
-                }
-                if (model.getList_t_job().size() > 0 && model != null && Integer.valueOf(count) == 0) {
-                    modleList.clear();
-                } else if (model!=null&&model.getList_t_job().size()<10){
-
-                }
-                modleList.addAll(model.getList_t_job());
-                adapter.notifyDataSetChanged();
-                loadOk = true;
-            }
-        }, getHoldingContext());
-
-        HttpMethods.getInstance().merchantEmployStatus(subscriber,String.valueOf(merchant_id),count,type);
+        startPosition= Integer.parseInt(count);
+        long timeMillis=System.currentTimeMillis();
+         String sign= MD5Util.getSign(getActivity(),timeMillis);
+        HttpMethods.getInstance().getJobList(subscriber,tel,sign, String.valueOf(timeMillis),type, String.valueOf(pageNum));
     }
 
     @Override
@@ -251,59 +202,7 @@ public class PartJobManagerFragment extends BaseFragment {
     }
 
 
-    /**
-     * postInfo
-     */
-    public void getJobs(String merchantId, String status, final String count) {
-        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
 
-        OkHttpUtils
-                .get()
-                .url(Constants.GET_PART_JOB_PUBLISH)
-                .addParams("only", only)
-                .addParams("merchant_id", merchantId)
-                .addParams("count", count)
-                .addParams("status", status)
-                .build()
-                .connTimeOut(60000)
-                .readTimeOut(20000)
-                .writeTimeOut(20000)
-                .execute(new Callback<BaseBean<Model>>() {
-                    @Override
-                    public BaseBean parseNetworkResponse(Response response, int id) throws Exception {
-                        String string = response.body().string();
-                        BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean<Model>>() {
-                        }.getType());
-                        return baseBean;
-                    }
-
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Message message = new Message();
-                        message.obj = e.toString();
-                        message.what = MSG_GET_FAIL;
-                        mHandler.sendMessage(message);
-                    }
-
-                    @Override
-                    public void onResponse(BaseBean baseBean, int id) {
-                        if (baseBean.getCode().equals("200")) {
-//                                SPUtils.setParam(AuthActivity.this, Constants.LOGIN_INFO, Constants.SP_TYPE, "0");
-                            Message message = new Message();
-                            message.obj = baseBean;
-                            message.arg1 = Integer.parseInt(count);
-                            message.what = MSG_GET_SUCCESS;
-                            mHandler.sendMessage(message);
-                        } else {
-                            Message message = new Message();
-                            message.obj = baseBean.getMessage();
-                            message.what = MSG_GET_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-                    }
-
-                });
-    }
 
 
 }

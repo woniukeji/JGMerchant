@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +36,7 @@ import com.woniukeji.jianmerchant.utils.EditCheckUtil;
 import com.woniukeji.jianmerchant.utils.FileUtils;
 import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.MD5Coder;
+import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 
 import org.json.JSONObject;
@@ -73,6 +75,7 @@ public class MerchantDetailActivity extends BaseActivity {
     private SubscriberOnNextListener<String> baseBeanSubscriberOnNextListener;
     private String token;
     private int loginId;
+    private String tel;
 
 
     @Override
@@ -88,6 +91,7 @@ public class MerchantDetailActivity extends BaseActivity {
 
     @Override
     public void initListeners() {
+
         baseBeanSubscriberOnNextListener=new SubscriberOnNextListener<String>() {
             @Override
             public void onNext(String s) {
@@ -101,7 +105,7 @@ public class MerchantDetailActivity extends BaseActivity {
     @Override
     public void initData() {
        merchantId = (int) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
-        loginId = (int) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
+        tel = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
         token = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_WQTOKEN, "");
         merchantBean = (MerchantBean) getIntent().getSerializableExtra("merchant");
     }
@@ -144,7 +148,14 @@ public class MerchantDetailActivity extends BaseActivity {
                     String merJson = gson.toJson(merchantBean);
                     upLoadQiNiu(this,key , filePath,1);
                     upLoadQiNiu(this,key2 , filepathHand,2);
-                    HttpMethods.getInstance().cerfication(new ProgressSubscriber<String>(baseBeanSubscriberOnNextListener,this), String.valueOf(loginId),String.valueOf(merchantId),token,merJson);
+                    long timeMillis = System.currentTimeMillis();
+                    String sign = MD5Util.getSign(MerchantDetailActivity.this,timeMillis);
+                    HttpMethods.getInstance().cerfication(new ProgressSubscriber<String>(baseBeanSubscriberOnNextListener,this),
+                            tel,sign,String.valueOf(timeMillis),"",merchantBean.getUserImage(),merchantBean.getRealName(),merchantBean.getName(),merchantBean.getCardNum(),merchantBean.getTel(),"2",
+                            merchantBean.getBussinessImg(),merchantBean.getHandImg(),merchantBean.getCompanyAddress(),merchantBean.getCompanyName(),
+                            merchantBean.getBussinessNum(),merchantBean.getContactName(),merchantBean.getContactPhone(),merchantBean.getEmail(),merchantBean.getProvince(),
+                            merchantBean.getCity(),merchantBean.getAbout()
+                            );
                 }
                 break;
         }

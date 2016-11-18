@@ -38,6 +38,7 @@ import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.MerchantBean;
+import com.woniukeji.jianmerchant.entity.NewMerchant;
 import com.woniukeji.jianmerchant.entity.User;
 import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
@@ -92,7 +93,7 @@ public class PasswordLoginFragment extends BaseFragment {
     private Handler mHandler = new Myhandler(getActivity());
     private Context context = getActivity();
     private TimeCount time;
-    private SubscriberOnNextListener<MerchantBean> subscriberOnNextListener;
+    private SubscriberOnNextListener<NewMerchant> subscriberOnNextListener;
 
     @Override
     public void onDestroyView() {
@@ -164,9 +165,9 @@ public class PasswordLoginFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-     subscriberOnNextListener=new SubscriberOnNextListener<MerchantBean>() {
+     subscriberOnNextListener=new SubscriberOnNextListener<NewMerchant>() {
          @Override
-         public void onNext(MerchantBean merchantBean) {
+         public void onNext(NewMerchant merchantBean) {
              saveToSP(merchantBean);
              SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_TYPE, 2);
          }
@@ -197,50 +198,51 @@ public class PasswordLoginFragment extends BaseFragment {
         tv.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    private void saveToSP(final MerchantBean user) {
+    private void saveToSP(final NewMerchant user) {
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_WQTOKEN, user.getToken() != null ? user.getToken() : "");
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_TEL, user.getTel() != null ? user.getTel() : "");
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PASSWORD, user.getPassword() != null ? user.getPassword() : "");
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID, user.getLoginId());
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, user.getMerchantId());
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getMerchantInfoStatus());
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getPermissions());
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, user.getCompanyName());
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, user.getUserImage());
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PAYSTATUS, user.getPayStatus());
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniuToken());
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PROVINCE, user.getProvince());
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_CITY, user.getCity());
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_ADDRESS, user.getCompanyAddress());
-        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.USER_PAY_PASS, user.getPayPassword());
-        if (!TextUtils.isEmpty(String.valueOf(user.getLoginId()))) {
-            if (JPushInterface.isPushStopped(getActivity().getApplicationContext())) {
-                JPushInterface.resumePush(getActivity().getApplicationContext());
-            }
-            //登陆leancloud服务器 给极光设置别名
-            LCChatKit.getInstance().open(String.valueOf(user.getLoginId()), new AVIMClientCallback() {
-                @Override
-                public void done(AVIMClient avimClient, AVIMException e) {
-                    if (null != e) {
-                        Toast.makeText(getActivity(), "聊天服务启动失败，稍后请重新登录", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-            JPushInterface.setAlias(getActivity().getApplicationContext(), "jianguo" + user.getLoginId(), new TagAliasCallback() {
-                @Override
-                public void gotResult(int i, String s, Set<String> set) {
-                    LogUtils.e("jpush", s + ",code=" + i);
-                }
-            });
-        }
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PASSWORD, user.getPassword() != null ? user.getPassword() : "");
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID, user.getLoginId());
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, user.getMerchantId());
+        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getAuth_status());
+        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getStatus());
+        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniu_token());
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, user.getCompanyName());
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, user.getUserImage());
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PAYSTATUS, user.getPayStatus());
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniuToken());
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PROVINCE, user.getProvince());
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_CITY, user.getCity());
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_ADDRESS, user.getCompanyAddress());
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.USER_PAY_PASS, user.getPayPassword());
+//        if (!TextUtils.isEmpty(String.valueOf(user.getLoginId()))) {
+//            if (JPushInterface.isPushStopped(getActivity().getApplicationContext())) {
+//                JPushInterface.resumePush(getActivity().getApplicationContext());
+//            }
+//            //登陆leancloud服务器 给极光设置别名
+//            LCChatKit.getInstance().open(String.valueOf(user.getLoginId()), new AVIMClientCallback() {
+//                @Override
+//                public void done(AVIMClient avimClient, AVIMException e) {
+//                    if (null != e) {
+//                        Toast.makeText(getActivity(), "聊天服务启动失败，稍后请重新登录", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//            JPushInterface.setAlias(getActivity().getApplicationContext(), "jianguo" + user.getLoginId(), new TagAliasCallback() {
+//                @Override
+//                public void gotResult(int i, String s, Set<String> set) {
+//                    LogUtils.e("jpush", s + ",code=" + i);
+//                }
+//            });
+//        }
         //是否填写商家资料信息 0未填写 1 正在审核 2审核拒绝 3审核通过
-        if (user.getMerchantInfoStatus()==0){
+        if (user.getAuth_status()==0){
             Intent intent = new Intent(getActivity(), ChooseActivity.class);
             startActivity(intent);
             getActivity().finish();
-        }else if (user.getMerchantInfoStatus()==1||user.getMerchantInfoStatus()==2){
+        }else if (user.getAuth_status()==1||user.getAuth_status()==2){
             Intent intent1 = new Intent(getActivity(), StatusActivity.class);
-            intent1.putExtra("type",user.getMerchantInfoStatus());
+            intent1.putExtra("type",user.getAuth_status());
             startActivity(intent1);
             getActivity().finish();
         }else {
@@ -261,8 +263,7 @@ public class PasswordLoginFragment extends BaseFragment {
                 String sms = phoneCode.getText().toString().trim();
                 if (CheckStatus()) {
 //                    PhoneLogin(tel, MD5Util.MD5(sms));
-
-                    HttpMethods.getInstance().passLogin(new ProgressSubscriber<MerchantBean>(subscriberOnNextListener,getActivity()),tel,MD5Util.MD5(sms));
+                    HttpMethods.getInstance().passLogin(new ProgressSubscriber<NewMerchant>(subscriberOnNextListener,getActivity()),tel,sms);
 
                 }
                 break;

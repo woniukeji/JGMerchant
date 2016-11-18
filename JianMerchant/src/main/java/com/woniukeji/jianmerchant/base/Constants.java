@@ -22,9 +22,9 @@ public class Constants {
     public static final String JIANGUO_TEST="http://101.200.195.147:8080/";
     public static final String JIANGUO_TEST2="http://v3.jianguojob.com:8080/";
     public static final String JIANGUO_xiao="http://192.168.1.115:8080/";
-    public static final String JIANGUO_xiao_new="http://192.168.43.90/JianGuo_Server/";
+    public static final String JIANGUO_yw="http://192.168.1.117:9090/";
     public static final String JIANGUO_jun="http://192.168.1.118:8080/";
-    public static final String JIANGUO_USING=JIANGUO_TEST2;
+    public static final String JIANGUO_USING=JIANGUO_yw;
     public static final String MARK_PIGEON= JIANGUO_USING+"T_UserPigeon_Servlet";//
     public static final String LOGIN= JIANGUO_USING+"AutoLoginServlet";//
     public static final String REC_SMS= JIANGUO_USING+"T_user_login_Check_BackTel_Servlet";//忘记密码 快速登录

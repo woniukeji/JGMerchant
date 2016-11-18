@@ -34,6 +34,7 @@ import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.CityCategory;
+import com.woniukeji.jianmerchant.entity.JobBase;
 import com.woniukeji.jianmerchant.entity.JobDetails;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
@@ -48,6 +49,7 @@ import com.woniukeji.jianmerchant.utils.CropCircleTransfermation;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.MD5Coder;
+import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.QiNiu;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.widget.CircleImageView;
@@ -263,70 +265,36 @@ public class PublishDetailActivity extends BaseActivity {
     private String[] second = new String[]{"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
     private JobDetails.TMerchantEntity merchantInfo = new JobDetails.TMerchantEntity();
     private JobDetails.TJobInfoEntity jobinfo = new JobDetails.TJobInfoEntity();
-    private int MSG_POST_SUCCESS = 0;
-    private int MSG_POST_FAIL = 1;
-    private int MSG_PHONE_SUCCESS = 2;
-    private int MSG_REGISTER_SUCCESS = 3;
     private Handler mHandler = new Myhandler(this);
     private Context context = PublishDetailActivity.this;
-    private String city_id = "";// 城市ID
-
     private String aera_id = "";//地区ID
-
-    private String type_id = "";//兼职类型ID
-
-    private String merchant_id = "";//    商家ID
-
     private String name = "";//      兼职名称
-
     private String name_image = "http://v3.jianguojob.com/logo.png";//    兼职图片
-
     private String start_date = "";//    开始日期
-
     private String stop_date = "";//  结束日期
-
     private String address = "";//        地址
-
     private String mode;//   结算方式（0=月结，1=周结，2=日结，3=旅行）
-
     private String money;//        钱
-
     private String term = "2";//    期限（0=月结，1=周结，2=日结，3=小时结，4=次，5=义工）给默认值
-
     private String limit_sex = "2";//         性别限制（0=只招女，1=只招男，2=不限男女，3=男女各需）
-
     private String sum;//        总人数
     private String girlsum;//
     private String hot;//        热门（0=普通，1=热门，2=精品，3=旅行）
-
     private String alike;//        相同（0=一条，时间戳=两条）
-
     private String tel;//         电话
-
     private String start_time;//        开始时间
-
     private String stop_time;//         结束时间
-
     private String set_place;//        集合地点
-
     private String set_time;//        集合时间
-
     private String other = "";//        其他
-
     private String work_content;//    工作内容
-
     private String work_require;//    工作要求
     private Context mContext = PublishDetailActivity.this;
-    private int merchantid;
     private SweetAlertDialog sweetAlertDialog;
-    private int MSG_GET_SUCCESS = 4;
-    private int MSG_GET_FAIL = 5;
-    private int MSG_GET_SINGLE_JOB_SUCESS = 6;
     private Model.ListTJobEntity listTJobEntity;
     /**
      * 限制条件
      */
-
     private String[] qualification;
     /**
      * 福利
@@ -351,7 +319,7 @@ public class PublishDetailActivity extends BaseActivity {
     /**
      * intent传递过来的cityAndCategoryBean对象，有工作限制，福利，兼职标签信息等
      */
-    private CityAndCategoryBean cityAndCategoryBean;
+    private JobBase cityAndCategoryBean;
     /**
      * 城市ID-->modify
      */
@@ -396,6 +364,8 @@ public class PublishDetailActivity extends BaseActivity {
     private StringBuffer labelOther;
     private boolean isFromActivity;
     private String jobid;
+    private String phone;
+    private SubscriberOnNextListener<JobBase> onNextListenner;
 
 
     @Override
@@ -410,25 +380,25 @@ public class PublishDetailActivity extends BaseActivity {
      * @param cityAndCategoryBean
      * @param strings
      */
-    private String[] getInfoForTag(CityAndCategoryBean cityAndCategoryBean, String strings) {
+    private String[] getInfoForTag(JobBase cityAndCategoryBean, String strings) {
         ArrayList<String> al = null;
         if (strings.equals("qualification")) {
             al = new ArrayList<>();
-            for (int i = 0; i < cityAndCategoryBean.getList_t_limit().size(); i++) {
-                al.add(cityAndCategoryBean.getList_t_limit().get(i).getLimit_name());
+            for (int i = 0; i < cityAndCategoryBean.getLimit_list().size(); i++) {
+                al.add(cityAndCategoryBean.getLimit_list().get(i).getName());
             }
             return al.toArray(new String[al.size()]);
         } else if (strings.equals("welfare")) {
             al = new ArrayList<>();
-            for (int i = 0; i < cityAndCategoryBean.getList_t_welfare().size(); i++) {
-                al.add(cityAndCategoryBean.getList_t_welfare().get(i).getWelfare_name());
+            for (int i = 0; i < cityAndCategoryBean.getWelfare_list().size(); i++) {
+                al.add(cityAndCategoryBean.getWelfare_list().get(i).getName());
             }
             return al.toArray(new String[al.size()]);
 
         } else if (strings.equals("partjob_tag")) {
             al = new ArrayList<>();
-            for (int i = 0; i < cityAndCategoryBean.getList_t_label().size(); i++) {
-                al.add(cityAndCategoryBean.getList_t_label().get(i).getLabel_name());
+            for (int i = 0; i < cityAndCategoryBean.getLabel_list().size(); i++) {
+                al.add(cityAndCategoryBean.getLabel_list().get(i).getName());
             }
             return al.toArray(new String[al.size()]);
         }
@@ -606,17 +576,17 @@ public class PublishDetailActivity extends BaseActivity {
                 //城市id选择后才能选择区域
                 if (String.valueOf(region_id) != null && !String.valueOf(region_id).equals("")) {
                     List<PickType> listAre = new ArrayList<>();
-                    List<CityAndCategoryBean.ListTCity2Bean.ListTAreaBean> list_t_area = new ArrayList<>();
-                    for (int i = 0; i < cityAndCategoryBean.getList_t_city2().size(); i++) {
-                        if (cityAndCategoryBean.getList_t_city2().get(i).getCode().equals(region_id)){
-                            list_t_area = cityAndCategoryBean.getList_t_city2().get(i).getList_t_area();
+                    List<JobBase.CityListBean.AreaListBean> list_t_area = new ArrayList<>();
+                    for (int i = 0; i < cityAndCategoryBean.getCity_list().size(); i++) {
+                        if (cityAndCategoryBean.getCity_list().get(i).getCode().equals(region_id)){
+                            list_t_area = cityAndCategoryBean.getCity_list().get(i).getAreaList();
                             break;
                         }
                     }
                     for (int i = 0; i < list_t_area.size(); i++) {
                         PickType pickType = new PickType();
                         pickType.setPickId(String.valueOf(list_t_area.get(i).getId()));
-                        pickType.setPickName(list_t_area.get(i).getArea_name());
+                        pickType.setPickName(list_t_area.get(i).getAreaName());
                         listAre.add(pickType);
                     }
                     TypePickerPopuWin pickerAre = new TypePickerPopuWin(context, listAre, mHandler, 6);
@@ -755,47 +725,69 @@ public class PublishDetailActivity extends BaseActivity {
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.cancel();
                                     job_model = sweetAlertDialog.getEditContent();
-                                    alike = "0";
-                                    if (limit_sex.equals("3")) {//男女各需
-                                        alike = "" + SystemClock.currentThreadTimeMillis();
-                                        // TODO: 2016/7/26 男女各需的情况
-                                        SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
-
+                                    if (limit_sex.equals("3")) {
+                                        SubscriberOnNextListener<String> nextListenner = new SubscriberOnNextListener<String>() {
                                             @Override
-                                            public void onNext(Jobs jobs) {
-                                                PublishDetailActivity.this.jobs = jobs;
-                                                LogUtils.i("jobs", jobs.toString());
-                                                String sucessMessage = "操作成功！";
+                                            public void onNext(String jobs) {
+                                                String sucessMessage = "保存成功！";
                                                 Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
-//                                                PublishDetailActivity.this.finish();
+                                                finish();
                                             }
                                         };
+                                        //job_model =0  不是模板
+                                        String girl_sum=etGirlCount.getText().toString();
+                                        String boy_sum=etBoyCount.getText().toString();
+                                        int sum =Integer.getInteger(girl_sum)+Integer.getInteger(boy_sum);
+                                        long timestamp= System.currentTimeMillis();
+                                        String sign = MD5Util.getSign(PublishDetailActivity.this,timestamp);
+                                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, PublishDetailActivity.this),
+                                                sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
+                                                address, mode, money, term, limit_sex, etGirlCount.getText().toString(),etBoyCount.getText().toString(),String.valueOf(sum), tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
+                                                qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"",job_model);
 
 
-                                        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-                                        HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
-                                                only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
-                                                address, mode, money, term, limit_sex, etBoyCount.getText().toString(),etGirlCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
-                                                job_model, qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
+                                        //男女各需
                                     } else {
-                                        alike = "0";
-                                        SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
+                                        SubscriberOnNextListener<String> nextListenner = new SubscriberOnNextListener<String>() {
 
                                             @Override
-                                            public void onNext(Jobs jobs) {
-                                                PublishDetailActivity.this.jobs = jobs;
-                                                LogUtils.i("jobs", jobs.toString());
-                                                String sucessMessage = "操作成功！";
+                                            public void onNext(String jobs) {
+//                                PublishDetailActivity.this.jobs = jobs;
+                                                //将刚发布的兼职信息写入到本地
+//                                LogUtils.i("jobs", new Gson().toJson(jobs).toString());
+                                                String sucessMessage = "发布成功！";
                                                 Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
-//                                                PublishDetailActivity.this.finish();
+                                                PublishDetailActivity.this.finish();
                                             }
                                         };
 
-                                        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-                                        HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
-                                                only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
-                                                address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
-                                                job_model, qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
+                                        //男女都限制数量，
+                                        String sum= etCount.getText().toString();
+                                        //job_model =0  不是模板
+                                        long timestamp= System.currentTimeMillis();
+                                        String sign = MD5Util.getSign(PublishDetailActivity.this,timestamp);
+                                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, PublishDetailActivity.this),
+                                                sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
+                                                address, mode, money, term, limit_sex, "0","0",sum, tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
+                                                qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"",job_model);
+
+//                                        SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
+//
+//                                            @Override
+//                                            public void onNext(Jobs jobs) {
+//                                                PublishDetailActivity.this.jobs = jobs;
+//                                                LogUtils.i("jobs", jobs.toString());
+//                                                String sucessMessage = "操作成功！";
+//                                                Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
+////                                                PublishDetailActivity.this.finish();
+//                                            }
+//                                        };
+//
+//                                        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+//                                        HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
+//                                                only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(""), name, name_image, start_date, stop_date,
+//                                                address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
+//                                                job_model, qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
                                     }
                                 }
                             })
@@ -812,47 +804,52 @@ public class PublishDetailActivity extends BaseActivity {
 
                 if (CheckStatus()) {
                     if (limit_sex.equals("3")) {
-                        alike = String.valueOf(System.currentTimeMillis());
-                        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-                        SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
+                        SubscriberOnNextListener<String> nextListenner = new SubscriberOnNextListener<String>() {
 
                             @Override
-                            public void onNext(Jobs jobs) {
-                                PublishDetailActivity.this.jobs = jobs;
+                            public void onNext(String jobs) {
+//                                PublishDetailActivity.this.jobs = jobs;
                                 //将刚发布的兼职信息写入到本地
-                                LogUtils.i("jobs", new Gson().toJson(jobs).toString());
+//                                LogUtils.i("jobs", new Gson().toJson(jobs).toString());
                                 String sucessMessage = "发布成功！";
                                 Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         };
                         //job_model =0  不是模板
-                        HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
-                                only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
-                                address, mode, money, term, limit_sex, etBoyCount.getText().toString(),etGirlCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
-                                "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
+                        String girl_sum=etGirlCount.getText().toString();
+                        String boy_sum=etBoyCount.getText().toString();
+                        int sum =Integer.getInteger(girl_sum)+Integer.getInteger(boy_sum);
+                                long timestamp= System.currentTimeMillis();
+                        String sign = MD5Util.getSign(PublishDetailActivity.this,timestamp);
+                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, PublishDetailActivity.this),
+                                sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
+                                address, mode, money, term, limit_sex, etGirlCount.getText().toString(),etBoyCount.getText().toString(),String.valueOf(sum), tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
+                               qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"","0");
 
                     } else {
-                        alike = "0";
-                        SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
+                        SubscriberOnNextListener<String> nextListenner = new SubscriberOnNextListener<String>() {
 
                             @Override
-                            public void onNext(Jobs jobs) {
-                                PublishDetailActivity.this.jobs = jobs;
+                            public void onNext(String jobs) {
+//                                PublishDetailActivity.this.jobs = jobs;
                                 //将刚发布的兼职信息写入到本地
-                                LogUtils.i("jobs", new Gson().toJson(jobs).toString());
-                                String sucessMessage = "发布成功！";
+//                                LogUtils.i("jobs", new Gson().toJson(jobs).toString());
+                                String sucessMessage = "保存成功！";
                                 Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
                                 PublishDetailActivity.this.finish();
                             }
                         };
-                        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-                        //job_model =0  不是模板
-                        HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
-                                only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
-                                address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
-                                "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
 
+                        //男女都限制数量，
+                        String sum= etCount.getText().toString();
+                        //job_model =0  不是模板
+                        long timestamp= System.currentTimeMillis();
+                        String sign = MD5Util.getSign(PublishDetailActivity.this,timestamp);
+                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, PublishDetailActivity.this),
+                                sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
+                                address, mode, money, term, limit_sex, "0","0",sum, tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
+                                qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"","0");
                     }
                 }
                 break;
@@ -871,7 +868,7 @@ public class PublishDetailActivity extends BaseActivity {
                         };
                         //job_model =0  不是模板
                         HttpMethods.getInstance().updateJob(new ProgressSubscriber<BaseBean>(nextListenner, PublishDetailActivity.this),only,jobid,
-                                String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
+                                String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(""), name, name_image, start_date, stop_date,
                                 address, mode, money, term, limit_sex, etBoyCount.getText().toString(),etGirlCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
                                 "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
 
@@ -887,7 +884,7 @@ public class PublishDetailActivity extends BaseActivity {
                         };
                         //job_model =0  不是模板
                         HttpMethods.getInstance().updateJob(new ProgressSubscriber<BaseBean>(nextListenner, PublishDetailActivity.this),only,jobid,
-                                String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(merchantid), name, name_image, start_date, stop_date,
+                                String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(""), name, name_image, start_date, stop_date,
                                 address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
                                 "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
                     }
@@ -990,13 +987,15 @@ public class PublishDetailActivity extends BaseActivity {
     public void setContentView() {
         setContentView(R.layout.activity_publish_detail);
         ButterKnife.bind(this);
-//        EventBus.getDefault().register(this);
     }
 
     @Override
     public void initViews() {
-
-
+        phone = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
+        getCategoryToBeanNew();
+        long times=System.currentTimeMillis();
+        String sign=MD5Util.getSign(PublishDetailActivity.this,times);
+        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this), phone,sign,String.valueOf(times));
         intent = getIntent();
         if (intent.getStringExtra("type").equals("change")) {
             jobid = intent.getStringExtra("jobid");
@@ -1004,7 +1003,9 @@ public class PublishDetailActivity extends BaseActivity {
             isFromItem = true;//目的是不走下面的判断
             isFromActivity = true;
             getCategoryToBeanNew();
+            changeJob();
         }else if (intent.getAction().equals("fromFragment")) {
+            cityAndCategoryBean= intent.getParcelableExtra("jobbase");
             Bundle bundle = intent.getExtras();
             region = bundle.getString("region");
             region_id = bundle.getString("region_id");//地区id
@@ -1012,68 +1013,23 @@ public class PublishDetailActivity extends BaseActivity {
             type_id1 = bundle.getInt("type_id");//兼职类型id
             category = bundle.getString("category");
             category_id = bundle.getInt("category_id");//职位id
-            cityAndCategoryBean = bundle.getParcelable("CityAndCategoryBean");
-            qualification = getInfoForTag(cityAndCategoryBean, "qualification");
-            welfare = getInfoForTag(cityAndCategoryBean, "welfare");
-            partjob_tag = getInfoForTag(cityAndCategoryBean, "partjob_tag");
         } else if (intent.getAction().equals("fromItem")) {
             //获取从历史纪录里传递过来的intent
             modle = (Model.ListTJobEntity) intent.getSerializableExtra("job");
             getCategoryToBean();
             isFromItem = true;
         }
-        if (!isFromItem) {
-            //这以下设置流布局标签
-            quaAdapter = new TagAdapter(qualification) {
-                @Override
-                public View getView(FlowLayout parent, int position, Object o) {
-                    TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_qualification, false);
-                    textView.setText((String) o);
-                    return textView;
-                }
-            };
-            flow_qualification.setAdapter(quaAdapter);
-            welAdapter = new TagAdapter(welfare) {
-                @Override
-                public View getView(FlowLayout parent, int position, Object o) {
-                    TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_welfare, false);
-                    textView.setText((String) o);
-                    return textView;
-                }
-            };
-            flow_welfare.setAdapter(welAdapter);
-            partAdapter = new TagAdapter(partjob_tag) {
-                @Override
-                public View getView(FlowLayout parent, int position, Object o) {
-                    TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_partjob, false);
-                    textView.setText((String) o);
-                    return textView;
-                }
-            };
-            flow_partjob.setAdapter(partAdapter);
-            //这以上设置流布局标签
-        }
-
 
         //获取限制，福利，标签String数组--
         // TODO: 2016/7/26 需要移动到历史或者模板页面
 
-//        } else if (mType.equals("change")) {//修改兼职传过来
-//            String jobid = intent.getStringExtra("jobid");
-//            llPublish.setVisibility(View.GONE);
-//            llChange.setVisibility(View.VISIBLE);
-//            GetSingleJobTask getSingleJobTask = new GetSingleJobTask(jobid);
-//            getSingleJobTask.execute();
-//        }
-//        sweetAlertDialog = new SweetAlertDialog(PublishDetailActivity.this, SweetAlertDialog.PROGRESS_TYPE);
 
     }
 
     private void getCategoryToBeanNew() {
-        SubscriberOnNextListener<CityAndCategoryBean> onNextListenner = new SubscriberOnNextListener<CityAndCategoryBean>() {
-
+        onNextListenner = new SubscriberOnNextListener<JobBase>() {
             @Override
-            public void onNext(CityAndCategoryBean cityAndCategoryBean) {
+            public void onNext(JobBase cityAndCategoryBean) {
                 PublishDetailActivity.this.cityAndCategoryBean = cityAndCategoryBean;
                 qualification = getInfoForTag(cityAndCategoryBean, "qualification");
                 welfare = getInfoForTag(cityAndCategoryBean, "welfare");
@@ -1107,7 +1063,6 @@ public class PublishDetailActivity extends BaseActivity {
                 };
                 flow_partjob.setAdapter(partAdapter);
 //                EventBus.getDefault().post(new ChangeJobEvent());
-                changeJob();
                 //这以上设置流布局标签
 //                if (isFromItem) {
 //                    //如果是从item过来的走下面
@@ -1117,10 +1072,7 @@ public class PublishDetailActivity extends BaseActivity {
             }
         };
 
-        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-        int loginId = (int) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
-        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<CityAndCategoryBean>(onNextListenner, this), only, String.valueOf(loginId));
-    }
+           }
 
     private void changeJob() {
         llPublish.setVisibility(View.GONE);
@@ -1142,10 +1094,10 @@ public class PublishDetailActivity extends BaseActivity {
      * 访问网络获取兼职类别
      */
     private void getCategoryToBean() {
-        SubscriberOnNextListener<CityAndCategoryBean> onNextListenner = new SubscriberOnNextListener<CityAndCategoryBean>() {
+        SubscriberOnNextListener<JobBase> onNextListenner = new SubscriberOnNextListener<JobBase>() {
 
             @Override
-            public void onNext(CityAndCategoryBean cityAndCategoryBean) {
+            public void onNext(JobBase cityAndCategoryBean) {
                 PublishDetailActivity.this.cityAndCategoryBean = cityAndCategoryBean;
                 qualification = getInfoForTag(cityAndCategoryBean, "qualification");
                 welfare = getInfoForTag(cityAndCategoryBean, "welfare");
@@ -1187,9 +1139,9 @@ public class PublishDetailActivity extends BaseActivity {
             }
         };
 
-        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-        int loginId = (int) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
-        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<CityAndCategoryBean>(onNextListenner, this), only, String.valueOf(loginId));
+        long times=System.currentTimeMillis();
+        String sign=MD5Util.getSign(PublishDetailActivity.this,times);
+        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this), phone,sign,String.valueOf(times));
     }
 
     private void initModleData(Model.ListTJobEntity modle) {
@@ -1275,7 +1227,7 @@ public class PublishDetailActivity extends BaseActivity {
             while (qualificationIterator.hasNext()) {
                 qualificationJsonArray.add(1+qualificationIterator.next()+"");
             }
-            qualificationJsonObj.add("list_t_limit", qualificationJsonArray);
+            qualificationJsonObj.add("limit_list", qualificationJsonArray);
         }
 
         if (flow_welfare.getSelectedList().size() > 0) {
@@ -1285,7 +1237,7 @@ public class PublishDetailActivity extends BaseActivity {
             while (welfareIterator.hasNext()) {
                 welfareJsonArray.add(1+welfareIterator.next()+"");
             }
-            welfareJsonObj.add("list_t_welfare", welfareJsonArray);
+            welfareJsonObj.add("welfare_list", welfareJsonArray);
         }
 
         if (flow_partjob.getSelectedList().size() > 0) {
@@ -1295,7 +1247,7 @@ public class PublishDetailActivity extends BaseActivity {
             while (labelIterator.hasNext()) {
                 partjobJsonArray.add(1+labelIterator.next()+"");
             }
-            labelJsonObj.add("list_t_label", partjobJsonArray);
+            labelJsonObj.add("label_list", partjobJsonArray);
         }
     }
 
@@ -1365,9 +1317,6 @@ public class PublishDetailActivity extends BaseActivity {
                 return false;
             }
         });
-        int loginId = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
-//        GetTask getTask = new GetTask(String.valueOf(loginId));
-//        getTask.execute();
 
         //给标签添加监听
         flow_qualification.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
@@ -1384,7 +1333,7 @@ public class PublishDetailActivity extends BaseActivity {
                         Integer next = iterator.next();
                         qualificationJsonArray.add(1+next + "");
                     }
-                    qualificationJsonObj.add("list_t_limit", qualificationJsonArray);
+                    qualificationJsonObj.add("limit_list", qualificationJsonArray);
 
 
             }
@@ -1403,7 +1352,7 @@ public class PublishDetailActivity extends BaseActivity {
                         Integer next = iterator.next();
                         welfareJsonArray.add(1+next + "");
                     }
-                    welfareJsonObj.add("list_t_welfare", welfareJsonArray);
+                    welfareJsonObj.add("welfare_list", welfareJsonArray);
             }
         });
         flow_partjob.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
@@ -1420,7 +1369,7 @@ public class PublishDetailActivity extends BaseActivity {
                         Integer next = iterator.next();
                         labelJsonArray.add(1+next + "");
                     }
-                    labelJsonObj.add("list_t_label", labelJsonArray);
+                    labelJsonObj.add("label_list", labelJsonArray);
             }
         });
     }
@@ -1444,12 +1393,11 @@ public class PublishDetailActivity extends BaseActivity {
         }
         return sb.toString().substring(0, sb.toString().lastIndexOf(","));
 
-
     }
 
     @Override
     public void initData() {
-        merchantid = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
+        phone = String.valueOf(SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, ""));
     }
 
     @Override
@@ -1462,7 +1410,6 @@ public class PublishDetailActivity extends BaseActivity {
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
@@ -1495,8 +1442,8 @@ public class PublishDetailActivity extends BaseActivity {
                 File file = new File(Environment.getExternalStorageDirectory() + "/" + fileName + ".png");
                 CommonUtils.copyfile(imgFile, file, true);
                 BitmapUtils.compressBitmap(file.getAbsolutePath(), 300, 300);
-                name_image = "http://7xlell.com2.z0.glb.qiniucdn.com/" + MD5Coder.getQiNiuName(String.valueOf(merchantid));
-                QiNiu.upLoadQiNiu(context, MD5Coder.getQiNiuName(String.valueOf(merchantid)), file);
+                name_image = "http://7xlell.com2.z0.glb.qiniucdn.com/" + MD5Coder.getQiNiuName(String.valueOf(phone));
+                QiNiu.upLoadQiNiu(context, MD5Coder.getQiNiuName(String.valueOf(phone)), file);
 
             }
         } else if (requestCode == 1) {
@@ -1513,338 +1460,6 @@ public class PublishDetailActivity extends BaseActivity {
 
     }
 
-    public class GetSingleJobTask extends AsyncTask<Void, Void, Void> {
-        private final String jobId;
-
-        GetSingleJobTask(String jobId) {
-            this.jobId = jobId;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-            try {
-                getSingleJobInfo();
-            } catch (Exception e) {
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        /**
-         * 获取单个兼职信息用于修改
-         */
-        public void getSingleJobInfo() {
-            String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-            OkHttpUtils
-                    .get()
-                    .url(Constants.GET_SINGLE_JOB_INFO)
-                    .addParams("only", only)
-                    .addParams("job_id", jobId)
-                    .build()
-                    .connTimeOut(60000)
-                    .readTimeOut(20000)
-                    .writeTimeOut(20000)
-                    .execute(new Callback<BaseBean<Model>>() {
-                        @Override
-                        public BaseBean parseNetworkResponse(Response response, int id) throws Exception {
-                            String string = response.body().string();
-                            BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean<Model>>() {
-                            }.getType());
-                            return baseBean;
-                        }
-
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            Message message = new Message();
-                            message.obj = e.toString();
-                            message.what = MSG_GET_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-
-                        @Override
-                        public void onResponse(BaseBean baseBean, int id) {
-                            if (baseBean.getCode().equals("200")) {
-                                Message message = new Message();
-                                message.obj = baseBean;
-                                message.what = MSG_GET_SINGLE_JOB_SUCESS;
-                                mHandler.sendMessage(message);
-                            } else {
-                                Message message = new Message();
-                                message.obj = baseBean.getMessage();
-                                message.what = MSG_GET_FAIL;
-                                mHandler.sendMessage(message);
-                            }
-                        }
-
-                    });
-        }
-    }
-
-    public class GetTask extends AsyncTask<Void, Void, Void> {
-        private final String loginId;
-
-        GetTask(String loginId) {
-            this.loginId = loginId;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-            try {
-                getCityCategory();
-            } catch (Exception e) {
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        /**
-         * 获取城市列表和兼职种类
-         */
-        public void getCityCategory() {
-            String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-            OkHttpUtils
-                    .get()
-                    .url(Constants.GET_CITY_CATEGORY)
-                    .addParams("only", only)
-                    .addParams("login_id", loginId)
-                    .build()
-                    .connTimeOut(60000)
-                    .readTimeOut(20000)
-                    .writeTimeOut(20000)
-                    .execute(new Callback<BaseBean<CityCategory>>() {
-                        @Override
-                        public BaseBean parseNetworkResponse(Response response, int id) throws Exception {
-                            String string = response.body().string();
-                            BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean<CityCategory>>() {
-                            }.getType());
-                            return baseBean;
-                        }
-
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            Message message = new Message();
-                            message.obj = e.toString();
-                            message.what = MSG_GET_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-
-                        @Override
-                        public void onResponse(BaseBean baseBean, int id) {
-                            if (baseBean.getCode().equals("200")) {
-                                Message message = new Message();
-                                message.obj = baseBean;
-                                message.what = MSG_GET_SUCCESS;
-                                mHandler.sendMessage(message);
-                            } else {
-                                Message message = new Message();
-                                message.obj = baseBean.getMessage();
-                                message.what = MSG_GET_FAIL;
-                                mHandler.sendMessage(message);
-                            }
-                        }
-
-                    });
-        }
-    }
-
-    public class PostPartInfoTask extends AsyncTask<Void, Void, Void> {
-        private String mSum;
-        private String mSex_limit;
-        private String mjob_model = "0";
-
-        PostPartInfoTask(String sum, String Sex_limit) {
-            this.mSum = sum;
-            this.mSex_limit = Sex_limit;
-        }
-
-        PostPartInfoTask(String sum, String Sex_limit, String job_model) {
-            this.mSum = sum;
-            this.mSex_limit = Sex_limit;
-            this.mjob_model = job_model;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-            try {
-                postPartInfo();
-            } catch (Exception e) {
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            if (!sweetAlertDialog.isShowing()) {
-                sweetAlertDialog.setTitleText("提交中");
-                sweetAlertDialog.getProgressHelper().setBarColor(R.color.app_bg);
-                sweetAlertDialog.show();
-            }
-
-            super.onPreExecute();
-        }
-
-        /**
-         * 提交兼职信息
-         */
-        public void postPartInfo() {
-            String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-            OkHttpUtils
-                    .post()
-                    .url(Constants.POST_PART_INFO)
-                    .addParams("only", only)
-                    .addParams("city_id", String.valueOf(region_id))
-                    .addParams("aera_id", String.valueOf(type_id1))
-                    .addParams("type_id", String.valueOf(category_id))
-                    .addParams("merchant_id", String.valueOf(merchantid))
-                    .addParams("name", name)
-                    .addParams("name_image", name_image)
-                    .addParams("start_date", start_date)
-                    .addParams("stop_date", stop_date)
-                    .addParams("address", address)
-                    .addParams("mode", mode)
-                    .addParams("money", money)
-                    .addParams("term", term)
-                    .addParams("limit_sex", mSex_limit)
-                    .addParams("sum", mSum)
-                    .addParams("max", hot)
-                    .addParams("alike", alike)
-                    .addParams("lon", "0")
-                    .addParams("lat", "0")
-                    .addParams("tel", tel)
-                    .addParams("start_time", start_time)
-                    .addParams("stop_time", stop_time)
-                    .addParams("set_place", set_place)
-                    .addParams("set_time", set_time)
-                    .addParams("work_content", work_content)
-                    .addParams("work_require", work_require)
-                    .addParams("job_model", mjob_model)
-//                    .addParams("json_limit",qualificationJsonArray.toString())
-//                    .addParams("json_welfare",welfareJsonArray.toString())
-//                    .addParams("json_label",partjobJsonArray.toString())
-                    .build()
-                    .connTimeOut(60000)
-                    .readTimeOut(20000)
-                    .writeTimeOut(20000)
-                    .execute(new Callback<BaseBean<Jobs>>() {
-                        @Override
-                        public BaseBean parseNetworkResponse(Response response, int id) throws Exception {
-                            String string = response.body().string();
-                            BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean<Jobs>>() {
-                            }.getType());
-                            return baseBean;
-                        }
-
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            Message message = new Message();
-                            message.obj = e.toString();
-                            message.what = MSG_POST_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-
-                        @Override
-                        public void onResponse(BaseBean baseBean, int id) {
-                            if (baseBean.getCode().equals("200")) {
-                                Message message = new Message();
-                                message.obj = baseBean.getMessage();
-                                message.what = MSG_POST_SUCCESS;
-                                mHandler.sendMessage(message);
-                            } else {
-                                Message message = new Message();
-                                message.obj = baseBean.getMessage();
-                                message.what = MSG_POST_FAIL;
-                                mHandler.sendMessage(message);
-                            }
-                        }
-
-                    });
-        }
-    }
-
-    /**
-     * 修改兼职信息
-     */
-    public void postChangeInfo(String count, String mSex_limit, String job_id) {
-        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-        OkHttpUtils
-                .get()
-                .url(Constants.POST_JOB_INFO)
-                .addParams("only", only)
-                .addParams("city_id", city_id)
-                .addParams("aera_id", aera_id)
-                .addParams("type_id", type_id)
-                .addParams("merchant_id", String.valueOf(merchantid))
-                .addParams("name", name)
-                .addParams("name_image", name_image)
-                .addParams("start_date", start_date)
-                .addParams("stop_date", stop_date)
-                .addParams("address", address)
-                .addParams("mode", mode)
-                .addParams("money", money)
-                .addParams("term", term)
-                .addParams("limit_sex", mSex_limit)
-                .addParams("sum", count)
-                .addParams("max", hot)
-                .addParams("alike", alike)
-                .addParams("lon", "0")
-                .addParams("lat", "0")
-                .addParams("tel", tel)
-                .addParams("start_time", start_time)
-                .addParams("stop_time", stop_time)
-                .addParams("set_place", set_place)
-                .addParams("set_time", set_time)
-                .addParams("work_content", work_content)
-                .addParams("work_require", work_require)
-                .addParams("job_id", job_id)
-                .build()
-                .connTimeOut(60000)
-                .readTimeOut(20000)
-                .writeTimeOut(20000)
-                .execute(new Callback<BaseBean>() {
-                    @Override
-                    public BaseBean parseNetworkResponse(Response response, int id) throws Exception {
-                        String string = response.body().string();
-                        BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean>() {
-                        }.getType());
-                        return baseBean;
-                    }
-
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Message message = new Message();
-                        message.obj = e.toString();
-                        message.what = MSG_POST_FAIL;
-                        mHandler.sendMessage(message);
-                    }
-
-                    @Override
-                    public void onResponse(BaseBean baseBean, int id) {
-                        if (baseBean.getCode().equals("200")) {
-                            Message message = new Message();
-                            message.obj = baseBean.getMessage();
-                            message.what = MSG_POST_SUCCESS;
-                            mHandler.sendMessage(message);
-                        } else {
-                            Message message = new Message();
-                            message.obj = baseBean.getMessage();
-                            message.what = MSG_POST_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-                    }
-
-                });
-    }
 
     //自动收起键盘的操作 通过判断当前的view实例是不是edittext来决定
     @Override

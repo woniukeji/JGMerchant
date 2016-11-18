@@ -3,6 +3,7 @@ package com.woniukeji.jianmerchant.activity.certification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
+import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 
 import butterknife.BindView;
@@ -39,12 +41,10 @@ public class StatusActivity extends BaseActivity {
     private int type;
     private SubscriberOnNextListener<Status> subscriberOnNextListener;
     private int merchantId;
+    private String tel;
+    private String token;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     public void setContentView() {
@@ -70,16 +70,19 @@ public class StatusActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        HttpMethods.getInstance().getStatus(new ProgressSubscriber<Status>(subscriberOnNextListener,this),String.valueOf(merchantId));
+        long timestamp = System.currentTimeMillis();
+        String sign = MD5Util.getSign(StatusActivity.this, timestamp);
+        HttpMethods.getInstance().getStatus(new ProgressSubscriber<Status>(subscriberOnNextListener,this),tel, String.valueOf(timestamp),sign);
 
     }
 
     @Override
     public void initListeners() {
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.top);
         subscriberOnNextListener =  new SubscriberOnNextListener<Status>() {
-
             @Override
             public void onNext(Status o) {
+                swipeRefreshLayout.setRefreshing(false);
                 type=o.getStatus();
                 if (type == 1) {
                     tvStatus.setText("正在审核中");
@@ -96,17 +99,30 @@ public class StatusActivity extends BaseActivity {
                 }
             }
         };
+        swipeRefreshLayout.setColorSchemeResources(R.color.app_bg);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                long timestamp = System.currentTimeMillis();
+                String sign = MD5Util.getSign(StatusActivity.this, timestamp);
+                HttpMethods.getInstance().getStatus(new ProgressSubscriber<Status>(subscriberOnNextListener,StatusActivity.this),tel, String.valueOf(timestamp),sign);
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        HttpMethods.getInstance().getStatus(new ProgressSubscriber<Status>(subscriberOnNextListener,this),String.valueOf(merchantId));
+        long timestamp = System.currentTimeMillis();
+        String sign = MD5Util.getSign(StatusActivity.this, timestamp);
+        HttpMethods.getInstance().getStatus(new ProgressSubscriber<Status>(subscriberOnNextListener,this),tel, String.valueOf(timestamp),sign);
 
     }
 
     @Override
     public void initData() {
+        tel = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
+        token = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_WQTOKEN, "");
           }
 
     @Override

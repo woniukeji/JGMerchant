@@ -13,6 +13,7 @@ import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.adapter.FooterViewHolder;
 import com.woniukeji.jianmerchant.adapter.HistoryJobItemViewHolder;
 import com.woniukeji.jianmerchant.base.Constants;
+import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 
@@ -22,7 +23,7 @@ import butterknife.BindView;
 
 public class HistoryJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final List<Model.ListTJobEntity> mValues;
+    private final List<JobInfo> mValues;
     private final Context mContext;
     private  String mType;
     public static final int NORMAL = 1;
@@ -46,11 +47,11 @@ public class HistoryJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
 
-    public HistoryJobAdapter(List<Model.ListTJobEntity> items, Context context, String type) {
+    public HistoryJobAdapter(List<JobInfo> items, Context context, String type) {
         mValues = items;
         mContext = context;
         mType=type;
-        name= (String) SPUtils.getParam(mContext, Constants.USER_INFO,Constants.USER_NAME,"");
+        name= (String) SPUtils.getParam(mContext, Constants.LOGIN_INFO,Constants.SP_TEL,"");
     }
 
 

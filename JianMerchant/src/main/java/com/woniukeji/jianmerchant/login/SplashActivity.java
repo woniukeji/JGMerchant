@@ -24,7 +24,14 @@ import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.MerchantBean;
+import com.woniukeji.jianmerchant.entity.NewMerchant;
 import com.woniukeji.jianmerchant.entity.User;
+import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
+import com.woniukeji.jianmerchant.http.BackgroundSubscriberOnerror;
+import com.woniukeji.jianmerchant.http.HttpMethods;
+import com.woniukeji.jianmerchant.http.ProgressSubscriber;
+import com.woniukeji.jianmerchant.http.SubscriberOnNextErrorListener;
+import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.LogUtils;
@@ -46,14 +53,9 @@ import okhttp3.Response;
 public class SplashActivity extends BaseActivity {
 
     @BindView(R.id.img_splash) ImageView imgSplash;
-    private int MSG_USER_SUCCESS = 0;
-    private int MSG_USER_FAIL = 1;
-    private int MSG_PHONE_SUCCESS = 2;
-    private int MSG_REGISTER_SUCCESS = 3;
     private Handler mHandler = new Myhandler(this);
     private Context context = SplashActivity.this;
-
-
+    private SubscriberOnNextErrorListener<NewMerchant> subscriberOnNextListener;
 
     private static class Myhandler extends Handler {
         private WeakReference<Context> reference;
@@ -67,24 +69,7 @@ public class SplashActivity extends BaseActivity {
             super.handleMessage(msg);
             SplashActivity splashActivity = (SplashActivity) reference.get();
             switch (msg.what) {
-                case 0:
-                    BaseBean<MerchantBean> merchantBean = (BaseBean<MerchantBean>) msg.obj;
-                    splashActivity.saveToSP(merchantBean.getData());
-                    SPUtils.setParam(splashActivity, Constants.LOGIN_INFO, Constants.SP_TYPE, 2);
-                    break;
-                case 1:
-                    splashActivity.startActivity(new Intent(splashActivity, LoginNewActivity.class));
-                    String ErrorMessage = (String) msg.obj;
-                    Toast.makeText(splashActivity, ErrorMessage, Toast.LENGTH_SHORT).show();
-                    splashActivity.finish();
-                    break;
-                case 2:
 
-                    break;
-                case 3:
-                    String sms = (String) msg.obj;
-                    Toast.makeText(splashActivity, sms, Toast.LENGTH_SHORT).show();
-                    break;
                 default:
                     break;
             }
@@ -93,25 +78,24 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void setContentView() {
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            getWindow().setStatusBarColor(Color.TRANSPARENT);
-//        }
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
     }
 
     @Override
     public void initViews() {
-        //初始化SDK
-//        ShareSDK.initSDK(this);
-//        Picasso.with(context).load(R.mipmap.splash).into(imgSplash);
     }
 
     @Override
     public void initListeners() {
+        subscriberOnNextListener=new SubscriberOnNextErrorListener<NewMerchant>() {
+            @Override
+            public void onNext(NewMerchant merchantBean) {
+                saveToSP(merchantBean);
+                SPUtils.setParam(SplashActivity.this, Constants.LOGIN_INFO, Constants.SP_TYPE, 2);
+            }
 
+        };
     }
 
     @Override
@@ -124,27 +108,35 @@ public class SplashActivity extends BaseActivity {
         ActivityManager.getActivityManager().addActivity(SplashActivity.this);
     }
 
-    private void saveToSP(MerchantBean user) {
+    private void saveToSP(NewMerchant user) {
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_WQTOKEN, user.getToken() != null ? user.getToken() : "");
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, user.getTel() != null ? user.getTel() : "");
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PASSWORD, user.getPassword() != null ? user.getPassword() : "");
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, user.getLoginId());
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, user.getMerchantId());
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getMerchantInfoStatus());
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getPermissions());
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, user.getCompanyName());
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, user.getUserImage());
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PAYSTATUS, user.getPayStatus());
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniuToken());
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PROVINCE, user.getProvince());
-        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_CITY, user.getCity());
-        SPUtils.setParam(this, Constants.LOGIN_INFO,Constants.SP_ADDRESS, user.getCompanyAddress());   if (!TextUtils.isEmpty(String.valueOf(user.getLoginId()))) {
-            SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.USER_PAY_PASS, user.getPayPassword());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, user.getTel()!= null ? user.getTel() : "");
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PASSWORD, user.getPassword() != null ? user.getPassword() : "");
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, user.getId());
+//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, user.getMerchantId());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getAuth_status());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getStatus());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniu_token());
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_WQTOKEN, user.getToken() != null ? user.getToken() : "");
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, user.getTel() != null ? user.getTel() : "");
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PASSWORD, user.getPassword() != null ? user.getPassword() : "");
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, user.getLoginId());
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, user.getMerchantId());
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getMerchantInfoStatus());
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getPermissions());
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, user.getCompanyName());
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, user.getUserImage());
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PAYSTATUS, user.getPayStatus());
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniuToken());
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PROVINCE, user.getProvince());
+//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_CITY, user.getCity());
+//        SPUtils.setParam(this, Constants.LOGIN_INFO,Constants.SP_ADDRESS, user.getCompanyAddress());   if (!TextUtils.isEmpty(String.valueOf(user.getLoginId()))) {
+//            SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.USER_PAY_PASS, user.getPayPassword());
             if (JPushInterface.isPushStopped(this.getApplicationContext())) {
                 JPushInterface.resumePush(this.getApplicationContext());
             }
             //登陆leancloud服务器 给极光设置别名
-            LCChatKit.getInstance().open(String.valueOf(user.getLoginId()), new AVIMClientCallback() {
+            LCChatKit.getInstance().open(String.valueOf(user.getId()), new AVIMClientCallback() {
                 @Override
                 public void done(AVIMClient avimClient, AVIMException e) {
                     if (null != e) {
@@ -152,21 +144,20 @@ public class SplashActivity extends BaseActivity {
                     }
                 }
             });
-            JPushInterface.setAlias(this.getApplicationContext(), "jianguo" + user.getLoginId(), new TagAliasCallback() {
+            JPushInterface.setAlias(this.getApplicationContext(), "jianguo" + user.getId(), new TagAliasCallback() {
                 @Override
                 public void gotResult(int i, String s, Set<String> set) {
                     LogUtils.e("jpush", s + ",code=" + i);
                 }
             });
-        }
-        //是否填写商家资料信息 0未填写 1 正在审核 2审核拒绝 3审核通过
-        if (user.getMerchantInfoStatus()==0){
+        //是否填写商家资料信息 1未填写 2 正在审核 3审核拒绝 4审核通过
+        if (user.getAuth_status()==0){
             Intent intent = new Intent(this, ChooseActivity.class);
             startActivity(intent);
             this.finish();
-        }else if (user.getMerchantInfoStatus()==1||user.getMerchantInfoStatus()==2){
+        }else if (user.getAuth_status()==1||user.getAuth_status()==2){
             Intent intent1 = new Intent(this, StatusActivity.class);
-            intent1.putExtra("type",user.getMerchantInfoStatus());
+            intent1.putExtra("type",user.getAuth_status());
             startActivity(intent1);
             this.finish();
         }else {
@@ -177,12 +168,9 @@ public class SplashActivity extends BaseActivity {
         }
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
-
-
     }
 
     @Override
@@ -199,11 +187,10 @@ public class SplashActivity extends BaseActivity {
                 chooseActivity();
             }
 
-            ;
+
         }.start();
         super.onStart();
     }
-
     /**
      * chooseActivity
      * 根据保存的登陆信息 跳转不同界面
@@ -220,8 +207,8 @@ public class SplashActivity extends BaseActivity {
             finish();
         }else {
             String phone= (String) SPUtils.getParam(context,Constants.LOGIN_INFO,Constants.SP_TEL,"");
-            String pass= (String) SPUtils.getParam(context,Constants.LOGIN_INFO,Constants.SP_WQTOKEN,"");
-            PhoneLogin(phone, pass);
+            String token= (String) SPUtils.getParam(context,Constants.LOGIN_INFO,Constants.SP_WQTOKEN,"");
+            HttpMethods.getInstance().autoLogin(new BackgroundSubscriberOnerror<NewMerchant>(subscriberOnNextListener,this),phone,token);
         }
     }
 
@@ -230,57 +217,6 @@ public class SplashActivity extends BaseActivity {
 
     }
 
-        /**
-         * phoneLogin
-         * @param phone
-         * @param pass
-         */
-        public void PhoneLogin(String phone, String pass) {
-            OkHttpUtils
-                    .post()
-                    .url(Constants.LOGIN)
-                    .addParams("tel", phone)
-                    .addParams("token", pass)
-                    .build()
-                    .connTimeOut(60000)
-                    .readTimeOut(20000)
-                    .writeTimeOut(20000)
-                    .execute(new Callback<BaseBean<MerchantBean>>() {
-                        @Override
-                        public BaseBean<MerchantBean> parseNetworkResponse(Response response, int id) throws Exception {
-                            String string = response.body().string();
-                            BaseBean user = new Gson().fromJson(string, new TypeToken<BaseBean<MerchantBean>>() {
-                            }.getType());
-                            return user;
-                        }
-
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            Message message = new Message();
-                            message.obj = e.toString();
-                            message.what = MSG_USER_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-
-                        @Override
-                        public void onResponse(BaseBean<MerchantBean> response, int id) {
-                            if (response.getCode().equals("200")) {
-                                Message message = new Message();
-                                message.obj = response;
-                                message.what = MSG_USER_SUCCESS;
-                                mHandler.sendMessage(message);
-                            } else {
-                                Message message = new Message();
-                                message.obj = response.getMessage();
-                                message.what = MSG_USER_FAIL;
-                                mHandler.sendMessage(message);
-                            }
-                        }
-
-
-
-                    });
-        }
 
 
 }

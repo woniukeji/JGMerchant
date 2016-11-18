@@ -3,7 +3,6 @@ package com.woniukeji.jianmerchant.activity.certification;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -26,8 +25,6 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.base.Constants;
-import com.woniukeji.jianmerchant.base.MainActivity;
-import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.MerchantBean;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
@@ -38,6 +35,7 @@ import com.woniukeji.jianmerchant.utils.EditCheckUtil;
 import com.woniukeji.jianmerchant.utils.FileUtils;
 import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.MD5Coder;
+import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 
 import org.json.JSONObject;
@@ -75,6 +73,7 @@ public class PersonalDetailActivity extends BaseActivity {
     private SubscriberOnNextListener<String> baseBeanSubscriberOnNextListener;
     private String token;
     private int loginId;
+    private String tel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +109,7 @@ public class PersonalDetailActivity extends BaseActivity {
     @Override
     public void initData() {
        merchantId = (int) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
-        loginId = (int) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
+        tel = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
         token = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_WQTOKEN, "");
         merchantBean = (MerchantBean) getIntent().getSerializableExtra("merchant");
     }
@@ -153,7 +152,15 @@ public class PersonalDetailActivity extends BaseActivity {
                     String merJson = gson.toJson(merchantBean);
                     upLoadQiNiu(this,key , filePath,1);
                     upLoadQiNiu(this,key2 , filepathHand,2);
-                    HttpMethods.getInstance().cerfication(new ProgressSubscriber<String>(baseBeanSubscriberOnNextListener,this), String.valueOf(loginId),String.valueOf(merchantId),token,merJson);
+                    long timeMillis = System.currentTimeMillis();
+                    String sign = MD5Util.getSign(PersonalDetailActivity.this, timeMillis);
+                    HttpMethods.getInstance().cerfication(new ProgressSubscriber<String>(baseBeanSubscriberOnNextListener,this),
+                            tel,sign,String.valueOf(timeMillis),merchantBean.getCardImg(),merchantBean.getUserImage(),merchantBean.getRealName(),merchantBean.getName(),merchantBean.getCardNum(),merchantBean.getTel(),"1",
+                            merchantBean.getBussinessImg(),merchantBean.getHandImg(),merchantBean.getCompanyAddress(),merchantBean.getCompanyName(),
+                            merchantBean.getBussinessNum(),merchantBean.getContactName(),merchantBean.getContactPhone(),merchantBean.getEmail(),merchantBean.getProvince(),
+                            merchantBean.getCity(),merchantBean.getAbout()
+                    );
+//                    HttpMethods.getInstance().cerfication(new ProgressSubscriber<String>(baseBeanSubscriberOnNextListener,this), String.valueOf(loginId),String.valueOf(merchantId),token,merJson);
                 }
                 break;
         }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
+import com.woniukeji.jianmerchant.entity.JobBase;
 
 import java.util.List;
 
@@ -20,11 +21,11 @@ import java.util.List;
  * Created by Administrator on 2016/7/22.
  */
 public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder> {
-    private BaseBean<List<CityAndCategoryBean.ListTTypeBean>> dataSet;
+    private BaseBean<List<JobBase.TypeListBean>> dataSet;
     private Context context;
 
 
-    public JobsAdapter(BaseBean<List<CityAndCategoryBean.ListTTypeBean>> dataSet, Context context) {
+    public JobsAdapter(BaseBean<List<JobBase.TypeListBean>> dataSet, Context context) {
         this.dataSet = dataSet;
         this.context = context;
     }
@@ -37,7 +38,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.tv_select.setText(dataSet.getData().get(position).getType_name());
+        holder.tv_select.setText(dataSet.getData().get(position).getName());
         if (dataSet.getData().get(position).isSelect()) {
             holder.tv_select.setTextColor(context.getResources().getColor(R.color.tab_selected_text));
             holder.tv_select.setBackgroundColor(context.getResources().getColor(R.color.tab_selected_bg));

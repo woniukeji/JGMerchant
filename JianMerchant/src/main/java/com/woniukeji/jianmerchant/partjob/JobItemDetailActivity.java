@@ -15,16 +15,25 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.sdsmdg.tastytoast.TastyToast;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.affordwages.CalculateActivity;
 import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
+import com.woniukeji.jianmerchant.entity.JobBase;
 import com.woniukeji.jianmerchant.entity.JobDetails;
+import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Model;
+import com.woniukeji.jianmerchant.entity.NewJobDetail;
+import com.woniukeji.jianmerchant.http.HttpMethods;
+import com.woniukeji.jianmerchant.http.ProgressSubscriber;
+import com.woniukeji.jianmerchant.http.SubscriberOnNextErrorListener;
+import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.publish.PublishDetailActivity;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 import com.woniukeji.jianmerchant.utils.DateUtils;
+import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.widget.CircleImageView;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -87,8 +96,6 @@ public class JobItemDetailActivity extends BaseActivity {
     @BindView(R.id.btn_girl) Button btnGirl;
     @BindView(R.id.ll_offlin_pay) LinearLayout layoutOfflin ;
 
-    private JobDetails.TMerchantEntity merchantInfo;
-    private JobDetails.TJobInfoEntity jobinfo;
     private int MSG_GET_SUCCESS = 0;
     private int MSG_GET_FAIL = 1;
     private int MSG_POST_SUCCESS = 5;
@@ -98,11 +105,12 @@ public class JobItemDetailActivity extends BaseActivity {
     private int loginId;
     private String img;
     private String name;
-    private Model.ListTJobEntity modleJob;
-    private int jobid;
-    String alike;
-    BaseBean<JobDetails> jobDetailsBaseBean;
+    private JobInfo modleJob;
+    private long jobid;
+   NewJobDetail jobDetailsBaseBean;
     private int permission;
+    private String phone;
+    private SubscriberOnNextListener<NewJobDetail> jobBaseSubscriberOnNextListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +126,7 @@ public class JobItemDetailActivity extends BaseActivity {
                 Intent intent1 = new Intent(mContext, CalculateActivity.class);
                 intent1.putExtra("money", tvWages.getText().toString());
                 intent1.putExtra("name", tvMerchantName.getText().toString());
-                intent1.putExtra("jobid", String.valueOf(jobinfo.getJob_id()));
+                intent1.putExtra("jobid", String.valueOf(jobDetailsBaseBean.getId()));
                 startActivity(intent1);
                 break;
             case R.id.img_back:
@@ -126,20 +134,20 @@ public class JobItemDetailActivity extends BaseActivity {
                 break;
             case R.id.btn_boy:
                 Intent boyIntent = new Intent(this, FilterActivity.class);
-                boyIntent.putExtra("jobid", jobinfo.getJob_id());
-                boyIntent.putExtra("jobname", jobinfo.getTitle());
+                boyIntent.putExtra("jobid", jobDetailsBaseBean.getId());
+                boyIntent.putExtra("jobname", jobDetailsBaseBean.getJob_name());
                 startActivity(boyIntent);
                 break;
             case R.id.btn_girl:
-                Intent girgleIntent = new Intent(this, FilterActivity.class);
-                girgleIntent.putExtra("jobid", jobinfo.getNv_job_id());
-                girgleIntent.putExtra("jobname", jobinfo.getTitle());
-                startActivity(girgleIntent);
+//                Intent girgleIntent = new Intent(this, FilterActivity.class);
+//                girgleIntent.putExtra("jobid", jobDetailsBaseBean.get());
+//                girgleIntent.putExtra("jobname", jobDetailsBaseBean.getTitle());
+//                startActivity(girgleIntent);
                 break;
             case R.id.btn_no_limit:
                 Intent Intent = new Intent(this, FilterActivity.class);
                 Intent.putExtra("jobid", String.valueOf(jobid));
-                Intent.putExtra("jobname", modleJob.getName());
+                Intent.putExtra("jobname", modleJob.getJob_name());
                 startActivity(Intent);
                 break;
             case R.id.btn_change:
@@ -219,15 +227,6 @@ public class JobItemDetailActivity extends BaseActivity {
             super.handleMessage(msg);
             JobItemDetailActivity jobDetailActivity = (JobItemDetailActivity) reference.get();
             switch (msg.what) {
-                case 0:
-//                    if (null!=jobDetailActivity.pDialog){
-//                        jobDetailActivity.pDialog.dismiss();
-//                    }
-                    jobDetailActivity.jobDetailsBaseBean = (BaseBean) msg.obj;
-                    jobDetailActivity.jobinfo = jobDetailActivity.jobDetailsBaseBean.getData().getT_job_info();
-                    jobDetailActivity.merchantInfo = jobDetailActivity.jobDetailsBaseBean.getData().getT_merchant();
-                    jobDetailActivity.fillData();
-                    break;
                 case 1:
 //                    if (null!=jobDetailActivity.pDialog){
 //                        jobDetailActivity.pDialog.dismiss();
@@ -236,12 +235,6 @@ public class JobItemDetailActivity extends BaseActivity {
                     Toast.makeText(jobDetailActivity, ErrorMessage, Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
-//                    if (null!=jobDetailActivity.pDialog){
-//                        jobDetailActivity.pDialog.dismiss();
-//                    }
-//                    BaseBean<RealName> realNameBaseBean = (BaseBean<RealName>) msg.obj;
-//                    jobDetailActivity.showShortToast("获取实名信息成功");
-//                    jobDetailActivity.setInf(realNameBaseBean.getData());
                     break;
                 case 3:
                     String sms = (String) msg.obj;
@@ -313,17 +306,17 @@ public class JobItemDetailActivity extends BaseActivity {
         }
 
         tvTitle.setText("兼职详情");
-        tvMerchantName.setText(modleJob.getName());
-        tvWorkLocation.setText(jobinfo.getAddress());
-        tvManagerName.setText(modleJob.getMerchant_id_name());
-        tvChakanBrowse.setText(modleJob.getLook());
+        tvMerchantName.setText(modleJob.getJob_name());
+        tvWorkLocation.setText(jobDetailsBaseBean.getAddress());
+        tvManagerName.setText(modleJob.getJob_name());
+        tvChakanBrowse.setText(modleJob.getJob_name());
 
-        String date = DateUtils.getTime(Long.valueOf(jobinfo.getStart_date()), Long.valueOf(jobinfo.getStop_date()));
+        String date = DateUtils.getTime(Long.valueOf(jobDetailsBaseBean.getStart_date()), Long.valueOf(jobDetailsBaseBean.getEnd_time()));
         tvWorkDate.setText(date);
         tvDate.setText(date);
-        tvWorkTime.setText(DateUtils.getHm(Long.parseLong(jobinfo.getStart_time())) + "-" + DateUtils.getHm(Long.parseLong(jobinfo.getStop_time())));
-        tvCollectionSites.setText(jobinfo.getSet_place());
-        tvCollectionTime.setText(jobinfo.getSet_time());
+        tvWorkTime.setText(DateUtils.getHm(jobDetailsBaseBean.getBegin_time()) + "-" + DateUtils.getHm(jobDetailsBaseBean.getEnd_time()));
+        tvCollectionSites.setText(jobDetailsBaseBean.getSet_place());
+        tvCollectionTime.setText(jobDetailsBaseBean.getSet_time());
         tvJobsCount.setText(modleJob.getCount() + "/" + modleJob.getSum());
         if (modleJob.getTerm() == 0) {//0=月结，1=周结，2=日结，3=小时结，4=次，5=义工
             tvWages.setText(modleJob.getMoney() + "/月");
@@ -342,49 +335,43 @@ public class JobItemDetailActivity extends BaseActivity {
         }
         tvCount.setText(modleJob.getCount() + "/" + modleJob.getSum());
 
-        if (jobinfo.getLimit_sex() == 0) {
+        if (jobDetailsBaseBean.getLimit_sex() == 0) {
             btnNoLimit.setVisibility(View.VISIBLE);
             llLimitSex.setVisibility(View.GONE);
-            btnNoLimit.setText("报名人数： " + modleJob.getUser_count() + "/" + modleJob.getSum());
+            btnNoLimit.setText("报名人数： " + jobDetailsBaseBean.getUser_count() + "/" + modleJob.getSum());
             tvSex.setText("女");
-        } else if (jobinfo.getLimit_sex() == 1) {
+        } else if (jobDetailsBaseBean.getLimit_sex() == 1) {
             btnNoLimit.setVisibility(View.VISIBLE);
             llLimitSex.setVisibility(View.GONE);
-            btnNoLimit.setText("报名人数： " + modleJob.getUser_count() + "/" + modleJob.getSum());
+            btnNoLimit.setText("报名人数： " + jobDetailsBaseBean.getUser_count() + "/" + modleJob.getSum());
             tvSex.setText("男");
-        } else if (jobinfo.getLimit_sex() == 2) {
+        } else if (jobDetailsBaseBean.getLimit_sex() == 2) {
             btnNoLimit.setVisibility(View.VISIBLE);
             llLimitSex.setVisibility(View.GONE);
-            btnNoLimit.setText("报名人数： " + modleJob.getUser_count() + "/" + modleJob.getSum());
+            btnNoLimit.setText("报名人数： " +jobDetailsBaseBean.getUser_count() + "/" + modleJob.getSum());
             tvSex.setText("男女不限");
         } else {
             btnNoLimit.setVisibility(View.VISIBLE);
             llLimitSex.setVisibility(View.GONE);
-//            btnBoy.setText("男生部分：" + modleJob.getUser_count() + "/" + modleJob.getSum());
-//            btnGirl.setText("女生部分: " + jobinfo.getNv_user_count() + "/" + modleJob.getGirl_sum());
-            btnNoLimit.setText("报名人数： " + modleJob.getUser_count() + "/" + modleJob.getSum());
+            btnNoLimit.setText("报名人数： " + jobDetailsBaseBean.getUser_count() + "/" + modleJob.getSum());
             tvSex.setText("男女各需");//性别限制（0=只招女，1=只招男，2=不限男女，30,31，男女各需）
         }
 
         //期限（1=月结，2=周结，3=日结，4=小时结）
-        if (jobinfo.getMode() == 0) {
+        if (jobDetailsBaseBean.getMode() == 0) {
             tvPayMethod.setText("月结");
-        } else if (jobinfo.getMode() == 1) {
+        } else if (jobDetailsBaseBean.getMode() == 1) {
             tvPayMethod.setText("周结");
-        } else if (jobinfo.getMode() == 2) {
+        } else if (jobDetailsBaseBean.getMode() == 2) {
             tvPayMethod.setText("日结");
         } else
             tvPayMethod.setText("小时结");
-        if (jobinfo.getOther() == null || jobinfo.getOther().equals("null") || jobinfo.getOther().equals("")) {
-            tvOther.setText("暂无");
-        } else
-            tvOther.setText(jobinfo.getOther());
-        tvWorkContent.setText(jobinfo.getWork_content());
-        tvWorkRequire.setText(jobinfo.getWork_require());
+        tvWorkContent.setText(jobDetailsBaseBean.getContent());
+        tvWorkRequire.setText(jobDetailsBaseBean.getRequire());
 
         //商家信息
 
-        tvCompanyName.setText(merchantInfo.getName());
+        tvCompanyName.setText(jobDetailsBaseBean.getJob_name());
 
     }
 
@@ -402,20 +389,30 @@ public class JobItemDetailActivity extends BaseActivity {
 
     @Override
     public void initListeners() {
+        jobBaseSubscriberOnNextListener=new SubscriberOnNextListener<NewJobDetail>() {
+            @Override
+            public void onNext(NewJobDetail jobBase) {
+                TastyToast.makeText(JobItemDetailActivity.this,"获取成功", TastyToast.LENGTH_SHORT,TastyToast.SUCCESS);
+               jobDetailsBaseBean =  jobBase;
+                fillData();
 
+            }
+        };
     }
 
     @Override
     public void initData() {
         Intent intent = getIntent();
-        modleJob = (Model.ListTJobEntity) intent.getSerializableExtra("job");
-        String alike = modleJob.getAlike();//时间戳-->男女各需的情况
+        modleJob = (JobInfo) intent.getSerializableExtra("job");
         jobid = modleJob.getId();
-        int merchantid = intent.getIntExtra("merchantid", 0);
-        loginId = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
         //1是外部商家，2是个人商户，0是内部
         permission = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, 1);
-        getJobs(String.valueOf(loginId), String.valueOf(jobid), String.valueOf(merchantid), alike);
+//        getJobs(String.valueOf(loginId), String.valueOf(jobid), String.valueOf(merchantid), alike);
+
+        phone = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
+        long times=System.currentTimeMillis();
+        String sign= MD5Util.getSign(JobItemDetailActivity.this,times);
+        HttpMethods.getInstance().getjobDetail(new ProgressSubscriber<NewJobDetail>(jobBaseSubscriberOnNextListener, this), String.valueOf(jobid),phone,sign,String.valueOf(times));
 
     }
 
@@ -491,7 +488,6 @@ public class JobItemDetailActivity extends BaseActivity {
                 .addParams("only", only)
                 .addParams("job_id", jobid)
                 .addParams("offer", offer)
-                .addParams("alike", modleJob.getAlike())
                 .build()
                 .connTimeOut(60000)
                 .readTimeOut(20000)
@@ -544,7 +540,6 @@ public class JobItemDetailActivity extends BaseActivity {
                 .addParams("only", only)
                 .addParams("job_id", jobid)
                 .addParams("offer", offer)
-                .addParams("alike", modleJob.getAlike())
                 .build()
                 .connTimeOut(60000)
                 .readTimeOut(20000)

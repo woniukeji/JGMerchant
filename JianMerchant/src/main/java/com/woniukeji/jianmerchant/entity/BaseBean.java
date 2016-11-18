@@ -7,6 +7,15 @@ public class BaseBean <T>{
     private String message;
     private String code;
     private String sum;
+    private String runtime;
+
+    public String getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
+    }
 
     public String getSum() {
         return sum;

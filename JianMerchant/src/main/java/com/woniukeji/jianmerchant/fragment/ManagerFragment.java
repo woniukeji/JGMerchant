@@ -151,7 +151,7 @@ public class ManagerFragment extends BaseFragment {
 
     private void initListener() {
         EventBus.getDefault().register(this);
-        checkVersion(CommonUtils.getVersion(getActivity()));
+//        checkVersion(CommonUtils.getVersion(getActivity()));
         rlMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,7 +199,7 @@ public class ManagerFragment extends BaseFragment {
                 case 0:
                     return PartJobManagerFragment.newInstance(1);           //录取
                 case 1:
-                    return PartJobManagerFragment.newInstance(0);          //完成
+                    return PartJobManagerFragment.newInstance(2);          //完成
             }
             return new FragmentText();
         }

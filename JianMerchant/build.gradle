@@ -90,5 +90,5 @@ dependencies {
     compile 'com.android.support:cardview-v7:24.1.1'
     compile 'com.qiniu:qiniu-android-sdk:7.2.+'
     compile project(':cropper')
-    compile project(':image-selector')
+    compile project(':multi-image-selector')
 }

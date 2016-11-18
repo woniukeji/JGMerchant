@@ -102,7 +102,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private ImageView mine_shezhi;
     private String filePath;
     private int merchantId;
-    private int loginId;
+    private String loginId;
     private String token;
 
     private Handler handler = new Handler() {
@@ -148,8 +148,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     private void initListener() {
 
-        merchantId = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
-        loginId = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID, 0);
+//        merchantId = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
+        loginId = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID, "");
         token = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_WQTOKEN, "");
         baseBeanSubscriberOnNextListener=new SubscriberOnNextListener<String>() {
             @Override
@@ -163,12 +163,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 //        btnLogout = (Button) view.findViewById(R.id.btn_logout);
         mine_shezhi = (ImageView) view.findViewById(R.id.mine_shezhi);
         userName.setText((String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, ""));
-        //暂无数据
-        avatarUrl = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, "");
-        Picasso.with(getActivity()).load(avatarUrl)
-                .placeholder(R.mipmap.icon_head_defult)
-                .error(R.mipmap.icon_head_defult)
-                .into(avatar);
+        //个人界面头像数据
+//        avatarUrl = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, "");
+//        Picasso.with(getActivity()).load(avatarUrl)
+//                .placeholder(R.mipmap.icon_head_defult)
+//                .error(R.mipmap.icon_head_defult)
+//                .into(avatar);
 //        shift = (Spinner) view.findViewById(R.id.spinner_shift);
 //        adapter = ArrayAdapter.createFromResource(getActivity(),
 //                R.array.shift_array, android.R.layout.simple_spinner_item);

@@ -78,7 +78,6 @@ public class MerchantActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             System.out.println(System.currentTimeMillis());
             // 三级联动效果
-
             pvOptions.setPicker(item1, item2, true);
             pvOptions.setCyclic(true, false, true);
             pvOptions.setSelectOptions(0, 0, 0);

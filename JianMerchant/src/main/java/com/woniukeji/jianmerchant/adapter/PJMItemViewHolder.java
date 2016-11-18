@@ -12,10 +12,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.partjob.FilterActivity;
 import com.woniukeji.jianmerchant.partjob.JobItemDetailActivity;
 import com.woniukeji.jianmerchant.utils.DateUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,7 +26,7 @@ import butterknife.OnClick;
 /**
  * Created by Se7enGM on 2016/9/5.
  */
-public class PJMItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
+public class PJMItemViewHolder extends TopViewHolder<JobInfo> {
     @BindView(R.id.tv_merchant_name)
     TextView tvTitle;
     @BindView(R.id.img_type)
@@ -54,7 +57,7 @@ public class PJMItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
     RelativeLayout rlJob;
     @BindView(R.id.progress_admit)
     ProgressBar progressAdmit;
-    private Model.ListTJobEntity job;
+    private JobInfo job;
     private int maxProgress;
 
     public PJMItemViewHolder(Context context, ViewGroup root) {
@@ -63,23 +66,23 @@ public class PJMItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
     }
 
     @Override
-    public void bindData(Model.ListTJobEntity listTJobEntity) {
+    public void bindData(JobInfo listTJobEntity) {
         job = listTJobEntity;
-        tvTitle.setText(job.getName());
-        String date = DateUtils.getTime(Long.valueOf(job.getStart_date()), Long.valueOf(job.getStop_date()));
+        tvTitle.setText(job.getJob_name());
+        String date = DateUtils.getTime(Long.valueOf(job.getStart_date()), Long.valueOf(job.getEnd_date()));
         tvDate.setText(date);
         //性别限制（0=只招女，1=只招男，2=不限男女）
-        tvManagerName.setText(job.getMerchant_id_name());
-        tvChakanBrowse.setText(job.getLook());
+//        tvManagerName.setText(job.getMerchant_id_name());
+//        tvChakanBrowse.setText(job.getBrowse_count());
 //        tvMessage.setText(job.getRemarks());
         maxProgress = job.getCount();
-        if (job.getHot() == 1) {
-            imgType.setImageResource(R.mipmap.icon_hot);
-        } else if (job.getHot() == 2) {
-            imgType.setImageResource(R.mipmap.icon_jing);
-        } else if (job.getHot() == 3) {
-            imgType.setImageResource(R.mipmap.icon_travel);
-        }
+//        if (job.get== 1) {
+//            imgType.setImageResource(R.mipmap.icon_hot);
+//        } else if (job.getHot() == 2) {
+//            imgType.setImageResource(R.mipmap.icon_jing);
+//        } else if (job.getHot() == 3) {
+//            imgType.setImageResource(R.mipmap.icon_travel);
+//        }
         tvCount.setText(job.getCount() + "/" + job.getSum());
         if (job.getTerm() == 0) {//0=月结，1=周结，2=日结，3=小时结，4=次，5=义工
             tvWages.setText(job.getMoney() + "/月");
@@ -128,7 +131,7 @@ public class PJMItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
             case R.id.ll_publisher:
                 Intent Intent = new Intent(getContext(), FilterActivity.class);
                 Intent.putExtra("jobid",job.getId()+"");
-                Intent.putExtra("jobname", job.getName());
+                Intent.putExtra("jobname", job.getJob_name());
                 getContext().startActivity(Intent);
                 break;
         }
@@ -143,7 +146,7 @@ public class PJMItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), JobItemDetailActivity.class);
                 intent.putExtra("job", job);
-                intent.putExtra("merchantid", job.getMerchant_id());
+//                intent.putExtra("merchantid", "");
                 getContext().startActivity(intent);
             }
         });

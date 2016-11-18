@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.publish.PublishDetailActivity;
 import com.woniukeji.jianmerchant.utils.LogUtils;
@@ -21,7 +22,7 @@ import butterknife.OnClick;
 /**
  * Created by Se7enGM on 2016/9/5.
  */
-public class HistoryJobItemViewHolder extends TopViewHolder<Model.ListTJobEntity> {
+public class HistoryJobItemViewHolder extends TopViewHolder<JobInfo> {
 
 
     @BindView(R.id.tv_merchant_name)
@@ -50,7 +51,7 @@ public class HistoryJobItemViewHolder extends TopViewHolder<Model.ListTJobEntity
     RelativeLayout rlJob;
     @BindView(R.id.ll_muban)
     LinearLayout llMuban;
-    private Model.ListTJobEntity job;
+    private JobInfo job;
     private String mType;
     private String name;
     private int position;
@@ -65,10 +66,10 @@ public class HistoryJobItemViewHolder extends TopViewHolder<Model.ListTJobEntity
 
 
     @Override
-    public void bindData(Model.ListTJobEntity listTJobEntity) {
+    public void bindData(JobInfo listTJobEntity) {
         job = listTJobEntity;
         if (mType.equals("0")) {//历史纪录
-            tvTitle.setText(job.getName());
+            tvTitle.setText(job.getJob_name());
             llMuban.setVisibility(View.GONE);
             imgHis.setVisibility(View.VISIBLE);
         } else {
@@ -77,10 +78,10 @@ public class HistoryJobItemViewHolder extends TopViewHolder<Model.ListTJobEntity
             imgHis.setVisibility(View.GONE);
         }
         tvName.setText(name);
-        if (null!=job.getRegedit_time()&& !job.getRegedit_time().equals("")){
-            String date = job.getRegedit_time().substring(5 ,11);
-            tvDate.setText(date);
-        }
+//        if (null!=job.getRegedit_time()&& !job.getRegedit_time().equals("")){
+//            String date = job.getRegedit_time().substring(5 ,11);
+//            tvDate.setText(date);
+//        }
     }
 
 
@@ -104,7 +105,7 @@ public class HistoryJobItemViewHolder extends TopViewHolder<Model.ListTJobEntity
                 break;
             case R.id.btn_muban_delete:
                 if (deleteCallBack != null) {
-                    deleteCallBack.onDelete(job.getId(), job.getMerchant_id(), position);
+//                    deleteCallBack.onDelete(job.getId(), job.getMerchant_id(), position);
                 } else {
                     LogUtils.e("deleteCallback","没有setDeleteCallback");
                 }

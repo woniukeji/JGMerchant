@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.woniukeji.jianmerchant.adapter.FooterViewHolder;
 import com.woniukeji.jianmerchant.adapter.PJMItemViewHolder;
 import com.woniukeji.jianmerchant.base.Constants;
+import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 
@@ -14,17 +15,17 @@ import java.util.List;
 
 public class PartJobManagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final List<Model.ListTJobEntity> mValues;
+    private final List<JobInfo> mValues;
     private final Context mContext;
     private int mType;
     public static final int NORMAL = 1;
     public static final int IS_FOOTER = 2;
     private String name;
-    public PartJobManagerAdapter(List<Model.ListTJobEntity> items, Context context, int type) {
+    public PartJobManagerAdapter(List<JobInfo> items, Context context, int type) {
         mValues = items;
         mContext = context;
         mType = type;
-        name = (String) SPUtils.getParam(mContext, Constants.USER_INFO, Constants.USER_NAME, "");
+        name = (String) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_TEL, "");
     }
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
