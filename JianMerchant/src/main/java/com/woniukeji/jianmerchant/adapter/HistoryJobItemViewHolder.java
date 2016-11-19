@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Model;
+import com.woniukeji.jianmerchant.publish.ChangeJobActivity;
 import com.woniukeji.jianmerchant.publish.PublishDetailActivity;
 import com.woniukeji.jianmerchant.utils.LogUtils;
 
@@ -97,8 +98,8 @@ public class HistoryJobItemViewHolder extends TopViewHolder<JobInfo> {
             case R.id.tv_enroll_num:
                 break;
             case R.id.btn_muban_use:
-                Intent intent=new Intent(getContext(), PublishDetailActivity.class);
-                intent.putExtra("job",job);
+                Intent intent=new Intent(getContext(), ChangeJobActivity.class);
+                intent.putExtra("jobid",job.getId());
                 intent.setAction("fromItem");
                 intent.putExtra("type","old");
                 getContext().startActivity(intent);
@@ -128,8 +129,8 @@ public class HistoryJobItemViewHolder extends TopViewHolder<JobInfo> {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), PublishDetailActivity.class);
-                intent.putExtra("job",job);
+                Intent intent=new Intent(getContext(), ChangeJobActivity.class);
+                intent.putExtra("jobid",job.getId()+"");
                 intent.setAction("fromItem");
                 intent.putExtra("type","old");
                 getContext().startActivity(intent);

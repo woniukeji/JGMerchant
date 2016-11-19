@@ -208,7 +208,7 @@ public class QuickLoginFragment extends BaseFragment {
 //        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID, user.getLoginId());
 //        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, user.getMerchantId());
 //        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getMerchantInfoStatus());
-//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getPermissions());
+        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getBusiness_type());
 //        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, user.getCompanyName());
 //        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, user.getUserImage());
 //        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PAYSTATUS, user.getPayStatus());

@@ -329,6 +329,9 @@
         <activity android:name=".activity.login.LeadActivity"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity android:name=".publish.ChangeJobActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
 
     </application>
 

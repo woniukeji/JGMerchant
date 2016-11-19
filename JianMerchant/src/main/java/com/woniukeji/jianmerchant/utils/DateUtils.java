@@ -217,7 +217,7 @@ public class DateUtils {
             e.printStackTrace();
         }
         long mills=getMillis(date);
-        return mills;
+        return mills/1000;
     }
     public static long getLongTime(String strDate,String formate) {
         DateFormat fmt =new SimpleDateFormat(formate);

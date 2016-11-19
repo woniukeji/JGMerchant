@@ -207,6 +207,7 @@ public class PasswordLoginFragment extends BaseFragment {
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getAuth_status());
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getStatus());
         SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniu_token());
+        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getBusiness_type());
 //        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, user.getCompanyName());
 //        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, user.getUserImage());
 //        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PAYSTATUS, user.getPayStatus());

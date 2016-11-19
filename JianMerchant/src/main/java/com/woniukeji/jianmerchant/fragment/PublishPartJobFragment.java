@@ -34,6 +34,7 @@ import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
+import com.woniukeji.jianmerchant.publish.ChangeJobActivity;
 import com.woniukeji.jianmerchant.publish.HistoryJobAdapter;
 import com.woniukeji.jianmerchant.publish.PublishDetailActivity;
 import com.woniukeji.jianmerchant.utils.DateUtils;

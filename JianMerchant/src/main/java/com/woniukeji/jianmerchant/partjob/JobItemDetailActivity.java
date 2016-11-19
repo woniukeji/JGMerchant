@@ -30,6 +30,7 @@ import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextErrorListener;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
+import com.woniukeji.jianmerchant.publish.ChangeJobActivity;
 import com.woniukeji.jianmerchant.publish.PublishDetailActivity;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 import com.woniukeji.jianmerchant.utils.DateUtils;
@@ -126,7 +127,7 @@ public class JobItemDetailActivity extends BaseActivity {
                 Intent intent1 = new Intent(mContext, CalculateActivity.class);
                 intent1.putExtra("money", tvWages.getText().toString());
                 intent1.putExtra("name", tvMerchantName.getText().toString());
-                intent1.putExtra("jobid", String.valueOf(jobDetailsBaseBean.getId()));
+                intent1.putExtra("jobid", jobid);
                 startActivity(intent1);
                 break;
             case R.id.img_back:
@@ -134,7 +135,7 @@ public class JobItemDetailActivity extends BaseActivity {
                 break;
             case R.id.btn_boy:
                 Intent boyIntent = new Intent(this, FilterActivity.class);
-                boyIntent.putExtra("jobid", jobDetailsBaseBean.getId());
+                boyIntent.putExtra("jobid", jobid);
                 boyIntent.putExtra("jobname", jobDetailsBaseBean.getJob_name());
                 startActivity(boyIntent);
                 break;
@@ -159,7 +160,7 @@ public class JobItemDetailActivity extends BaseActivity {
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
                                 sDialog.dismissWithAnimation();
-                                Intent changeIntent = new Intent(JobItemDetailActivity.this, PublishDetailActivity.class);
+                                Intent changeIntent = new Intent(JobItemDetailActivity.this, ChangeJobActivity.class);
                                 changeIntent.putExtra("jobid", String.valueOf(jobid));
                                 changeIntent.putExtra("type", "change");
                                 startActivity(changeIntent);
@@ -177,7 +178,7 @@ public class JobItemDetailActivity extends BaseActivity {
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
                                 sDialog.dismissWithAnimation();
-                                postAction(String.valueOf(loginId), String.valueOf(jobid), "9");
+//                                postAction(String.valueOf(loginId), String.valueOf(jobid), "9");
                             }
                         }).show();
 
@@ -192,7 +193,7 @@ public class JobItemDetailActivity extends BaseActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismissWithAnimation();
-                                    postDown(String.valueOf(loginId), String.valueOf(jobid), "13");
+//                                    postDown(String.valueOf(loginId), String.valueOf(jobid), "13");
                                 }
                             }).show();
                 }else if(modleJob.getStatus() == 2){
@@ -204,7 +205,7 @@ public class JobItemDetailActivity extends BaseActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismissWithAnimation();
-                                    postDown(String.valueOf(loginId), String.valueOf(jobid), "0");
+//                                    postDown(String.valueOf(loginId), String.valueOf(jobid), "0");
                                 }
                             }).show();
                 }
@@ -274,6 +275,56 @@ public class JobItemDetailActivity extends BaseActivity {
 
     }
 
+
+    @Override
+    public void setContentView() {
+        setContentView(R.layout.activity_partjob_item_detail);
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public void initViews() {
+
+
+    }
+
+    @Override
+    public void initListeners() {
+        jobBaseSubscriberOnNextListener=new SubscriberOnNextListener<NewJobDetail>() {
+            @Override
+            public void onNext(NewJobDetail jobBase) {
+                TastyToast.makeText(JobItemDetailActivity.this,"获取成功", TastyToast.LENGTH_SHORT,TastyToast.SUCCESS);
+               jobDetailsBaseBean =  jobBase;
+                fillData();
+
+            }
+        };
+    }
+
+    @Override
+    public void initData() {
+        Intent intent = getIntent();
+        modleJob = (JobInfo) intent.getSerializableExtra("job");
+        jobid = modleJob.getId();
+        //1是外部商家，2是个人商户，3是内部
+        permission = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, 1);
+//        getJobs(String.valueOf(loginId), String.valueOf(jobid), String.valueOf(merchantid), alike);
+
+        phone = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
+        long times=System.currentTimeMillis();
+        String sign= MD5Util.getSign(JobItemDetailActivity.this,times);
+        HttpMethods.getInstance().getjobDetail(new ProgressSubscriber<NewJobDetail>(jobBaseSubscriberOnNextListener, this), String.valueOf(jobid),phone,sign,String.valueOf(times));
+
+    }
+
+    @Override
+    public void addActivity() {
+        ActivityManager.getActivityManager().addActivity(JobItemDetailActivity.this);
+    }
+
+
+
+
     private void fillData() {
 
         if (modleJob.getStatus() == 2) {
@@ -296,8 +347,8 @@ public class JobItemDetailActivity extends BaseActivity {
             btnDown.setVisibility(View.GONE);
             layoutOfflin.setVisibility(View.VISIBLE);
         }
-        //0是内部1是外部商家，2是个人商户
-        if (permission==0){
+        //3是内部1是外部商家，2是个人商户
+        if (permission==3){
             btnClearing.setVisibility(View.VISIBLE);
             layoutOfflin.setVisibility(View.GONE);
         }else {
@@ -375,209 +426,4 @@ public class JobItemDetailActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void setContentView() {
-        setContentView(R.layout.activity_partjob_item_detail);
-        ButterKnife.bind(this);
-    }
-
-    @Override
-    public void initViews() {
-
-
-    }
-
-    @Override
-    public void initListeners() {
-        jobBaseSubscriberOnNextListener=new SubscriberOnNextListener<NewJobDetail>() {
-            @Override
-            public void onNext(NewJobDetail jobBase) {
-                TastyToast.makeText(JobItemDetailActivity.this,"获取成功", TastyToast.LENGTH_SHORT,TastyToast.SUCCESS);
-               jobDetailsBaseBean =  jobBase;
-                fillData();
-
-            }
-        };
-    }
-
-    @Override
-    public void initData() {
-        Intent intent = getIntent();
-        modleJob = (JobInfo) intent.getSerializableExtra("job");
-        jobid = modleJob.getId();
-        //1是外部商家，2是个人商户，0是内部
-        permission = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, 1);
-//        getJobs(String.valueOf(loginId), String.valueOf(jobid), String.valueOf(merchantid), alike);
-
-        phone = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
-        long times=System.currentTimeMillis();
-        String sign= MD5Util.getSign(JobItemDetailActivity.this,times);
-        HttpMethods.getInstance().getjobDetail(new ProgressSubscriber<NewJobDetail>(jobBaseSubscriberOnNextListener, this), String.valueOf(jobid),phone,sign,String.valueOf(times));
-
-    }
-
-    @Override
-    public void addActivity() {
-        ActivityManager.getActivityManager().addActivity(JobItemDetailActivity.this);
-    }
-
-
-
-    /**
-     * postInfo
-     * @param alike
-     */
-    public void getJobs(String login_id, String job_id, String merchant_id, String alike) {
-        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-        OkHttpUtils
-                .get()
-                .url(Constants.GET_JOB_DETAIL)
-                .addParams("only", only)
-                .addParams("login_id", login_id)
-                .addParams("job_id", job_id)
-                .addParams("merchant_id", merchant_id)
-                .addParams("alike", alike)
-                .build()
-                .connTimeOut(60000)
-                .readTimeOut(20000)
-                .writeTimeOut(20000)
-                .execute(new Callback<BaseBean<JobDetails>>() {
-                    @Override
-                    public BaseBean<JobDetails> parseNetworkResponse(Response response, int id) throws Exception {
-                        String string = response.body().string();
-                        BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean<JobDetails>>() {
-                        }.getType());
-                        return baseBean;
-                    }
-
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Message message = new Message();
-                        message.obj = e.toString();
-                        message.what = MSG_GET_FAIL;
-                        mHandler.sendMessage(message);
-                    }
-
-                    @Override
-                    public void onResponse(BaseBean<JobDetails> response, int id) {
-                        if (response.getCode().equals("200")) {
-//                              SPUtils.setParam(AuthActivity.this, Constants.LOGIN_INFO, Constants.SP_TYPE, "0");
-                            Message message = new Message();
-                            message.obj = response;
-                            message.what = MSG_GET_SUCCESS;
-                            mHandler.sendMessage(message);
-                        } else {
-                            Message message = new Message();
-                            message.obj = response.getMessage();
-                            message.what = MSG_GET_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-                    }
-
-                });
-    }
-    /**
-     * postInfo
-     * @param s
-     */
-    public void postAction(String s, String jobid, final String offer) {
-        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-        OkHttpUtils
-                .get()
-                .url(Constants.POST_DOWN)
-                .addParams("only", only)
-                .addParams("job_id", jobid)
-                .addParams("offer", offer)
-                .build()
-                .connTimeOut(60000)
-                .readTimeOut(20000)
-                .writeTimeOut(20000)
-                .execute(new Callback<BaseBean>() {
-                    @Override
-                    public BaseBean parseNetworkResponse(Response response, int id) throws Exception {
-                        String string = response.body().string();
-                        BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean>() {
-                        }.getType());
-                        return baseBean;
-                    }
-
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Message message = new Message();
-                        message.obj = e.toString();
-                        message.what = MSG_POST_FAIL;
-                        mHandler.sendMessage(message);
-                    }
-
-                    @Override
-                    public void onResponse(BaseBean response, int id) {
-                        if (response.getCode().equals("200")) {
-//                                SPUtils.setParam(AuthActivity.this, Constants.LOGIN_INFO, Constants.SP_TYPE, "0");
-                            Message message = new Message();
-                            message.obj = response.getMessage();
-                            message.arg1 = Integer.parseInt(offer);
-                            message.what = MSG_POST_SUCCESS;
-                            mHandler.sendMessage(message);
-                        } else {
-                            Message message = new Message();
-                            message.obj = response.getMessage();
-                            message.what = MSG_POST_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-                    }
-
-
-                });
-    }
-    /**
-     * postInfo
-     */
-    public void postDown(String loginid, String jobid, final String offer) {
-        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-        OkHttpUtils
-                .get()
-                .url(Constants.POST_PART_JOB_DOWN)
-                .addParams("only", only)
-                .addParams("job_id", jobid)
-                .addParams("offer", offer)
-                .build()
-                .connTimeOut(60000)
-                .readTimeOut(20000)
-                .writeTimeOut(20000)
-                .execute(new Callback<BaseBean>() {
-                    @Override
-                    public BaseBean parseNetworkResponse(Response response, int id) throws Exception {
-                        String string = response.body().string();
-                        BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean>() {
-                        }.getType());
-                        return baseBean;
-                    }
-
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Message message = new Message();
-                        message.obj = e.toString();
-                        message.what = MSG_POST_FAIL;
-                        mHandler.sendMessage(message);
-                    }
-
-                    @Override
-                    public void onResponse(BaseBean baseBean, int id) {
-                        if (baseBean.getCode().equals("200")) {
-//                                SPUtils.setParam(AuthActivity.this, Constants.LOGIN_INFO, Constants.SP_TYPE, "0");
-                            Message message = new Message();
-                            message.obj = baseBean.getMessage();
-                            message.arg1 = Integer.parseInt(offer);
-                            message.what = MSG_POST_SUCCESS;
-                            mHandler.sendMessage(message);
-                        } else {
-                            Message message = new Message();
-                            message.obj = baseBean.getMessage();
-                            message.what = MSG_POST_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-                    }
-
-                });
-    }
 }

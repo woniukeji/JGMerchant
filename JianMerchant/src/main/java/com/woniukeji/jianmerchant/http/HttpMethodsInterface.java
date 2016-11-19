@@ -234,7 +234,7 @@ public interface HttpMethodsInterface {
                                          @Query("job_type_id") String job_type_id,
                                                    @Query("job_image") String name_image,
                                          @Query("start_date") String start_date,
-                                                   @Query("stop_date") String stop_date,
+                                                   @Query("end_date") String stop_date,
                                          @Query("address") String address,
                                                    @Query("mode") String mode,
                                          @Query("money") String money,
@@ -255,6 +255,37 @@ public interface HttpMethodsInterface {
                                            @Query("json_label") String json_label,
                                          @Query("job_model") String job_model);
 
+/**
+*修改兼职
+*/
+@PUT("job/new")
+Observable<BaseBean> changeJob(@Query("id") String job_id,@Query("app_id") String app_id, @Query("sign") String sign,
+                             @Query("timestamp") String timestamp,
+                             @Query("type") String type,
+                             @Query("job_name") String job_name,
+                             @Query("job_type_id") String job_type_id,
+                             @Query("job_image") String name_image,
+                             @Query("start_date") String start_date,
+                             @Query("end_date") String stop_date,
+                             @Query("address") String address,
+                             @Query("mode") String mode,
+                             @Query("money") String money,
+                             @Query("term") String term,
+                             @Query("limit_sex") String limit_sex,
+                             @Query("girl_sum") String girl_sum,
+                             @Query("boy_sum") String boy_sum,
+                             @Query("sum") String sum,
+                             @Query("city_id") String city_id,@Query("area_id") String area_id,
+                             @Query("tel") String tel,
+                             @Query("begin_time") String begin_time,@Query("end_time") String end_time,
+                             @Query("set_place") String set_place,
+                             @Query("set_time") String set_time,
+                             @Query("content") String content,
+                             @Query("require") String require,
+                             @Query("json_limit") String json_limit,
+                             @Query("json_welfare") String json_welfare,
+                             @Query("json_label") String json_label,
+                             @Query("job_model") String job_model);
 
     /**
      *兼职详情

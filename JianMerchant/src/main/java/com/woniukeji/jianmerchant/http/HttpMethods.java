@@ -275,7 +275,24 @@ public class HttpMethods {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
-
+    public void changeJob(Subscriber<String> subscriber,String job_id,String sign,String timestamp,
+                        String login_phone,
+                        String city_id,String aera_id,String type_id,
+                        String name,String name_image,String type,
+                        String start_date,String stop_date,String address,String mode,
+                        String money,String term,String limit_sex,String girl_sum,String boy_sum,String sum,
+                        String tel,String start_time,String stop_time,
+                        String set_place,String set_time,String work_content,String work_require,
+                        String json_limit,String json_welfare,String json_label,String job_model) {
+        String appid=MD5Util.MD5(login_phone);
+        Observable<BaseBean> jobs = methodsInterface.changeJob(job_id,appid, sign,timestamp,type,name,type_id,name_image,
+                start_date,stop_date, address, mode, money, term, limit_sex, girl_sum,boy_sum,sum,city_id, aera_id, tel, start_time, stop_time, set_place, set_time, work_content, work_require, json_limit,json_welfare,json_label,job_model);
+        jobs.map(new BaseBeanFun())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
     /**
      * 兼职历史记录
      */

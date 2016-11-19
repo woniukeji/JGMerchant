@@ -118,7 +118,7 @@
 <LinearLayout
     android:id="@+id/ll_muban"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="50dp"
     android:layout_alignParentRight="true"
     android:orientation="vertical"
     android:padding="10dp"
@@ -141,6 +141,7 @@
         android:layout_height="23.5dp"
         android:text="删除"
         android:layout_marginTop="8dp"
+        android:visibility="gone"
         android:background="@drawable/button_delete"
         />
 </LinearLayout>

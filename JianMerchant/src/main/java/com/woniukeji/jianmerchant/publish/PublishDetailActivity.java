@@ -36,6 +36,7 @@ import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.CityCategory;
 import com.woniukeji.jianmerchant.entity.JobBase;
 import com.woniukeji.jianmerchant.entity.JobDetails;
+import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.PickType;
@@ -352,7 +353,7 @@ public class PublishDetailActivity extends BaseActivity {
     private TagAdapter quaAdapter;
     private TagAdapter welAdapter;
     private TagAdapter partAdapter;
-    private Model.ListTJobEntity modle;
+    private JobInfo modle;
     private boolean isFromItem = false;
     private JsonArray labelJsonArray;
     private Intent intent;
@@ -652,7 +653,7 @@ public class PublishDetailActivity extends BaseActivity {
                     if (region != null && !region.equals("")) {
                         city_name = region;
                     } else {
-                        city_name = modle.getCity_id_name();
+//                        city_name = modle.getCity_id_name();
                     }
                     jobinfo.setAddress(city_name + tvPosition.getText().toString() + etDetailPosition.getText().toString());
                     long startDate = DateUtils.getLongTime(tvDateStart.getText().toString());
@@ -675,23 +676,23 @@ public class PublishDetailActivity extends BaseActivity {
                     if (qualicationSelected != null&&intent.getAction().equals("fromFragment")) {
                         qualificationOther.append(qualicationSelected);
                     } else {
-                        for (int i = 0; i < modle.getLimit_name().size(); i++) {
-                            qualificationOther.append(qualification[Integer.valueOf(modle.getLimit_name().get(i))-1]);
-                        }
+//                        for (int i = 0; i < modle.getLimit_name().size(); i++) {
+//                            qualificationOther.append(qualification[Integer.valueOf(modle.getLimit_name().get(i))-1]);
+//                        }
                     }
                     if (welfareSelected != null&&intent.getAction().equals("fromFragment")) {
                         labelOther.append(welfareSelected);
                     } else {
-                        for (int i = 0; i < modle.getWelfare_name().size(); i++) {
-                            welfareOther.append(welfare[Integer.valueOf(modle.getWelfare_name().get(i))-1]);
-                        }
+//                        for (int i = 0; i < modle.getWelfare_name().size(); i++) {
+//                            welfareOther.append(welfare[Integer.valueOf(modle.getWelfare_name().get(i))-1]);
+//                        }
                     }
                     if (partjobSelected != null&&intent.getAction().equals("fromFragment")) {
                         labelOther.append(partjobSelected);
                     } else {
-                        for (int i = 0; i < modle.getLabel_name().size(); i++) {
-                            labelOther.append(partjob_tag[Integer.valueOf(modle.getLabel_name().get(i))-1]);
-                        }
+//                        for (int i = 0; i < modle.getLabel_name().size(); i++) {
+//                            labelOther.append(partjob_tag[Integer.valueOf(modle.getLabel_name().get(i))-1]);
+//                        }
                     }
                     jobinfo.setOther(qualificationOther.toString()+"-"+welfareOther.toString()+"-"+labelOther.toString());
                     if (limit_sex.equals("3")) {
@@ -771,23 +772,6 @@ public class PublishDetailActivity extends BaseActivity {
                                                 address, mode, money, term, limit_sex, "0","0",sum, tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
                                                 qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"",job_model);
 
-//                                        SubscriberOnNextListener<Jobs> nextListenner = new SubscriberOnNextListener<Jobs>() {
-//
-//                                            @Override
-//                                            public void onNext(Jobs jobs) {
-//                                                PublishDetailActivity.this.jobs = jobs;
-//                                                LogUtils.i("jobs", jobs.toString());
-//                                                String sucessMessage = "操作成功！";
-//                                                Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
-////                                                PublishDetailActivity.this.finish();
-//                                            }
-//                                        };
-//
-//                                        String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-//                                        HttpMethods.getInstance().saveJobInfoToServer(new ProgressSubscriber<Jobs>(nextListenner, PublishDetailActivity.this),
-//                                                only, String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(""), name, name_image, start_date, stop_date,
-//                                                address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
-//                                                job_model, qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
                                     }
                                 }
                             })
@@ -1013,9 +997,10 @@ public class PublishDetailActivity extends BaseActivity {
             type_id1 = bundle.getInt("type_id");//兼职类型id
             category = bundle.getString("category");
             category_id = bundle.getInt("category_id");//职位id
-        } else if (intent.getAction().equals("fromItem")) {
+        }
+        else if (intent.getAction().equals("fromItem")) {
             //获取从历史纪录里传递过来的intent
-            modle = (Model.ListTJobEntity) intent.getSerializableExtra("job");
+//            modle = (Model.ListTJobEntity) intent.getSerializableExtra("job");
             getCategoryToBean();
             isFromItem = true;
         }
@@ -1082,9 +1067,9 @@ public class PublishDetailActivity extends BaseActivity {
         BackgroundSubscriber<Model> subscriber = new BackgroundSubscriber<Model>(new SubscriberOnNextListener<Model>() {
             @Override
             public void onNext(Model model) {
-                modle = model.getT_job();
-                //最后在去初始化界面
-                initModleData(modle);
+//                modle = model.getT_job();
+//                //最后在去初始化界面
+//                initModleData(modle);
             }
         },mContext);
         HttpMethods.getInstance().singleJobDetail(subscriber, intent.getStringExtra("jobid"));
@@ -1133,7 +1118,7 @@ public class PublishDetailActivity extends BaseActivity {
                 //这以上设置流布局标签
                 if (isFromItem) {
                     //如果是从item过来的走下面
-                    initModleData(modle);
+//                     initModleData(modle);
                 }
 
             }

@@ -61,7 +61,7 @@ public class PartJobManagerFragment extends BaseFragment {
     BackgroundSubscriber<List<JobInfo>> subscriber;
     int startPosition =0;
     private int pageNum=1;
-
+    private int nowPage=1;
 
     private Context mContext = this.getActivity();
     private List<JobInfo> modleList = new ArrayList<>();
@@ -115,7 +115,8 @@ public class PartJobManagerFragment extends BaseFragment {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getMerchantEmployStatus(String.valueOf(type), String.valueOf(pageNum));
+                getMerchantEmployStatus(String.valueOf(type),"1");
+
             }
         });
         tel = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_TEL, "");
@@ -125,7 +126,7 @@ public class PartJobManagerFragment extends BaseFragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (modleList.size() > 4 && lastVisibleItem == modleList.size()&&modleList.size()%10==0&&loadOk) {
-                    getMerchantEmployStatus(String.valueOf(type),String.valueOf(lastVisibleItem));
+                    getMerchantEmployStatus(String.valueOf(type),String.valueOf(pageNum));
                     loadOk = false;
                 }
             }
@@ -135,16 +136,26 @@ public class PartJobManagerFragment extends BaseFragment {
                 lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
             }
         });
-       subscriber = new BackgroundSubscriber<>(new SubscriberOnNextListener<List<JobInfo>>() {
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getMerchantEmployStatus(String.valueOf(type),"1");
+    }
+
+    /**
+     * 获取商家录录取和完成信息列表
+     */
+    private void getMerchantEmployStatus(String type, final String nowPage) {
+        subscriber = new BackgroundSubscriber<>(new SubscriberOnNextListener<List<JobInfo>>() {
             @Override
             public void onNext(List<JobInfo> model) {
                 if (refreshLayout!=null&& refreshLayout.isRefreshing()){
                     refreshLayout.setRefreshing(false);
                 }
-                if (model.size() > 0 && model != null && Integer.valueOf(startPosition) == 0) {
+                if (model.size() > 0 && model != null && Integer.valueOf(nowPage) == 1) {
                     modleList.clear();
-                } else if (model!=null&&model.size()<10){
-
                 }
                 modleList.addAll(model);
                 adapter.notifyDataSetChanged();
@@ -152,22 +163,10 @@ public class PartJobManagerFragment extends BaseFragment {
                 loadOk = true;
             }
         }, getHoldingContext());
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getMerchantEmployStatus(String.valueOf(type),"0");
-    }
-
-    /**
-     * 获取商家录录取和完成信息列表
-     */
-    private void getMerchantEmployStatus(String type, final String count) {
-        startPosition= Integer.parseInt(count);
+        startPosition= Integer.parseInt(nowPage);
         long timeMillis=System.currentTimeMillis();
          String sign= MD5Util.getSign(getActivity(),timeMillis);
-        HttpMethods.getInstance().getJobList(subscriber,tel,sign, String.valueOf(timeMillis),type, String.valueOf(pageNum));
+        HttpMethods.getInstance().getJobList(subscriber,tel,sign, String.valueOf(timeMillis),type, String.valueOf(nowPage));
     }
 
     @Override
