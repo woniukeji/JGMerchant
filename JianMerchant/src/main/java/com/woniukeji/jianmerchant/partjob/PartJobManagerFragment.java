@@ -49,7 +49,7 @@ import ui.EmptyRecyclerView;
 public class PartJobManagerFragment extends BaseFragment {
 
     /**
-     * params1 0完成 1录取
+     * params1 2完成 1录取
      */
     private static String params1;
     @BindView(R.id.list)

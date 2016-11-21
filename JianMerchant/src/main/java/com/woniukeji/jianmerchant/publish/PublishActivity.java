@@ -84,11 +84,9 @@ public class PublishActivity extends BaseActivity {
 
     private static class Myhandler extends Handler {
         private WeakReference<Context> reference;
-
         public Myhandler(Context context) {
             reference = new WeakReference<>(context);
         }
-
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

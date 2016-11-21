@@ -293,6 +293,12 @@ Observable<BaseBean> changeJob(@Query("id") String job_id,@Query("app_id") Strin
     @GET("job/detail/{job_id}")
     Observable<BaseBean<NewJobDetail>>  jobDetail(@Path("job_id") String job_id, @Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp);
 
+    /**
+     *修改兼职状态
+     */
+    @PUT("job/{job_id}/status")
+    Observable<BaseBean>  changeJobStatus(@Path("job_id") String job_id, @Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp, @Query("status") String status);
+
 
 
 }

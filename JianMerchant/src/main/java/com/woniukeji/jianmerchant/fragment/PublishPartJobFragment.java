@@ -88,7 +88,6 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
     private LinearLayoutManager linearLayoutManager;
     private int lastVisibleItem;
     private int checkOutPage = 0;
-    private int checkOutPage1 = 0;
 
     private HistoryJobAdapter historyJobAdapter;
     private Handler mHandler = new Handler(){

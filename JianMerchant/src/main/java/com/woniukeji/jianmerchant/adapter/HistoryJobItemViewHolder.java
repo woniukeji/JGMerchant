@@ -99,8 +99,9 @@ public class HistoryJobItemViewHolder extends TopViewHolder<JobInfo> {
                 break;
             case R.id.btn_muban_use:
                 Intent intent=new Intent(getContext(), ChangeJobActivity.class);
-                intent.putExtra("jobid",job.getId());
+                intent.putExtra("jobid",job.getId()+"");
                 intent.setAction("fromItem");
+                intent.putExtra("isHistory",2);
                 intent.putExtra("type","old");
                 getContext().startActivity(intent);
                 break;
@@ -132,6 +133,7 @@ public class HistoryJobItemViewHolder extends TopViewHolder<JobInfo> {
                 Intent intent=new Intent(getContext(), ChangeJobActivity.class);
                 intent.putExtra("jobid",job.getId()+"");
                 intent.setAction("fromItem");
+                intent.putExtra("isHistory",1);
                 intent.putExtra("type","old");
                 getContext().startActivity(intent);
             }

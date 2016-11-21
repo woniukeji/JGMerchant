@@ -330,6 +330,19 @@ public class HttpMethods {
                 .subscribe(subscriber);
 
     }
+    /**
+     *修改兼职状态
+     */
+    public void changeJobStatus(Subscriber<String> subscriber, String jobid, String tel, String sign, String timestamp,String status) {
+        String appid=MD5Util.MD5(tel);
+        Observable<BaseBean> cityCategory = methodsInterface.changeJobStatus(jobid,appid, sign,timestamp,status);
+        cityCategory.map(new BaseBeanFun())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
+    }
     /** -----------------------------------------老版分割线-----------------------------------------------------------------------------------？、、*/
         /**
          * *验证码登陆

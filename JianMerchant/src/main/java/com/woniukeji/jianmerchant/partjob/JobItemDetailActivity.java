@@ -26,6 +26,7 @@ import com.woniukeji.jianmerchant.entity.JobDetails;
 import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.NewJobDetail;
+import com.woniukeji.jianmerchant.entity.Status;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextErrorListener;
@@ -97,21 +98,15 @@ public class JobItemDetailActivity extends BaseActivity {
     @BindView(R.id.btn_girl) Button btnGirl;
     @BindView(R.id.ll_offlin_pay) LinearLayout layoutOfflin ;
 
-    private int MSG_GET_SUCCESS = 0;
-    private int MSG_GET_FAIL = 1;
-    private int MSG_POST_SUCCESS = 5;
-    private int MSG_POST_FAIL = 6;
-    private Handler mHandler = new Myhandler(this);
     private Context mContext = JobItemDetailActivity.this;
-    private int loginId;
-    private String img;
-    private String name;
     private JobInfo modleJob;
     private long jobid;
    NewJobDetail jobDetailsBaseBean;
     private int permission;
     private String phone;
     private SubscriberOnNextListener<NewJobDetail> jobBaseSubscriberOnNextListener;
+    private SubscriberOnNextListener<String> changeSubscriberOnNextListener;
+    private int status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,20 +166,24 @@ public class JobItemDetailActivity extends BaseActivity {
                 break;
             case R.id.btn_finish:
                 new SweetAlertDialog(JobItemDetailActivity.this, SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText("您确认结束该兼职？")
+                        .setTitleText("您确认停止并结束招聘该兼职？")
                         .setConfirmText("确定")
                         .setCancelText("取消")
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
                                 sDialog.dismissWithAnimation();
-//                                postAction(String.valueOf(loginId), String.valueOf(jobid), "9");
+                                status=3;
+                                long times=System.currentTimeMillis();
+                                String sign= MD5Util.getSign(JobItemDetailActivity.this,times);
+                                HttpMethods.getInstance().changeJobStatus(new ProgressSubscriber<String>(changeSubscriberOnNextListener, JobItemDetailActivity.this), String.valueOf(jobid),phone,sign,String.valueOf(times),"3");
+//
                             }
                         }).show();
 
                 break;
             case R.id.btn_down:
-               if(modleJob.getStatus() == 0){
+               if(modleJob.getStatus() == 1){
                     new SweetAlertDialog(JobItemDetailActivity.this, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("确认暂停招聘么？")
                             .setConfirmText("确定")
@@ -193,6 +192,10 @@ public class JobItemDetailActivity extends BaseActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismissWithAnimation();
+                                    status=2;
+                                    long times=System.currentTimeMillis();
+                                    String sign= MD5Util.getSign(JobItemDetailActivity.this,times);
+                                    HttpMethods.getInstance().changeJobStatus(new ProgressSubscriber<String>(changeSubscriberOnNextListener, JobItemDetailActivity.this), String.valueOf(jobid),phone,sign,String.valueOf(times),"2");
 //                                    postDown(String.valueOf(loginId), String.valueOf(jobid), "13");
                                 }
                             }).show();
@@ -205,7 +208,10 @@ public class JobItemDetailActivity extends BaseActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismissWithAnimation();
-//                                    postDown(String.valueOf(loginId), String.valueOf(jobid), "0");
+                                    status=1;
+                                    long times=System.currentTimeMillis();
+                                    String sign= MD5Util.getSign(JobItemDetailActivity.this,times);
+                                    HttpMethods.getInstance().changeJobStatus(new ProgressSubscriber<String>(changeSubscriberOnNextListener, JobItemDetailActivity.this), String.valueOf(jobid),phone,sign,String.valueOf(times),"1");
                                 }
                             }).show();
                 }
@@ -229,43 +235,8 @@ public class JobItemDetailActivity extends BaseActivity {
             JobItemDetailActivity jobDetailActivity = (JobItemDetailActivity) reference.get();
             switch (msg.what) {
                 case 1:
-//                    if (null!=jobDetailActivity.pDialog){
-//                        jobDetailActivity.pDialog.dismiss();
-//                    }
                     String ErrorMessage = (String) msg.obj;
                     Toast.makeText(jobDetailActivity, ErrorMessage, Toast.LENGTH_SHORT).show();
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    String sms = (String) msg.obj;
-                    Toast.makeText(jobDetailActivity, sms, Toast.LENGTH_SHORT).show();
-                    break;
-                case 4:
-                    String signMessage = (String) msg.obj;
-                    Toast.makeText(jobDetailActivity, signMessage, Toast.LENGTH_SHORT).show();
-//                    jobDetailActivity.tvSignup.setText("已报名");
-//                    jobDetailActivity.tvSignup.setBackgroundResource(R.color.gray);
-                    break;
-                case 5:
-                    String Message = (String) msg.obj;
-                    Toast.makeText(jobDetailActivity, Message, Toast.LENGTH_SHORT).show();
-                    int offer = msg.arg1;
-                    if (offer == 13) {
-                        jobDetailActivity.modleJob.setStatus(2);
-                        jobDetailActivity.btnDown.setText("恢复招聘");
-                    }else if(offer == 0){
-                        jobDetailActivity.modleJob.setStatus(0);
-                        jobDetailActivity.btnDown.setText("暂停招聘");
-                } else if (offer == 9) {
-                        jobDetailActivity.btnFinish.setVisibility(View.GONE);
-                        jobDetailActivity.btnChange.setVisibility(View.GONE);
-                        jobDetailActivity. btnDown.setVisibility(View.GONE);
-                    }
-                    break;
-                case 6:
-                    String msg2 = (String) msg.obj;
-                    Toast.makeText(jobDetailActivity, "收藏失败" + msg2, Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;
@@ -285,7 +256,6 @@ public class JobItemDetailActivity extends BaseActivity {
     @Override
     public void initViews() {
 
-
     }
 
     @Override
@@ -294,9 +264,22 @@ public class JobItemDetailActivity extends BaseActivity {
             @Override
             public void onNext(NewJobDetail jobBase) {
                 TastyToast.makeText(JobItemDetailActivity.this,"获取成功", TastyToast.LENGTH_SHORT,TastyToast.SUCCESS);
-               jobDetailsBaseBean =  jobBase;
+                jobDetailsBaseBean =  jobBase;
                 fillData();
+            }
+        };
 
+        changeSubscriberOnNextListener=new SubscriberOnNextListener<String>() {
+            @Override
+            public void onNext(String s) {
+                if (status==1){
+                    btnDown.setText("暂停招聘");
+                }else if(status==2){
+                    btnDown.setText("恢复招聘");
+                }else {
+                    finish();
+                }
+                TastyToast.makeText(JobItemDetailActivity.this,"操作成功", TastyToast.LENGTH_SHORT,TastyToast.SUCCESS);
             }
         };
     }
@@ -306,10 +289,7 @@ public class JobItemDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         modleJob = (JobInfo) intent.getSerializableExtra("job");
         jobid = modleJob.getId();
-        //1是外部商家，2是个人商户，3是内部
         permission = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, 1);
-//        getJobs(String.valueOf(loginId), String.valueOf(jobid), String.valueOf(merchantid), alike);
-
         phone = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
         long times=System.currentTimeMillis();
         String sign= MD5Util.getSign(JobItemDetailActivity.this,times);
@@ -326,42 +306,11 @@ public class JobItemDetailActivity extends BaseActivity {
 
 
     private void fillData() {
-
-        if (modleJob.getStatus() == 2) {
-            btnDown.setText("恢复招聘");
-        } else if (modleJob.getStatus() == 0) {
-            btnDown.setText("暂停招聘");
-        } else if (modleJob.getStatus() == 5) {
-            btnFinish.setVisibility(View.GONE);
-            btnChange.setVisibility(View.GONE);
-            btnDown.setVisibility(View.GONE);
-            layoutOfflin.setVisibility(View.VISIBLE);
-        } else if (modleJob.getStatus() == 6) {
-            btnFinish.setVisibility(View.GONE);
-            btnChange.setVisibility(View.GONE);
-            btnDown.setVisibility(View.GONE);
-            layoutOfflin.setVisibility(View.VISIBLE);
-        } else if (modleJob.getStatus() == 3) {
-            btnFinish.setVisibility(View.GONE);
-            btnChange.setVisibility(View.GONE);
-            btnDown.setVisibility(View.GONE);
-            layoutOfflin.setVisibility(View.VISIBLE);
-        }
-        //3是内部1是外部商家，2是个人商户
-        if (permission==3){
-            btnClearing.setVisibility(View.VISIBLE);
-            layoutOfflin.setVisibility(View.GONE);
-        }else {
-            btnClearing.setVisibility(View.GONE);
-            layoutOfflin.setVisibility(View.VISIBLE);
-        }
-
         tvTitle.setText("兼职详情");
         tvMerchantName.setText(modleJob.getJob_name());
         tvWorkLocation.setText(jobDetailsBaseBean.getAddress());
         tvManagerName.setText(modleJob.getJob_name());
         tvChakanBrowse.setText(modleJob.getJob_name());
-
         String date = DateUtils.getTime(Long.valueOf(jobDetailsBaseBean.getStart_date()), Long.valueOf(jobDetailsBaseBean.getEnd_time()));
         tvWorkDate.setText(date);
         tvDate.setText(date);
@@ -419,10 +368,29 @@ public class JobItemDetailActivity extends BaseActivity {
             tvPayMethod.setText("小时结");
         tvWorkContent.setText(jobDetailsBaseBean.getContent());
         tvWorkRequire.setText(jobDetailsBaseBean.getRequire());
-
         //商家信息
+        tvCompanyName.setText(jobDetailsBaseBean.getContact_name());
 
-        tvCompanyName.setText(jobDetailsBaseBean.getJob_name());
+
+        //根据当前兼职状态显示对应操作按钮
+        if (modleJob.getStatus() == 2) {
+            btnDown.setText("恢复招聘");
+        } else if (modleJob.getStatus() == 1) {
+            btnDown.setText("暂停招聘");
+        } else if (modleJob.getStatus() >= 3) {
+            btnFinish.setVisibility(View.GONE);
+            btnChange.setVisibility(View.GONE);
+            btnDown.setVisibility(View.GONE);
+            layoutOfflin.setVisibility(View.VISIBLE);
+        }
+        //3是内部1是外部商家，2是个人商户
+        if (permission==3){
+            btnClearing.setVisibility(View.VISIBLE);
+            layoutOfflin.setVisibility(View.GONE);
+        }else {
+            btnClearing.setVisibility(View.GONE);
+            layoutOfflin.setVisibility(View.VISIBLE);
+        }
 
     }
 

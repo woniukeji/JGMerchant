@@ -95,6 +95,13 @@ public class SplashActivity extends BaseActivity {
                 SPUtils.setParam(SplashActivity.this, Constants.LOGIN_INFO, Constants.SP_TYPE, 2);
             }
 
+            @Override
+            public void onError(String mes) {
+                Intent intent = new Intent(SplashActivity.this, LoginNewActivity.class);
+                startActivity(intent);
+                finish();
+                super.onError(mes);
+            }
         };
     }
 
@@ -117,21 +124,6 @@ public class SplashActivity extends BaseActivity {
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getAuth_status());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getBusiness_type());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniu_token());
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_WQTOKEN, user.getToken() != null ? user.getToken() : "");
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, user.getTel() != null ? user.getTel() : "");
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PASSWORD, user.getPassword() != null ? user.getPassword() : "");
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, user.getLoginId());
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, user.getMerchantId());
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getMerchantInfoStatus());
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getPermissions());
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, user.getCompanyName());
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, user.getUserImage());
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PAYSTATUS, user.getPayStatus());
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniuToken());
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PROVINCE, user.getProvince());
-//        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_CITY, user.getCity());
-//        SPUtils.setParam(this, Constants.LOGIN_INFO,Constants.SP_ADDRESS, user.getCompanyAddress());   if (!TextUtils.isEmpty(String.valueOf(user.getLoginId()))) {
-//            SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.USER_PAY_PASS, user.getPayPassword());
             if (JPushInterface.isPushStopped(this.getApplicationContext())) {
                 JPushInterface.resumePush(this.getApplicationContext());
             }

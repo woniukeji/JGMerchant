@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,32 +21,30 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
+import com.sdsmdg.tastytoast.TastyToast;
 import com.squareup.picasso.Picasso;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
-import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
-import com.woniukeji.jianmerchant.entity.CityCategory;
 import com.woniukeji.jianmerchant.entity.JobBase;
 import com.woniukeji.jianmerchant.entity.JobDetails;
 import com.woniukeji.jianmerchant.entity.JobInfo;
 import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.Model;
+import com.woniukeji.jianmerchant.entity.NewJobDetail;
 import com.woniukeji.jianmerchant.entity.PickType;
 import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
+import com.woniukeji.jianmerchant.partjob.JobItemDetailActivity;
 import com.woniukeji.jianmerchant.utils.BitmapUtils;
 import com.woniukeji.jianmerchant.utils.CommonUtils;
 import com.woniukeji.jianmerchant.utils.CropCircleTransfermation;
 import com.woniukeji.jianmerchant.utils.DateUtils;
-import com.woniukeji.jianmerchant.utils.LogUtils;
 import com.woniukeji.jianmerchant.utils.MD5Coder;
 import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.QiNiu;
@@ -57,8 +53,6 @@ import com.woniukeji.jianmerchant.widget.CircleImageView;
 import com.woniukeji.jianmerchant.widget.DatePickerPopuWin;
 import com.woniukeji.jianmerchant.widget.TimePickerPopuWin;
 import com.woniukeji.jianmerchant.widget.TypePickerPopuWin;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -77,10 +71,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
-import okhttp3.Call;
-import okhttp3.Response;
 
-public class PublishDetailActivity extends BaseActivity {
+public class ChangeJobActivity extends BaseActivity {
 
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 9;
@@ -267,7 +259,7 @@ public class PublishDetailActivity extends BaseActivity {
     private JobDetails.TMerchantEntity merchantInfo = new JobDetails.TMerchantEntity();
     private JobDetails.TJobInfoEntity jobinfo = new JobDetails.TJobInfoEntity();
     private Handler mHandler = new Myhandler(this);
-    private Context context = PublishDetailActivity.this;
+    private Context context = ChangeJobActivity.this;
     private String aera_id = "";//地区ID
     private String name = "";//      兼职名称
     private String name_image = "http://v3.jianguojob.com/logo.png";//    兼职图片
@@ -290,7 +282,7 @@ public class PublishDetailActivity extends BaseActivity {
     private String other = "";//        其他
     private String work_content;//    工作内容
     private String work_require;//    工作要求
-    private Context mContext = PublishDetailActivity.this;
+    private Context mContext = ChangeJobActivity.this;
     private SweetAlertDialog sweetAlertDialog;
     private Model.ListTJobEntity listTJobEntity;
     /**
@@ -347,13 +339,12 @@ public class PublishDetailActivity extends BaseActivity {
     private JsonObject qualificationJsonObj;
     private JsonObject welfareJsonObj;
     private JsonObject labelJsonObj;
-    private String region;
     private String type;
     private String category;
     private TagAdapter quaAdapter;
     private TagAdapter welAdapter;
     private TagAdapter partAdapter;
-    private JobInfo modle;
+    private NewJobDetail modle;
     private boolean isFromItem = false;
     private JsonArray labelJsonArray;
     private Intent intent;
@@ -367,7 +358,8 @@ public class PublishDetailActivity extends BaseActivity {
     private String jobid;
     private String phone;
     private SubscriberOnNextListener<JobBase> onNextListenner;
-
+    private SubscriberOnNextListener<NewJobDetail> jobBaseSubscriberOnNextListener;
+    private int isHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -409,16 +401,13 @@ public class PublishDetailActivity extends BaseActivity {
 
     private static class Myhandler extends Handler {
         private WeakReference<Context> reference;
-
-
         public Myhandler(Context context) {
             reference = new WeakReference<>(context);
         }
-
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            PublishDetailActivity activity = (PublishDetailActivity) reference.get();
+            ChangeJobActivity activity = (ChangeJobActivity) reference.get();
             switch (msg.what) {
                 case 0:
                     if (activity.sweetAlertDialog.isShowing()) {
@@ -442,9 +431,9 @@ public class PublishDetailActivity extends BaseActivity {
                     activity.finish();
                     break;
                 case 6:
-                    BaseBean<Model> obj = (BaseBean<Model>) msg.obj;
-                    activity.listTJobEntity = obj.getData().getT_job();//这里有问题,由于返回的实体bean变化导致的
-                    activity.initModleData(activity.listTJobEntity);
+//                    BaseBean<Model> obj = (BaseBean<Model>) msg.obj;
+//                    activity.listTJobEntity = obj.getData().getT_job();//这里有问题,由于返回的实体bean变化导致的
+//                    activity.initModleData(activity.listTJobEntity);
                     break;
                 case 2:
                     //选择器返回字符
@@ -525,14 +514,203 @@ public class PublishDetailActivity extends BaseActivity {
         }
     }
 
+
+
+
+    @Override
+    public void setContentView() {
+        setContentView(R.layout.activity_publish_detail);
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public void initViews() {
+        phone = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
+        getCategoryToBeanNew();
+        long times=System.currentTimeMillis();
+        String sign=MD5Util.getSign(ChangeJobActivity.this,times);
+        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this), phone,sign,String.valueOf(times));
+        intent = getIntent();
+        if (intent.getStringExtra("type").equals("change")) {
+            //修改兼职显示修改按钮
+            jobid = intent.getStringExtra("jobid");
+            changeJob();
+        } else if (intent.getAction().equals("fromItem")) {
+            //获取从历史纪录里传递过来的intent,使用模板,显示发布按钮
+            jobid = intent.getStringExtra("jobid");
+            isHistory = intent.getIntExtra("isHistory",1);
+            getCategoryToBean();
+            isFromItem = true;
+        }
+
+        //获取限制，福利，标签String数组--
+        // TODO: 2016/7/26 需要移动到历史或者模板页面
+
+
+    }
+
+    private void getCategoryToBeanNew() {
+        onNextListenner = new SubscriberOnNextListener<JobBase>() {
+            @Override
+            public void onNext(JobBase cityAndCategoryBean) {
+                ChangeJobActivity.this.cityAndCategoryBean = cityAndCategoryBean;
+                qualification = getInfoForTag(cityAndCategoryBean, "qualification");
+                welfare = getInfoForTag(cityAndCategoryBean, "welfare");
+                partjob_tag = getInfoForTag(cityAndCategoryBean, "partjob_tag");
+                //这以下设置流布局标签
+                setAdapter();
+                getJobDetail();
+
+            }
+        };
+
+           }
+
+    private void getJobDetail() {
+        jobBaseSubscriberOnNextListener=new SubscriberOnNextListener<NewJobDetail>() {
+            @Override
+            public void onNext(NewJobDetail jobBase) {
+                TastyToast.makeText(ChangeJobActivity.this,"获取成功", TastyToast.LENGTH_SHORT,TastyToast.SUCCESS);
+                modle =  jobBase;
+                initModleData(modle);
+
+            }
+        };
+        phone = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
+        long timeMillis=System.currentTimeMillis();
+        String sign1= MD5Util.getSign(ChangeJobActivity.this,timeMillis);
+        HttpMethods.getInstance().getjobDetail(new ProgressSubscriber<NewJobDetail>(jobBaseSubscriberOnNextListener, this), String.valueOf(jobid),phone,sign1,String.valueOf(timeMillis));
+
+    }
+
+    private void changeJob() {
+        llPublish.setVisibility(View.GONE);
+        llChange.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 访问网络获取兼职类别
+     */
+    private void getCategoryToBean() {
+        SubscriberOnNextListener<JobBase> onNextListenner = new SubscriberOnNextListener<JobBase>() {
+
+            @Override
+            public void onNext(JobBase cityAndCategoryBean) {
+                ChangeJobActivity.this.cityAndCategoryBean = cityAndCategoryBean;
+                qualification = getInfoForTag(cityAndCategoryBean, "qualification");
+                welfare = getInfoForTag(cityAndCategoryBean, "welfare");
+                partjob_tag = getInfoForTag(cityAndCategoryBean, "partjob_tag");
+                //这以下设置流布局标签
+                setAdapter();
+                //这以上设置流布局标签
+                if (isFromItem) {
+                    //如果是从item过来的走下面
+//                     initModleData(modle);
+                }
+
+            }
+        };
+
+        long times=System.currentTimeMillis();
+        String sign=MD5Util.getSign(ChangeJobActivity.this,times);
+        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this), phone,sign,String.valueOf(times));
+    }
+
+
+
+    private void initModleData(NewJobDetail modle) {
+        region_id = modle.getCity_id();
+        type_id1 = modle.getJob_type_id();
+        aera_id = String.valueOf(modle.getArea_id());
+        tvPosition.setText(modle.getArea());
+        tvPosition.setTextColor(getResources().getColor(R.color.black));
+        etTitle.setText(modle.getJob_name());
+        name_image = modle.getJob_image();
+        Picasso.with(mContext).load(name_image)
+                .placeholder(R.mipmap.icon_head_defult)
+                .error(R.mipmap.icon_head_defult)
+                .transform(new CropCircleTransfermation())
+                .into(imgJob);
+        tvDateStart.setText(DateUtils.getTime(modle.getStart_date(), "yyyy-MM-dd"));
+        tvDateEnd.setText(DateUtils.getTime(modle.getEnd_date(), "yyyy-MM-dd"));
+        start_date = String.valueOf(modle.getStart_date());
+        stop_date = String.valueOf(modle.getEnd_date());
+        tvTimeStart.setText(DateUtils.getHm(modle.getBegin_time()));
+        tvTimeEnd.setText(DateUtils.getHm(modle.getEnd_time()));
+        start_time = String.valueOf(modle.getBegin_time());
+        stop_time = String.valueOf(modle.getEnd_time());
+        etDetailPosition.setText(modle.getAddress());
+        tvPayMethod.setText(payMethods[modle.getMode()]);
+        tvPayMethod.setTextColor(getResources().getColor(R.color.black));
+        mode = String.valueOf(modle.getMode());
+        etWages.setText(String.valueOf(modle.getMoney()));
+        etWages.setTextColor(getResources().getColor(R.color.black));
+        tvWagesMethod.setText(wagesMethods[modle.getTerm()]);
+        term = String.valueOf(modle.getTerm());
+        sum = String.valueOf(modle.getSum());
+        limit_sex = String.valueOf(modle.getLimit_sex());
+        if (limit_sex.equals("3") && limit_sex != null) {
+            tvSex.setText("男女各需");
+            rlLimits.setVisibility(View.VISIBLE);
+            rlNoLimits.setVisibility(View.GONE);
+            etGirlCount.setText(modle.getGirl_sum()+"");
+            etBoyCount.setText(modle.getBoy_sum()+"");
+        } else {
+            tvSex.setText(sexs[modle.getLimit_sex()]);
+            rlLimits.setVisibility(View.GONE);
+            rlNoLimits.setVisibility(View.VISIBLE);
+        }
+        tvSex.setTextColor(getResources().getColor(R.color.black));
+        if (!limit_sex.equals("3") && limit_sex != null) {
+            etCount.setText(sum);
+        }
+//        hot = String.valueOf(modle.getMax());
+        etTel.setText(modle.getTel());
+        etWorkContent.setText(modle.getContent());
+        etWorkRequire.setText(modle.getRequire());
+        etCollectionPosition.setText(modle.getSet_place());
+        etCollectionTime.setText(modle.getSet_time());
+        //根据model中的数据设置，写一个假的例子
+        quaAdapter.setSelectedList(getCurrentSet(modle,"qualification"));
+        welAdapter.setSelectedList(getCurrentSet(modle,"welfare"));
+        partAdapter.setSelectedList(getCurrentSet(modle,"label"));
+        if (flow_qualification.getSelectedList().size()>0) {
+            Iterator<Integer> qualificationIterator = flow_qualification.getSelectedList().iterator();
+            qualificationJsonObj = new JsonObject();
+            qualificationJsonArray = new JsonArray();
+            while (qualificationIterator.hasNext()) {
+                qualificationJsonArray.add(1+qualificationIterator.next()+"");
+            }
+            qualificationJsonObj.add("limit_list", qualificationJsonArray);
+        }
+
+        if (flow_welfare.getSelectedList().size() > 0) {
+            Iterator<Integer> welfareIterator = flow_welfare.getSelectedList().iterator();
+            welfareJsonObj = new JsonObject();
+            welfareJsonArray = new JsonArray();
+            while (welfareIterator.hasNext()) {
+                welfareJsonArray.add(1+welfareIterator.next()+"");
+            }
+            welfareJsonObj.add("welfare_list", welfareJsonArray);
+        }
+
+        if (flow_partjob.getSelectedList().size() > 0) {
+            Iterator<Integer> labelIterator = flow_partjob.getSelectedList().iterator();
+            labelJsonObj = new JsonObject();
+            partjobJsonArray = new JsonArray();
+            while (labelIterator.hasNext()) {
+                partjobJsonArray.add(1+labelIterator.next()+"");
+            }
+            labelJsonObj.add("label_list", partjobJsonArray);
+        }
+    }
     @OnClick({R.id.img_job, R.id.btn_change, R.id.rl_location, R.id.rl_part_level, R.id.rl_category, R.id.rl_pay_method, R.id.tv_wages_method, R.id.rl_sex, R.id.rl_position, R.id.tv_date_start, R.id.tv_date_end, R.id.tv_time_start, R.id.tv_time_end, R.id.rl_collection_time, R.id.btn_preview, R.id.btn_save, R.id.btn_publish})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_job:
                 //单选多选,requestCode,最多选择数，单选模式
-                MultiImageSelectorActivity.startSelect(PublishDetailActivity.this, 0, 1, 0);
+                MultiImageSelectorActivity.startSelect(ChangeJobActivity.this, 0, 1, 0);
                 break;
-
             case R.id.rl_pay_method:
                 List<PickType> listpay = new ArrayList<>();
                 for (int i = 0; i < payMethods.length; i++) {
@@ -543,7 +721,7 @@ public class PublishDetailActivity extends BaseActivity {
                 }
                 TypePickerPopuWin pickerPayMethod = new TypePickerPopuWin(context, listpay, mHandler, 3);
                 pickerPayMethod.showShareWindow();
-                pickerPayMethod.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
+                pickerPayMethod.showAtLocation(ChangeJobActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             case R.id.tv_wages_method:
@@ -556,7 +734,7 @@ public class PublishDetailActivity extends BaseActivity {
                 }
                 TypePickerPopuWin pickerWagesMethod = new TypePickerPopuWin(context, listwage, mHandler, 4);
                 pickerWagesMethod.showShareWindow();
-                pickerWagesMethod.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
+                pickerWagesMethod.showAtLocation(ChangeJobActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             case R.id.rl_sex:
@@ -569,7 +747,7 @@ public class PublishDetailActivity extends BaseActivity {
                 }
                 TypePickerPopuWin pickerSex = new TypePickerPopuWin(context, listSex, mHandler, 5);
                 pickerSex.showShareWindow();
-                pickerSex.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
+                pickerSex.showAtLocation(ChangeJobActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
 
@@ -592,7 +770,7 @@ public class PublishDetailActivity extends BaseActivity {
                     }
                     TypePickerPopuWin pickerAre = new TypePickerPopuWin(context, listAre, mHandler, 6);
                     pickerAre.showShareWindow();
-                    pickerAre.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
+                    pickerAre.showAtLocation(ChangeJobActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
                             Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
 
                 } else
@@ -601,13 +779,13 @@ public class PublishDetailActivity extends BaseActivity {
             case R.id.tv_date_start:
                 DatePickerPopuWin pickerPopup1 = new DatePickerPopuWin(context, mHandler, 7);
                 pickerPopup1.showShareWindow();
-                pickerPopup1.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
+                pickerPopup1.showAtLocation(ChangeJobActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             case R.id.tv_date_end:
                 DatePickerPopuWin pickerPopup2 = new DatePickerPopuWin(context, mHandler, 8);
                 pickerPopup2.showShareWindow();
-                pickerPopup2.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
+                pickerPopup2.showAtLocation(ChangeJobActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             case R.id.tv_time_start:
@@ -622,7 +800,7 @@ public class PublishDetailActivity extends BaseActivity {
                 }
                 TimePickerPopuWin pickerTimeS = new TimePickerPopuWin(context, hourlist, secondlist, mHandler, 9);
                 pickerTimeS.showShareWindow();
-                pickerTimeS.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
+                pickerTimeS.showAtLocation(ChangeJobActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             case R.id.tv_time_end:
@@ -637,81 +815,10 @@ public class PublishDetailActivity extends BaseActivity {
                 }
                 TimePickerPopuWin pickerTimeE = new TimePickerPopuWin(context, hourlistE, secondlistE, mHandler, 10);
                 pickerTimeE.showShareWindow();
-                pickerTimeE.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
+                pickerTimeE.showAtLocation(ChangeJobActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             case R.id.rl_collection_time:
-//                DatePickerPopuWin pickerPopup5=new DatePickerPopuWin(context,mHandler,11);
-//                pickerPopup5.showShareWindow();
-//                pickerPopup5.showAtLocation(PublishDetailActivity.this.getLayoutInflater().inflate(R.layout.activity_publish_detail, null),
-//                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-                break;
-            case R.id.btn_preview:
-                String city_name="";
-                if (CheckStatus()) {
-                    jobinfo.setTitle(etTitle.getText().toString());
-                    if (region != null && !region.equals("")) {
-                        city_name = region;
-                    } else {
-//                        city_name = modle.getCity_id_name();
-                    }
-                    jobinfo.setAddress(city_name + tvPosition.getText().toString() + etDetailPosition.getText().toString());
-                    long startDate = DateUtils.getLongTime(tvDateStart.getText().toString());
-                    long stopDate = DateUtils.getLongTime(tvDateEnd.getText().toString());
-                    jobinfo.setStart_date(startDate);
-                    jobinfo.setStop_date(stopDate);
-                    jobinfo.setLimit_sex(Integer.valueOf(limit_sex));
-                    jobinfo.setSet_place(etCollectionPosition.getText().toString());
-                    jobinfo.setTerm(Integer.valueOf(term));
-                    jobinfo.setStart_time(start_time);
-                    jobinfo.setStop_time(stop_time);
-                    jobinfo.setSet_time(set_time);
-                    jobinfo.setWork_content(etWorkContent.getText().toString());
-                    jobinfo.setWork_require(etWorkRequire.getText().toString());
-                    jobinfo.setWages(money + tvWagesMethod.getText().toString());
-                    //其他信息
-                    qualificationOther = new StringBuffer();
-                    welfareOther = new StringBuffer();
-                    labelOther = new StringBuffer();
-                    if (qualicationSelected != null&&intent.getAction().equals("fromFragment")) {
-                        qualificationOther.append(qualicationSelected);
-                    } else {
-//                        for (int i = 0; i < modle.getLimit_name().size(); i++) {
-//                            qualificationOther.append(qualification[Integer.valueOf(modle.getLimit_name().get(i))-1]);
-//                        }
-                    }
-                    if (welfareSelected != null&&intent.getAction().equals("fromFragment")) {
-                        labelOther.append(welfareSelected);
-                    } else {
-//                        for (int i = 0; i < modle.getWelfare_name().size(); i++) {
-//                            welfareOther.append(welfare[Integer.valueOf(modle.getWelfare_name().get(i))-1]);
-//                        }
-                    }
-                    if (partjobSelected != null&&intent.getAction().equals("fromFragment")) {
-                        labelOther.append(partjobSelected);
-                    } else {
-//                        for (int i = 0; i < modle.getLabel_name().size(); i++) {
-//                            labelOther.append(partjob_tag[Integer.valueOf(modle.getLabel_name().get(i))-1]);
-//                        }
-                    }
-                    jobinfo.setOther(qualificationOther.toString()+"-"+welfareOther.toString()+"-"+labelOther.toString());
-                    if (limit_sex.equals("3")) {
-                        int sum = Integer.valueOf(etGirlCount.getText().toString()) + Integer.valueOf(etBoyCount.getText().toString());
-                        jobinfo.setSum(sum + "人");
-                    } else {
-                        jobinfo.setSum(etCount.getText().toString() + "人");
-                    }
-
-
-                    String merchantName = (String) SPUtils.getParam(mContext, Constants.USER_INFO, Constants.USER_NAME, "");//王五
-                    merchantInfo.setName(merchantName);
-                    merchantInfo.setName_image(name_image);
-                    Intent intent = new Intent(PublishDetailActivity.this, PreviewJobActivity.class);
-                    intent.putExtra("jobinfo", jobinfo);
-                    intent.putExtra("merchantinfo", merchantInfo);
-                    startActivity(intent);
-                }
-
                 break;
             case R.id.btn_save:
                 if (CheckStatus()) {
@@ -731,7 +838,7 @@ public class PublishDetailActivity extends BaseActivity {
                                             @Override
                                             public void onNext(String jobs) {
                                                 String sucessMessage = "保存成功！";
-                                                Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ChangeJobActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
                                                 finish();
                                             }
                                         };
@@ -740,25 +847,20 @@ public class PublishDetailActivity extends BaseActivity {
                                         String boy_sum=etBoyCount.getText().toString();
                                         int sum =Integer.getInteger(girl_sum)+Integer.getInteger(boy_sum);
                                         long timestamp= System.currentTimeMillis();
-                                        String sign = MD5Util.getSign(PublishDetailActivity.this,timestamp);
-                                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, PublishDetailActivity.this),
+                                        String sign = MD5Util.getSign(ChangeJobActivity.this,timestamp);
+                                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, ChangeJobActivity.this),
                                                 sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
                                                 address, mode, money, term, limit_sex, etGirlCount.getText().toString(),etBoyCount.getText().toString(),String.valueOf(sum), tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
                                                 qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"",job_model);
-
-
                                         //男女各需
                                     } else {
                                         SubscriberOnNextListener<String> nextListenner = new SubscriberOnNextListener<String>() {
 
                                             @Override
                                             public void onNext(String jobs) {
-//                                PublishDetailActivity.this.jobs = jobs;
-                                                //将刚发布的兼职信息写入到本地
-//                                LogUtils.i("jobs", new Gson().toJson(jobs).toString());
                                                 String sucessMessage = "发布成功！";
-                                                Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
-                                                PublishDetailActivity.this.finish();
+                                                Toast.makeText(ChangeJobActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
+                                                ChangeJobActivity.this.finish();
                                             }
                                         };
 
@@ -766,12 +868,11 @@ public class PublishDetailActivity extends BaseActivity {
                                         String sum= etCount.getText().toString();
                                         //job_model =0  不是模板
                                         long timestamp= System.currentTimeMillis();
-                                        String sign = MD5Util.getSign(PublishDetailActivity.this,timestamp);
-                                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, PublishDetailActivity.this),
+                                        String sign = MD5Util.getSign(ChangeJobActivity.this,timestamp);
+                                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, ChangeJobActivity.this),
                                                 sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
                                                 address, mode, money, term, limit_sex, "0","0",sum, tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
                                                 qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"",job_model);
-
                                     }
                                 }
                             })
@@ -782,21 +883,16 @@ public class PublishDetailActivity extends BaseActivity {
                                 }
                             }).show();
                 }
-
                 break;
             case R.id.btn_publish:
 
                 if (CheckStatus()) {
                     if (limit_sex.equals("3")) {
                         SubscriberOnNextListener<String> nextListenner = new SubscriberOnNextListener<String>() {
-
                             @Override
                             public void onNext(String jobs) {
-//                                PublishDetailActivity.this.jobs = jobs;
-                                //将刚发布的兼职信息写入到本地
-//                                LogUtils.i("jobs", new Gson().toJson(jobs).toString());
                                 String sucessMessage = "发布成功！";
-                                Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChangeJobActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         };
@@ -804,12 +900,12 @@ public class PublishDetailActivity extends BaseActivity {
                         String girl_sum=etGirlCount.getText().toString();
                         String boy_sum=etBoyCount.getText().toString();
                         int sum =Integer.getInteger(girl_sum)+Integer.getInteger(boy_sum);
-                                long timestamp= System.currentTimeMillis();
-                        String sign = MD5Util.getSign(PublishDetailActivity.this,timestamp);
-                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, PublishDetailActivity.this),
-                                sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
+                        long timestamp= System.currentTimeMillis();
+                        String sign = MD5Util.getSign(ChangeJobActivity.this,timestamp);
+                        HttpMethods.getInstance().changeJob(new ProgressSubscriber<String>(nextListenner, ChangeJobActivity.this),
+                                jobid,sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
                                 address, mode, money, term, limit_sex, etGirlCount.getText().toString(),etBoyCount.getText().toString(),String.valueOf(sum), tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
-                               qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"","0");
+                                qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"","0");
 
                     } else {
                         SubscriberOnNextListener<String> nextListenner = new SubscriberOnNextListener<String>() {
@@ -819,18 +915,16 @@ public class PublishDetailActivity extends BaseActivity {
 //                                PublishDetailActivity.this.jobs = jobs;
                                 //将刚发布的兼职信息写入到本地
 //                                LogUtils.i("jobs", new Gson().toJson(jobs).toString());
-                                String sucessMessage = "发布成功！";
-                                Toast.makeText(PublishDetailActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
-                                PublishDetailActivity.this.finish();
+                                String sucessMessage = "保存成功！";
+                                Toast.makeText(ChangeJobActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
+                                ChangeJobActivity.this.finish();
                             }
                         };
-
                         //男女都限制数量，
                         String sum= etCount.getText().toString();
-                        //job_model =0  不是模板
                         long timestamp= System.currentTimeMillis();
-                        String sign = MD5Util.getSign(PublishDetailActivity.this,timestamp);
-                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, PublishDetailActivity.this),
+                        String sign = MD5Util.getSign(ChangeJobActivity.this,timestamp);
+                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, ChangeJobActivity.this),
                                 sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
                                 address, mode, money, term, limit_sex, "0","0",sum, tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
                                 qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"","0");
@@ -844,37 +938,288 @@ public class PublishDetailActivity extends BaseActivity {
                         String jobid = intent.getStringExtra("jobid");
                         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
                         alike = String.valueOf(System.currentTimeMillis());
-                        SubscriberOnNextListener<BaseBean> nextListenner = new SubscriberOnNextListener<BaseBean>() {
+                        SubscriberOnNextListener<String> nextListenner = new SubscriberOnNextListener<String>() {
                             @Override
-                            public void onNext(BaseBean baseBean) {
-                                showShortToast(baseBean.getMessage());
+                            public void onNext(String baseBean) {
+                               TastyToast.makeText(ChangeJobActivity.this,"修改成功",TastyToast.LENGTH_LONG,TastyToast.SUCCESS);
                             }
                         };
-                        //job_model =0  不是模板
-                        HttpMethods.getInstance().updateJob(new ProgressSubscriber<BaseBean>(nextListenner, PublishDetailActivity.this),only,jobid,
-                                String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(""), name, name_image, start_date, stop_date,
-                                address, mode, money, term, limit_sex, etBoyCount.getText().toString(),etGirlCount.getText().toString(), String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
-                                "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
-
+                        String girl_sum=etGirlCount.getText().toString();
+                        String boy_sum=etBoyCount.getText().toString();
+                        int sum =Integer.getInteger(girl_sum)+Integer.getInteger(boy_sum);
+                        long timestamp= System.currentTimeMillis();
+                        String sign = MD5Util.getSign(ChangeJobActivity.this,timestamp);
+                        HttpMethods.getInstance().changeJob(new ProgressSubscriber<String>(nextListenner, ChangeJobActivity.this),
+                                jobid,sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
+                                address, mode, money, term, limit_sex, etGirlCount.getText().toString(),etBoyCount.getText().toString(),String.valueOf(sum), tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
+                                qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"","0");
                     } else {
                         alike = "0";
                         String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
                         String jobid = intent.getStringExtra("jobid");
-                        SubscriberOnNextListener<BaseBean> nextListenner = new SubscriberOnNextListener<BaseBean>() {
+                        SubscriberOnNextListener<String> nextListenner = new SubscriberOnNextListener<String>() {
                             @Override
-                            public void onNext(BaseBean baseBean) {
-                                showShortToast(baseBean.getMessage());
+                            public void onNext(String baseBean) {
+                                TastyToast.makeText(ChangeJobActivity.this,"修改成功",TastyToast.LENGTH_LONG,TastyToast.SUCCESS);
                             }
                         };
-                        //job_model =0  不是模板
-                        HttpMethods.getInstance().updateJob(new ProgressSubscriber<BaseBean>(nextListenner, PublishDetailActivity.this),only,jobid,
-                                String.valueOf(region_id), aera_id, String.valueOf(category_id), String.valueOf(""), name, name_image, start_date, stop_date,
-                                address, mode, money, term, limit_sex, etCount.getText().toString(),"0", String.valueOf(type_id1), alike, "0", "0", tel, start_time, stop_time, set_place, set_time, other, work_content, work_require,
-                                "0", qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"");
+                        String sum= etCount.getText().toString();
+                        long timestamp= System.currentTimeMillis();
+                        String sign = MD5Util.getSign(ChangeJobActivity.this,timestamp);
+                        HttpMethods.getInstance().changeJob(new ProgressSubscriber<String>(nextListenner, ChangeJobActivity.this),
+                                jobid,sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
+                                address, mode, money, term, limit_sex, "0","0",sum, tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
+                                qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"","0");
                     }
                 }
                 break;
         }
+    }
+
+    private Set<Integer> getCurrentSet(NewJobDetail modle, String name) {
+        HashSet<Integer> set = new HashSet<>();
+        if (name.equals("qualification")) {
+            if (modle.getLimits().size() != 0 && !modle.getLimits().get(0).equals("")) {
+                for (int i = 0; i < modle.getLimits().size(); i++) {
+                    set.add(Integer.valueOf(modle.getLimits().get(i)) - 1);
+                }
+            } else {
+                return null;
+            }
+        } else if (name.equals("welfare")) {
+            if (modle.getWelfare().size() != 0 && !modle.getWelfare().get(0).equals("")) {
+                for (int i = 0; i < modle.getWelfare().size(); i++) {
+                    set.add(Integer.valueOf(modle.getWelfare().get(i)) - 1);
+                }
+            } else {
+                return null;
+            }
+        } else if (name.equals("label")) {
+            if (modle.getLabel().size() != 0 && !modle.getLabel().get(0).equals("")) {
+                for (int i = 0; i < modle.getLabel().size(); i++) {
+                    set.add(Integer.valueOf(modle.getLabel().get(i)) - 1);
+                }
+            } else {
+                return null;
+            }
+        }
+        return set;
+    }
+    @Override
+    public void initListeners() {
+        etWorkContent.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (view.getId() == R.id.et_work_content) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
+        etWorkRequire.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (view.getId() == R.id.et_work_require) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
+        //给标签添加监听
+        flow_qualification.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
+            @Override
+            public void onSelected(Set<Integer> selectPosSet) {
+                    qualicationSelected = getSelectedTagFromSet(selectPosSet,qualification);
+                if (qualicationSelected != null) {
+                    qualificationSplit = qualicationSelected.split(",");
+                }
+                    Iterator<Integer> iterator = selectPosSet.iterator();
+                    qualificationJsonObj = new JsonObject();
+                    qualificationJsonArray = new JsonArray();
+                    while (iterator.hasNext()) {
+                        Integer next = iterator.next();
+                        qualificationJsonArray.add(1+next + "");
+                    }
+                    qualificationJsonObj.add("limit_list", qualificationJsonArray);
+
+
+            }
+        });
+        flow_welfare.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
+            @Override
+            public void onSelected(Set<Integer> selectPosSet) {
+                    welfareSelected =getSelectedTagFromSet(selectPosSet,welfare);
+                    if (welfareSelected != null) {
+                        welfareSplit = welfareSelected.split(",");
+                    }
+                    Iterator<Integer> iterator = selectPosSet.iterator();
+                    welfareJsonObj = new JsonObject();
+                    welfareJsonArray = new JsonArray();
+                    while (iterator.hasNext()) {
+                        Integer next = iterator.next();
+                        welfareJsonArray.add(1+next + "");
+                    }
+                    welfareJsonObj.add("welfare_list", welfareJsonArray);
+            }
+        });
+        flow_partjob.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
+            @Override
+            public void onSelected(Set<Integer> selectPosSet) {
+                    partjobSelected =getSelectedTagFromSet(selectPosSet,partjob_tag);
+                    if (partjobSelected!=null) {
+                        labelSplit = partjobSelected.split(",");
+                        }
+                    Iterator<Integer> iterator = selectPosSet.iterator();
+                    labelJsonObj = new JsonObject();
+                    labelJsonArray = new JsonArray();
+                    while (iterator.hasNext()) {
+                        Integer next = iterator.next();
+                        labelJsonArray.add(1+next + "");
+                    }
+                    labelJsonObj.add("label_list", labelJsonArray);
+            }
+        });
+    }
+    private void setAdapter() {
+        quaAdapter = new TagAdapter(qualification) {
+            @Override
+            public View getView(FlowLayout parent, int position, Object o) {
+                TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_qualification, false);
+                textView.setText((String) o);
+                return textView;
+            }
+        };
+        flow_qualification.setAdapter(quaAdapter);
+        welAdapter = new TagAdapter(welfare) {
+            @Override
+            public View getView(FlowLayout parent, int position, Object o) {
+                TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_welfare, false);
+                textView.setText((String) o);
+                return textView;
+            }
+        };
+        flow_welfare.setAdapter(welAdapter);
+        partAdapter = new TagAdapter(partjob_tag) {
+            @Override
+            public View getView(FlowLayout parent, int position, Object o) {
+                TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_partjob, false);
+                textView.setText((String) o);
+                return textView;
+            }
+        };
+        flow_partjob.setAdapter(partAdapter);
+    }
+    /**
+     * 从set集合中找出选择的标签，并且赋值给目标字符串
+     * @param selectPosSet
+     * @param contents
+     */
+    private String getSelectedTagFromSet(Set<Integer> selectPosSet, String[] contents) {
+        Iterator<Integer> iterator = selectPosSet.iterator();
+        StringBuffer sb = new StringBuffer();
+        while (iterator.hasNext()) {
+            Integer pos = iterator.next();
+            sb.append(contents[pos]);
+            sb.append(",");
+        }
+        if (selectPosSet.size() == 0) {
+            return null;
+        }
+        return sb.toString().substring(0, sb.toString().lastIndexOf(","));
+    }
+    @Override
+    public void initData() {
+        phone = String.valueOf(SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, ""));
+    }
+    @Override
+    public void addActivity() {
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                // 获取返回的图片列表
+                List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+                // 处理你自己的逻辑 ....
+                File imgFile = new File(path.get(0));
+                String choosePic = path.get(0).substring(path.get(0).lastIndexOf("."));
+                String fileName = Constants.IMG_PATH + CommonUtils.generateFileName() + choosePic;
+                Uri imgSource = Uri.fromFile(imgFile);
+                imgJob.setImageURI(imgSource);
+                File file = new File(Environment.getExternalStorageDirectory() + "/" + fileName + ".png");
+                CommonUtils.copyfile(imgFile, file, true);
+                BitmapUtils.compressBitmap(file.getAbsolutePath(), 300, 300);
+                name_image = "http://7xlell.com2.z0.glb.qiniucdn.com/" + MD5Coder.getQiNiuName(String.valueOf(phone));
+                QiNiu.upLoadQiNiu(context, MD5Coder.getQiNiuName(String.valueOf(phone)), file);
+
+            }
+        } else if (requestCode == 1) {
+//            tvBirthday.setText(data.getStringExtra("date"));
+        } else if (requestCode == 2) {
+//            tvDate.setText(data.getStringExtra("date"));
+        } else if (requestCode == 3) {
+            if (resultCode == RESULT_OK) {
+//                tvSchool.setText(data.getStringExtra("school"));
+            }
+
+        }
+
+
+    }
+
+
+    //自动收起键盘的操作 通过判断当前的view实例是不是edittext来决定
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (isShouldHideInput(v, ev)) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+        // 必不可少，否则所有的组件都不会有TouchEvent了
+        if (getWindow().superDispatchTouchEvent(ev)) {
+            return true;
+        }
+        return onTouchEvent(ev);
+    }
+
+    public boolean isShouldHideInput(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {
+            int[] leftTop = {0, 0};
+            //获取输入框当前的location位置
+            v.getLocationInWindow(leftTop);
+            int left = leftTop[0];
+            int top = leftTop[1];
+            int bottom = top + v.getHeight();
+            int right = left + v.getWidth();
+            if (event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom) {
+                // 点击的是输入框区域，保留点击EditText的事件
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean CheckStatus() {
@@ -965,519 +1310,5 @@ public class PublishDetailActivity extends BaseActivity {
         work_require = etWorkRequire.getText().toString();
         return true;
     }
-
-
-    @Override
-    public void setContentView() {
-        setContentView(R.layout.activity_publish_detail);
-        ButterKnife.bind(this);
-    }
-
-    @Override
-    public void initViews() {
-        phone = (String) SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
-        getCategoryToBeanNew();
-        long times=System.currentTimeMillis();
-        String sign=MD5Util.getSign(PublishDetailActivity.this,times);
-        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this), phone,sign,String.valueOf(times));
-        intent = getIntent();
-        if (intent.getStringExtra("type").equals("change")) {
-            jobid = intent.getStringExtra("jobid");
-            //从兼职详情过来，需要修改
-            isFromItem = true;//目的是不走下面的判断
-            isFromActivity = true;
-            getCategoryToBeanNew();
-            changeJob();
-        }else if (intent.getAction().equals("fromFragment")) {
-            cityAndCategoryBean= intent.getParcelableExtra("jobbase");
-            Bundle bundle = intent.getExtras();
-            region = bundle.getString("region");
-            region_id = bundle.getString("region_id");//地区id
-            type = bundle.getString("type");
-            type_id1 = bundle.getInt("type_id");//兼职类型id
-            category = bundle.getString("category");
-            category_id = bundle.getInt("category_id");//职位id
-        }
-        else if (intent.getAction().equals("fromItem")) {
-            //获取从历史纪录里传递过来的intent
-//            modle = (Model.ListTJobEntity) intent.getSerializableExtra("job");
-            getCategoryToBean();
-            isFromItem = true;
-        }
-
-        //获取限制，福利，标签String数组--
-        // TODO: 2016/7/26 需要移动到历史或者模板页面
-
-
-    }
-
-    private void getCategoryToBeanNew() {
-        onNextListenner = new SubscriberOnNextListener<JobBase>() {
-            @Override
-            public void onNext(JobBase cityAndCategoryBean) {
-                PublishDetailActivity.this.cityAndCategoryBean = cityAndCategoryBean;
-                qualification = getInfoForTag(cityAndCategoryBean, "qualification");
-                welfare = getInfoForTag(cityAndCategoryBean, "welfare");
-                partjob_tag = getInfoForTag(cityAndCategoryBean, "partjob_tag");
-                //这以下设置流布局标签
-                quaAdapter = new TagAdapter(qualification) {
-                    @Override
-                    public View getView(FlowLayout parent, int position, Object o) {
-                        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_qualification, false);
-                        textView.setText((String) o);
-                        return textView;
-                    }
-                };
-                flow_qualification.setAdapter(quaAdapter);
-                welAdapter = new TagAdapter(welfare) {
-                    @Override
-                    public View getView(FlowLayout parent, int position, Object o) {
-                        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_welfare, false);
-                        textView.setText((String) o);
-                        return textView;
-                    }
-                };
-                flow_welfare.setAdapter(welAdapter);
-                partAdapter = new TagAdapter(partjob_tag) {
-                    @Override
-                    public View getView(FlowLayout parent, int position, Object o) {
-                        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_partjob, false);
-                        textView.setText((String) o);
-                        return textView;
-                    }
-                };
-                flow_partjob.setAdapter(partAdapter);
-//                EventBus.getDefault().post(new ChangeJobEvent());
-                //这以上设置流布局标签
-//                if (isFromItem) {
-//                    //如果是从item过来的走下面
-//                    initModleData(modle);
-//                }
-
-            }
-        };
-
-           }
-
-    private void changeJob() {
-        llPublish.setVisibility(View.GONE);
-        llChange.setVisibility(View.VISIBLE);
-
-        //获取单个id的兼职信息
-        BackgroundSubscriber<Model> subscriber = new BackgroundSubscriber<Model>(new SubscriberOnNextListener<Model>() {
-            @Override
-            public void onNext(Model model) {
-//                modle = model.getT_job();
-//                //最后在去初始化界面
-//                initModleData(modle);
-            }
-        },mContext);
-        HttpMethods.getInstance().singleJobDetail(subscriber, intent.getStringExtra("jobid"));
-    }
-
-    /**
-     * 访问网络获取兼职类别
-     */
-    private void getCategoryToBean() {
-        SubscriberOnNextListener<JobBase> onNextListenner = new SubscriberOnNextListener<JobBase>() {
-
-            @Override
-            public void onNext(JobBase cityAndCategoryBean) {
-                PublishDetailActivity.this.cityAndCategoryBean = cityAndCategoryBean;
-                qualification = getInfoForTag(cityAndCategoryBean, "qualification");
-                welfare = getInfoForTag(cityAndCategoryBean, "welfare");
-                partjob_tag = getInfoForTag(cityAndCategoryBean, "partjob_tag");
-                //这以下设置流布局标签
-                quaAdapter = new TagAdapter(qualification) {
-                    @Override
-                    public View getView(FlowLayout parent, int position, Object o) {
-                        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_qualification, false);
-                        textView.setText((String) o);
-                        return textView;
-                    }
-                };
-                flow_qualification.setAdapter(quaAdapter);
-                welAdapter = new TagAdapter(welfare) {
-                    @Override
-                    public View getView(FlowLayout parent, int position, Object o) {
-                        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_welfare, false);
-                        textView.setText((String) o);
-                        return textView;
-                    }
-                };
-                flow_welfare.setAdapter(welAdapter);
-                partAdapter = new TagAdapter(partjob_tag) {
-                    @Override
-                    public View getView(FlowLayout parent, int position, Object o) {
-                        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.item_detail_tv, flow_partjob, false);
-                        textView.setText((String) o);
-                        return textView;
-                    }
-                };
-                flow_partjob.setAdapter(partAdapter);
-                //这以上设置流布局标签
-                if (isFromItem) {
-                    //如果是从item过来的走下面
-//                     initModleData(modle);
-                }
-
-            }
-        };
-
-        long times=System.currentTimeMillis();
-        String sign=MD5Util.getSign(PublishDetailActivity.this,times);
-        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this), phone,sign,String.valueOf(times));
-    }
-
-    private void initModleData(Model.ListTJobEntity modle) {
-//        tvPublishLocation.setText(modle.getCity_id_name());
-//        tvPublishLocation.setTextColor(getResources().getColor(R.color.black));
-        region_id = modle.getCity_id();
-        type_id1 = modle.getType_id();
-        aera_id = String.valueOf(modle.getArea_id());
-        tvPosition.setText(modle.getArea_id_name());
-        tvPosition.setTextColor(getResources().getColor(R.color.black));
-//        tvCategory.setText(modle.getType_id_name());
-//        tvCategory.setTextColor(getResources().getColor(R.color.black));
-        etTitle.setText(modle.getName());
-        name_image = modle.getName_image();
-        Picasso.with(mContext).load(name_image)
-                .placeholder(R.mipmap.icon_head_defult)
-                .error(R.mipmap.icon_head_defult)
-                .transform(new CropCircleTransfermation())
-                .into(imgJob);
-        tvDateStart.setText(DateUtils.getTime(Long.parseLong(modle.getStart_date()), "yyyy-MM-dd"));
-        tvDateEnd.setText(DateUtils.getTime(Long.parseLong(modle.getStop_date()), "yyyy-MM-dd"));
-        start_date = modle.getStart_date();
-        stop_date = modle.getStop_date();
-        tvTimeStart.setText(DateUtils.getHm(Long.parseLong(modle.getInfo_start_time())));
-        tvTimeEnd.setText(DateUtils.getHm(Long.parseLong(modle.getInfo_stop_time())));
-        start_time = modle.getInfo_start_time();
-        stop_time = modle.getInfo_stop_time();
-        etDetailPosition.setText(modle.getAddress());
-        tvPayMethod.setText(payMethods[modle.getMode()]);
-        tvPayMethod.setTextColor(getResources().getColor(R.color.black));
-        mode = String.valueOf(modle.getMode());
-        etWages.setText(String.valueOf(modle.getMoney()));
-        etWages.setTextColor(getResources().getColor(R.color.black));
-        tvWagesMethod.setText(wagesMethods[modle.getTerm()]);
-        term = String.valueOf(modle.getTerm());
-        sum = String.valueOf(modle.getSum());
-        limit_sex = String.valueOf(modle.getLimit_sex());
-        if (limit_sex.equals("3") && limit_sex != null) {
-            tvSex.setText("男女各需");
-            rlLimits.setVisibility(View.VISIBLE);
-            rlNoLimits.setVisibility(View.GONE);
-            etGirlCount.setText(modle.getGirl_sum()+"");
-//            etBoyCount.setText(sum);
-            etBoyCount.setText(modle.getBoySum());
-        } else {
-            tvSex.setText(sexs[modle.getLimit_sex()]);
-            rlLimits.setVisibility(View.GONE);
-            rlNoLimits.setVisibility(View.VISIBLE);
-        }
-        tvSex.setTextColor(getResources().getColor(R.color.black));
-
-        if (!limit_sex.equals("3") && limit_sex != null) {
-            etCount.setText(sum);
-        }
-
-//        tvHot.setText(partHot[modle.getMax()]);
-        hot = String.valueOf(modle.getMax());
-//        tvHot.setTextColor(getResources().getColor(R.color.black));
-        etTel.setText(modle.getInfo_tel());
-
-        etWorkContent.setText(modle.getInfo_work_content());
-        etWorkRequire.setText(modle.getInfo_work_require());
-        etCollectionPosition.setText(modle.getInfo_set_place());
-        etCollectionTime.setText(modle.getInfo_set_time());
-
-        //根据model中的数据设置，写一个假的例子
-
-        quaAdapter.setSelectedList(getCurrentSet(modle,"qualification"));
-        welAdapter.setSelectedList(getCurrentSet(modle,"welfare"));
-        partAdapter.setSelectedList(getCurrentSet(modle,"label"));
-        if (flow_qualification.getSelectedList().size()>0) {
-            Iterator<Integer> qualificationIterator = flow_qualification.getSelectedList().iterator();
-            qualificationJsonObj = new JsonObject();
-            qualificationJsonArray = new JsonArray();
-            while (qualificationIterator.hasNext()) {
-                qualificationJsonArray.add(1+qualificationIterator.next()+"");
-            }
-            qualificationJsonObj.add("limit_list", qualificationJsonArray);
-        }
-
-        if (flow_welfare.getSelectedList().size() > 0) {
-            Iterator<Integer> welfareIterator = flow_welfare.getSelectedList().iterator();
-            welfareJsonObj = new JsonObject();
-            welfareJsonArray = new JsonArray();
-            while (welfareIterator.hasNext()) {
-                welfareJsonArray.add(1+welfareIterator.next()+"");
-            }
-            welfareJsonObj.add("welfare_list", welfareJsonArray);
-        }
-
-        if (flow_partjob.getSelectedList().size() > 0) {
-            Iterator<Integer> labelIterator = flow_partjob.getSelectedList().iterator();
-            labelJsonObj = new JsonObject();
-            partjobJsonArray = new JsonArray();
-            while (labelIterator.hasNext()) {
-                partjobJsonArray.add(1+labelIterator.next()+"");
-            }
-            labelJsonObj.add("label_list", partjobJsonArray);
-        }
-    }
-
-//    public void onEventMainThread(ChangeJobEvent event) {
-//        //限制只能修改不能发布22
-//
-//    }
-
-    private Set<Integer> getCurrentSet(Model.ListTJobEntity modle,String name) {
-        HashSet<Integer> set = new HashSet<>();
-        if (name.equals("qualification")) {
-            if (modle.getLimit_name().size() != 0 && !modle.getLimit_name().get(0).equals("")) {
-                for (int i = 0; i < modle.getLimit_name().size(); i++) {
-                    set.add(Integer.valueOf(modle.getLimit_name().get(i)) - 1);
-                }
-            } else {
-                return null;
-            }
-        } else if (name.equals("welfare")) {
-            if (modle.getWelfare_name().size() != 0 && !modle.getWelfare_name().get(0).equals("")) {
-                for (int i = 0; i < modle.getWelfare_name().size(); i++) {
-                    set.add(Integer.valueOf(modle.getWelfare_name().get(i)) - 1);
-                }
-            } else {
-                return null;
-            }
-
-        } else if (name.equals("label")) {
-            if (modle.getLabel_name().size() != 0 && !modle.getLabel_name().get(0).equals("")) {
-                for (int i = 0; i < modle.getLabel_name().size(); i++) {
-                    set.add(Integer.valueOf(modle.getLabel_name().get(i)) - 1);
-                }
-            } else {
-                return null;
-            }
-        }
-        return set;
-    }
-
-    @Override
-    public void initListeners() {
-        etWorkContent.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if (view.getId() == R.id.et_work_content) {
-                    view.getParent().requestDisallowInterceptTouchEvent(true);
-                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
-                        case MotionEvent.ACTION_UP:
-                            view.getParent().requestDisallowInterceptTouchEvent(false);
-                            break;
-                    }
-                }
-                return false;
-            }
-        });
-        etWorkRequire.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if (view.getId() == R.id.et_work_require) {
-                    view.getParent().requestDisallowInterceptTouchEvent(true);
-                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
-                        case MotionEvent.ACTION_UP:
-                            view.getParent().requestDisallowInterceptTouchEvent(false);
-                            break;
-                    }
-                }
-                return false;
-            }
-        });
-
-        //给标签添加监听
-        flow_qualification.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
-            @Override
-            public void onSelected(Set<Integer> selectPosSet) {
-                    qualicationSelected = getSelectedTagFromSet(selectPosSet,qualification);
-                if (qualicationSelected != null) {
-                    qualificationSplit = qualicationSelected.split(",");
-                }
-                    Iterator<Integer> iterator = selectPosSet.iterator();
-                    qualificationJsonObj = new JsonObject();
-                    qualificationJsonArray = new JsonArray();
-                    while (iterator.hasNext()) {
-                        Integer next = iterator.next();
-                        qualificationJsonArray.add(1+next + "");
-                    }
-                    qualificationJsonObj.add("limit_list", qualificationJsonArray);
-
-
-            }
-        });
-        flow_welfare.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
-            @Override
-            public void onSelected(Set<Integer> selectPosSet) {
-                    welfareSelected =getSelectedTagFromSet(selectPosSet,welfare);
-                    if (welfareSelected != null) {
-                        welfareSplit = welfareSelected.split(",");
-                    }
-                    Iterator<Integer> iterator = selectPosSet.iterator();
-                    welfareJsonObj = new JsonObject();
-                    welfareJsonArray = new JsonArray();
-                    while (iterator.hasNext()) {
-                        Integer next = iterator.next();
-                        welfareJsonArray.add(1+next + "");
-                    }
-                    welfareJsonObj.add("welfare_list", welfareJsonArray);
-            }
-        });
-        flow_partjob.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
-            @Override
-            public void onSelected(Set<Integer> selectPosSet) {
-                    partjobSelected =getSelectedTagFromSet(selectPosSet,partjob_tag);
-                    if (partjobSelected!=null) {
-                        labelSplit = partjobSelected.split(",");
-                        }
-                    Iterator<Integer> iterator = selectPosSet.iterator();
-                    labelJsonObj = new JsonObject();
-                    labelJsonArray = new JsonArray();
-                    while (iterator.hasNext()) {
-                        Integer next = iterator.next();
-                        labelJsonArray.add(1+next + "");
-                    }
-                    labelJsonObj.add("label_list", labelJsonArray);
-            }
-        });
-    }
-
-    /**
-     * 从set集合中找出选择的标签，并且赋值给目标字符串
-     *
-     * @param selectPosSet
-     * @param contents
-     */
-    private String getSelectedTagFromSet(Set<Integer> selectPosSet, String[] contents) {
-        Iterator<Integer> iterator = selectPosSet.iterator();
-        StringBuffer sb = new StringBuffer();
-        while (iterator.hasNext()) {
-            Integer pos = iterator.next();
-            sb.append(contents[pos]);
-            sb.append(",");
-        }
-        if (selectPosSet.size() == 0) {
-            return null;
-        }
-        return sb.toString().substring(0, sb.toString().lastIndexOf(","));
-
-    }
-
-    @Override
-    public void initData() {
-        phone = String.valueOf(SPUtils.getParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, ""));
-    }
-
-    @Override
-    public void addActivity() {
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                } else {
-                }
-                return;
-            }
-
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0) {
-            if (resultCode == RESULT_OK) {
-                // 获取返回的图片列表
-                List<String> path = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
-                // 处理你自己的逻辑 ....
-                File imgFile = new File(path.get(0));
-                String choosePic = path.get(0).substring(path.get(0).lastIndexOf("."));
-                String fileName = Constants.IMG_PATH + CommonUtils.generateFileName() + choosePic;
-                Uri imgSource = Uri.fromFile(imgFile);
-                imgJob.setImageURI(imgSource);
-                File file = new File(Environment.getExternalStorageDirectory() + "/" + fileName + ".png");
-                CommonUtils.copyfile(imgFile, file, true);
-                BitmapUtils.compressBitmap(file.getAbsolutePath(), 300, 300);
-                name_image = "http://7xlell.com2.z0.glb.qiniucdn.com/" + MD5Coder.getQiNiuName(String.valueOf(phone));
-                QiNiu.upLoadQiNiu(context, MD5Coder.getQiNiuName(String.valueOf(phone)), file);
-
-            }
-        } else if (requestCode == 1) {
-//            tvBirthday.setText(data.getStringExtra("date"));
-        } else if (requestCode == 2) {
-//            tvDate.setText(data.getStringExtra("date"));
-        } else if (requestCode == 3) {
-            if (resultCode == RESULT_OK) {
-//                tvSchool.setText(data.getStringExtra("school"));
-            }
-
-        }
-
-
-    }
-
-
-    //自动收起键盘的操作 通过判断当前的view实例是不是edittext来决定
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            View v = getCurrentFocus();
-            if (isShouldHideInput(v, ev)) {
-
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                }
-            }
-            return super.dispatchTouchEvent(ev);
-        }
-        // 必不可少，否则所有的组件都不会有TouchEvent了
-        if (getWindow().superDispatchTouchEvent(ev)) {
-            return true;
-        }
-        return onTouchEvent(ev);
-    }
-
-    public boolean isShouldHideInput(View v, MotionEvent event) {
-        if (v != null && (v instanceof EditText)) {
-            int[] leftTop = {0, 0};
-            //获取输入框当前的location位置
-            v.getLocationInWindow(leftTop);
-            int left = leftTop[0];
-            int top = leftTop[1];
-            int bottom = top + v.getHeight();
-            int right = left + v.getWidth();
-            if (event.getX() > left && event.getX() < right
-                    && event.getY() > top && event.getY() < bottom) {
-                // 点击的是输入框区域，保留点击EditText的事件
-                return false;
-            } else {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
 }

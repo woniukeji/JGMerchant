@@ -71,18 +71,7 @@ public class PJMItemViewHolder extends TopViewHolder<JobInfo> {
         tvTitle.setText(job.getJob_name());
         String date = DateUtils.getTime(Long.valueOf(job.getStart_date()), Long.valueOf(job.getEnd_date()));
         tvDate.setText(date);
-        //性别限制（0=只招女，1=只招男，2=不限男女）
-//        tvManagerName.setText(job.getMerchant_id_name());
-//        tvChakanBrowse.setText(job.getBrowse_count());
-//        tvMessage.setText(job.getRemarks());
         maxProgress = job.getCount();
-//        if (job.get== 1) {
-//            imgType.setImageResource(R.mipmap.icon_hot);
-//        } else if (job.getHot() == 2) {
-//            imgType.setImageResource(R.mipmap.icon_jing);
-//        } else if (job.getHot() == 3) {
-//            imgType.setImageResource(R.mipmap.icon_travel);
-//        }
         tvCount.setText(job.getCount() + "/" + job.getSum());
         if (job.getTerm() == 0) {//0=月结，1=周结，2=日结，3=小时结，4=次，5=义工
             tvWages.setText(job.getMoney() + "/月");
@@ -99,19 +88,13 @@ public class PJMItemViewHolder extends TopViewHolder<JobInfo> {
         } else if (job.getTerm() == 6) {
             tvWages.setText("面议");
         }
-        if (job.getStatus() == 0) {
-            btnAdmitAction.setText("录取中");
-        } else if (job.getStatus() == 1) {
-            btnAdmitAction.setText("已招满");
+        if (job.getStatus() == 1) {
+            btnAdmitAction.setText("招聘中");
         } else if (job.getStatus() == 2) {
-            btnAdmitAction.setText("工作中");
+            btnAdmitAction.setText("暂停中");
         } else if (job.getStatus() == 3) {
-            btnAdmitAction.setText("去结算");
+            btnAdmitAction.setText("已招满");
         } else if (job.getStatus() == 4) {
-            btnAdmitAction.setText("去评价");
-        } else if (job.getStatus() == 5) {
-            btnAdmitAction.setText("已完成");
-        } else if (job.getStatus() == 6) {
             btnAdmitAction.setText("已下架");
         }
 
@@ -125,8 +108,6 @@ public class PJMItemViewHolder extends TopViewHolder<JobInfo> {
     @OnClick({R.id.btn_admit_action,R.id.progress_admit,R.id.ll_publisher})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_admit_action:
-                break;
             case R.id.progress_admit:
             case R.id.ll_publisher:
                 Intent Intent = new Intent(getContext(), FilterActivity.class);
@@ -146,7 +127,6 @@ public class PJMItemViewHolder extends TopViewHolder<JobInfo> {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), JobItemDetailActivity.class);
                 intent.putExtra("job", job);
-//                intent.putExtra("merchantid", "");
                 getContext().startActivity(intent);
             }
         });

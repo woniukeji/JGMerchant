@@ -184,7 +184,7 @@ public class FilterFragment extends BaseFragment {
         type = getArguments().getInt(params1);
         jobid = getArguments().getString(params2);
         jobName = getArguments().getString("jobname");
-        merchantId = (int) SPUtils.getParam(getActivity(), "loginInfo", "id", 0);
+//        merchantId = (int) SPUtils.getParam(getActivity(), "loginInfo", "id", 0);
         EventBus.getDefault().register(this);
     }
 
