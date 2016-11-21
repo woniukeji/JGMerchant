@@ -135,10 +135,6 @@ public class JobItemDetailActivity extends BaseActivity {
                 startActivity(boyIntent);
                 break;
             case R.id.btn_girl:
-//                Intent girgleIntent = new Intent(this, FilterActivity.class);
-//                girgleIntent.putExtra("jobid", jobDetailsBaseBean.get());
-//                girgleIntent.putExtra("jobname", jobDetailsBaseBean.getTitle());
-//                startActivity(girgleIntent);
                 break;
             case R.id.btn_no_limit:
                 Intent Intent = new Intent(this, FilterActivity.class);
@@ -162,7 +158,6 @@ public class JobItemDetailActivity extends BaseActivity {
                             }
                         }).show();
 
-
                 break;
             case R.id.btn_finish:
                 new SweetAlertDialog(JobItemDetailActivity.this, SweetAlertDialog.WARNING_TYPE)
@@ -177,10 +172,8 @@ public class JobItemDetailActivity extends BaseActivity {
                                 long times=System.currentTimeMillis();
                                 String sign= MD5Util.getSign(JobItemDetailActivity.this,times);
                                 HttpMethods.getInstance().changeJobStatus(new ProgressSubscriber<String>(changeSubscriberOnNextListener, JobItemDetailActivity.this), String.valueOf(jobid),phone,sign,String.valueOf(times),"3");
-//
                             }
                         }).show();
-
                 break;
             case R.id.btn_down:
                if(modleJob.getStatus() == 1){
@@ -215,20 +208,14 @@ public class JobItemDetailActivity extends BaseActivity {
                                 }
                             }).show();
                 }
-
-
-
                 break;
         }
     }
-
     private static class Myhandler extends Handler {
         private WeakReference<Context> reference;
-
         public Myhandler(Context context) {
             reference = new WeakReference<>(context);
         }
-
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
