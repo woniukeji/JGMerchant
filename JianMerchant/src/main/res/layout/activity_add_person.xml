@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
-    tools:context="com.woniukeji.jianmerchant.affordwages.AddPersonActivity">
+    tools:context="com.woniukeji.jianmerchant.payWage.AddPersonActivity">
     <RelativeLayout
         android:id="@+id/rl_top"
         style="@style/title_bar_style">

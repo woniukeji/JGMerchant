@@ -7,7 +7,6 @@ import android.widget.Button;
 
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.activity.login.LoginNewActivity;
-import com.woniukeji.jianmerchant.login.LoginActivity;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 
 import butterknife.ButterKnife;

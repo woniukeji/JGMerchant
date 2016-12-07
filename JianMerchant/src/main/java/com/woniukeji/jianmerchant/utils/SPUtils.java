@@ -33,44 +33,50 @@ public class SPUtils {
      * @param key
      * @param object
      */
-//    public static void setParam(Context context, String fileName, String key, Object object) {
-//
-//        String type = object.getClass().getSimpleName();
+    public static void setParam(Context context, String fileName, String key, Object object) {
+
+        String type = object.getClass().getSimpleName();
+        SharedPreferences sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
+        if ("String".equals(type)) {
+            editor.putString(key, (String) object);
+        } else if ("Integer".equals(type)) {
+            editor.putInt(key, (Integer) object);
+        } else if ("Boolean".equals(type)) {
+            editor.putBoolean(key, (Boolean) object);
+        } else if ("Float".equals(type)) {
+            editor.putFloat(key, (Float) object);
+        } else if ("Long".equals(type)) {
+            editor.putLong(key, (Long) object);
+        }
+
+        editor.commit();
+    }
+//    public static void setParam(Context context, String fileName, String key, Boolean object) {
 //        SharedPreferences sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sp.edit();
-//
-//        if ("String".equals(type)) {
-//            editor.putString(key, (String) object);
-//        } else if ("Integer".equals(type)) {
-//            editor.putInt(key, (Integer) object);
-//        } else if ("Boolean".equals(type)) {
-//            editor.putBoolean(key, (Boolean) object);
-//        } else if ("Float".equals(type)) {
-//            editor.putFloat(key, (Float) object);
-//        } else if ("Long".equals(type)) {
-//            editor.putLong(key, (Long) object);
-//        }
-//
+//        editor.putBoolean(key, (Boolean) object);
 //        editor.commit();
 //    }
-    public static void setParam(Context context, String fileName, String key, Boolean object) {
-        SharedPreferences sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean(key, (Boolean) object);
-        editor.commit();
-    }
-    public static void setParam(Context context, String fileName, String key, String object) {
-        SharedPreferences sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-            editor.putString(key, (String) object);
-        editor.commit();
-    }
-    public static void setParam(Context context, String fileName, String key, Integer object) {
-        SharedPreferences sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putInt(key, (Integer) object);
-        editor.commit();
-    }
+//    public static void setParam(Context context, String fileName, String key, String object) {
+//        SharedPreferences sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sp.edit();
+//            editor.putString(key, (String) object);
+//        editor.commit();
+//    }
+//    public static void setParam(Context context, String fileName, String key, Integer object) {
+//        SharedPreferences sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sp.edit();
+//        editor.putInt(key,  object);
+//        editor.commit();
+//    }
+//    public static void setParam(Context context, String fileName, String key, long object) {
+//        SharedPreferences sp = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sp.edit();
+//        editor.putLong(key,object);
+//        editor.commit();
+//    }
     /**
      * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
      *

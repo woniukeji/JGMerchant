@@ -2,7 +2,6 @@ package com.woniukeji.jianmerchant.partjob;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,26 +18,21 @@ import android.widget.Toast;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
-import com.woniukeji.jianmerchant.entity.Pigeon;
-import com.woniukeji.jianmerchant.entity.PublishUser;
+import com.woniukeji.jianmerchant.entity.NewJobDetail;
+import com.woniukeji.jianmerchant.entity.NewJoinUser;
 import com.woniukeji.jianmerchant.eventbus.FilterEvent;
-import com.woniukeji.jianmerchant.http.BackgroundSubscriber;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.ExcelUtil;
 import com.woniukeji.jianmerchant.utils.LogUtils;
-import com.woniukeji.jianmerchant.utils.PopupUtils;
+import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.SPUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -53,8 +47,6 @@ import cn.leancloud.chatkit.activity.LCIMConversationActivity;
 import cn.leancloud.chatkit.utils.LCIMConstants;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
-import okhttp3.Call;
-import okhttp3.Response;
 import ui.EmptyRecyclerView;
 
 /**
@@ -71,27 +63,26 @@ public class FilterFragment extends BaseFragment {
     @BindView(R.id.refresh_layout) SwipeRefreshLayout refreshLayout;
     @BindView(R.id.btn_out_info) TextView btnOutInfo;
     @BindView(R.id.null_content) View mEmptyView;
-    private int MSG_GET_SUCCESS = 0;
-    private int MSG_GET_FAIL = 1;
-    private int MSG_POST_SUCCESS = 5;
-    private int MSG_POST_FAIL = 6;
     private Handler mHandler = new Myhandler(this.getActivity());
     private Context mContext = this.getActivity();
-    private List<PublishUser.ListTUserInfoEntity> modleList = new ArrayList<>();
+    private List<NewJoinUser> modleList = new ArrayList<>();
     private int lastVisibleItem;
     //    private FilterAdapter adapter;
     private NewNewFilterAdapter adapter;
     private LinearLayoutManager mLayoutManager;
     private int mPosition;
-    private int type = 0;
+    private int type = 1;
     private String jobid;
     private String jobName;
     private boolean loadOk=false;
     private ProgressSubscriber<BaseBean> subscriber;
     private SubscriberOnNextListener<BaseBean> listenner;
+    private SubscriberOnNextListener<List<NewJoinUser>> userListSubOnNextListener;
     private android.view.ActionMode mActionMode;
-    private int merchantId;
+    private long merchantId;
     private ViewGroup container;
+    private String tel;
+    private boolean isRefresh=true;
 
     @Override
     public void onDestroyView() {
@@ -116,30 +107,9 @@ public class FilterFragment extends BaseFragment {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case 0:
-                    BaseBean<PublishUser> modelBaseBean = (BaseBean<PublishUser>) msg.obj;
-                    int count = msg.arg1;
-                    if (count == 0) {
-                        modleList.clear();
-                    }
-                    if (refreshLayout != null && refreshLayout.isRefreshing()) {
-                        refreshLayout.setRefreshing(false);
-                    }
-                    modleList.addAll(modelBaseBean.getData().getList_t_user_info());
-                    adapter.notifyDataSetChanged();
-                    loadOk=true;
-                    break;
-                case 1:
-                    String ErrorMessage = (String) msg.obj;
-                    Toast.makeText(getActivity(), ErrorMessage, Toast.LENGTH_SHORT).show();
-                    break;
-                case 2:
-                    break;
                 case 3:
                     String sms = (String) msg.obj;
                     Toast.makeText(getActivity(), sms, Toast.LENGTH_SHORT).show();
-                    break;
-                case 4:
                     break;
                 case 5:
                     String me = (String) msg.obj;
@@ -157,23 +127,19 @@ public class FilterFragment extends BaseFragment {
         }
     }
     public static FilterFragment newInstance(int type, String jobid) {
-        //通过Bundle保存数据
         Bundle args = new Bundle();
         args.putInt(params1, type);
         args.putString(params2, jobid);
         FilterFragment fragment = new FilterFragment();
-        //将Bundle设置为fragment的参数
         fragment.setArguments(args);
         return fragment;
     }
     public static FilterFragment newInstance(int type, String jobid,String jobname) {
-        //通过Bundle保存数据
         Bundle args = new Bundle();
         args.putInt(params1, type);
         args.putString(params2, jobid);
         args.putString("jobname", jobname);
         FilterFragment fragment = new FilterFragment();
-        //将Bundle设置为fragment的参数
         fragment.setArguments(args);
         return fragment;
     }
@@ -184,7 +150,6 @@ public class FilterFragment extends BaseFragment {
         type = getArguments().getInt(params1);
         jobid = getArguments().getString(params2);
         jobName = getArguments().getString("jobname");
-//        merchantId = (int) SPUtils.getParam(getActivity(), "loginInfo", "id", 0);
         EventBus.getDefault().register(this);
     }
 
@@ -202,10 +167,11 @@ public class FilterFragment extends BaseFragment {
 
     private void initview() {
         adapter = new NewNewFilterAdapter(modleList,getActivity(),type,jobid);
+        tel = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_TEL, "");
+        merchantId=(long) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID, 0l);
         adapter.setEnrollOrRefuseClickListener(new EnrollOrRefuseClickListener() {
             @Override
-            public void onClick(final int position, int login_id, int type, View view) {
-                String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
+            public void onClick(final int position, long userId, int type, View view) {
                 ProgressSubscriber<BaseBean> subscriber1= new ProgressSubscriber<BaseBean>(new SubscriberOnNextListener<BaseBean>() {
 
                     @Override
@@ -217,45 +183,47 @@ public class FilterFragment extends BaseFragment {
                         }
                     }
                 },getHoldingContext(),false);
-                HttpMethods.getInstance().admitOrRefuseUser(subscriber1,only,jobid,String.valueOf(login_id),String.valueOf(type));
-            }
-        });
-        adapter.setFilterItemClickListener(new FilterItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-            }
+                long times=System.currentTimeMillis();
+                String sign= MD5Util.getSign(getActivity(),times);
+                HttpMethods.getInstance().admitOrRefuseUser(subscriber1,tel,sign,String.valueOf(times),jobid, String.valueOf(userId),type);
+                           }
 
-            @Override
-            public boolean onItemLongClick(final int position, View view, final int login_id) {
-                //用popupwindow
-                PopupUtils popupUtils = new PopupUtils(getHoldingContext());
-                popupUtils.setOnSetupDove(new PopupUtils.onSetupDove() {
-                    @Override
-                    public void onSetup(View v) {
-                        if (type != 1) {
-                            Toast.makeText(getHoldingContext(), "未录用,不能标记为鸽子!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            BackgroundSubscriber<Pigeon> subscriber = new BackgroundSubscriber<Pigeon>(new SubscriberOnNextListener<Pigeon>() {
-
-                                @Override
-                                public void onNext(Pigeon pigeon) {
-                                    modleList.get(position).setPigeon_count(pigeon.getUser_info().getPigeon_count());
-                                    adapter.notifyDataSetChanged();
-                                }
-                            },getHoldingContext());
-                            HttpMethods.getInstance().markPigeon(subscriber,jobid,String.valueOf(login_id), String.valueOf(merchantId));
-                        }
-                    }
-                });
-                popupUtils.show(view);
-                view.setSelected(true);
-                return true;
-            }
         });
+//        adapter.setFilterItemClickListener(new FilterItemClickListener() {
+//            @Override
+//            public void onItemClick(int position) {
+//            }
+//
+//            @Override
+//            public boolean onItemLongClick(final int position, View view, final int login_id) {
+//                //用popupwindow
+//                PopupUtils popupUtils = new PopupUtils(getHoldingContext());
+//                popupUtils.setOnSetupDove(new PopupUtils.onSetupDove() {
+//                    @Override
+//                    public void onSetup(View v) {
+//                        if (type != 1) {
+//                            Toast.makeText(getHoldingContext(), "未录用,不能标记为鸽子!", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            BackgroundSubscriber<Pigeon> subscriber = new BackgroundSubscriber<Pigeon>(new SubscriberOnNextListener<Pigeon>() {
+//
+//                                @Override
+//                                public void onNext(Pigeon pigeon) {
+//                                    modleList.get(position).setPigeon_count(pigeon.getUser_info().getPigeon_count());
+//                                    adapter.notifyDataSetChanged();
+//                                }
+//                            },getHoldingContext());
+//                            HttpMethods.getInstance().markPigeon(subscriber,jobid,String.valueOf(login_id), String.valueOf(merchantId));
+//                        }
+//                    }
+//                });
+//                popupUtils.show(view);
+//                view.setSelected(true);
+//                return true;
+//            }
+//        });
         adapter.setOnChatClickListener(new onChatClickListener() {
             @Override
-            public void onChat(int postion, final int login_id, View v) {
-//                Toast.makeText(getHoldingContext(), "postion  "+postion+"  login_id  "+login_id, Toast.LENGTH_SHORT).show();
+            public void onChat(int postion, final long login_id, View v) {
                 LogUtils.i("onChat","position-->"+postion+"    login_id-->"+login_id);
                 LCChatKit.getInstance().open(String.valueOf(merchantId), new AVIMClientCallback() {
                     @Override
@@ -281,12 +249,31 @@ public class FilterFragment extends BaseFragment {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                GetTask getTask = new GetTask(jobid, String.valueOf(type), "0");
-                getTask.execute();
+                isRefresh=true;
+                long times=System.currentTimeMillis();
+                String sign= MD5Util.getSign(getActivity(),times);
+                HttpMethods.getInstance().getJobUserList(new ProgressSubscriber<List<NewJoinUser>>(userListSubOnNextListener,getActivity()),jobid,tel,sign,String.valueOf(times),type,"1");
             }
         });
-        GetTask getTask = new GetTask(jobid, String.valueOf(type), "0");
-        getTask.execute();
+
+        userListSubOnNextListener=new SubscriberOnNextListener<List<NewJoinUser>>() {
+            @Override
+            public void onNext(List<NewJoinUser> newJobDetail) {
+                if (refreshLayout != null && refreshLayout.isRefreshing()) {
+                    refreshLayout.setRefreshing(false);
+                }
+                if (isRefresh){
+                    modleList.clear();
+                }
+                modleList.addAll(newJobDetail);
+                adapter.notifyDataSetChanged();
+                loadOk=true;
+            }
+        };
+        long times=System.currentTimeMillis();
+        String sign= MD5Util.getSign(getActivity(),times);
+        HttpMethods.getInstance().getJobUserList(new ProgressSubscriber<List<NewJoinUser>>(userListSubOnNextListener,getActivity()),jobid,tel,sign,String.valueOf(times),type,"1");
+
         //标记鸽子
         listenner = new SubscriberOnNextListener<BaseBean>() {
             @Override
@@ -300,8 +287,8 @@ public class FilterFragment extends BaseFragment {
     }
 
     public void onEvent(FilterEvent filterEvent) {
-        GetTask getTask = new GetTask(jobid, String.valueOf(type), "0");
-        getTask.execute();
+//        GetTask getTask = new GetTask(jobid, String.valueOf(type), "0");
+//        getTask.execute();
     }
 
     @Override
@@ -317,11 +304,14 @@ public class FilterFragment extends BaseFragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (lastVisibleItem +1 == adapter.getItemCount()&&loadOk) {
+                if (lastVisibleItem>4&&lastVisibleItem +1 == adapter.getItemCount()&&loadOk) {
                     loadOk=false;
-                    GetTask getTask = new GetTask(jobid, String.valueOf(type), String.valueOf(lastVisibleItem));
-                    getTask.execute();
-                    refreshLayout.setRefreshing(true);
+                    long times=System.currentTimeMillis();
+                    String sign= MD5Util.getSign(getActivity(),times);
+                    int pageNum=modleList.size()/10+1;
+                    isRefresh=false;
+                    HttpMethods.getInstance().getJobUserList(new ProgressSubscriber<List<NewJoinUser>>(userListSubOnNextListener,getActivity()),jobid,tel,sign,String.valueOf(times),type, String.valueOf(pageNum));
+//                    refreshLayout.setRefreshing(true);
                 }
             }
 
@@ -376,81 +366,6 @@ public class FilterFragment extends BaseFragment {
         }
     }
 
-    public class GetTask extends AsyncTask<Void, Void, Void> {
-        private final String jobid;
-        private final String type;
-        private final String count;
 
-        GetTask(String merId, String type, String count) {
-            this.jobid = merId;
-            this.type = type;
-            this.count = count;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                getJobs();
-            } catch (Exception e) {
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        /**
-         * postInfo
-         */
-        public void getJobs() {
-            String only = DateUtils.getDateTimeToOnly(System.currentTimeMillis());
-            OkHttpUtils
-                    .get()
-                    .url(Constants.GET_ADMIT_LIST)
-                    .addParams("only", only)
-                    .addParams("job_id", jobid)
-                    .addParams("type", type)
-                    .addParams("count", count)
-                    .build()
-                    .connTimeOut(60000)
-                    .readTimeOut(20000)
-                    .writeTimeOut(20000)
-                    .execute(new Callback<BaseBean<PublishUser>>() {
-                        @Override
-                        public BaseBean<PublishUser> parseNetworkResponse(Response response, int id) throws Exception {
-                            String string = response.body().string();
-                            BaseBean baseBean = new Gson().fromJson(string, new TypeToken<BaseBean<PublishUser>>() {
-                            }.getType());
-                            return baseBean;
-                        }
-
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            Message message = new Message();
-                            message.obj = e.toString();
-                            message.what = MSG_GET_FAIL;
-                            mHandler.sendMessage(message);
-                        }
-
-                        @Override
-                        public void onResponse(BaseBean<PublishUser> response, int id) {
-                            if (response.getCode().equals("200")) {
-                                Message message = new Message();
-                                message.obj = response;
-                                message.arg1 = Integer.parseInt(count);
-                                message.what = MSG_GET_SUCCESS;
-                                mHandler.sendMessage(message);
-                            } else {
-                                Message message = new Message();
-                                message.obj = response.getMessage();
-                                message.what = MSG_GET_FAIL;
-                                mHandler.sendMessage(message);
-                            }
-                        }
-                    });
-        }
-    }
 
 }

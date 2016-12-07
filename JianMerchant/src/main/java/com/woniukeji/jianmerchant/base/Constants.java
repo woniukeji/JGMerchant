@@ -22,7 +22,7 @@ public class Constants {
     public static final String JIANGUO_TEST="http://101.200.195.147:8080/";
     public static final String JIANGUO_TEST2="http://v3.jianguojob.com:8080/";
     public static final String JIANGUO_xiao="http://192.168.1.115:8080/";
-    public static final String JIANGUO_yw="http://192.168.1.117:9090/";
+    public static final String JIANGUO_yw="http://192.168.1.118:9090/";
     public static final String JIANGUO_jun="http://192.168.1.118:8080/";
     public static final String JIANGUO_USING=JIANGUO_yw;
     public static final String MARK_PIGEON= JIANGUO_USING+"T_UserPigeon_Servlet";//

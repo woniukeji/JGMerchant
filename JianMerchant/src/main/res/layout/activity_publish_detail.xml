@@ -543,7 +543,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/tv_cou"
                     android:orientation="vertical"
-                    android:visibility="gone"
+                    android:visibility="visible"
 
                     >
 

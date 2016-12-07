@@ -39,7 +39,7 @@ public class PushMessageActivity extends BaseActivity {
     private List<PushMessage.ListTPushEntity> listPush = new ArrayList<PushMessage.ListTPushEntity>();
     private LinearLayoutManager mLayoutManager;
     private Context context = PushMessageActivity.this;
-    private int loginId;
+    private long loginId;
     private SubscriberOnNextListener<PushMessage> pushMessageSubscriberOnNextListener;
 
 
@@ -103,7 +103,7 @@ public class PushMessageActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        loginId = (int) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
+        loginId = (long) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
     }
 
     @Override

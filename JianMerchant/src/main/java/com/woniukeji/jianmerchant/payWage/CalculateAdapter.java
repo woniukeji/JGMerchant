@@ -1,4 +1,4 @@
-package com.woniukeji.jianmerchant.affordwages;
+package com.woniukeji.jianmerchant.payWage;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CalculateAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final List<AffordUser.ListTUserInfoEntity> mValues;
+    private final List<AffordUser.ListBean> mValues;
     private List<Boolean> isSelected;
     private final Context mContext;
     private String money;
@@ -27,7 +27,7 @@ public class CalculateAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.changeMoney = changeMoney;
     }
 
-    public CalculateAdapter(List<AffordUser.ListTUserInfoEntity> items,List<Boolean> list, Context context, String money) {
+    public CalculateAdapter(List<AffordUser.ListBean> items,List<Boolean> list, Context context, String money) {
         mValues = items;
         mContext = context;
         isSelected=list;

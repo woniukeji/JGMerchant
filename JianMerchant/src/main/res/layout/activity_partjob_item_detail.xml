@@ -60,6 +60,7 @@
                         android:visibility="gone" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tv_manager_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -81,6 +82,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_toLeftOf="@+id/tv_manager_name"
                         android:text="负责人:"
+                        android:visibility="gone"
                         android:textColor="#bfbfbf"
                         android:textSize="12dp" />
                 </RelativeLayout>

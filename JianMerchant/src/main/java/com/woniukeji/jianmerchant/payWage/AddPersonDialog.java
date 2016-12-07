@@ -1,4 +1,4 @@
-package com.woniukeji.jianmerchant.affordwages;
+package com.woniukeji.jianmerchant.payWage;
 
 import android.content.Intent;
 import android.os.Bundle;

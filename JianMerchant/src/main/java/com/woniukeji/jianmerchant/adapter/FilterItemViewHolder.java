@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.entity.NewJoinUser;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.partjob.EnrollOrRefuseClickListener;
 import com.woniukeji.jianmerchant.partjob.FilterItemClickListener;
@@ -25,7 +26,7 @@ import butterknife.OnClick;
 /**
  * Created by Se7enGM on 2016/9/2.
  */
-public class FilterItemViewHolder extends TopViewHolder<PublishUser.ListTUserInfoEntity> {
+public class FilterItemViewHolder extends TopViewHolder<NewJoinUser> {
 
 
     @BindView(R.id.circleimg_head)
@@ -56,7 +57,7 @@ public class FilterItemViewHolder extends TopViewHolder<PublishUser.ListTUserInf
     Button btnConfirm;
     @BindView(R.id.btn_cancel)
     Button btnCancel;
-    private PublishUser.ListTUserInfoEntity userInfo;
+    private NewJoinUser userInfo;
     private EnrollOrRefuseClickListener enrollOrRefuseClickListener;
     private int position;
 
@@ -78,7 +79,7 @@ public class FilterItemViewHolder extends TopViewHolder<PublishUser.ListTUserInf
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                filterItemClickListener.onItemLongClick(position, v,userInfo.getLogin_id());
+                filterItemClickListener.onItemLongClick(position, v,userInfo.getB_user_id());
                 return true;
             }
         });
@@ -90,7 +91,7 @@ public class FilterItemViewHolder extends TopViewHolder<PublishUser.ListTUserInf
     }
 
     @Override
-    public void bindData(PublishUser.ListTUserInfoEntity userInfo) {
+    public void bindData(NewJoinUser userInfo) {
         this.userInfo = userInfo;
         //设置报名者姓名
         if (userInfo.getName() != null && !userInfo.getName().equals("0")) {
@@ -99,7 +100,7 @@ public class FilterItemViewHolder extends TopViewHolder<PublishUser.ListTUserInf
             tvUserName.setText("未填写");
         }
         //性别
-        if (userInfo.getSex_resume() == 1) {
+        if (userInfo.getSex() == 2) {
             imgSex.setText("男");
             imgSex.setTextColor(Color.parseColor("#82dcd8"));
         } else {
@@ -110,57 +111,37 @@ public class FilterItemViewHolder extends TopViewHolder<PublishUser.ListTUserInf
         if (tvSchoolName.equals("")) {
             tvSchoolName.setText("未设置学校");
         } else {
-            tvSchoolName.setText(userInfo.getSchool());
+            tvSchoolName.setText(userInfo.getSchool_name());
         }
         //时间
-        tvPublishDate.setText(userInfo.getTime_job());
-        //根据用户的状态这是现实的button
-        if (userInfo.getUser_status().equals("0")) {
+        tvPublishDate.setText(userInfo.getCreateTime());
+        //根据用户的状态这是现实的button 1 报名  2未录取 3 录取 4 取消报名
+        if (userInfo.getStatus().equals("1")) {
             btnCancel.setVisibility(View.VISIBLE);
             btnConfirm.setVisibility(View.VISIBLE);
-        } else if (userInfo.getUser_status().equals("2")) {
-            btnCancel.setText("已取消");
+        } else if (userInfo.getStatus().equals("2")) {
+            btnCancel.setText("未录取");
             btnCancel.setClickable(false);
             btnConfirm.setVisibility(View.GONE);
             btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
-        } else if (userInfo.getUser_status().equals("3")) {
-            btnCancel.setText("取消录取");
-            btnConfirm.setText("待确认");
-            btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
-        } else if (userInfo.getUser_status().equals("4")) {
-            btnCancel.setText("用户取消");
+        } else if (userInfo.getStatus().equals("3")) {
+//            btnCancel.setText("取消录取");
+            btnConfirm.setVisibility(View.GONE);
+        } else if (userInfo.getStatus().equals("4")) {
+            btnCancel.setText("取消报名");
             btnCancel.setClickable(false);
             btnConfirm.setVisibility(View.GONE);
             btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
-        } else if (userInfo.getUser_status().equals("5")) {
-            btnCancel.setText("取消录取");
-            btnConfirm.setVisibility(View.GONE);
-            btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
-        } else if (userInfo.getUser_status().equals("6")) {
-            btnCancel.setText("用户取消");
-            btnCancel.setClickable(false);
-            btnConfirm.setVisibility(View.GONE);
-            btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
-        } else if (userInfo.getUser_status().equals("7")) {
-            btnCancel.setText("已取消");
-            btnCancel.setClickable(false);
-            btnConfirm.setVisibility(View.GONE);
-            btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
-        } else if (userInfo.getUser_status().equals("8")) {
-            btnCancel.setText("工作中");
-            btnCancel.setClickable(false);
-            btnConfirm.setVisibility(View.GONE);
-            btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
-        } else {
+        }  else {
             btnCancel.setText("工作结束");
             btnCancel.setClickable(false);
             btnConfirm.setVisibility(View.GONE);
             btnCancel.setBackgroundResource(R.drawable.button_sign_background_gray);
         }
         //显示鸽子数量
-        showPigeonCount(userInfo.getPigeon_count());
+//        showPigeonCount(userInfo.getPigeon_count());
         //头像
-        Picasso.with(getContext()).load(userInfo.getName_image())
+        Picasso.with(getContext()).load(userInfo.getHead_img_url())
                 .placeholder(R.mipmap.icon_head_defult)
                 .error(R.mipmap.icon_head_defult)
                 .transform(new CropCircleTransfermation())
@@ -224,36 +205,22 @@ public class FilterItemViewHolder extends TopViewHolder<PublishUser.ListTUserInf
                 getContext().startActivity(intent);
                 break;
             case R.id.user_talk:
-                onChatClickListener.onChat(getAdapterPosition(),userInfo.getLogin_id(),view);
+                onChatClickListener.onChat(getAdapterPosition(),userInfo.getB_user_id(),view);
                 break;
             case R.id.btn_confirm:
-
-                if (userInfo.getUser_status().equals("0")){
+                if (userInfo.getStatus().equals("1")){
                     type=3;
-                }else {
-                    return;
                 }
-                enrollOrRefuseClickListener.onClick(getAdapterPosition(),userInfo.getLogin_id(),type,view);
+                enrollOrRefuseClickListener.onClick(getAdapterPosition(),userInfo.getB_user_id(),type,view);
                 break;
             case R.id.btn_cancel:
-                if (userInfo.getUser_status().equals("0")){
+                //用户报名后状态为1 商家可以拒绝，录取之后商家依然可以拒绝3
+                if (userInfo.getStatus().equals("1")){
                     type=2;
-                }else if(userInfo.getUser_status().equals("3")){
+                }else if(userInfo.getStatus().equals("3")){
                     type=2;
                 }
-                else if(userInfo.getUser_status().equals("5")){
-                    type=7;
-                }
-                else if(userInfo.getUser_status().equals("9")){
-                    type=12;
-                }
-                else if(userInfo.getUser_status().equals("10")){
-                    type=12;
-                }
-                else {
-                    return;
-                }
-                enrollOrRefuseClickListener.onClick(getAdapterPosition(),userInfo.getLogin_id(),type,view);
+                enrollOrRefuseClickListener.onClick(getAdapterPosition(),userInfo.getB_user_id(),type,view);
                 break;
         }
     }

@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Environment;
 
 import com.woniukeji.jianmerchant.entity.EnrolledUser;
+import com.woniukeji.jianmerchant.entity.NewJoinUser;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 
 
@@ -32,10 +33,10 @@ public class ExcelUtil {
 	
 	String filename;
 	
-	List<PublishUser.ListTUserInfoEntity> users;
+	List<NewJoinUser> users;
 	File file;
 	
-	public ExcelUtil(String filename,List<PublishUser.ListTUserInfoEntity> users) throws IOException {
+	public ExcelUtil(String filename,List<NewJoinUser> users) throws IOException {
 		this.filename = filename;
 		this.users = users;
 		init();
@@ -54,7 +55,7 @@ public class ExcelUtil {
 		format.setVerticalAlignment(VerticalAlignment.CENTRE);
 		sheet.mergeCells(0, 0, 3, 0);
 		sheet.addCell(new Label(0, 0, filename, format));
-		PublishUser.ListTUserInfoEntity user;
+		NewJoinUser user;
 		label1 = new Label(0, 1, "姓名", format);
 		label2 = new Label(1, 1, "电话", format);
 		label3 = new Label(2, 1, "性别", format);
@@ -69,8 +70,8 @@ public class ExcelUtil {
 			user = users.get(i);
 			label1 = new Label(0, i+2, user.getName(), format);
 			label2 = new Label(1, i+2, user.getTel(), format);
-			label3 = new Label(2, i+2, user.getSex_resume() == 0 ? "女" : "男", format);
-			label4 = new Label(3, i+2, user.getSchool(), format);
+			label3 = new Label(2, i+2, user.getSex() == 1 ? "女" : "男", format);
+			label4 = new Label(3, i+2, user.getSchool_name(), format);
 			sheet.addCell(label1);
 			sheet.addCell(label2);
 			sheet.addCell(label3);

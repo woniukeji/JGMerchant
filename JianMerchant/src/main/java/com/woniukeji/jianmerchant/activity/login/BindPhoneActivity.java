@@ -57,7 +57,7 @@ public class BindPhoneActivity extends BaseActivity {
     private int MSG_REGISTER_SUCCESS = 3;
     private Handler mHandler=new Myhandler(this);
     private Context context= BindPhoneActivity.this;
-    private int loginId;
+    private long loginId;
     private String phone;
 
     private static class Myhandler extends Handler{
@@ -118,7 +118,7 @@ public class BindPhoneActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        loginId = (int) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
+        loginId = (long) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_USERID,0L);
 
     }
 

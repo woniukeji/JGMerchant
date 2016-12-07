@@ -27,7 +27,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by Se7enGM on 2016/9/6.
  */
-public class CalculateViewHolder extends TopViewHolder<AffordUser.ListTUserInfoEntity> {
+public class CalculateViewHolder extends TopViewHolder<AffordUser.ListBean> {
     private String name;
     @BindView(R.id.cb_user)
     CheckBox cbUser;
@@ -48,7 +48,7 @@ public class CalculateViewHolder extends TopViewHolder<AffordUser.ListTUserInfoE
 
     private ChangeMoney changeMoney;
     private int position;
-    private AffordUser.ListTUserInfoEntity user;
+    private AffordUser.ListBean user;
     private List<Boolean> isSelected;
     private String money;
 
@@ -61,7 +61,7 @@ public class CalculateViewHolder extends TopViewHolder<AffordUser.ListTUserInfoE
     }
 
     public interface ChangeMoney {
-        void onChangeMoney(String money, AffordUser.ListTUserInfoEntity user, int position);
+        void onChangeMoney(String money, AffordUser.ListBean user, int position);
     }
 
 
@@ -73,17 +73,17 @@ public class CalculateViewHolder extends TopViewHolder<AffordUser.ListTUserInfoE
     }
 
     @Override
-    public void bindData(AffordUser.ListTUserInfoEntity listTUserInfoEntity) {
+    public void bindData(AffordUser.ListBean listTUserInfoEntity) {
         user = listTUserInfoEntity;
-        if (user.getRealname() != null && !user.getRealname().equals("2")) {
+        if (user.getName() != null) {
             userName.setText(user.getName());
         } else {
             userName.setText(user.getName() + "（未实名）");
         }
 
         tvPhone.setText(user.getTel());
-        tvWages.setText(user.getReal_money() + "元");
-        Picasso.with(getContext()).load(user.getName_image()).transform(new CropCircleTransfermation()).error(R.drawable.default_head).into(imgHead);
+        tvWages.setText(user.getMoney() + "元");
+        Picasso.with(getContext()).load(user.getHead_img_url()).transform(new CropCircleTransfermation()).error(R.drawable.default_head).into(imgHead);
         cbUser.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

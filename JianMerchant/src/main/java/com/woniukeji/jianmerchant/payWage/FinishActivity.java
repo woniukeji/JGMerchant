@@ -1,4 +1,4 @@
-package com.woniukeji.jianmerchant.affordwages;
+package com.woniukeji.jianmerchant.payWage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
-import com.woniukeji.jianmerchant.entity.AffordUser;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.User;
 
@@ -35,7 +34,6 @@ public class FinishActivity extends BaseActivity {
     private int MSG_REGISTER_SUCCESS = 3;
     private Handler mHandler = new Myhandler(this);
     private Context context = FinishActivity.this;
-    AffordUser.ListTUserInfoEntity user;
     private int position;
 
     @Override
@@ -100,7 +98,7 @@ public class FinishActivity extends BaseActivity {
     @Override
     public void initViews() {
         Intent intent=getIntent();
-        String sum=intent.getStringExtra("sum");
+        int sum=intent.getIntExtra("sum",0);
         tvFinishPayContent.setText("结算成功，还有"+sum+"人未结算");
     }
 

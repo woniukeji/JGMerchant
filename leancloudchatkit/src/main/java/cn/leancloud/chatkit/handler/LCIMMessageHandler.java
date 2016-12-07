@@ -93,8 +93,7 @@ public class LCIMMessageHandler extends AVIMTypedMessageHandler<AVIMTypedMessage
           } else if (null != userProfile) {
             String title = userProfile.getUserName();
             Intent intent = getIMNotificationIntent(conversation.getConversationId(), message.getFrom());
-//            LCIMNotificationUtils.showNotification(context, title, notificationContent, null, intent);
-            LCIMNotificationUtils.showNotification(context, Integer.parseInt(message.getFrom()), title, notificationContent, null, intent);
+            LCIMNotificationUtils.showNotification(context, 1, title, notificationContent, null, intent);
           }
         }
       });

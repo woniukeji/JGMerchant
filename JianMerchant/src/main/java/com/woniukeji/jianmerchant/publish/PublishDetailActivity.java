@@ -803,7 +803,7 @@ public class PublishDetailActivity extends BaseActivity {
                         //job_model =0  不是模板
                         String girl_sum=etGirlCount.getText().toString();
                         String boy_sum=etBoyCount.getText().toString();
-                        int sum =Integer.getInteger(girl_sum)+Integer.getInteger(boy_sum);
+                        int sum =Integer.valueOf(girl_sum)+Integer.valueOf(boy_sum);
                                 long timestamp= System.currentTimeMillis();
                         String sign = MD5Util.getSign(PublishDetailActivity.this,timestamp);
                         HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, PublishDetailActivity.this),
@@ -825,7 +825,6 @@ public class PublishDetailActivity extends BaseActivity {
                             }
                         };
 
-                        //男女都限制数量，
                         String sum= etCount.getText().toString();
                         //job_model =0  不是模板
                         long timestamp= System.currentTimeMillis();
@@ -979,7 +978,7 @@ public class PublishDetailActivity extends BaseActivity {
         getCategoryToBeanNew();
         long times=System.currentTimeMillis();
         String sign=MD5Util.getSign(PublishDetailActivity.this,times);
-        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this), phone,sign,String.valueOf(times));
+        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this));
         intent = getIntent();
         if (intent.getStringExtra("type").equals("change")) {
             jobid = intent.getStringExtra("jobid");
@@ -1126,7 +1125,7 @@ public class PublishDetailActivity extends BaseActivity {
 
         long times=System.currentTimeMillis();
         String sign=MD5Util.getSign(PublishDetailActivity.this,times);
-        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this), phone,sign,String.valueOf(times));
+        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this));
     }
 
     private void initModleData(Model.ListTJobEntity modle) {

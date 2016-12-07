@@ -1,8 +1,6 @@
-package com.woniukeji.jianmerchant.affordwages;
+package com.woniukeji.jianmerchant.payWage;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,7 +17,6 @@ import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.BaseCallback;
-import com.woniukeji.jianmerchant.entity.User;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -29,7 +26,6 @@ import java.lang.ref.WeakReference;
 import butterknife.ButterKnife;
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 
 public class PassWordActivity extends BaseActivity {

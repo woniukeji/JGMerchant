@@ -115,49 +115,52 @@ public class SplashActivity extends BaseActivity {
         ActivityManager.getActivityManager().addActivity(SplashActivity.this);
     }
 
-    private void saveToSP(NewMerchant user) {
+    private void saveToSP(final NewMerchant user) {
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_WQTOKEN, user.getToken() != null ? user.getToken() : "");
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_TEL, user.getTel()!= null ? user.getTel() : "");
 //        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PASSWORD, user.getPassword() != null ? user.getPassword() : "");
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_USERID, user.getId());
-//        SPUtils.setParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, user.getMerchantId());
+        SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, user.getHead_img_url());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, user.getAuth_status());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, user.getBusiness_type());
         SPUtils.setParam(this, Constants.LOGIN_INFO, Constants.SP_QNTOKEN, user.getQiniu_token());
             if (JPushInterface.isPushStopped(this.getApplicationContext())) {
                 JPushInterface.resumePush(this.getApplicationContext());
             }
+        JPushInterface.setAlias(this.getApplicationContext(), "jianguo" + user.getId(), new TagAliasCallback() {
+            @Override
+            public void gotResult(int i, String s, Set<String> set) {
+                LogUtils.e("jpush", s + ",code=" + i);
+            }
+        });
             //登陆leancloud服务器 给极光设置别名
             LCChatKit.getInstance().open(String.valueOf(user.getId()), new AVIMClientCallback() {
                 @Override
                 public void done(AVIMClient avimClient, AVIMException e) {
                     if (null != e) {
                         Toast.makeText(SplashActivity.this, "聊天服务启动失败，稍后请重新登录", Toast.LENGTH_SHORT).show();
+                    }else {
+                        //是否填写商家资料信息 1未填写 2 正在审核 3审核拒绝 4审核通过
+                        if (user.getAuth_status()==0){
+                            Intent intent = new Intent(SplashActivity.this, ChooseActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else if (user.getAuth_status()==1||user.getAuth_status()==2){
+                            Intent intent1 = new Intent(SplashActivity.this, StatusActivity.class);
+                            intent1.putExtra("type",user.getAuth_status());
+                            startActivity(intent1);
+                            finish();
+                        }else {
+                            Intent intent1 = new Intent(SplashActivity.this, MainActivity.class);
+                            intent1.putExtra("login",true);
+                            startActivity(intent1);
+                            finish();
+                        }
                     }
                 }
             });
-            JPushInterface.setAlias(this.getApplicationContext(), "jianguo" + user.getId(), new TagAliasCallback() {
-                @Override
-                public void gotResult(int i, String s, Set<String> set) {
-                    LogUtils.e("jpush", s + ",code=" + i);
-                }
-            });
-        //是否填写商家资料信息 1未填写 2 正在审核 3审核拒绝 4审核通过
-        if (user.getAuth_status()==0){
-            Intent intent = new Intent(this, ChooseActivity.class);
-            startActivity(intent);
-            this.finish();
-        }else if (user.getAuth_status()==1||user.getAuth_status()==2){
-            Intent intent1 = new Intent(this, StatusActivity.class);
-            intent1.putExtra("type",user.getAuth_status());
-            startActivity(intent1);
-            this.finish();
-        }else {
-            Intent intent1 = new Intent(this, MainActivity.class);
-            intent1.putExtra("login",true);
-            startActivity(intent1);
-            this.finish();
-        }
+
+
     }
 
     @Override

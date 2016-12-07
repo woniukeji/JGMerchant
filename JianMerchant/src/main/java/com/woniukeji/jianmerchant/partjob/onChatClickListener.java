@@ -12,5 +12,5 @@ public interface onChatClickListener {
      * @param login_id 用户login_id
      * @param v 当前点击的View
      */
-    void onChat(int postion, int login_id, View v);
+    void onChat(int postion, long login_id, View v);
 }

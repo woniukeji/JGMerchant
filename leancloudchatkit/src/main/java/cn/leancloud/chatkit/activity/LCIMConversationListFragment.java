@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.avos.avoscloud.LogUtil;
 import com.avos.avoscloud.im.v2.AVIMConversation;
 
 import java.util.ArrayList;
@@ -62,12 +63,14 @@ public class LCIMConversationListFragment extends Fragment {
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     updateConversationList();
+    LogUtil.avlog.e("chatonActivityCreated");
   }
 
   @Override
   public void onResume() {
     super.onResume();
     updateConversationList();
+    LogUtil.avlog.e("chatonResume");
   }
 
   @Override

@@ -19,10 +19,19 @@ public class NewMerchant {
         private int createTime;
         private String tel;
         private int auth_status;
-        private String id;
+        private long id;
         private int type;
         private int status;
         private int business_type;
+    private String head_img_url;
+
+    public String getHead_img_url() {
+        return head_img_url;
+    }
+
+    public void setHead_img_url(String head_img_url) {
+        this.head_img_url = head_img_url;
+    }
 
     public int getBusiness_type() {
         return business_type;
@@ -75,11 +84,11 @@ public class NewMerchant {
             this.auth_status = auth_status;
         }
 
-        public String getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(long id) {
             this.id = id;
         }
 

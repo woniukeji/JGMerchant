@@ -23,13 +23,14 @@
             >
             <TextView
                 android:id="@+id/tv_merchant_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
                 android:paddingLeft="15dp"
                 android:text="凯宾斯基酒店宴会服务员哈哈哈"
                 android:ellipsize="end"
                 android:maxLength="24"
+                android:gravity="left"
                 android:maxLines="1"
                 android:maxWidth="182dp"
                 android:layout_centerVertical="true"
@@ -56,6 +57,7 @@
                 android:textColor="#bfbfbf"
                 android:layout_marginRight="13dp"
                 android:layout_alignParentRight="true"
+                android:visibility="gone"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -68,6 +70,7 @@
                 android:layout_gravity="right"
                 android:textColor="#bfbfbf"
                 android:layout_marginRight="10dp"
+                android:visibility="gone"
                 />
         </RelativeLayout>
 
@@ -150,7 +153,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="13dp"
-            android:text="123"
+            android:text="10"
             android:textColor="#9b9b9b"
             android:gravity="center"
             android:textSize="12dp"

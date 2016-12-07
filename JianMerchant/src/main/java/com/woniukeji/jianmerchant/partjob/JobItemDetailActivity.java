@@ -13,33 +13,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.woniukeji.jianmerchant.R;
-import com.woniukeji.jianmerchant.affordwages.CalculateActivity;
+import com.woniukeji.jianmerchant.payWage.CalculateActivity;
 import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.base.Constants;
-import com.woniukeji.jianmerchant.entity.BaseBean;
-import com.woniukeji.jianmerchant.entity.JobBase;
-import com.woniukeji.jianmerchant.entity.JobDetails;
 import com.woniukeji.jianmerchant.entity.JobInfo;
-import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.NewJobDetail;
-import com.woniukeji.jianmerchant.entity.Status;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
-import com.woniukeji.jianmerchant.http.SubscriberOnNextErrorListener;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.publish.ChangeJobActivity;
-import com.woniukeji.jianmerchant.publish.PublishDetailActivity;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.widget.CircleImageView;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 
 import java.lang.ref.WeakReference;
 
@@ -47,8 +36,6 @@ import butterknife.ButterKnife;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import okhttp3.Call;
-import okhttp3.Response;
 
 public class JobItemDetailActivity extends BaseActivity {
 
@@ -122,7 +109,7 @@ public class JobItemDetailActivity extends BaseActivity {
                 Intent intent1 = new Intent(mContext, CalculateActivity.class);
                 intent1.putExtra("money", tvWages.getText().toString());
                 intent1.putExtra("name", tvMerchantName.getText().toString());
-                intent1.putExtra("jobid", jobid);
+                intent1.putExtra("jobid", jobDetailsBaseBean.getId());
                 startActivity(intent1);
                 break;
             case R.id.img_back:
@@ -297,7 +284,7 @@ public class JobItemDetailActivity extends BaseActivity {
         tvMerchantName.setText(modleJob.getJob_name());
         tvWorkLocation.setText(jobDetailsBaseBean.getAddress());
         tvManagerName.setText(modleJob.getJob_name());
-        tvChakanBrowse.setText(modleJob.getJob_name());
+        tvChakanBrowse.setText(modleJob.getBrowse_count()+"");
         String date = DateUtils.getTime(Long.valueOf(jobDetailsBaseBean.getStart_date()), Long.valueOf(jobDetailsBaseBean.getEnd_time()));
         tvWorkDate.setText(date);
         tvDate.setText(date);

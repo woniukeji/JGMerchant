@@ -10,12 +10,14 @@ import com.woniukeji.jianmerchant.entity.Jobs;
 import com.woniukeji.jianmerchant.entity.MerchantBean;
 import com.woniukeji.jianmerchant.entity.Model;
 import com.woniukeji.jianmerchant.entity.NewJobDetail;
+import com.woniukeji.jianmerchant.entity.NewJoinUser;
 import com.woniukeji.jianmerchant.entity.NewMerchant;
 import com.woniukeji.jianmerchant.entity.Pigeon;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 import com.woniukeji.jianmerchant.entity.SmsCode;
 import com.woniukeji.jianmerchant.entity.Status;
 import com.woniukeji.jianmerchant.entity.User;
+import com.woniukeji.jianmerchant.entity.Version;
 import com.woniukeji.jianmerchant.jpush.PushMessage;
 
 import java.util.List;
@@ -32,8 +34,6 @@ import rx.Observable;
  * Created by Administrator on 2016/7/16.
  */
 public interface HttpMethodsInterface {
-    //    @GET("top250")
-//    rx.Observable<HttpResult<List<Subject>>> getTopMovie(@Query("start") int start, @Query("count") int count);
 
     /**
      *查询推送记录接口
@@ -42,8 +42,6 @@ public interface HttpMethodsInterface {
      */
     @GET("T_push_List_Servlet")
     Observable<BaseBean<PushMessage>> getPush(@Query("only") String only, @Query("login_id") String login_id);
-
-
 
     @POST("RegisterServlet")
     Observable<BaseBean> register(@Query("tel") String tel, @Query("smsCode") String smsCode, @Query("password") String password);
@@ -103,17 +101,7 @@ public interface HttpMethodsInterface {
     @GET("T_job_Merchant_Id_Zhong_Servlet")
     Observable<BaseBean<Model>> getPublishJobs(@Query("only")String only,@Query("merchant_id")String merchant_id,@Query("count")String count,@Query("status")String status);
 
-    @GET("T_enroll_Job_Servlet")
-    Observable<BaseBean<PublishUser>> getEnrollJobs(@Query("only") String only,@Query("job_id")String job_id,@Query("count")String count,@Query("type")String type);
 
-    @GET("T_enroll_Offer_Servlet")
-    Observable<BaseBean<PublishUser>> admitUser(@Query("only") String only,@Query("job_id") String job_id,@Query("login_id")String login_id,@Query("offer")String offer);
-
-    /**
-     *查询果聊用户信息
-     */
-    @GET("T_UserGroup_Servlet")//T_UserGroup_Servlet
-    Observable<BaseBean<List<LCChatKitUser>>> getTalkUser(@Query("only") String only, @Query("login_id") String login_id);
 
     /**
      *标记鸽子
@@ -178,7 +166,7 @@ public interface HttpMethodsInterface {
     Observable<BaseBean> sendCode(@Query("app_id") String app_id,@Query("tel") String tel,@Query("type") String type);
 
     @POST("login")
-    Observable<BaseBean<NewMerchant>> passwdLogin(@Query("app_id") String app_id, @Query("tel") String tel, @Query("password") String password, @Query("type") String type);
+    Observable<BaseBean<NewMerchant>> passwdLogin(@Query("app_id") String app_id, @Query("tel") String tel, @Query("passwd") String password, @Query("type") String type);
 
     @POST("login")
     Observable<BaseBean<NewMerchant>> smsLogin(@Query("app_id") String app_id, @Query("tel") String tel, @Query("code") String code, @Query("type") String type);
@@ -208,13 +196,19 @@ public interface HttpMethodsInterface {
                                       @Query("city_id") String city_id,
                                       @Query("Introduce") String Introduce
                                       );
-
+    /**
+    *获取商家认证状态
+    */
     @GET("auth/status")
     Observable<BaseBean<Status>> getStatus(@Query("app_id") String app_id, @Query("sign") String sign,  @Query("timestamp") String timestamp,  @Query("type") String type);
-
+    /**
+    *获取商家发布的兼职列表
+    */
     @GET("job/list/business")
     Observable<BaseBean<List<JobInfo>>> getJobList(@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp, @Query("type") String type, @Query("pageNum") String pageNum);
-
+    /**
+    *兼职发布历史记录
+    */
     @GET("join/history")
     Observable<BaseBean<List<JobInfo>>> getHistroyJobFromServer(@Query("app_id") String app_id, @Query("sign") String sign,@Query("type") String type, @Query("timestamp") String timestamp,  @Query("pageNum") String pageNum);
 
@@ -223,9 +217,11 @@ public interface HttpMethodsInterface {
   *查询兼职种类福利标签等
   */
     @GET("join/label")
-    Observable<BaseBean<JobBase>> getCityCategory(@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp);
+    Observable<BaseBean<JobBase>> getCityCategory();
 
-
+    /**
+    *创建兼职
+    */
     @POST("job/new")
     Observable<BaseBean> makeJob(@Query("app_id") String app_id, @Query("sign") String sign,
                                          @Query("timestamp") String timestamp,
@@ -292,13 +288,55 @@ Observable<BaseBean> changeJob(@Query("id") String job_id,@Query("app_id") Strin
      */
     @GET("job/detail/{job_id}")
     Observable<BaseBean<NewJobDetail>>  jobDetail(@Path("job_id") String job_id, @Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp);
-
     /**
      *修改兼职状态
      */
     @PUT("job/{job_id}/status")
     Observable<BaseBean>  changeJobStatus(@Path("job_id") String job_id, @Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp, @Query("status") String status);
+    /**
+    *获取报名用户信息列表
+    */
+    @GET("join/{job_id}/register")
+    Observable<BaseBean<List<NewJoinUser>>>  jobUserList(@Path("job_id") String job_id, @Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp, @Query("status") int status, @Query("pageNum") String pageNum);
+    @GET("join/info/{job_id}")
+    Observable<BaseBean<PublishUser>> admitUser(@Path("job_id") String job_id,@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp, @Query("status") int status);
+    /**
+     *录取或取消用户报名请求
+     */
+    @PUT("join/status")
+    Observable<BaseBean> joinStatus(@Query("app_id") String app_id, @Query("sign") String sign,@Query("timestamp") String timestamp,@Query("job_id") String job_id,@Query("user_id") String user_id,@Query("status") int status);
+    /**
+    *获取待支付用户列表
+    */
+    @GET("wallet/userlist/{job_id}")
+    Observable<BaseBean<AffordUser>> getPayList(@Path("job_id") String job_id,@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp, @Query("pageNum") int pageNum);
+    /**
+     *支付工资
+     */
+    @PUT("wallet/money")
+    Observable<BaseBean> payMoney(@Query("app_id") String app_id, @Query("sign") String sign,@Query("timestamp") String timestamp,@Query("param") String param);
+    /**
+     *密码
+     */
+    @POST("wallet/pay_pwd")
+    Observable<BaseBean> payPassword(@Query("app_id") String app_id, @Query("sign") String sign,@Query("timestamp") String timestamp,@Query("pay_password") String pass);
 
+    /**
+    *用户反馈
+    */
+    @POST("user/opinion")
+    Observable<BaseBean<String>> postFeedback(@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp,@Query("context") String context,@Query("type") int type);
 
+    /**
+    *版本更新信息
+    */
+    @GET("version")
+    Observable<BaseBean<Version>> getVersion();
+
+    /**
+     *查询果聊用户信息
+     */
+    @GET("user/im")//T_UserGroup_Servlet
+    Observable<BaseBean<List<LCChatKitUser>>> getTalkUser(@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp,@Query("ids") String ids,@Query("type") int type);
 
 }

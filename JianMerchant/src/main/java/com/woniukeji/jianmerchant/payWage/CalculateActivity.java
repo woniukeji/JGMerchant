@@ -1,4 +1,4 @@
-package com.woniukeji.jianmerchant.affordwages;
+package com.woniukeji.jianmerchant.payWage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,12 +32,18 @@ import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 import com.woniukeji.jianmerchant.utils.LogUtils;
+import com.woniukeji.jianmerchant.utils.MD5Util;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,10 +86,10 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
     private CalculateAdapter adapter;
     private int merchantid;
     private List<Boolean> isSelected = new ArrayList<>();
-    private List<AffordUser.ListTUserInfoEntity> userList = new ArrayList<>();
+    private List<AffordUser.ListBean> userList = new ArrayList<>();
     private int lastVisibleItem;
     private LinearLayoutManager mLayoutManager;
-    private String jobid;
+    private long jobid;
     private String moneyStr;
     private String jobName;
     private double money;
@@ -95,6 +101,8 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
     private int lastSize;
     private View mEmptyView;
     private boolean loadOk = true;
+    private String tel;
+    private long userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +117,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
                 break;
             case R.id.btn_pay_wages:
                 if (checkStatus()) {
-                    PayDialog mdialog = new PayDialog(mContext);
+                    PayDialog mdialog = new PayDialog(mContext,tel);
                     mdialog.show();
                 }
                 break;
@@ -126,7 +134,6 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
                 b = true;
                 return true;
             }
-
         }
         if (!b) {
             showShortToast("请至少勾选一人进行结算");
@@ -149,7 +156,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
                         money = Double.parseDouble(sweetAlertDialog.getEditContent());
                         tvJobWages.setText(money + str);
                         for (int i = 0; i < userList.size(); i++) {
-                            userList.get(i).setReal_money(money);
+                            userList.get(i).setMoney(money);
                         }
                         Calculate();
                         adapter.notifyDataSetChanged();
@@ -164,14 +171,6 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
                 .show();
     }
 
-    @Override
-    public void onChangeMoney(String money, AffordUser.ListTUserInfoEntity user, int position) {
-        Intent intent = new Intent(mContext, ChangeActivity.class);
-        intent.putExtra("money", money);
-        intent.putExtra("user", user);
-        intent.putExtra("position", position);
-        startActivityForResult(intent, 1);
-    }
 
     @Override
     public void setContentView() {
@@ -186,7 +185,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
         moneyStr = intent.getStringExtra("money");
         str = moneyStr.substring(moneyStr.indexOf("/"));
         money = Double.parseDouble(moneyStr.substring(0, moneyStr.indexOf("/")));
-        jobid = intent.getStringExtra("jobid");
+        jobid = intent.getLongExtra("jobid",0);
     }
 
     @Override
@@ -258,7 +257,8 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
 
     @Override
     public void initData() {
-        merchantid = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
+        tel = (String) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_TEL, "");
+       userId = (long) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_USERID, 0L);
         getEmployeeInfo(0);
     }
 
@@ -269,31 +269,34 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
         ProgressSubscriber<AffordUser> subscriber = new ProgressSubscriber<>(new SubscriberOnNextListener<AffordUser>() {
             @Override
             public void onNext(AffordUser affordUser) {
-                int size = affordUser.getList_t_user_info().size();
+                int size = affordUser.getList().size();
                 lastSize = userList.size();
                 if (count == 0) {
                     //首次获取
                     userList.clear();
-                    userList.addAll(affordUser.getList_t_user_info());
+                    userList.addAll(affordUser.getList());
                     for (int i = 0; i < size; i++) {
                         isSelected.add(i, false);
                     }
                 } else {
-                    userList.addAll(affordUser.getList_t_user_info());
+                    userList.addAll(affordUser.getList());
                     for (int i = lastSize; i < userList.size(); i++) {
                         isSelected.add(i, false);
                     }
                 }
                 for (int i =0; i < userList.size(); i++) {
-                    userList.get(i).setReal_money(money);
+                    userList.get(i).setMoney(money);
                 }
-                tvTitleSum.setText("总计" + affordUser.getUser_sum() + "人");
+                tvTitleSum.setText("总计" + affordUser.getTotal() + "人");
                 adapter.notifyDataSetChanged();
                 refresh.setRefreshing(false);
                 loadOk = true;
             }
         }, this, false);
-        HttpMethods.getInstance().paywage(subscriber, jobid, String.valueOf(count));
+//        isRefresh=true;
+        long times=System.currentTimeMillis();
+        String sign= MD5Util.getSign(CalculateActivity.this,times);
+        HttpMethods.getInstance().getPayList(subscriber, tel,sign,String.valueOf(times), String.valueOf(jobid), 1);
     }
 
     @Override
@@ -337,7 +340,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
         int person = 0;
         for (int i = 0; i < userList.size(); i++) {
             if (isSelected.get(i)) {
-                sum += userList.get(i).getReal_money();
+                sum += userList.get(i).getMoney();
                 person++;
             }
         }
@@ -351,29 +354,31 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
     public void onEventMainThread(PayPassWordEvent event) {
 
         if (event.isCorrect) {
-            Map map = new HashMap();
             ArrayList list = new ArrayList();
             for (int i = 0; i < userList.size(); i++) {
                 if (isSelected.get(i)) {
-                    list.add(userList.get(i));
+                    AffordUser.ListBean listBean = userList.get(i);
+                    listBean.setPay_user_id(userId);
+                    listBean.setType(1);
+                    list.add(listBean);
                 }
             }
-            map.put("list_t_wages_Bean", list);
-            String json = new Gson().toJson(map);
-            checkout(jobid, json);
+            String json = new Gson().toJson(list);
+            checkout(list.size(), json);
         }
     }
 
     /**
      * 确认结算
      */
-    private void checkout(String jobid, String json) {
+    private void checkout(final int size, String json) {
         ProgressSubscriber<BaseBean> subscriber = new ProgressSubscriber<BaseBean>(new SubscriberOnNextListener<BaseBean>() {
             @Override
             public void onNext(BaseBean baseBean) {
                 Intent intent = new Intent(mContext, FinishActivity.class);
-                intent.putExtra("sum", baseBean.getSum());
+                intent.putExtra("sum", size);
                 startActivityForResult(intent, 0);
+                Toast.makeText(mContext, "结算成功", Toast.LENGTH_SHORT).show();
             }
         }, mContext, false){
             @Override
@@ -388,7 +393,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
                 Toast.makeText(mContext, "结算成功", Toast.LENGTH_SHORT).show();
             }
         };
-        HttpMethods.getInstance().checkout(subscriber, jobid, json);
+        HttpMethods.getInstance().payMoney(CalculateActivity.this,subscriber, tel, json);
     }
 
     @Override
@@ -403,10 +408,10 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
         if (requestCode == 1) {//修改界面返回值
             if (resultCode == RESULT_OK) {
                 int position = data.getIntExtra("position", 0);
-                AffordUser.ListTUserInfoEntity user = (AffordUser.ListTUserInfoEntity) data.getSerializableExtra("user");
+                AffordUser.ListBean user = (AffordUser.ListBean) data.getSerializableExtra("user");
                 userList.set(position, user);
                 Calculate();
-                LogUtils.e("json", "修改" + user.getReal_money());
+                LogUtils.e("json", "修改" + user.getMoney());
                 adapter.notifyDataSetChanged();
             }
         } else {
@@ -414,6 +419,36 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
                 //结算成功后，重新拉取列表
                 getEmployeeInfo(0);
             }
+        }
+    }
+
+    @Override
+    public void onChangeMoney(String money, AffordUser.ListBean user, int position) {
+        Intent intent = new Intent(mContext, ChangeActivity.class);
+        intent.putExtra("money", money);
+        intent.putExtra("user", user);
+        intent.putExtra("position", position);
+        startActivityForResult(intent, 1);
+    }
+
+    public void saveJpg(InputStream is,String dir) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String filename = df.format(new Date());
+        byte[] bs = new byte[1024];
+        int len;
+        File sf = new File(dir);
+        if (!sf.exists()) {
+            sf.mkdirs();
+        }
+        try {
+            OutputStream os = new FileOutputStream(sf.getPath() + "\\" + filename);
+            while ((len = is.read(bs)) != -1) {
+                os.write(bs, 0, len);
+            }
+            os.close();
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

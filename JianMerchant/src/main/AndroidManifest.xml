@@ -73,9 +73,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
             android:name=".activity.login.LoginNewActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
@@ -124,17 +121,17 @@
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".affordwages.CalculateActivity"
+            android:name=".payWage.CalculateActivity"
             android:parentActivityName=".partjob.JobItemDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".affordwages.ChangeActivity"
+            android:name=".payWage.ChangeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".affordwages.FinishActivity"
+            android:name=".payWage.FinishActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".affordwages.PassWordActivity"
+            android:name=".payWage.PassWordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".login.RegistActivity"
@@ -267,10 +264,10 @@
             android:name=".activity.HistoryRecords"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".affordwages.AddPersonActivity"
+            android:name=".payWage.AddPersonActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".affordwages.AddPersonDialog"
+            android:name=".payWage.AddPersonDialog"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".activity.DemoActivity"

@@ -1,4 +1,4 @@
-package com.woniukeji.jianmerchant.affordwages;
+package com.woniukeji.jianmerchant.payWage;
 
 /**
  * Created by Administrator on 2016/11/2.
@@ -13,13 +13,15 @@ package com.woniukeji.jianmerchant.affordwages;
     import android.widget.Toast;
 
     import com.woniukeji.jianmerchant.R;
-    import com.woniukeji.jianmerchant.base.Constants;
+    import com.woniukeji.jianmerchant.entity.BaseBean;
     import com.woniukeji.jianmerchant.eventbus.PayPassWordEvent;
-    import com.woniukeji.jianmerchant.utils.SPUtils;
+    import com.woniukeji.jianmerchant.http.HttpMethods;
+    import com.woniukeji.jianmerchant.http.ProgressSubscriberOnError;
+    import com.woniukeji.jianmerchant.http.SubscriberOnNextErrorListener;
 
     import de.greenrobot.event.EventBus;
 
-    /**
+/**
      * Created by invinjun on 2016/4/19.
      */
     public class PayDialog extends Dialog {
@@ -30,14 +32,13 @@ package com.woniukeji.jianmerchant.affordwages;
         private TextView titleText;
         private Button okBtn;
         private Button cancelBtn;
+    private String tel;
+        private SubscriberOnNextErrorListener<BaseBean> baseBeanSubscriberOnNextErrorListener;
 
-        public static PayDialog createBuilder(Context context) {
-            return new PayDialog(context);
-        }
-
-        public PayDialog(Context context) {
+        public PayDialog(Context context,String tel) {
             this(context, R.style.myDialogTheme);
             this.context = context;
+            this.tel=tel;
         }
 
         public PayDialog(Context context, boolean cancelable,
@@ -63,25 +64,35 @@ package com.woniukeji.jianmerchant.affordwages;
             passEText = (EditText) view.findViewById(R.id.et_pass);
             okBtn = (Button) view.findViewById(R.id.ok_btn);
             cancelBtn = (Button) view.findViewById(R.id.cancel_btn);
-            final String password = (String) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.USER_PAY_PASS, "");
             cancelBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     PayDialog.this.dismiss();
                 }
             });
+            baseBeanSubscriberOnNextErrorListener=new SubscriberOnNextErrorListener<BaseBean>() {
+                @Override
+                public void onNext(BaseBean baseBean) {
+                    super.onNext(baseBean);
+                    PayPassWordEvent payPassWordEvent=new PayPassWordEvent();
+                    payPassWordEvent.isCorrect=true;
+                    EventBus.getDefault().post(payPassWordEvent);
+                    PayDialog.this.dismiss();
+                }
+
+                @Override
+                public void onError(String mes) {
+                    super.onError(mes);
+                    //否则
+                    Toast.makeText(context,"密码输入错误，请重新输入",Toast.LENGTH_SHORT).show();
+                }
+            };
             okBtn.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View view) {
-                    if (passEText.getText().toString().equals(password)){
-                        PayPassWordEvent payPassWordEvent=new PayPassWordEvent();
-                        payPassWordEvent.isCorrect=true;
-                        EventBus.getDefault().post(payPassWordEvent);
-                        PayDialog.this.dismiss();
-                    }else {
-                        Toast.makeText(context,"密码输入错误，请重新输入",Toast.LENGTH_SHORT).show();
-                    }
+                    HttpMethods.getInstance().payPassword(context,new ProgressSubscriberOnError<BaseBean>(baseBeanSubscriberOnNextErrorListener,context),tel,passEText.getText().toString());
+
                 }
             });
             setContentView(view);

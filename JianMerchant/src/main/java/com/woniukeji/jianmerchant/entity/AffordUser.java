@@ -7,138 +7,104 @@ import java.util.List;
  * Created by invinjun on 2016/4/13.
  */
 public class AffordUser implements Serializable{
-
         /**
-         * id : 27
-         * login_id : 44
-         * nickname : null
-         * name : 谢军
-         * name_image : http://7xlell.com2.z0.glb.qiniucdn.com/android_C73B7225385A1613854B3F4DB77A9A9C
-         * school : 技师学院
-         * realname : 0
-         * credit : 0
-         * integral : 0
-         * regedit_time : 2016-03-07 11:34:35
-         * login_time : 2016-03-07 11:34:35
-         * complete_job : 0
-         * cancel_job : 0
-         * time_job : 2016-04-13 15:37:23
-         * user_status : 9
-         * remarks_job :
-         * sex_resume : 0
-         * intoschool_date_resume : 1998-07-16
+         * total : 2
+         * list : [{"money":50,"user_id":800630391256780800,"job_id":803808942302826496,"sex":2,"name":"军哥","tel":18101050625,"id":803809397791657984,"head_img_url":"http://7xlell.com2.z0.glb.qiniucdn.com/android_18101050625_1479895627910"},{"money":50,"user_id":800624884655722496,"job_id":803808942302826496,"sex":2,"name":"周杰伦","tel":13614093590,"id":803809480356532224,"head_img_url":"http://7xlell.com2.z0.glb.qiniucdn.com/Fl3jdnicY4_89DTRPYGcIrlHloDn"}]
          */
 
-    private List<ListTUserInfoEntity> list_t_user_info;
-    private String user_sum;
+        private int total;
+        private List<ListBean> list;
 
-    public String getUser_sum() {
-        return user_sum;
-    }
-
-    public void setUser_sum(String user_sum) {
-        this.user_sum = user_sum;
-    }
-
-    public List<ListTUserInfoEntity> getList_t_user_info() {
-            return list_t_user_info;
+        public int getTotal() {
+            return total;
         }
 
-        public void setList_t_user_info(List<ListTUserInfoEntity> list_t_user_info) {
-            this.list_t_user_info = list_t_user_info;
+        public void setTotal(int total) {
+            this.total = total;
         }
 
-        public static class ListTUserInfoEntity implements Serializable{
-            private int id;
-            private int login_id;
-            private String nickname;
+        public List<ListBean> getList() {
+            return list;
+        }
+
+        public void setList(List<ListBean> list) {
+            this.list = list;
+        }
+
+        public static class ListBean implements Serializable{
+            /**
+             * money : 50
+             * user_id : 800630391256780800
+             * job_id : 803808942302826496
+             * sex : 2
+             * name : 军哥
+             * tel : 18101050625
+             * id : 803809397791657984
+             * head_img_url : http://7xlell.com2.z0.glb.qiniucdn.com/android_18101050625_1479895627910
+             */
+
+            private double money;
+            private long pay_user_id;
+            private long receive_user_id;
+            private long job_id;
+            private int sex;
             private String name;
-            private String name_image;
-            private String school;
-            private String realname;
-            private int credit;
-            private int integral;
-            private String regedit_time;
-            private String login_time;
-            private int complete_job;
-            private int cancel_job;
-            private String time_job;
-            private int user_status;
-            private String remarks_job;
-            private int sex_resume;
-            private String intoschool_date_resume;
             private String tel;
-            private String job_id;
+            private long id;
+            private String head_img_url;
+            private String note;
+            private int type;
 
-            public String getJob_id() {
+
+
+            public int getType() {
+                return type;
+            }
+
+            public void setType(int type) {
+                this.type = type;
+            }
+
+
+            public long getPay_user_id() {
+                return pay_user_id;
+            }
+
+            public void setPay_user_id(long pay_user_id) {
+                this.pay_user_id = pay_user_id;
+            }
+
+            public long getReceive_user_id() {
+                return receive_user_id;
+            }
+
+            public void setReceive_user_id(long receive_user_id) {
+                this.receive_user_id = receive_user_id;
+            }
+
+            public double getMoney() {
+                return money;
+            }
+
+            public void setMoney(double money) {
+                this.money = money;
+            }
+
+
+            public long getJob_id() {
                 return job_id;
             }
 
-            public void setJob_id(String job_id) {
+            public void setJob_id(long job_id) {
                 this.job_id = job_id;
             }
 
-            //本地维护数据
-            private String hould_money;
-            private double real_money;
-
-            public String getRemarks() {
-                return remarks;
+            public int getSex() {
+                return sex;
             }
 
-            public void setRemarks(String remarks) {
-                this.remarks = remarks;
-            }
-
-            private String remarks;
-
-            public String getHould_money() {
-                return hould_money;
-            }
-
-            public void setHould_money(String hould_money) {
-                this.hould_money = hould_money;
-            }
-
-            public double getReal_money() {
-                return real_money;
-            }
-
-            public void setReal_money(double real_money) {
-                this.real_money = real_money;
-            }
-
-
-            public String getTel() {
-                return tel;
-            }
-
-            public void setTel(String tel) {
-                this.tel = tel;
-            }
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public int getLogin_id() {
-                return login_id;
-            }
-
-            public void setLogin_id(int login_id) {
-                this.login_id = login_id;
-            }
-
-            public String getNickname() {
-                return nickname;
-            }
-
-            public void setNickname(String nickname) {
-                this.nickname = nickname;
+            public void setSex(int sex) {
+                this.sex = sex;
             }
 
             public String getName() {
@@ -149,116 +115,36 @@ public class AffordUser implements Serializable{
                 this.name = name;
             }
 
-            public String getName_image() {
-                return name_image;
+            public String getTel() {
+                return tel;
             }
 
-            public void setName_image(String name_image) {
-                this.name_image = name_image;
+            public void setTel(String tel) {
+                this.tel = tel;
             }
 
-            public String getSchool() {
-                return school;
+            public long getId() {
+                return id;
             }
 
-            public void setSchool(String school) {
-                this.school = school;
+            public void setId(long id) {
+                this.id = id;
             }
 
-            public String getRealname() {
-                return realname;
+            public String getHead_img_url() {
+                return head_img_url;
             }
 
-            public void setRealname(String realname) {
-                this.realname = realname;
+            public void setHead_img_url(String head_img_url) {
+                this.head_img_url = head_img_url;
             }
 
-            public int getCredit() {
-                return credit;
+            public String getNote() {
+                return note;
             }
 
-            public void setCredit(int credit) {
-                this.credit = credit;
-            }
-
-            public int getIntegral() {
-                return integral;
-            }
-
-            public void setIntegral(int integral) {
-                this.integral = integral;
-            }
-
-            public String getRegedit_time() {
-                return regedit_time;
-            }
-
-            public void setRegedit_time(String regedit_time) {
-                this.regedit_time = regedit_time;
-            }
-
-            public String getLogin_time() {
-                return login_time;
-            }
-
-            public void setLogin_time(String login_time) {
-                this.login_time = login_time;
-            }
-
-            public int getComplete_job() {
-                return complete_job;
-            }
-
-            public void setComplete_job(int complete_job) {
-                this.complete_job = complete_job;
-            }
-
-            public int getCancel_job() {
-                return cancel_job;
-            }
-
-            public void setCancel_job(int cancel_job) {
-                this.cancel_job = cancel_job;
-            }
-
-            public String getTime_job() {
-                return time_job;
-            }
-
-            public void setTime_job(String time_job) {
-                this.time_job = time_job;
-            }
-
-            public int getUser_status() {
-                return user_status;
-            }
-
-            public void setUser_status(int user_status) {
-                this.user_status = user_status;
-            }
-
-            public String getRemarks_job() {
-                return remarks_job;
-            }
-
-            public void setRemarks_job(String remarks_job) {
-                this.remarks_job = remarks_job;
-            }
-
-            public int getSex_resume() {
-                return sex_resume;
-            }
-
-            public void setSex_resume(int sex_resume) {
-                this.sex_resume = sex_resume;
-            }
-
-            public String getIntoschool_date_resume() {
-                return intoschool_date_resume;
-            }
-
-            public void setIntoschool_date_resume(String intoschool_date_resume) {
-                this.intoschool_date_resume = intoschool_date_resume;
+            public void setNote(String note) {
+                this.note = note;
             }
         }
 }

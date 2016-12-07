@@ -64,7 +64,7 @@ public class PreviewJobActivity extends BaseActivity {
     private int MSG_POST_FAIL = 6;
     private Handler mHandler = new Myhandler(this);
     private Context mContext = PreviewJobActivity.this;
-    private int loginId;
+    private long loginId;
     private String img;
     private String name;
 
@@ -221,7 +221,7 @@ public class PreviewJobActivity extends BaseActivity {
 //        tvWage.setText(String.valueOf(money));
 //        tvJobsCount.setText(count);
 
-         loginId = (int) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_USERID, 0);//3
+        loginId = (long) SPUtils.getParam(mContext, Constants.LOGIN_INFO, Constants.SP_USERID,0L);
         img = (String) SPUtils.getParam(mContext, Constants.USER_INFO, Constants.SP_GROUP_IMG, "");//商家图片地址
         name = (String) SPUtils.getParam(mContext, Constants.USER_INFO, Constants.USER_NAME, "");//王五
         fillData();

@@ -97,7 +97,7 @@ public class PJMItemViewHolder extends TopViewHolder<JobInfo> {
         } else if (job.getStatus() == 4) {
             btnAdmitAction.setText("已下架");
         }
-
+        tvChakanBrowse.setText(job.getBrowse_count()+"");
         progressAdmit.setMax(job.getSum());
         if (job.getCount() > job.getSum()) {
             maxProgress = job.getSum();

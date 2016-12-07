@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical"
-    tools:context="com.woniukeji.jianmerchant.affordwages.PassWordActivity">
+    tools:context="com.woniukeji.jianmerchant.payWage.PassWordActivity">
 
     <RelativeLayout
                     android:background="@color/app_bg"

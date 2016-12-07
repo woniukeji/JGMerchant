@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import com.woniukeji.jianmerchant.adapter.FooterViewHolder;
 import com.woniukeji.jianmerchant.adapter.FilterItemViewHolder;
+import com.woniukeji.jianmerchant.entity.NewJoinUser;
 import com.woniukeji.jianmerchant.entity.PublishUser;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class NewNewFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<PublishUser.ListTUserInfoEntity> mValues;
+    private List<NewJoinUser> mValues;
     private Context context;
     private int type;
     private String jobid;
@@ -40,7 +41,7 @@ public class NewNewFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
 
-    public NewNewFilterAdapter(List<PublishUser.ListTUserInfoEntity> values, Context context, int type, String jobid) {
+    public NewNewFilterAdapter(List<NewJoinUser> values, Context context, int type, String jobid) {
         this.mValues = values;
         this.context = context;
         this.type = type;

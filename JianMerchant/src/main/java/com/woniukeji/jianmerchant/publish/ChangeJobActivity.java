@@ -529,7 +529,7 @@ public class ChangeJobActivity extends BaseActivity {
         getCategoryToBeanNew();
         long times=System.currentTimeMillis();
         String sign=MD5Util.getSign(ChangeJobActivity.this,times);
-        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this), phone,sign,String.valueOf(times));
+        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this));
         intent = getIntent();
         if (intent.getStringExtra("type").equals("change")) {
             //修改兼职显示修改按钮
@@ -613,7 +613,7 @@ public class ChangeJobActivity extends BaseActivity {
 
         long times=System.currentTimeMillis();
         String sign=MD5Util.getSign(ChangeJobActivity.this,times);
-        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this), phone,sign,String.valueOf(times));
+        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, this));
     }
 
 
@@ -858,7 +858,7 @@ public class ChangeJobActivity extends BaseActivity {
 
                                             @Override
                                             public void onNext(String jobs) {
-                                                String sucessMessage = "发布成功！";
+                                                String sucessMessage = "保存成功！";
                                                 Toast.makeText(ChangeJobActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
                                                 ChangeJobActivity.this.finish();
                                             }
@@ -899,11 +899,11 @@ public class ChangeJobActivity extends BaseActivity {
                         //job_model =0  不是模板
                         String girl_sum=etGirlCount.getText().toString();
                         String boy_sum=etBoyCount.getText().toString();
-                        int sum =Integer.getInteger(girl_sum)+Integer.getInteger(boy_sum);
+                        int sum =Integer.valueOf(girl_sum)+Integer.valueOf(boy_sum);
                         long timestamp= System.currentTimeMillis();
                         String sign = MD5Util.getSign(ChangeJobActivity.this,timestamp);
-                        HttpMethods.getInstance().changeJob(new ProgressSubscriber<String>(nextListenner, ChangeJobActivity.this),
-                                jobid,sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
+                        HttpMethods.getInstance().makeJob(new ProgressSubscriber<String>(nextListenner, ChangeJobActivity.this),
+                               sign,String.valueOf(timestamp),phone, String.valueOf(region_id), aera_id, String.valueOf(category_id),name,name_image, String.valueOf(type_id1), start_date, stop_date,
                                 address, mode, money, term, limit_sex, etGirlCount.getText().toString(),etBoyCount.getText().toString(),String.valueOf(sum), tel, start_time, stop_time, set_place, set_time,  work_content, work_require,
                                 qualificationJsonObj!=null?qualificationJsonObj.toString():"",welfareJsonObj!=null?welfareJsonObj.toString():"", labelJsonObj!=null?labelJsonObj.toString():"","0");
 
@@ -915,7 +915,7 @@ public class ChangeJobActivity extends BaseActivity {
 //                                PublishDetailActivity.this.jobs = jobs;
                                 //将刚发布的兼职信息写入到本地
 //                                LogUtils.i("jobs", new Gson().toJson(jobs).toString());
-                                String sucessMessage = "保存成功！";
+                                String sucessMessage = "发布成功！";
                                 Toast.makeText(ChangeJobActivity.this, sucessMessage, Toast.LENGTH_SHORT).show();
                                 ChangeJobActivity.this.finish();
                             }

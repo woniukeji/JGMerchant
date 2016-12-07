@@ -9,33 +9,22 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.sdsmdg.tastytoast.TastyToast;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
-import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.FragmentText;
-import com.woniukeji.jianmerchant.base.MainActivity;
-import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.TabEntity;
-import com.woniukeji.jianmerchant.entity.User;
-import com.woniukeji.jianmerchant.login.LoginActivity;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
-import com.woniukeji.jianmerchant.utils.CommonUtils;
 import com.woniukeji.jianmerchant.widget.UpDialog;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import okhttp3.Call;
 
 public class PartJobManagerActivity extends BaseActivity {
 

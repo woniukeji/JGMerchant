@@ -1,4 +1,4 @@
-package com.woniukeji.jianmerchant.affordwages;
+package com.woniukeji.jianmerchant.payWage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -53,7 +53,7 @@ public class ChangeActivity extends BaseActivity {
     private int MSG_REGISTER_SUCCESS = 3;
     private Handler mHandler = new Myhandler(this);
     private Context context = ChangeActivity.this;
-    AffordUser.ListTUserInfoEntity user;
+    AffordUser.ListBean user;
     private int position;
 
     @Override
@@ -105,10 +105,10 @@ public class ChangeActivity extends BaseActivity {
     @Override
     public void initViews() {
         Intent intent=getIntent();
-        user= (AffordUser.ListTUserInfoEntity) intent.getSerializableExtra("user");
+        user= (AffordUser.ListBean) intent.getSerializableExtra("user");
         String money=intent.getStringExtra("money");
         position=intent.getIntExtra("position",0);
-        if (user.getRealname()!=null&&!user.getRealname().equals("0")){
+        if (user.getName()!=null&&!user.getName().equals("0")){
           userName.setText(user.getName());
         }else {
            userName.setText("未实名");
@@ -116,7 +116,7 @@ public class ChangeActivity extends BaseActivity {
         tvPhone.setText(user.getTel());
         tvBaseWages.setText(money+"元");
 
-        Picasso.with(ChangeActivity.this).load(user.getName_image()).transform(new CropCircleTransfermation()).error(R.drawable.default_head).into(imgHead);
+        Picasso.with(ChangeActivity.this).load(user.getHead_img_url()).transform(new CropCircleTransfermation()).error(R.drawable.default_head).into(imgHead);
 
 
     }
@@ -144,8 +144,8 @@ public class ChangeActivity extends BaseActivity {
                 break;
             case R.id.btn_confirm_change:
                 Intent intent=getIntent();
-                user.setReal_money(Double.parseDouble(etPayWages.getText().toString().trim()));
-                user.setRemarks(etNote.getText().toString().trim());
+                user.setMoney(Double.parseDouble(etPayWages.getText().toString().trim()));
+                user.setNote(etNote.getText().toString().trim());
                 intent.putExtra("user",user);
                 intent.putExtra("position",position);
                 setResult(RESULT_OK,intent);

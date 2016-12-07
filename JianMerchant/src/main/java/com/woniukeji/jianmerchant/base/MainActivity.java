@@ -76,11 +76,11 @@ public class MainActivity extends BaseActivity {
     private NoScrollViewPager mVPContent;
     private String[] mTitles = {"首页", "财务","", "果聊", "我的"};
     private int[] mIconUnselectIds = {
-            R.mipmap.tab_home_unselect, R.drawable.cw,R.mipmap.tem,
-            R.drawable.chat, R.mipmap.tab_contact_unselect};
+            R.mipmap.tab_home_unselect, R.mipmap.financel,R.mipmap.what,
+            R.mipmap.chat, R.mipmap.tab_about_me_unselect};
     private int[] mIconSelectIds = {
-            R.mipmap.tab_home_select, R.drawable.cwclick,R.mipmap.tem,
-            R.drawable.chactclick,  R.mipmap.tab_contact_select};
+            R.mipmap.tab_home_select, R.mipmap.finance,R.mipmap.whatl,
+            R.mipmap.chatl,  R.mipmap.tab_about_me_select};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private String filePath;
@@ -226,7 +226,7 @@ public class MainActivity extends BaseActivity {
 //        }
         if (mTabLayout.getCurrentTab() != 3) {
             mTabLayout.showMsg(3, ++msgCount);
-            mTabLayout.setMsgMargin(3,-5,-1);
+            mTabLayout.setMsgMargin(2, -7, 5);
         } else {
             msgCount = 0;
             mTabLayout.hideMsg(3);

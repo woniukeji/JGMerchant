@@ -13,10 +13,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.sdsmdg.tastytoast.TastyToast;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.base.BaseActivity;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.BaseBean;
+import com.woniukeji.jianmerchant.http.HttpMethods;
+import com.woniukeji.jianmerchant.http.ProgressSubscriber;
+import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.ActivityManager;
 import com.woniukeji.jianmerchant.utils.DateUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
@@ -42,7 +46,8 @@ public class FeedBackActivity extends BaseActivity {
     private int MSG_POST_SUCCESS = 0;
     private int MSG_POST_FAIL = 1;
     private Handler mHandler = new Myhandler(this);
-    private int loginId;
+    private String tel;
+    private SubscriberOnNextListener<String> stringSubscriberOnNextListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +68,18 @@ public class FeedBackActivity extends BaseActivity {
 
     @Override
     public void initListeners() {
-
+        stringSubscriberOnNextListener=new SubscriberOnNextListener<String>() {
+            @Override
+            public void onNext(String s) {
+                TastyToast.makeText(FeedBackActivity.this,"反馈提交成功，我们会及时处理您的反馈的！",TastyToast.LENGTH_SHORT,TastyToast.SUCCESS);
+                finish();
+            }
+        };
     }
 
     @Override
     public void initData() {
-        loginId = (int) SPUtils.getParam(FeedBackActivity.this, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
+        tel = (String) SPUtils.getParam(FeedBackActivity.this, Constants.LOGIN_INFO, Constants.SP_TEL, "");
     }
 
     @Override
@@ -92,9 +103,7 @@ public class FeedBackActivity extends BaseActivity {
                     showShortToast("请输入手机号");
                     return;
                 }
-                postOpinion(String.valueOf(loginId),etContent.getText().toString());
-                showShortToast("感谢您的反馈！我们将及时处理");
-                finish();
+                HttpMethods.getInstance().postFeedback(FeedBackActivity.this,new ProgressSubscriber<String>(stringSubscriberOnNextListener,FeedBackActivity.this),tel,etContent.getText().toString());
                 break;
         }
     }

@@ -18,16 +18,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UpProgressHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.qiniu.android.storage.UploadOptions;
+import com.sdsmdg.tastytoast.TastyToast;
 import com.squareup.picasso.Picasso;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.activity.login.LoginNewActivity;
+import com.woniukeji.jianmerchant.entity.Version;
 import com.woniukeji.jianmerchant.widget.Mdialog;
 import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
@@ -38,19 +38,15 @@ import com.woniukeji.jianmerchant.eventbus.AvatarEvent;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
 import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
-import com.woniukeji.jianmerchant.login.LoginActivity;
 import com.woniukeji.jianmerchant.utils.CommonUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.widget.CircleImageView;
 import com.woniukeji.jianmerchant.widget.UpDialog;
 import com.woniukeji.jianmerchant.widget.WebViewActivity;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,7 +54,6 @@ import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
-import okhttp3.Call;
 
 public class MineFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
@@ -93,7 +88,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     private SubscriberOnNextListener<String> baseBeanSubscriberOnNextListener;
     private Handler mHandler = new Myhandler(getActivity());
-    private Context context = getActivity();
     private View view;
     private Button btnLogout;
     private String avatarUrl;
@@ -102,9 +96,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private ImageView mine_shezhi;
     private String filePath;
     private int merchantId;
-    private String loginId;
+    private long loginId;
     private String token;
-
+  private SubscriberOnNextListener<Version> versionSubscriberOnNextListener;
     private Handler handler = new Handler() {
         // 处理子线程给我们发送的消息。
         @Override
@@ -149,7 +143,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private void initListener() {
 
 //        merchantId = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
-        loginId = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID, "");
+        loginId = (long) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID,0L);
         token = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_WQTOKEN, "");
         baseBeanSubscriberOnNextListener=new SubscriberOnNextListener<String>() {
             @Override
@@ -157,6 +151,32 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
             }
         };
+
+        versionSubscriberOnNextListener=new SubscriberOnNextListener<Version>() {
+            @Override
+            public void onNext(final Version version) {
+                int version1 = CommonUtils.getVersion(getActivity());
+                if (Integer.valueOf(version.getAndroid_business_version())>version1){
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("检测到新版本，是否更新？")
+                            .setConfirmText("确定")
+                            .setCancelText("取消")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                    UpDialog upDataDialog = new UpDialog(getActivity(),version.getAndroid_business_url());
+                                    upDataDialog.setCanceledOnTouchOutside(false);
+                                    upDataDialog.setCanceledOnTouchOutside(false);
+                                    upDataDialog.show();
+                                }
+                            }).show();
+                }else
+                    TastyToast.makeText(getActivity(),"已经是最新版本！",TastyToast.LENGTH_SHORT,TastyToast.SUCCESS);
+
+            }
+        };
+
     }
 
     private void initView() {
@@ -164,11 +184,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         mine_shezhi = (ImageView) view.findViewById(R.id.mine_shezhi);
         userName.setText((String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, ""));
         //个人界面头像数据
-//        avatarUrl = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, "");
-//        Picasso.with(getActivity()).load(avatarUrl)
-//                .placeholder(R.mipmap.icon_head_defult)
-//                .error(R.mipmap.icon_head_defult)
-//                .into(avatar);
+        avatarUrl = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, "");
+        Picasso.with(getActivity()).load(avatarUrl)
+                .placeholder(R.mipmap.icon_head_defult)
+                .error(R.mipmap.icon_head_defult)
+                .into(avatar);
 //        shift = (Spinner) view.findViewById(R.id.spinner_shift);
 //        adapter = ArrayAdapter.createFromResource(getActivity(),
 //                R.array.shift_array, android.R.layout.simple_spinner_item);
@@ -221,7 +241,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 //        android.os.Process.killProcess(android.os.Process.myPid());
 //        System.exit(0);
         SPUtils.deleteParams(getActivity());
-        startActivity(new Intent(getActivity(), LoginActivity.class));
+        startActivity(new Intent(getActivity(), LoginNewActivity.class));
         getActivity().finish();
     }
 
@@ -275,7 +295,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 getActivity().startActivity(intent1);
                 break;
             case R.id.rl_check:
-                checkVersion(CommonUtils.getVersion(getActivity()));
+                HttpMethods.getInstance().getVersion(new ProgressSubscriber<Version>(versionSubscriberOnNextListener,getActivity()));
                 break;
             case R.id.rl_feedback:
                 startActivity(new Intent(getActivity(),FeedBackActivity.class));
@@ -368,41 +388,5 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
-    /**
-     * getInfo
-     * @param version
-     */
-    public void checkVersion(int version) {
-        OkHttpUtils
-                .get()
-                .url(Constants.CHECK_VERSION)
-                .addParams("v", String.valueOf(version))
-                .build()
-                .connTimeOut(80000)
-                .readTimeOut(90000)
-                .writeTimeOut(90000)
-                .execute(new StringCallback() {
-                             @Override
-                             public void onError(Call call, Exception e, int id) {
 
-                             }
-
-                             @Override
-                             public void onResponse(String response, int id) {
-                                 Gson gson=new Gson();
-                                 Map<String, String> map = gson.fromJson(response, new TypeToken<Map<String, String>>() {}.getType());
-                                 if (!map.get("url").equals("")){
-                                     Message message=new Message();
-                                     message.what=0;
-                                     message.obj=map.get("url");
-                                     handler.sendMessage(message);
-                                 }else {
-                                     Message message=new Message();
-                                     message.what=1;
-                                     handler.sendMessage(message);
-                                 }
-                             }
-                         }
-                );
-    }
 }

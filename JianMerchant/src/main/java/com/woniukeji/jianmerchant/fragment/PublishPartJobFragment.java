@@ -348,7 +348,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
         };
         long times=System.currentTimeMillis();
         String sign= MD5Util.getSign(getActivity(),times);
-        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, getHoldingContext()), phone,sign,String.valueOf(times));
+        HttpMethods.getInstance().getCityAndCategory(new ProgressSubscriber<JobBase>(onNextListenner, getHoldingContext()));
     }
 
     @Override

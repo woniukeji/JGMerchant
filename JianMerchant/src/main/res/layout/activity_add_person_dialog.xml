@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:gravity="center"
-    tools:context="com.woniukeji.jianmerchant.affordwages.AddPersonDialog">
+    tools:context="com.woniukeji.jianmerchant.payWage.AddPersonDialog">
     <RelativeLayout
         android:gravity="bottom|center_horizontal"
         android:id="@+id/rl_bg"
