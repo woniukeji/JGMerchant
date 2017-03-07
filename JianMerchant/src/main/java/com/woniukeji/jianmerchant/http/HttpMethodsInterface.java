@@ -180,7 +180,7 @@ public interface HttpMethodsInterface {
     @POST("auth/info/")
     Observable<BaseBean> Cerfication( @Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp,
                                       @Query("front_img_url") String front_img_url,@Query("head_img_url") String head_img_url,
-                                      @Query("realname") String realname, @Query("nickName") String nickName,
+                                      @Query("realname") String realname, @Query("nickname") String nickname,
                                       @Query("IDcard") String IDcard,
                                       @Query("phone") String phone,
                                       @Query("type") String type,//个人 1 机构 2 内部 3

@@ -16,7 +16,7 @@ public class NewMerchant {
      * token : Nzk4MDIxNDgzMjk2MDY3NTg0Nl8xM0E0OEI0RjRDREUwQjY4QzcxMDE5MDc4RjEzQjcwNQ==
      */
         private int resume;
-        private int createTime;
+        private long createTime;
         private String tel;
         private int auth_status;
         private long id;
@@ -60,15 +60,15 @@ public class NewMerchant {
             this.resume = resume;
         }
 
-        public int getCreateTime() {
-            return createTime;
-        }
+    public long getCreateTime() {
+        return createTime;
+    }
 
-        public void setCreateTime(int createTime) {
-            this.createTime = createTime;
-        }
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
 
-        public String getTel() {
+    public String getTel() {
             return tel;
         }
 

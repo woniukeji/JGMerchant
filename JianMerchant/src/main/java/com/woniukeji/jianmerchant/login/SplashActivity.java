@@ -140,7 +140,7 @@ public class SplashActivity extends BaseActivity {
                     if (null != e) {
                         Toast.makeText(SplashActivity.this, "聊天服务启动失败，稍后请重新登录", Toast.LENGTH_SHORT).show();
                     }else {
-                        //是否填写商家资料信息 1未填写 2 正在审核 3审核拒绝 4审核通过
+                        //是否填写商家资料信息 0未填写 1 正在审核 2审核拒绝 3审核通过
                         if (user.getAuth_status()==0){
                             Intent intent = new Intent(SplashActivity.this, ChooseActivity.class);
                             startActivity(intent);

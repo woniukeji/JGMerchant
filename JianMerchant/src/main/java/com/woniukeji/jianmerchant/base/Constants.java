@@ -19,12 +19,12 @@ import java.io.File;
 
 public class Constants {
     public static final String JIANGUO_FACTORY="http://192.168.1.132/JianGuo_Server/";
-    public static final String JIANGUO_TEST="http://101.200.195.147:8080/";
+    public static final String JIANGUO_TEST="http://101.200.195.147:9090/";
     public static final String JIANGUO_TEST2="http://v3.jianguojob.com:8080/";
     public static final String JIANGUO_xiao="http://192.168.1.115:8080/";
     public static final String JIANGUO_yw="http://192.168.1.118:9090/";
-    public static final String JIANGUO_jun="http://192.168.1.118:8080/";
-    public static final String JIANGUO_USING=JIANGUO_yw;
+    public static final String JIANGUO_jun="http://192.168.0.106:9090/";
+    public static final String JIANGUO_USING=JIANGUO_jun;
     public static final String MARK_PIGEON= JIANGUO_USING+"T_UserPigeon_Servlet";//
     public static final String LOGIN= JIANGUO_USING+"AutoLoginServlet";//
     public static final String REC_SMS= JIANGUO_USING+"T_user_login_Check_BackTel_Servlet";//忘记密码 快速登录
@@ -52,22 +52,6 @@ public class Constants {
     public static final String POST_BIND_PHONE= JIANGUO_USING+"T_user_login_BindingTel_Servlet";//绑定手机号
     public static final String ONLY_PART1 = "xse2iowiowdg3542d49z";
     public static final String ONLY_PART2 = "jfiejdw4gdeqefw33ff23fi999";
-    public static final String GET_SCHOOL= JIANGUO_USING+"T_school_LikeName_Servlet";//学校模糊查询 接口
-    public static final String POST_REAL_NAME= JIANGUO_USING+"T_user_realname_Insert_Servlet";//实名认证
-    public static final String GET_REAL_NAME= JIANGUO_USING+"T_user_realname_SelectId_Servlet";//查看实名
-    public static final String CHANGE_REAL_NAME= JIANGUO_USING+"T_user_realname_Update_Servlet";//修改认证信息
-//    public static final String POST_RESUME= JIANGUO_USING+"T_user_resume_Insert_Servlet";//录入简历
-    public static final String GET_RESUME= JIANGUO_USING+"T_user_resume_SelectId_Servlet";//查看简历
-    public static final String CHANGE_RESUME= JIANGUO_USING+"T_user_resume_Update_Servlet";//修改简历
-    public static final String GET_JOB= JIANGUO_USING+"T_job_List_Servlet";//兼职列表获取
-    public static final String GET_JOB_DETAIL= JIANGUO_USING+"T_Job_info_Select_JobId_Servlet";//兼职详情获取
-    public static final String GET_ADMIT_LIST= JIANGUO_USING+"T_enroll_Job_Servlet";//报名列表
-    public static final String POST_ADMIT= JIANGUO_USING+"T_enroll_Offer_Servlet";//商家录取
-    public static final String POST_DOWN= JIANGUO_USING+"T_enroll_Agree_Servlet";//下架或者结束兼职
-    public static final String GET_SINGLE_JOB_INFO= JIANGUO_USING+"T_job_Id_Servlet";//查询单条目兼职信息
-    public static final String POST_JOB_INFO= JIANGUO_USING+"T_job_Update_Servlet";//修改兼职信息
-    public static final String GET_PAY_LIST= JIANGUO_USING+"T_enroll_Job_User_Servlet";//获取发放工资用用户列表
-    public static final String POST_WAGES= JIANGUO_USING+"T_wages_Insert_Servlet";//工资结算接口
     public static final String POST_PAY_PASSWORD= JIANGUO_USING+"T_mechant_pay_Update_Servlet";//结算密码
     public static final String CHECK_VERSION= JIANGUO_USING+"v_update";//城市和轮播图
     public static final String LOGIN_INFO = "loginInfo";
@@ -96,23 +80,5 @@ public class Constants {
     public static final String USER_PAY_PASS ="pay_password";
     private static final String LEANMESSAGE_CONSTANTS_PREFIX = "com.leancloud.im.guide";
     public static final String IMG_PATH = Environment.getExternalStorageDirectory() + File.separator + "jianguoMer"+ File.separator;
-    public static final String UPDATED_AT = "updatedAt";
-
-    /*
-
-        leancloud消息协议
-        creatimg    string   创建者头像
-        otherimg    string   被邀请者头像
-        creatname   string   创建者名字
-        othername   string   被邀请者名字
-        ctype        int     对话类型：私人对话0，提醒1，通知2，群聊3
-
-     */
-    public static final String CREAT_IMG = "creatimg";
-    public static final String CREAT_NAME = "creatname";
-    public static final String OTHER_IMG = "otherimg";
-    public static final String OTHER_NAME = "othername";
-    public static final String C_TYPE = "ctype";
-
 
 }
