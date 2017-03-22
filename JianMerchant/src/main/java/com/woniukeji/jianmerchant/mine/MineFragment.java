@@ -185,10 +185,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         userName.setText((String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, ""));
         //个人界面头像数据
         avatarUrl = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, "");
-        Picasso.with(getActivity()).load(avatarUrl)
-                .placeholder(R.mipmap.icon_head_defult)
-                .error(R.mipmap.icon_head_defult)
-                .into(avatar);
+//        Picasso.with(getActivity()).load(avatarUrl)
+//                .placeholder(R.mipmap.icon_head_defult)
+//                .error(R.mipmap.icon_head_defult)
+//                .into(avatar);
 //        shift = (Spinner) view.findViewById(R.id.spinner_shift);
 //        adapter = ArrayAdapter.createFromResource(getActivity(),
 //                R.array.shift_array, android.R.layout.simple_spinner_item);
