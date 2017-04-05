@@ -274,6 +274,7 @@
                 }
             }
         ]
+<<<<<<< HEAD
     },
     {
         "outputFile": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
@@ -412,5 +413,7 @@
                 }
             }
         ]
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     }
 ]

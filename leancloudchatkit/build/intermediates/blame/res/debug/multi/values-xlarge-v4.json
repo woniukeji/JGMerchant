@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
         "map": [
             {
@@ -176,6 +177,8 @@
         ]
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "outputFile": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
         "map": [
             {

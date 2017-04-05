@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-si-rLK\\values-si-rLK.xml",
         "map": [
             {
@@ -385,6 +386,8 @@
         ]
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "outputFile": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-si-rLK\\values-si-rLK.xml",
         "map": [
             {

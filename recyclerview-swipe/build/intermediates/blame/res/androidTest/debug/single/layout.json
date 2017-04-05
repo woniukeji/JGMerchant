@@ -4,10 +4,13 @@
         "source": "E:\\work\\MerchantNew\\recyclerview-swipe\\build\\intermediates\\bundles\\debug\\res\\layout\\yanzhenjie_item_default.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\recyclerview-swipe\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\yanzhenjie_item_default.xml",
         "source": "D:\\workbysnew\\MerchantNew\\recyclerview-swipe\\build\\intermediates\\bundles\\debug\\res\\layout\\yanzhenjie_item_default.xml"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\recyclerview-swipe\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\yanzhenjie_item_default.xml",
         "source": "D:\\workbus\\MerchantNew\\recyclerview-swipe\\build\\intermediates\\bundles\\debug\\res\\layout\\yanzhenjie_item_default.xml"
     }

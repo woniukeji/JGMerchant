@@ -1,33 +1,63 @@
 [
     {
+<<<<<<< HEAD
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_picture_button_bg.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_picture_button_bg.xml"
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_voice_button_bg.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_voice_button_bg.xml"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_colored_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_picture_button_bg.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_picture_button_bg.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_colored_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_colored_material.xml"
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_keyboard_button_bg.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_keyboard_button_bg.xml"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_voice_button_bg.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_voice_button_bg.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_send_button_bg.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_send_button_bg.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_borderless_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_borderless_material.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_edit_text_material.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_edit_text_material.xml"
     },
     {
+<<<<<<< HEAD
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_keyboard_button_bg.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_keyboard_button_bg.xml"
+    },
+    {
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_action_button_bg.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_action_button_bg.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_action_button_bg.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_action_button_bg.xml"
     },
@@ -38,12 +68,25 @@
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_track_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_seekbar_track_material.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_location_button_bg.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_location_button_bg.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_chat_record_button_round_background.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_chat_record_button_round_background.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_internal_bg.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_cab_background_internal_bg.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_cab_background_top_material.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_spinner_textfield_background_material.xml"
     },
@@ -54,52 +97,97 @@
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_dark.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_dialog_material_background_dark.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_light.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_holo_dark.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_chat_anim_voice_right.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_chat_anim_voice_right.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_chat_anim_voice_left.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_chat_anim_voice_left.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_full_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_full_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_item_background_holo_dark.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_chat_record_button_round_background.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_chat_record_button_round_background.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_read_badge.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_read_badge.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_read_badge.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_read_badge.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_switch_thumb_material.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_switch_thumb_material.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_voice_button_bg.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_voice_button_bg.xml"
     },
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_tab_indicator_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_tab_indicator_material.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_chat_anim_voice_left.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_chat_anim_voice_left.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_light.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_holo_light.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_seekbar_thumb_material.xml"
     },
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_chat_resend_bg.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_chat_resend_bg.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_radio_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_seekbar_thumb_material.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_chat_resend_bg.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_chat_resend_bg.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_spinner_textfield_background_material.xml"
     },
@@ -110,20 +198,38 @@
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_check_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_check_material.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_keyboard_button_bg.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_keyboard_button_bg.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_read_badge.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_read_badge.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_spinner_textfield_background_material.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_send_button_bg.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_send_button_bg.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_spinner_textfield_background_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_spinner_textfield_background_material.xml"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_text_cursor_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_text_cursor_material.xml"
     },
@@ -134,14 +240,31 @@
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_send_button_bg.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_send_button_bg.xml"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_radio_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_tab_indicator_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_internal_bg.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_cab_background_internal_bg.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_chat_anim_voice_right.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_chat_anim_voice_right.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_light.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_holo_light.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_item_background_holo_dark.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_camera_button_bg.xml",
@@ -152,12 +275,28 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_full_material.xml"
     },
     {
+<<<<<<< HEAD
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_indicator_material.xml"
+    },
+    {
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_light.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_holo_light.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_indicator_material.xml"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_check_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_light.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_item_background_holo_light.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_small_material.xml",
@@ -172,14 +311,24 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_dialog_material_background_dark.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_radio_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_radio_material.xml"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_light.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_dialog_material_background_light.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_location_button_bg.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_location_button_bg.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_switch_thumb_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_switch_thumb_material.xml"
     },
@@ -194,6 +343,18 @@
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_borderless_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_borderless_material.xml"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_track_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
@@ -212,6 +373,7 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_chat_resend_bg.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_camera_button_bg.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_camera_button_bg.xml"
     },
@@ -408,24 +570,36 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_camera_button_bg.xml"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_search_material.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_textfield_search_material.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_item_background_holo_dark.xml"
     },
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_location_button_bg.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_location_button_bg.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_camera_button_bg.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_camera_button_bg.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_voice_button_bg.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_voice_button_bg.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_light.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_dialog_material_background_light.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_textview_bg.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_textview_bg.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_edit_text_material.xml",
@@ -440,8 +614,25 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_chat_anim_voice_left.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_seekbar_thumb_material.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_light.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_dialog_material_background_light.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_track_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_thumb_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_dark.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_dialog_material_background_dark.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_bottom_bar_action_button_bg.xml",
@@ -456,15 +647,39 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_bottom_bar_picture_button_bg.xml"
     },
     {
+<<<<<<< HEAD
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_check_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_small_material.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_small_material.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_search_material.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_textfield_search_material.xml"
     },
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_chat_record_button_round_background.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_chat_record_button_round_background.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_colored_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\lcim_textview_bg.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable\\lcim_textview_bg.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_switch_thumb_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_textfield_search_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_textfield_search_material.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     }
 ]

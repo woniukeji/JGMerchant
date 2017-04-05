@@ -4,10 +4,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_picture_button_normal.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_resend_normal.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_resend_normal.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
@@ -24,10 +27,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\name2.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_longpressed_holo.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_longpressed_holo.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_longpressed_holo.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_longpressed_holo.9.png"
     },
@@ -40,6 +46,7 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
@@ -52,6 +59,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_record_icon_voice4.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice4.png"
     },
@@ -60,26 +69,39 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_action_button_normal.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_resend_normal.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_resend_normal.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_right2.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_right2.png"
     },
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_camera_button_normal.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_camera_button_normal.png"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_right2.png",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_right2.png"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_right.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_right.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
     },
@@ -88,6 +110,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_rating_star_off_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
@@ -100,10 +124,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_location_button_pressed.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_picture_button_normal.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_picture_button_normal.png"
     },
@@ -112,6 +139,7 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\chat2.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_icon_voice5.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice5.png"
     },
@@ -124,6 +152,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\click.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
@@ -140,10 +170,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_keyboard_button_pressed.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_record_icon_voice2.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice2.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_record_icon_voice2.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice2.png"
     },
@@ -156,26 +189,39 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\kuang.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\kuang.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\kuang.png"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_location_button_pressed.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_location_button_pressed.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\chat.9.png",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\chat.9.png"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_action_button_normal.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_action_button_normal.png"
     },
     {
+<<<<<<< HEAD
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\chat.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\chat.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_longpressed_holo.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_longpressed_holo.9.png"
     },
@@ -184,10 +230,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_bg.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_bg.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_keyboard_button_normal.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_keyboard_button_normal.png"
     },
@@ -200,10 +249,13 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_bg.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_icon_voice1.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice1.png"
     },
@@ -220,10 +272,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\name2.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\name2.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_send_button_pressed.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_send_button_pressed.png"
     },
@@ -236,10 +291,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_send_button_pressed.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\add.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\add.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\mr.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\mr.png"
     },
@@ -248,10 +306,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\xj.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_icon_voice0.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice0.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
@@ -264,6 +325,7 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_icon_voice3.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice3.png"
     },
@@ -272,6 +334,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
     },
@@ -288,6 +352,7 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\bq.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png"
     },
@@ -296,6 +361,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\chat2.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_left.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_left.png"
     },
@@ -312,22 +379,37 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_icon_voice0.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice0.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_right1.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_right1.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_record_icon_voice2.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice2.png"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_icon_voice0.png",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice0.png"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_action_button_pressed.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_action_button_pressed.png"
     },
     {
+<<<<<<< HEAD
+=======
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_record_icon_voice2.png",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice2.png"
+    },
+    {
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
@@ -336,6 +418,7 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice3.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
@@ -350,24 +433,36 @@
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_send_button_normal.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_send_button_normal.png"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_36dp.png",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_36dp.png"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_36dp.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_36dp.png"
+=======
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_send_button_normal.png",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_send_button_normal.png"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_rating_star_off_mtrl_alpha.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_rating_star_off_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_icon_voice1.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice1.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
@@ -376,6 +471,7 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_clear_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_left.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_left.png"
     },
@@ -392,6 +488,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\img_bg_right.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_icon_voice4.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice4.png"
     },
@@ -424,10 +522,13 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
     },
@@ -456,26 +557,35 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_location_button_normal.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_location_button_normal.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_group_icon.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_group_icon.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_pressed_holo_light.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_icon_voice2.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice2.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_focused_holo.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_focused_holo.9.png"
     },
@@ -484,10 +594,13 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\camera_normal.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_left3.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_left3.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\camera.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\camera.png"
     },
@@ -504,6 +617,7 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_keyboard_button_pressed.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_keyboard_button_pressed.png"
     },
@@ -512,10 +626,13 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\photo_normal.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\jp.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\jp.png"
     },
@@ -524,10 +641,13 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_item_location_default.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_camera_button_pressed.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_camera_button_pressed.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
     },
@@ -540,18 +660,24 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_default_avatar_icon.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_icon_voice4.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice4.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_left2.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_left2.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_record_icon_voice3.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice3.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_picture_button_pressed.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_picture_button_pressed.png"
     },
@@ -560,6 +686,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_right3.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
@@ -580,10 +708,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice4.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\chatnull.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\chatnull.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png"
     },
@@ -604,10 +735,13 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_camera_button_normal.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_record_icon_voice3.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice3.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png"
     },
@@ -620,10 +754,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_focused_holo.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_focused_holo.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\pic.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\pic.png"
     },
@@ -636,6 +773,7 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\camera_normal.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\camera_normal.png"
     },
@@ -644,6 +782,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_bg_pressed.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_popup_background_mtrl_mult.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_popup_background_mtrl_mult.9.png"
     },
@@ -672,10 +812,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_default_avatar_icon.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_right.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_right.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
@@ -688,10 +831,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\pic.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\pic.png"
     },
@@ -700,14 +846,18 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice5.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_divider_mtrl_alpha.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_item_right_bg.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_item_right_bg.9.png"
     },
@@ -716,10 +866,13 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_location_button_pressed.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\chat1.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\chat1.9.png"
     },
@@ -732,6 +885,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_search_api_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_right3.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_right3.png"
     },
@@ -740,10 +895,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\dog.jpg"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_rating_star_on_mtrl_alpha.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_rating_star_on_mtrl_alpha.png"
     },
@@ -752,6 +910,7 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_camera_button_normal.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     },
@@ -760,6 +919,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_left1.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
@@ -776,6 +937,7 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_action_button_normal.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_action_button_normal.png"
     },
@@ -792,6 +954,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_voice_button_pressed.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_left2.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_left2.png"
     },
@@ -804,10 +968,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\img_bg_left.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_record_icon_voice5.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice5.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\photo_normal.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\photo_normal.png"
     },
@@ -828,6 +995,7 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
@@ -836,6 +1004,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_rating_star_on_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_pressed_holo_light.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
@@ -844,6 +1014,7 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_top_voice_bg.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_top_voice_bg.9.png"
     },
@@ -860,6 +1031,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_resend_pressed.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\pic2.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\pic2.9.png"
     },
@@ -872,26 +1045,35 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\tj.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\tj.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_record_icon_voice1.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice1.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_go_search_api_mtrl_alpha.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_go_search_api_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_go_search_api_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_go_search_api_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_item_right_bg.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_item_right_bg.9.png"
     },
@@ -916,10 +1098,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
@@ -956,10 +1141,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_bg.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\name.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\name.png"
     },
@@ -972,6 +1160,7 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_item_location_default.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
@@ -980,14 +1169,19 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_action_button_pressed.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\xj.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\xj.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_left.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_left.png"
     },
@@ -1020,10 +1214,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_voice_button_normal.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_voice_button_normal.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\bq.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\bq.png"
     },
@@ -1040,10 +1237,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice1.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\chat.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\chat.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\camera.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\camera.png"
     },
@@ -1052,6 +1252,7 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_resend_pressed.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
@@ -1060,6 +1261,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\img_bg_left.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_top_voice_bg.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_top_voice_bg.9.png"
     },
@@ -1068,6 +1271,7 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_top_voice_bg.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_clear_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_clear_mtrl_alpha.png"
     },
@@ -1080,6 +1284,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_keyboard_button_normal.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\tj.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\tj.png"
     },
@@ -1096,10 +1302,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\pic2.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\pic2.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_item_left_bg.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_item_left_bg.9.png"
     },
@@ -1108,6 +1317,7 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_picture_button_pressed.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_record_icon_voice0.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_record_icon_voice0.png"
     },
@@ -1116,6 +1326,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_send_button_pressed.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
@@ -1124,6 +1336,7 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_location_button_normal.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
@@ -1132,6 +1345,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
@@ -1152,10 +1367,13 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_item_left_bg.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_item_left_bg.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_resend_pressed.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_resend_pressed.png"
     },
@@ -1164,26 +1382,35 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice3.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_left3.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_left3.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_right1.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_right1.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_rating_star_off_mtrl_alpha.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_rating_star_off_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\camera.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\camera.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_bg_pressed.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_bg_pressed.9.png"
     },
@@ -1200,14 +1427,18 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\name.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\name.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\img_bg_right.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\img_bg_right.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
@@ -1216,22 +1447,30 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_bg_pressed.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_bg_pressed.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\dog.jpg",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\dog.jpg"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_send_button_normal.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_send_button_normal.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\name.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\name.png"
     },
@@ -1248,10 +1487,13 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\photo.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_icon_voice4.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice4.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_bottom_bar_voice_button_normal.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_bottom_bar_voice_button_normal.png"
     },
@@ -1260,10 +1502,13 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\photo.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\photo.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_group_icon.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_group_icon.png"
     },
@@ -1280,6 +1525,7 @@
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\chat1.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
@@ -1296,22 +1542,30 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\mr.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_clear_mtrl_alpha.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_clear_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\lcim_chat_voice_right.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_voice_right.png"
     },
@@ -1320,6 +1574,7 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_item_location_default.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\bq.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\bq.png"
     },
@@ -1328,6 +1583,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
@@ -1344,10 +1601,13 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\drawable-xhdpi\\lcim_chat_icon_voice2.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
@@ -1362,9 +1622,12 @@
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png"
+<<<<<<< HEAD
     },
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-xhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png"
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     }
 ]

@@ -4,18 +4,24 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_btn_colored_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-v21\\abc_btn_colored_material.xml"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_edit_text_material.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-v21\\abc_edit_text_material.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_action_bar_item_background_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_edit_text_material.xml",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-v21\\abc_edit_text_material.xml"
     },
@@ -30,9 +36,12 @@
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_btn_colored_material.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-v21\\abc_btn_colored_material.xml"
+<<<<<<< HEAD
     },
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_edit_text_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-v21\\abc_edit_text_material.xml"
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     }
 ]

@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <merger version="3"><dataSet config="main"><source path="D:\workbysnew\MerchantNew\cropper\src\main\shaders"/></dataSet><dataSet config="debug"><source path="D:\workbysnew\MerchantNew\cropper\src\debug\shaders"/></dataSet></merger>
+=======
+<merger version="3"><dataSet config="main"><source path="D:\workbus\MerchantNew\cropper\src\main\shaders"/></dataSet><dataSet config="debug"><source path="D:\workbus\MerchantNew\cropper\src\debug\shaders"/></dataSet></merger>
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc

@@ -347,6 +347,7 @@
         ]
     },
     {
+<<<<<<< HEAD
         "outputFile": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-mk-rMK\\values-mk-rMK.xml",
         "map": [
             {
@@ -694,6 +695,8 @@
         ]
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "outputFile": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-mk-rMK\\values-mk-rMK.xml",
         "map": [
             {

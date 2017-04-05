@@ -4,6 +4,7 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-mdpi-v17\\abc_ic_ab_back_mtrl_am_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_ab_back_mtrl_am_alpha.png"
     },
@@ -12,6 +13,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-ldrtl-mdpi-v17\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
@@ -38,6 +41,7 @@
     {
         "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-mdpi-v17\\abc_spinner_mtrl_am_alpha.9.png",
         "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-ldrtl-mdpi-v17\\abc_spinner_mtrl_am_alpha.9.png"
+<<<<<<< HEAD
     },
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png",
@@ -46,5 +50,7 @@
     {
         "merged": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     }
 ]

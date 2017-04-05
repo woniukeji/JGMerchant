@@ -1,9 +1,12 @@
 [
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-v23\\abc_control_background_material.xml",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-v23\\abc_control_background_material.xml"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-v23\\abc_control_background_material.xml",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-v23\\abc_control_background_material.xml"
     },

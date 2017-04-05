@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <merger version="3"><dataSet config="main"><source path="D:\workbysnew\MerchantNew\leancloudchatkit\src\main\assets"/><source path="D:\workbysnew\MerchantNew\leancloudchatkit\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="D:\workbysnew\MerchantNew\leancloudchatkit\src\debug\assets"/></dataSet></merger>
+=======
+<merger version="3"><dataSet config="main"><source path="D:\workbus\MerchantNew\leancloudchatkit\src\main\assets"/><source path="D:\workbus\MerchantNew\leancloudchatkit\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="D:\workbus\MerchantNew\leancloudchatkit\src\debug\assets"/></dataSet></merger>
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc

@@ -730,6 +730,7 @@
                 }
             }
         ]
+<<<<<<< HEAD
     },
     {
         "outputFile": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-az-rAZ\\values-az-rAZ.xml",
@@ -1096,5 +1097,7 @@
                 }
             }
         ]
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     }
 ]

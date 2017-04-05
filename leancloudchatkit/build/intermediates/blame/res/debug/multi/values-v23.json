@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "D:\\workbysnew\\MerchantNew\\leancloudchatkit\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
         "map": [
             {
@@ -199,6 +200,8 @@
         ]
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "outputFile": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
         "map": [
             {

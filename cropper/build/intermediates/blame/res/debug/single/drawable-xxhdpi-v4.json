@@ -24,6 +24,7 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
@@ -40,12 +41,19 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png",
+        "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
@@ -56,6 +64,7 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\src\\main\\res\\drawable-xxhdpi\\crop_image_menu_rotate_right.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
@@ -64,6 +73,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
     },
@@ -80,10 +91,13 @@
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_search_api_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png"
     },
@@ -104,6 +118,7 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\crop_image_menu_rotate_left.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\src\\main\\res\\drawable-xxhdpi\\crop_image_menu_rotate_left.png"
     },
@@ -112,6 +127,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     },
@@ -136,36 +153,52 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_rating_star_on_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_black_36dp.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
+=======
+        "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
+        "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
@@ -196,6 +229,7 @@
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
     },
@@ -212,6 +246,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
@@ -220,6 +256,7 @@
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_popup_background_mtrl_mult.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_popup_background_mtrl_mult.9.png"
     },
@@ -228,10 +265,13 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_rating_star_on_mtrl_alpha.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_rating_star_on_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
     },
@@ -240,10 +280,13 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
@@ -252,6 +295,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
@@ -276,6 +321,7 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png"
     },
@@ -284,14 +330,19 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
     },
@@ -312,18 +363,24 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_search_api_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_search_api_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\crop_image_menu_rotate_left.png",
         "source": "E:\\work\\MerchantNew\\cropper\\src\\main\\res\\drawable-xxhdpi\\crop_image_menu_rotate_left.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
@@ -364,6 +421,7 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     },
@@ -376,6 +434,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png"
     },
@@ -396,6 +456,7 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
@@ -408,6 +469,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_clear_mtrl_alpha.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_clear_mtrl_alpha.png"
     },
@@ -420,14 +483,18 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
@@ -436,6 +503,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_rating_star_off_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_rating_star_off_mtrl_alpha.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_rating_star_off_mtrl_alpha.png"
     },
@@ -448,6 +517,7 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_search_api_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
@@ -460,10 +530,13 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_go_search_api_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
@@ -472,10 +545,13 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
@@ -488,6 +564,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
     },
@@ -500,6 +578,7 @@
         "source": "E:\\work\\MerchantNew\\cropper\\src\\main\\res\\drawable-xxhdpi\\crop_image_menu_rotate_right.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
@@ -508,6 +587,8 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
@@ -520,10 +601,13 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
@@ -532,10 +616,13 @@
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_clear_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png"
     },
@@ -560,10 +647,13 @@
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\drawable-xxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },

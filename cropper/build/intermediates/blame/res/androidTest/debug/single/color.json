@@ -4,6 +4,7 @@
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_background_cache_hint_selector_material_dark.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_secondary_text_material_light.xml",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_secondary_text_material_light.xml"
     },
@@ -60,10 +61,19 @@
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_primary_text_disable_only_material_dark.xml"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_background_cache_hint_selector_material_light.xml",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_background_cache_hint_selector_material_light.xml"
     },
     {
+<<<<<<< HEAD
+=======
+        "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_secondary_text_material_light.xml",
+        "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_secondary_text_material_light.xml"
+    },
+    {
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_background_cache_hint_selector_material_dark.xml",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_background_cache_hint_selector_material_dark.xml"
     },
@@ -76,10 +86,24 @@
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_secondary_text_material_dark.xml"
     },
     {
+<<<<<<< HEAD
+=======
+        "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_secondary_text_material_dark.xml",
+        "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_secondary_text_material_dark.xml"
+    },
+    {
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_primary_text_disable_only_material_light.xml",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_primary_text_disable_only_material_light.xml"
     },
     {
+<<<<<<< HEAD
+=======
+        "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_primary_text_disable_only_material_dark.xml",
+        "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_primary_text_disable_only_material_dark.xml"
+    },
+    {
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\switch_thumb_material_light.xml",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\switch_thumb_material_light.xml"
     },
@@ -88,10 +112,13 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_primary_text_material_light.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_search_url_text.xml",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_search_url_text.xml"
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_secondary_text_material_light.xml",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_secondary_text_material_light.xml"
     },
@@ -104,6 +131,7 @@
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_background_cache_hint_selector_material_light.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\switch_thumb_material_light.xml",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\switch_thumb_material_light.xml"
     },
@@ -118,17 +146,45 @@
     {
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_primary_text_material_light.xml",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_primary_text_material_light.xml"
+=======
+        "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_primary_text_material_dark.xml",
+        "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\switch_thumb_material_light.xml",
+        "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\switch_thumb_material_light.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_primary_text_material_dark.xml",
+        "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_primary_text_material_dark.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_primary_text_material_light.xml",
         "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_primary_text_material_light.xml"
     },
     {
+<<<<<<< HEAD
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_secondary_text_material_dark.xml",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_secondary_text_material_dark.xml"
+=======
+        "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\switch_thumb_material_dark.xml",
+        "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\switch_thumb_material_dark.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     },
     {
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_search_url_text.xml",
         "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_search_url_text.xml"
+<<<<<<< HEAD
+=======
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\switch_thumb_material_dark.xml",
+        "source": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\switch_thumb_material_dark.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\abc_primary_text_disable_only_material_light.xml",
+        "source": "E:\\work\\MerchantNew\\cropper\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\color\\abc_primary_text_disable_only_material_light.xml"
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     }
 ]

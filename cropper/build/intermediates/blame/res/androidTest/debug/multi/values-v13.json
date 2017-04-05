@@ -46,6 +46,7 @@
                 }
             }
         ]
+<<<<<<< HEAD
     },
     {
         "outputFile": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v13\\values-v13.xml",
@@ -70,5 +71,7 @@
                 }
             }
         ]
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     }
 ]

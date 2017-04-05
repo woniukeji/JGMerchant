@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-w480dp-v13\\values-w480dp-v13.xml",
         "map": [
             {
@@ -43,6 +44,8 @@
         ]
     },
     {
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
         "outputFile": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-w480dp-v13\\values-w480dp-v13.xml",
         "map": [
             {

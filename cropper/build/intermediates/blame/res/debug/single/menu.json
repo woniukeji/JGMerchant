@@ -6,9 +6,12 @@
     {
         "merged": "D:\\workbus\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\menu\\crop_image_menu.xml",
         "source": "D:\\workbus\\MerchantNew\\cropper\\src\\main\\res\\menu\\crop_image_menu.xml"
+<<<<<<< HEAD
     },
     {
         "merged": "D:\\workbysnew\\MerchantNew\\cropper\\build\\intermediates\\res\\merged\\debug\\menu\\crop_image_menu.xml",
         "source": "D:\\workbysnew\\MerchantNew\\cropper\\src\\main\\res\\menu\\crop_image_menu.xml"
+=======
+>>>>>>> 77a0e807ef06f3cf1995b16990dc058a3862cccc
     }
 ]
