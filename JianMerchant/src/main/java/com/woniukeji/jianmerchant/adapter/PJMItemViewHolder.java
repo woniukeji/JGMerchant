@@ -109,6 +109,7 @@ public class PJMItemViewHolder extends TopViewHolder<JobInfo> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.progress_admit:
+                break;
             case R.id.ll_publisher:
                 Intent Intent = new Intent(getContext(), FilterActivity.class);
                 Intent.putExtra("jobid",job.getId()+"");

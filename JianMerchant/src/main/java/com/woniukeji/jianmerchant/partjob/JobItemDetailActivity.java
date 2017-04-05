@@ -285,7 +285,7 @@ public class JobItemDetailActivity extends BaseActivity {
         tvWorkLocation.setText(jobDetailsBaseBean.getAddress());
         tvManagerName.setText(modleJob.getJob_name());
         tvChakanBrowse.setText(modleJob.getBrowse_count()+"");
-        String date = DateUtils.getTime(Long.valueOf(jobDetailsBaseBean.getStart_date()), Long.valueOf(jobDetailsBaseBean.getEnd_time()));
+        String date = DateUtils.getTime(Long.valueOf(jobDetailsBaseBean.getStart_date()), Long.valueOf(jobDetailsBaseBean.getEnd_date()));
         tvWorkDate.setText(date);
         tvDate.setText(date);
         tvWorkTime.setText(DateUtils.getHm(jobDetailsBaseBean.getBegin_time()) + "-" + DateUtils.getHm(jobDetailsBaseBean.getEnd_time()));

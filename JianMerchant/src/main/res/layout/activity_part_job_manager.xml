@@ -33,13 +33,14 @@
             android:text="兼果"
             />
         <RelativeLayout
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/rl_message"
             android:layout_width="37dp"
             android:layout_height="34dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
+
             >
             <ImageView
                 android:layout_width="wrap_content"

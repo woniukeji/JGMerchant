@@ -223,17 +223,17 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
         title = (TextView) top.findViewById(R.id.tv_title);
         title.setText("结算");
         add_person = (TextView) top.findViewById(R.id.add_person);
-        add_person.setVisibility(View.VISIBLE);
-        add_person.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CalculateActivity.this, AddPersonActivity.class);
-                intent.putExtra("job_id", jobid);
-                intent.putExtra("job_name", jobName);
-                //这里不用forResult启动，用eventbus代替
-                startActivity(intent);
-            }
-        });
+
+//        add_person.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(CalculateActivity.this, AddPersonActivity.class);
+//                intent.putExtra("job_id", jobid);
+//                intent.putExtra("job_name", jobName);
+//                //这里不用forResult启动，用eventbus代替
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override

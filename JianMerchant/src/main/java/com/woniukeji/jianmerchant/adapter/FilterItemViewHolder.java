@@ -94,8 +94,8 @@ public class FilterItemViewHolder extends TopViewHolder<NewJoinUser> {
     public void bindData(NewJoinUser userInfo) {
         this.userInfo = userInfo;
         //设置报名者姓名
-        if (userInfo.getName() != null && !userInfo.getName().equals("0")) {
-            tvUserName.setText(userInfo.getName());
+        if (userInfo.getNickname() != null && !userInfo.getNickname().equals("0")) {
+            tvUserName.setText(userInfo.getNickname());
         } else {
             tvUserName.setText("未填写");
         }

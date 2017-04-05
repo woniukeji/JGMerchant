@@ -283,7 +283,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 MultiImageSelectorActivity.startSelect(getActivity(),0,1,0);
                 break;
             case R.id.rl_custom:
-                Mdialog mdialog=new Mdialog(getActivity(),"01053350021");
+                Mdialog mdialog=new Mdialog(getActivity(),"010-53350021");
                 mdialog.show();
                 break;
             case R.id.iv_feedback:

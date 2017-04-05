@@ -103,7 +103,7 @@ public class PushMessageActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        loginId = (long) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_USERID, 0);
+        loginId = (long) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_USERID, 0L);
     }
 
     @Override
