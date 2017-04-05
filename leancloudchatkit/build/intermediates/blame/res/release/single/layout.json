@@ -1,23 +1,15 @@
 [
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_image_brower_layout.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_image_brower_layout.xml"
-    },
-    {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\support_simple_spinner_dropdown_item.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\support_simple_spinner_dropdown_item.xml"
-    },
-    {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_dialog_title_material.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_dialog_title_material.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_mode_close_item_material.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_bottom_bar_more_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_bottom_bar_more_layout.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_item_material.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\select_dialog_item_material.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_conversation_fragment.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_conversation_fragment.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_material.xml",
@@ -28,12 +20,24 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\select_dialog_multichoice_material.xml"
     },
     {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_right_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_right_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_bar.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_left_text_layout.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_left_text_layout.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_right_audio_layout.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_right_audio_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_right_text_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_right_text_layout.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_conversation_activity.xml",
@@ -44,28 +48,24 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_right_text_layout.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_icon.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_icon.xml"
-    },
-    {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_record_layout.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_record_layout.xml"
-    },
-    {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_menu_layout.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_part_chronometer.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_part_chronometer.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_load_more_footer_layout.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_load_more_footer_layout.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_left_layout.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_left_layout.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_image_brower_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_image_brower_layout.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_title_item.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_common_footer_item_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_common_footer_item_layout.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view.xml",
@@ -76,36 +76,48 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_part_chronometer.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_select_dialog_material.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_item_layout.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_screen_toolbar.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_image_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_image_layout.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_screen_toolbar.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_right_layout.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_right_layout.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_item_layout.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_menu_item_layout.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_input_bottom_bar_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_input_bottom_bar_layout.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_conversation_list_fragment.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_conversation_list_fragment.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_view.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_search_view.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_content_include.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_load_more_footer_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_load_more_footer_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple_overlay_action_mode.xml",
@@ -116,52 +128,48 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_singlechoice_material.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\select_dialog_singlechoice_material.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_media.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_media.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_bottom_bar_action_layout.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_bottom_bar_action_layout.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_left_audio_layout.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_left_audio_layout.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_conversation_item.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_conversation_item.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_conversation_item.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_conversation_item.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_item_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\select_dialog_item_material.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_location.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_location.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_conversation_activity.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_conversation_activity.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_bottom_bar_more_layout.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_bottom_bar_more_layout.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_common_header_item_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_common_header_item_layout.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_right_audio_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_right_audio_layout.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_narrow.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_big_media_narrow.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_left_audio_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_left_audio_layout.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_cancel_action.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_media_cancel_action.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_alert_dialog_material.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_checkbox.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_checkbox.xml"
-    },
-    {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_input_bottom_bar_layout.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_input_bottom_bar_layout.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_conversation_fragment.xml",
@@ -170,6 +178,10 @@
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_image_layout.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_image_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_dialog_title_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_dialog_title_material.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_lines.xml",
@@ -188,16 +200,12 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_media_action.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_big_media.xml"
-    },
-    {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_common_header_item_layout.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_common_header_item_layout.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_media.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_media.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_item_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_menu_item_layout.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_layout.xml",
@@ -206,6 +214,226 @@
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_common_footer_item_layout.xml",
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_common_footer_item_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_part_time.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_big_media.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_radio.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_image_brower_layout.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_image_brower_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_expanded_menu_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_cancel_action.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_item_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_title_item.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_icon.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_record_layout.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_record_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_left_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_left_layout.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_left_layout.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_left_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_up_container.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_action.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_media_action.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_record_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_record_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_radio.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_bottom_bar_action_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_bottom_bar_action_layout.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_item_layout.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_conversation_list_fragment.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_conversation_list_fragment.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_bottom_bar_text_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_bottom_bar_text_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_location.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_location.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_view.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_search_view.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_lines.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_lines.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_bottom_bar_action_layout.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_bottom_bar_action_layout.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_left_audio_layout.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_left_audio_layout.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_conversation_item.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_conversation_item.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_location.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_location.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_bottom_bar_more_layout.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_bottom_bar_more_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_search_view.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_search_view.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_narrow.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_item_left_text_layout.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_item_left_text_layout.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_media_cancel_action.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_multichoice_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_icon.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_chat_input_bottom_bar_layout.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\src\\main\\res\\layout\\lcim_chat_input_bottom_bar_layout.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_narrow.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_big_media.xml"
+    },
+    {
+        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_media.xml",
+        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_media.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\select_dialog_singlechoice_material.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\lcim_bottom_bar_text_layout.xml",
@@ -224,8 +452,12 @@
         "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
-        "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_radio.xml",
-        "source": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_radio.xml"
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple.xml",
+        "source": "D:\\workbus\\MerchantNew\\leancloudchatkit\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_screen_simple.xml"
     },
     {
         "merged": "E:\\work\\MerchantNew\\leancloudchatkit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_part_time.xml",
