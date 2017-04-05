@@ -43,6 +43,7 @@ public class Mdialog extends Dialog {
         setDialogContentView();
 
     }
+
     public Mdialog(Context context, boolean cancelable,
                    OnCancelListener cancelListener) {
 
