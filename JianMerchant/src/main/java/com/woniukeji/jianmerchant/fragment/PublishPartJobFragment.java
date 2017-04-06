@@ -259,7 +259,7 @@ public class PublishPartJobFragment extends BaseFragment implements View.OnClick
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                     super.onScrollStateChanged(recyclerView, newState);
-                    if (modelList.size() > 5 && lastVisibleItem == modelList.size()) {
+                    if (modelList.size() > 5 && lastVisibleItem == modelList.size()&& modelList.size()%10==0) {
                         if (isCanLoadDate) {
                             getHistroyJobs(++checkOutPage);
                         }

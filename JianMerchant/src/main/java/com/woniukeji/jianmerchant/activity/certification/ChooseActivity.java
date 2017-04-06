@@ -26,6 +26,8 @@ public class ChooseActivity extends BaseActivity {
     @Override
     public void setContentView() {
 
+
+
         setContentView(R.layout.activity_choose);
         ButterKnife.bind(this);
     }

@@ -296,7 +296,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
 //        isRefresh=true;
         long times=System.currentTimeMillis();
         String sign= MD5Util.getSign(CalculateActivity.this,times);
-        HttpMethods.getInstance().getPayList(subscriber, tel,sign,String.valueOf(times), String.valueOf(jobid), 1);
+        HttpMethods.getInstance().getPayList(subscriber, tel,sign,String.valueOf(times), String.valueOf(jobid), count/10+1);
     }
 
     @Override
