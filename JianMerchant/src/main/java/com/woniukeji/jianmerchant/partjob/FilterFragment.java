@@ -261,6 +261,7 @@ public class FilterFragment extends BaseFragment {
             public void onNext(List<NewJoinUser> newJobDetail) {
                 if (refreshLayout != null && refreshLayout.isRefreshing()) {
                     refreshLayout.setRefreshing(false);
+                    modleList.clear();
                 }
                 if (isRefresh){
                     modleList.clear();
@@ -304,11 +305,11 @@ public class FilterFragment extends BaseFragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (lastVisibleItem>4&&lastVisibleItem +1 == adapter.getItemCount()&&loadOk) {
+                if ( modleList.size() >= 10 && lastVisibleItem  == modleList.size()-1 && loadOk && modleList.size()%10 == 0) {
                     loadOk=false;
-                    long times=System.currentTimeMillis();
-                    String sign= MD5Util.getSign(getActivity(),times);
-                    int pageNum=modleList.size()/10+1;
+                    long times =System.currentTimeMillis();
+                    String sign = MD5Util.getSign(getActivity(),times);
+                    int pageNum =modleList.size()/10+1;
                     isRefresh=false;
                     HttpMethods.getInstance().getJobUserList(new ProgressSubscriber<List<NewJoinUser>>(userListSubOnNextListener,getActivity()),jobid,tel,sign,String.valueOf(times),type, String.valueOf(pageNum));
 //                    refreshLayout.setRefreshing(true);

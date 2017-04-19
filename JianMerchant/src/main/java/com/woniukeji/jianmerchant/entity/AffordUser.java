@@ -49,11 +49,21 @@ public class AffordUser implements Serializable{
             private long job_id;
             private int sex;
             private String name;
+            private String nickname;
             private String tel;
             private long id;
             private String head_img_url;
             private String note;
             private int type;
+            public String getNickname() {
+                return nickname;
+            }
+
+            public void setNickname(String nickname) {
+                this.nickname = nickname;
+            }
+
+
 
 
 

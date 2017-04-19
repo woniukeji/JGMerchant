@@ -597,9 +597,9 @@ public class HttpMethods {
     /**
      *获取待支付工资人员列表
      */
-    public void getPayList(Subscriber<AffordUser> subscriber, String tel, String sign, String timestamp, String jobid,int pageNum){
+    public void getPayList(Subscriber<AffordUser> subscriber, String tel, String sign, String timestamp, String jobid,int pageNum,int type){
         String appid= MD5Util.MD5(tel);
-        Observable<BaseBean<AffordUser>> cityCategory = methodsInterface.getPayList(jobid,appid,sign,timestamp,pageNum);
+        Observable<BaseBean<AffordUser>> cityCategory = methodsInterface.getPayList(jobid,appid,sign,timestamp,pageNum,type);
         cityCategory.map(new BaseBeanFun<AffordUser>())
                  .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

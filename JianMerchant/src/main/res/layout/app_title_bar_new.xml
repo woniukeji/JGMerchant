@@ -42,4 +42,16 @@
         android:layout_centerVertical="true"
         android:visibility="gone"
         />
+    <TextView
+        android:id="@+id/tv_calculated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已结算"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:background="@color/app_bg"
+        android:layout_alignParentRight="true"
+        />
 </RelativeLayout>

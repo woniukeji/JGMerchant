@@ -103,6 +103,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
     private boolean loadOk = true;
     private String tel;
     private long userId;
+    private TextView tv_calculated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,7 +224,15 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
         title = (TextView) top.findViewById(R.id.tv_title);
         title.setText("结算");
         add_person = (TextView) top.findViewById(R.id.add_person);
-
+        tv_calculated = (TextView) top.findViewById(R.id.tv_calculated);
+        tv_calculated.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CalculateActivity.this,AlreadyCalculateActivity.class);
+                intent.putExtra("jobid",jobid);
+                startActivity(intent);
+            }
+        });
 //        add_person.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -296,7 +305,7 @@ public class CalculateActivity extends BaseActivity implements CalculateViewHold
 //        isRefresh=true;
         long times=System.currentTimeMillis();
         String sign= MD5Util.getSign(CalculateActivity.this,times);
-        HttpMethods.getInstance().getPayList(subscriber, tel,sign,String.valueOf(times), String.valueOf(jobid), count/10+1);
+        HttpMethods.getInstance().getPayList(subscriber, tel,sign,String.valueOf(times), String.valueOf(jobid), count/10+1,1);
     }
 
     @Override

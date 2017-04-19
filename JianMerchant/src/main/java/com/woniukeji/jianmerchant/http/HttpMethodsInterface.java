@@ -309,7 +309,7 @@ Observable<BaseBean> changeJob(@Query("id") String job_id,@Query("app_id") Strin
     *获取待支付用户列表
     */
     @GET("wallet/userlist/{job_id}")
-    Observable<BaseBean<AffordUser>> getPayList(@Path("job_id") String job_id,@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp, @Query("pageNum") int pageNum);
+    Observable<BaseBean<AffordUser>> getPayList(@Path("job_id") String job_id,@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp, @Query("pageNum") int pageNum,@Query("type") int type);
     /**
      *支付工资
      */

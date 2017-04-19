@@ -331,7 +331,9 @@
                 android:id="@+id/rl_down_url"
                 android:clickable="true"
                 android:layout_width="match_parent"
-                android:layout_height="45dp">
+                android:layout_height="45dp"
+                android:visibility="gone"
+                >
                 <ImageView
                     android:id="@+id/iv_logout"
                     android:layout_centerVertical="true"

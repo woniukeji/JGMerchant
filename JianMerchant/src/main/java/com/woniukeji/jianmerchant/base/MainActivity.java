@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,7 +91,10 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+
     }
+
+
 
     @Override
     public void setContentView() {
@@ -98,6 +103,12 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        //状态栏 @ 顶部
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//A
+        //导航栏 @ 底部
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//B
+
+
         mRightCorner = (ImageView) findViewById(R.id.img_share);
         mTabLayout = (CommonTabLayout) findViewById(R.id.bottom_tab);
         mVPContent = (NoScrollViewPager) findViewById(R.id.viewpager_content);
@@ -312,4 +323,6 @@ public class MainActivity extends BaseActivity {
                 }, null));
 
     }
+
+
 }

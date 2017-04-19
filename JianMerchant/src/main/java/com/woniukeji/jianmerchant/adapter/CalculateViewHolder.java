@@ -75,10 +75,10 @@ public class CalculateViewHolder extends TopViewHolder<AffordUser.ListBean> {
     @Override
     public void bindData(AffordUser.ListBean listTUserInfoEntity) {
         user = listTUserInfoEntity;
-        if (user.getName() != null) {
-            userName.setText(user.getName());
+        if (user.getNickname() != null) {
+            userName.setText(user.getNickname());
         } else {
-            userName.setText(user.getName() + "（未实名）");
+            userName.setText(user.getNickname() + "（未实名）");
         }
 
         tvPhone.setText(user.getTel());

@@ -215,7 +215,14 @@ public class QuickLoginFragment extends BaseFragment {
                 JPushInterface.resumePush(getActivity().getApplicationContext());
             }
         }
-            //登陆leancloud服务器 给极光设置别名
+        JPushInterface.setAlias(getActivity().getApplicationContext(), "jianguo" + user.getId(), new TagAliasCallback() {
+            @Override
+            public void gotResult(int i, String s, Set<String> set) {
+                LogUtils.e("jpush", s + ",code=" + i);
+            }
+        });
+
+        //登陆leancloud服务器 给极光设置别名
             LCChatKit.getInstance().open(String.valueOf(user.getId()), new AVIMClientCallback() {
                 @Override
                 public void done(AVIMClient avimClient, AVIMException e) {

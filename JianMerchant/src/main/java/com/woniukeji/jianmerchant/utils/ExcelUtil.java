@@ -68,7 +68,7 @@ public class ExcelUtil {
 		for (int i = 0; i < users.size(); i++) {
 			sheet.setColumnView(i+2, 15);
 			user = users.get(i);
-			label1 = new Label(0, i+2, user.getName(), format);
+			label1 = new Label(0, i+2, user.getNickname(), format);
 			label2 = new Label(1, i+2, user.getTel(), format);
 			label3 = new Label(2, i+2, user.getSex() == 1 ? "女" : "男", format);
 			label4 = new Label(3, i+2, user.getSchool_name(), format);
