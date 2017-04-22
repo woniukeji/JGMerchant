@@ -104,9 +104,9 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initViews() {
         //状态栏 @ 顶部
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//A
-        //导航栏 @ 底部
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//B
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//A
+//        //导航栏 @ 底部
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//B
 
 
         mRightCorner = (ImageView) findViewById(R.id.img_share);

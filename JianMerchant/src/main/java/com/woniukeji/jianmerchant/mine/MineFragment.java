@@ -24,16 +24,16 @@ import com.qiniu.android.storage.UpProgressHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.qiniu.android.storage.UploadOptions;
 import com.sdsmdg.tastytoast.TastyToast;
-import com.squareup.picasso.Picasso;
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.activity.certification.ChooseActivity;
+import com.woniukeji.jianmerchant.activity.certification.StatusActivity;
 import com.woniukeji.jianmerchant.activity.login.LoginNewActivity;
-import com.woniukeji.jianmerchant.entity.Version;
-import com.woniukeji.jianmerchant.widget.Mdialog;
 import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.entity.BaseBean;
 import com.woniukeji.jianmerchant.entity.User;
+import com.woniukeji.jianmerchant.entity.Version;
 import com.woniukeji.jianmerchant.eventbus.AvatarEvent;
 import com.woniukeji.jianmerchant.http.HttpMethods;
 import com.woniukeji.jianmerchant.http.ProgressSubscriber;
@@ -41,6 +41,7 @@ import com.woniukeji.jianmerchant.http.SubscriberOnNextListener;
 import com.woniukeji.jianmerchant.utils.CommonUtils;
 import com.woniukeji.jianmerchant.utils.SPUtils;
 import com.woniukeji.jianmerchant.widget.CircleImageView;
+import com.woniukeji.jianmerchant.widget.Mdialog;
 import com.woniukeji.jianmerchant.widget.UpDialog;
 import com.woniukeji.jianmerchant.widget.WebViewActivity;
 
@@ -58,33 +59,66 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 public class MineFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
 
-    @BindView(R.id.iv_header_bg) ImageView ivHeaderBg;
-    @BindView(R.id.mine_shezhi) ImageView mineShezhi;
-    @BindView(R.id.avatar) CircleImageView avatar;
-    @BindView(R.id.user_name) TextView userName;
-    @BindView(R.id.department) TextView department;
-    @BindView(R.id.total_wage_number) TextView totalWageNumber;
-    @BindView(R.id.tv_total) TextView tvTotal;
-    @BindView(R.id.total_people_number) TextView totalPeopleNumber;
-    @BindView(R.id.tv_people) TextView tvPeople;
-    @BindView(R.id.iv_past) ImageView ivPast;
-    @BindView(R.id.iv_past_right) ImageView ivPastRight;
-    @BindView(R.id.rl_custom) RelativeLayout rlCustom;
-    @BindView(R.id.iv_feedback) ImageView ivFeedback;
-    @BindView(R.id.iv_rck_right) ImageView ivRckRight;
-    @BindView(R.id.rl_feedback) RelativeLayout rlFeedback;
-    @BindView(R.id.iv_shift) ImageView ivShift;
-    @BindView(R.id.spinner_shift) Spinner spinnerShift;
-    @BindView(R.id.rl_shift) RelativeLayout rlShift;
-    @BindView(R.id.iv_logout) ImageView ivLogout;
-    @BindView(R.id.iv_logout_right) ImageView ivLogoutRight;
-    @BindView(R.id.rl_down_url) RelativeLayout rlDownUrl;
-    @BindView(R.id.iv_ing) ImageView ivIng;
-    @BindView(R.id.iv_ing_right) ImageView ivIngRight;
-    @BindView(R.id.about) RelativeLayout about;
-    @BindView(R.id.rl_check) RelativeLayout reCheck;
-    @BindView(R.id.rl_logout) Button rlLogout;
-    @BindView(R.id.rl_question) RelativeLayout rlQuestion;
+    @BindView(R.id.iv_header_bg)
+    ImageView ivHeaderBg;
+    @BindView(R.id.mine_shezhi)
+    ImageView mineShezhi;
+    @BindView(R.id.avatar)
+    CircleImageView avatar;
+    @BindView(R.id.user_name)
+    TextView userName;
+    @BindView(R.id.department)
+    TextView department;
+    @BindView(R.id.total_wage_number)
+    TextView totalWageNumber;
+    @BindView(R.id.tv_total)
+    TextView tvTotal;
+    @BindView(R.id.total_people_number)
+    TextView totalPeopleNumber;
+    @BindView(R.id.tv_people)
+    TextView tvPeople;
+    @BindView(R.id.iv_past)
+    ImageView ivPast;
+    @BindView(R.id.iv_past_right)
+    ImageView ivPastRight;
+    @BindView(R.id.rl_custom)
+    RelativeLayout rlCustom;
+    @BindView(R.id.iv_feedback)
+    ImageView ivFeedback;
+    @BindView(R.id.iv_rck_right)
+    ImageView ivRckRight;
+    @BindView(R.id.rl_feedback)
+    RelativeLayout rlFeedback;
+    @BindView(R.id.iv_shift)
+    ImageView ivShift;
+    @BindView(R.id.spinner_shift)
+    Spinner spinnerShift;
+    @BindView(R.id.rl_shift)
+    RelativeLayout rlShift;
+    @BindView(R.id.iv_logout)
+    ImageView ivLogout;
+    @BindView(R.id.iv_logout_right)
+    ImageView ivLogoutRight;
+    @BindView(R.id.rl_down_url)
+    RelativeLayout rlDownUrl;
+    @BindView(R.id.iv_ing)
+    ImageView ivIng;
+    @BindView(R.id.iv_ing_right)
+    ImageView ivIngRight;
+    @BindView(R.id.about)
+    RelativeLayout about;
+    @BindView(R.id.rl_check)
+    RelativeLayout reCheck;
+    @BindView(R.id.rl_logout)
+    Button rlLogout;
+    @BindView(R.id.rl_question)
+    RelativeLayout rlQuestion;
+    @BindView(R.id.iv_auth_status)
+    ImageView ivAuthStatus;
+    @BindView(R.id.iv_image)
+    ImageView ivImage;
+    @BindView(R.id.rl_mineinfo)
+    RelativeLayout rlMineinfo;
 
     private SubscriberOnNextListener<String> baseBeanSubscriberOnNextListener;
     private Handler mHandler = new Myhandler(getActivity());
@@ -98,14 +132,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private int merchantId;
     private long loginId;
     private String token;
-  private SubscriberOnNextListener<Version> versionSubscriberOnNextListener;
+    private SubscriberOnNextListener<Version> versionSubscriberOnNextListener;
     private Handler handler = new Handler() {
         // 处理子线程给我们发送的消息。
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    final String url= (String) msg.obj;
+                    final String url = (String) msg.obj;
                     new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("检测到新版本，是否更新？")
                             .setConfirmText("确定")
@@ -114,7 +148,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismissWithAnimation();
-                                    UpDialog upDataDialog = new UpDialog(getActivity(),url);
+                                    UpDialog upDataDialog = new UpDialog(getActivity(), url);
                                     upDataDialog.setCanceledOnTouchOutside(false);
                                     upDataDialog.setCanceledOnTouchOutside(false);
                                     upDataDialog.show();
@@ -129,6 +163,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         }
 
     };
+    private int authstatus;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //        view = inflater.inflate(R.layout.activity_mine, container, false);
@@ -143,20 +179,20 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private void initListener() {
 
 //        merchantId = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
-        loginId = (long) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID,0L);
+        loginId = (long) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_USERID, 0L);
         token = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_WQTOKEN, "");
-        baseBeanSubscriberOnNextListener=new SubscriberOnNextListener<String>() {
+        baseBeanSubscriberOnNextListener = new SubscriberOnNextListener<String>() {
             @Override
             public void onNext(String s) {
 
             }
         };
 
-        versionSubscriberOnNextListener=new SubscriberOnNextListener<Version>() {
+        versionSubscriberOnNextListener = new SubscriberOnNextListener<Version>() {
             @Override
             public void onNext(final Version version) {
                 int version1 = CommonUtils.getVersion(getActivity());
-                if (Integer.valueOf(version.getAndroid_business_version())>version1){
+                if (Integer.valueOf(version.getAndroid_business_version()) > version1) {
                     new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("检测到新版本，是否更新？")
                             .setConfirmText("确定")
@@ -165,14 +201,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     sDialog.dismissWithAnimation();
-                                    UpDialog upDataDialog = new UpDialog(getActivity(),version.getAndroid_business_url());
+                                    UpDialog upDataDialog = new UpDialog(getActivity(), version.getAndroid_business_url());
                                     upDataDialog.setCanceledOnTouchOutside(false);
                                     upDataDialog.setCanceledOnTouchOutside(false);
                                     upDataDialog.show();
                                 }
                             }).show();
-                }else
-                    TastyToast.makeText(getActivity(),"已经是最新版本！",TastyToast.LENGTH_SHORT,TastyToast.SUCCESS);
+                } else
+                    TastyToast.makeText(getActivity(), "已经是最新版本！", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
 
             }
         };
@@ -185,6 +221,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         userName.setText((String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, ""));
         //个人界面头像数据
         avatarUrl = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, "");
+        authstatus = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, 0);
+        if(authstatus == 0){
+            startActivity(new Intent(getActivity(), ChooseActivity.class));
+        }else if(authstatus == 1||authstatus == 2){
+            Intent intent1 = new Intent(getActivity(), StatusActivity.class);
+            intent1.putExtra("type",authstatus);
+            startActivity(intent1);
+        }
 //        Picasso.with(getActivity()).load(avatarUrl)
 //                .placeholder(R.mipmap.icon_head_defult)
 //                .error(R.mipmap.icon_head_defult)
@@ -227,9 +271,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
      * 当确认结算并且密码输入正确之后会走这里
      */
     public void onEventMainThread(AvatarEvent event) {
-        if (event.getBitmap()!=null) {
+        if (event.getBitmap() != null) {
             avatar.setImageBitmap(event.getBitmap());
-            HttpMethods.getInstance().UpLoadLogo(new ProgressSubscriber<String>(baseBeanSubscriberOnNextListener,getActivity()), String.valueOf(loginId),String.valueOf(merchantId),token,event.getUrl());
+            HttpMethods.getInstance().UpLoadLogo(new ProgressSubscriber<String>(baseBeanSubscriberOnNextListener, getActivity()), String.valueOf(loginId), String.valueOf(merchantId), token, event.getUrl());
 
         }
     }
@@ -276,14 +320,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     }
 
-    @OnClick({R.id.avatar,R.id.rl_question,R.id.rl_check,R.id.rl_down_url, R.id.rl_custom, R.id.iv_feedback, R.id.iv_rck_right, R.id.rl_feedback, R.id.about, R.id.rl_logout})
+    @OnClick({R.id.avatar, R.id.rl_question, R.id.rl_check, R.id.rl_down_url, R.id.rl_custom, R.id.iv_feedback, R.id.iv_rck_right, R.id.rl_feedback, R.id.about, R.id.rl_logout,R.id.rl_mineinfo})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.avatar:
-                MultiImageSelectorActivity.startSelect(getActivity(),0,1,0);
+            case R.id.rl_mineinfo:
+
                 break;
+//            case R.id.avatar:
+//                MultiImageSelectorActivity.startSelect(getActivity(), 0, 1, 0);
+//                break;
             case R.id.rl_custom:
-                Mdialog mdialog=new Mdialog(getActivity(),"010-53350021");
+                Mdialog mdialog = new Mdialog(getActivity(), "010-53350021");
                 mdialog.show();
                 break;
             case R.id.iv_feedback:
@@ -295,10 +342,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 getActivity().startActivity(intent1);
                 break;
             case R.id.rl_check:
-                HttpMethods.getInstance().getVersion(new ProgressSubscriber<Version>(versionSubscriberOnNextListener,getActivity()));
+                HttpMethods.getInstance().getVersion(new ProgressSubscriber<Version>(versionSubscriberOnNextListener, getActivity()));
                 break;
             case R.id.rl_feedback:
-                startActivity(new Intent(getActivity(),FeedBackActivity.class));
+                startActivity(new Intent(getActivity(), FeedBackActivity.class));
                 break;
             case R.id.rl_down_url:
                 Intent intent = new Intent();
@@ -309,7 +356,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
                 break;
             case R.id.about:
-                startActivity(new Intent(getActivity(),AboutActivity.class));
+                startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
             case R.id.rl_logout:
                 SweetAlertDialog sweetAlertDialog1 = new SweetAlertDialog(getActivity());
@@ -332,6 +379,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 break;
         }
     }
+
+
 
 
     private static class Myhandler extends Handler {

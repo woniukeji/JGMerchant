@@ -230,21 +230,21 @@ public class QuickLoginFragment extends BaseFragment {
                         Toast.makeText(getActivity(), "聊天服务启动失败，稍后请重新登录", Toast.LENGTH_SHORT).show();
                     }else {
                         //是否填写商家资料信息 1未填写 2 正在审核 3审核拒绝 4审核通过
-                        if (user.getAuth_status()==0){
-                            Intent intent = new Intent(getActivity(), ChooseActivity.class);
-                            startActivity(intent);
-                            getActivity().finish();
-                        }else if (user.getAuth_status()==1||user.getAuth_status()==2){
-                            Intent intent1 = new Intent(getActivity(), StatusActivity.class);
-                            intent1.putExtra("type",user.getAuth_status());
-                            startActivity(intent1);
-                            getActivity().finish();
-                        }else {
+//                        if (user.getAuth_status()==0){
+//                            Intent intent = new Intent(getActivity(), ChooseActivity.class);
+//                            startActivity(intent);
+//                            getActivity().finish();
+//                        }else if (user.getAuth_status()==1||user.getAuth_status()==2){
+//                            Intent intent1 = new Intent(getActivity(), StatusActivity.class);
+//                            intent1.putExtra("type",user.getAuth_status());
+//                            startActivity(intent1);
+//                            getActivity().finish();
+//                        }else {
                             Intent intent1 = new Intent(getActivity(), MainActivity.class);
                             intent1.putExtra("login",true);
                             startActivity(intent1);
                             getActivity().finish();
-                        }
+//                        }
                     }
                 }
             });

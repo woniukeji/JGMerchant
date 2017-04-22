@@ -77,7 +77,7 @@ public class HistoryJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position ==mValues.size()) {
             //最后一条
-            if (mValues.size() > 0 && mValues.size() < 5||mValues.size()>0&&mValues.size()%10!=0) {
+            if (mValues.size() > 0 && mValues.size() < 10||mValues.size()>0&&mValues.size()%10!=0) {
                 ((FooterViewHolder) holder).bindData(1);
             } else {
                 ((FooterViewHolder) holder).bindData(0);
