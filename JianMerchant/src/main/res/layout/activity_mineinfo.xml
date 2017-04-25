@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <RelativeLayout
+        android:id="@+id/racharge_title"
+        android:background="@color/app_bg"
+        style="@style/title_bar_style"
+        android:layout_height="45dp"
+        >
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="18dp"
+            android:maxEms="8"
+            android:textColor="@color/white"
+            android:text="我的信息"
+            android:maxLines="1"
+            android:ellipsize="end"
+            />
+        <ImageView
+            android:id="@+id/wallet_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_back"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="38dp"
+           android:background="#ffffff"
+           >
+           <TextView
+               android:id="@+id/tv_1"
+               android:layout_width="wrap_content"
+               android:layout_height="38dp"
+               android:text="用户姓名"
+               android:textColor="@color/black"
+               android:gravity="center_vertical"
+               android:layout_marginLeft="15dp"
+               />
+
+           <TextView
+               android:id="@+id/tv_name"
+               android:layout_width="match_parent"
+               android:layout_toRightOf="@id/tv_1"
+               android:layout_height="38dp"
+               android:text="马达加斯加"
+               android:textColor="#666666"
+               android:textSize="15dp"
+               android:layout_alignParentRight="true"
+               android:gravity="center_vertical|right"
+                android:paddingRight="15dp"
+               android:background="@null"
+               />
+
+       </RelativeLayout>
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+
+
+            />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="登录账号"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_account"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:text="456456456"
+            android:layout_toRightOf="@id/tv_2"
+            android:gravity="center_vertical|right"
+            android:textColor="#666666"
+            android:layout_alignParentRight="true"
+
+            android:paddingRight="15dp"
+            android:background="@null"
+            android:textSize="15dp"
+            />
+
+    </RelativeLayout>
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+
+
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="当前团队/企业名称"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            />
+
+        <EditText
+            android:id="@+id/tv_companyname"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_toRightOf="@id/tv_3"
+            android:background="@null"
+            android:text="海南翼蜗牛网络科技有限公司"
+            android:textColor="#666666"
+            android:textSize="15dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:paddingRight="15dp"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:id="@+id/tv_4"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="联系电话"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            />
+
+        <EditText
+            android:id="@+id/tv_contacts"
+            android:layout_toRightOf="@id/tv_4"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@null"
+            android:text="456456456"
+            android:textColor="#666666"
+            android:textSize="15dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:paddingRight="15dp"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:id="@+id/tv_5"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="联系邮箱"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            />
+
+        <EditText
+            android:id="@+id/tv_email"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_toRightOf="@id/tv_5"
+            android:background="@null"
+            android:text="123@qq.com"
+            android:textColor="#666666"
+            android:textSize="15dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:paddingRight="15dp"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:id="@+id/tv_6"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="联系地址"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@id/tv_6"
+            android:layout_height="38dp"
+            android:background="@null"
+            android:text="玉渊潭公园"
+            android:textColor="#666666"
+            android:textSize="15dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:paddingRight="15dp"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:id="@+id/tv_7"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="团队简介/企业简介:"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            />
+
+        <EditText
+            android:id="@+id/tv_introduce"
+            android:layout_toRightOf="@id/tv_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@null"
+            android:text="玉渊潭公园玉渊潭公园玉渊潭公园玉渊潭公园玉渊潭公园玉渊潭公园玉渊潭公园玉渊潭公园玉渊潭公园玉渊潭公园玉渊潭公园玉渊潭公园玉渊潭公园"
+            android:textColor="#666666"
+            android:textSize="15dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:paddingRight="15dp"
+            android:layout_marginBottom="10dp"
+            />
+
+    </RelativeLayout>
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:id="@+id/tv_8"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="身份证号"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_idnumber"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@id/tv_8"
+            android:layout_height="38dp"
+            android:background="@null"
+            android:text="456456456456"
+            android:textColor="#666666"
+            android:textSize="15dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:paddingRight="15dp"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:id="@+id/tv_9"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="企业组织机构代码"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:id="@+id/et_organization_number"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@id/tv_9"
+            android:layout_height="38dp"
+            android:background="@null"
+            android:text="151456456456456"
+            android:textColor="#666666"
+            android:textSize="15dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:paddingRight="15dp"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        />
+
+
+
+</LinearLayout>
+</ScrollView>

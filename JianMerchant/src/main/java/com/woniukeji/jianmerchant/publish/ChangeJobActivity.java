@@ -1291,8 +1291,8 @@ public class ChangeJobActivity extends BaseActivity {
         }
 
 
-        start_time = String.valueOf(DateUtils.getLongTime(tvDateStart.getText().toString() + " " + tvTimeStart.getText().toString(), "yyyy-MM-dd HH:mm"));
-        stop_time = String.valueOf(DateUtils.getLongTime(tvDateEnd.getText().toString() + " " + tvTimeEnd.getText().toString(), "yyyy-MM-dd HH:mm"));
+        start_time = String.valueOf(DateUtils.getLongTime(tvDateStart.getText().toString() + " " + tvTimeStart.getText().toString(), "yyyy-MM-dd HH:mm")).substring(0,10);
+        stop_time = String.valueOf(DateUtils.getLongTime(tvDateEnd.getText().toString() + " " + tvTimeEnd.getText().toString(), "yyyy-MM-dd HH:mm")).substring(0,10);
         if (DateUtils.getLongTime(tvDateStart.getText().toString() + " " + tvTimeStart.getText().toString(), "yyyy-MM-dd HH:mm") < System.currentTimeMillis()) {
             showShortToast("开始时间早于当前时间，请重新选择");
             return false;

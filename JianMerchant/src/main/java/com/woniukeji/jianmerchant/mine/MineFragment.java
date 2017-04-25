@@ -24,6 +24,7 @@ import com.qiniu.android.storage.UpProgressHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.qiniu.android.storage.UploadOptions;
 import com.sdsmdg.tastytoast.TastyToast;
+import com.squareup.picasso.Picasso;
 import com.woniukeji.jianmerchant.R;
 import com.woniukeji.jianmerchant.activity.certification.ChooseActivity;
 import com.woniukeji.jianmerchant.activity.certification.StatusActivity;
@@ -32,6 +33,7 @@ import com.woniukeji.jianmerchant.base.BaseFragment;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.base.MainActivity;
 import com.woniukeji.jianmerchant.entity.BaseBean;
+import com.woniukeji.jianmerchant.entity.BaseInfo;
 import com.woniukeji.jianmerchant.entity.User;
 import com.woniukeji.jianmerchant.entity.Version;
 import com.woniukeji.jianmerchant.eventbus.AvatarEvent;
@@ -54,7 +56,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
-import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 public class MineFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
@@ -113,12 +114,15 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     Button rlLogout;
     @BindView(R.id.rl_question)
     RelativeLayout rlQuestion;
-    @BindView(R.id.iv_auth_status)
-    ImageView ivAuthStatus;
+
     @BindView(R.id.iv_image)
     ImageView ivImage;
     @BindView(R.id.rl_mineinfo)
     RelativeLayout rlMineinfo;
+    @BindView(R.id.iv_auth_info)
+    TextView ivAuthInfo;
+    @BindView(R.id.tv_auth_status)
+    TextView tvAuthStatus;
 
     private SubscriberOnNextListener<String> baseBeanSubscriberOnNextListener;
     private Handler mHandler = new Myhandler(getActivity());
@@ -132,7 +136,61 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private int merchantId;
     private long loginId;
     private String token;
+    private int authstatus;
+    private int permission;
+    private BaseInfo info;
     private SubscriberOnNextListener<Version> versionSubscriberOnNextListener;
+    private SubscriberOnNextListener<BaseInfo> infoSubscriber = new SubscriberOnNextListener<BaseInfo>() {
+        @Override
+        public void onNext(BaseInfo baseInfo) {
+            info = baseInfo;
+            if(baseInfo.getHead_img_url() != null|| !baseInfo.getHead_img_url().equals("") ){
+
+                Picasso.with(getActivity()).load(baseInfo.getHead_img_url())
+                .placeholder(R.mipmap.icon_head_defult)
+                .error(R.mipmap.icon_head_defult)
+                .into(avatar);
+            }
+            //1未填写 2 正在审核 3审核拒绝 4审核通过
+            if(baseInfo.getAuth_status() == 0){
+                tvAuthStatus.setText("未认证");
+            }else if(baseInfo.getAuth_status() == 1){
+                tvAuthStatus.setText("正在认证中");
+
+            }else if(baseInfo.getAuth_status() == 2){
+                tvAuthStatus.setText("认证失败");
+
+            }else{
+                tvAuthStatus.setText("已认证");
+
+            }
+            if(baseInfo.getBusiness_type() == 1){
+                if(baseInfo.getNickname() != null|| !baseInfo.getHead_img_url().equals("") ){
+                    userName.setText(baseInfo.getNickname());
+                }
+                ivAuthInfo.setText("个人认证");
+
+            }else if(baseInfo.getBusiness_type() == 2){
+                if(baseInfo.getCompanyName() != null|| !baseInfo.getCompanyName().equals("") ){
+                    userName.setText(baseInfo.getCompanyName());
+                }
+                ivAuthInfo.setText("企业认证");
+            }else if(baseInfo.getBusiness_type() == 3){
+
+                if(baseInfo.getCompanyName() != null|| !baseInfo.getCompanyName().equals("") ){
+                    userName.setText(baseInfo.getCompanyName());
+                }
+                ivAuthInfo.setText("企业认证");
+
+            }
+
+
+
+
+        }
+    };
+
+
     private Handler handler = new Handler() {
         // 处理子线程给我们发送的消息。
         @Override
@@ -163,7 +221,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         }
 
     };
-    private int authstatus;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -220,15 +279,37 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         mine_shezhi = (ImageView) view.findViewById(R.id.mine_shezhi);
         userName.setText((String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_NAME, ""));
         //个人界面头像数据
+        permission = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_PERMISSIONS, 5);
         avatarUrl = (String) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_GROUP_IMG, "");
         authstatus = (int) SPUtils.getParam(getActivity(), Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, 0);
-        if(authstatus == 0){
-            startActivity(new Intent(getActivity(), ChooseActivity.class));
-        }else if(authstatus == 1||authstatus == 2){
-            Intent intent1 = new Intent(getActivity(), StatusActivity.class);
-            intent1.putExtra("type",authstatus);
-            startActivity(intent1);
-        }
+        tvAuthStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(info.getAuth_status() == 0){
+                    startActivity(new Intent(getActivity(),ChooseActivity.class));
+
+                }else if(info.getAuth_status() == 1||info.getAuth_status() == 2){
+                    Intent intent1 = new Intent(getActivity(), StatusActivity.class);
+                    intent1.putExtra("type",info.getAuth_status());
+                    intent1.putExtra("businesstype",info.getBusiness_type());
+
+                    startActivity(intent1);
+
+                }
+            }
+        });
+//        if(authstatus == 0){
+//            userName.setText();
+//        }
+
+//        if (authstatus == 0) {
+//            startActivity(new Intent(getActivity(), ChooseActivity.class));
+//        } else if (authstatus == 1 || authstatus == 2) {
+//            Intent intent1 = new Intent(getActivity(), StatusActivity.class);
+//            intent1.putExtra("type", authstatus);
+//            startActivity(intent1);
+//        }
 //        Picasso.with(getActivity()).load(avatarUrl)
 //                .placeholder(R.mipmap.icon_head_defult)
 //                .error(R.mipmap.icon_head_defult)
@@ -245,6 +326,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 //                startActivity(new Intent(getActivity(), DemoActivity.class));
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        HttpMethods.getInstance().getInfo(getActivity(),new ProgressSubscriber<BaseInfo>(infoSubscriber,getActivity()) );
+
     }
 
     @Override
@@ -320,11 +408,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     }
 
-    @OnClick({R.id.avatar, R.id.rl_question, R.id.rl_check, R.id.rl_down_url, R.id.rl_custom, R.id.iv_feedback, R.id.iv_rck_right, R.id.rl_feedback, R.id.about, R.id.rl_logout,R.id.rl_mineinfo})
+    @OnClick({R.id.avatar, R.id.rl_question, R.id.rl_check, R.id.rl_down_url, R.id.rl_custom, R.id.iv_feedback, R.id.iv_rck_right, R.id.rl_feedback, R.id.about, R.id.rl_logout, R.id.rl_mineinfo})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_mineinfo:
-
+                startActivity(new Intent(getActivity(),MineInfoActivity.class));
                 break;
 //            case R.id.avatar:
 //                MultiImageSelectorActivity.startSelect(getActivity(), 0, 1, 0);
@@ -380,7 +468,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
 
+    }
 
 
     private static class Myhandler extends Handler {

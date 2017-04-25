@@ -35,7 +35,10 @@
                 android:id="@+id/iv_header_bg"
                 android:layout_width="match_parent"
                 android:layout_height="177dp"
-                android:background="@mipmap/bg_personal" />
+                android:background="@mipmap/bg_personal"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
             <ImageView
                 android:clickable="true"
                 android:layout_marginTop="10dp"
@@ -73,25 +76,53 @@
                 android:textColor="#EAE9E9"
                 android:textSize="12dp" />
 
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="海南翼蜗牛网络科技有限公司"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#FFFFFF"
+                    android:drawableLeft="@mipmap/mineperson"
+                    android:drawablePadding="10dp"
+                    android:textSize="15dp"
+                    android:layout_below="@+id/avatar"
+                    android:layout_centerHorizontal="true"
+                    />
+
+
+
+
             <TextView
-                android:id="@+id/user_name"
+                android:id="@+id/iv_auth_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="团队名称"
-                android:layout_marginTop="10dp"
-                android:textColor="#FFFFFF"
+                android:drawableLeft="@mipmap/minecertified"
+                android:text="企业认证"
                 android:textSize="15dp"
-                android:layout_below="@+id/avatar"
-                android:layout_centerHorizontal="true"
-                />
-            <ImageView
-                android:id="@+id/iv_auth_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/customerservice"
+                android:textColor="@color/white"
+                android:drawablePadding="10dp"
                 android:layout_below="@id/user_name"
+                android:layout_alignLeft="@id/user_name"
                 android:layout_marginTop="5dp"
                 android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:id="@+id/tv_auth_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_name"
+                android:text="认证中"
+                android:layout_toRightOf="@id/iv_auth_info"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="15dp"
+                android:textColor="#FF0000"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:background="@drawable/bg_white"
+
                 />
 
         </RelativeLayout>
@@ -205,7 +236,7 @@
                     android:id="@+id/iv_image"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
-                    android:src="@mipmap/customerservice"
+                    android:src="@mipmap/mineinfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView

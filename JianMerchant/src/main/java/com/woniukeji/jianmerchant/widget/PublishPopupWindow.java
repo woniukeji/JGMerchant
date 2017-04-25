@@ -15,7 +15,12 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.woniukeji.jianmerchant.R;
+import com.woniukeji.jianmerchant.activity.certification.ChooseActivity;
+import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.publish.PublishActivity;
+import com.woniukeji.jianmerchant.utils.SPUtils;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -41,6 +46,7 @@ public class PublishPopupWindow extends PopupWindow implements OnClickListener {
     private String date;
     private String wage;
     private String jobid;
+    private int authstatus;
     //分享相关
 
     public PublishPopupWindow(Context cx) {
@@ -86,16 +92,67 @@ public class PublishPopupWindow extends PopupWindow implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+
             case R.id.img_buss_icon:
-            Intent intent = new Intent(context, PublishActivity.class);
-             context.startActivity(intent);
-                dismiss();
+                authstatus = (int) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, 5);
+                if(authstatus == 1 || authstatus == 2 || authstatus == 0){
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("此功能仅对已认证用户开放")
+                            .setConfirmText("去认证")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                    context.startActivity(new Intent(context,ChooseActivity.class));
+//                                    finish();
+                                }
+                            })
+                            .setCancelText("取消")
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismissWithAnimation();
+//                                    finish();
+                                }
+                            }).show();
+                }else if(authstatus == 3){
+                    Intent intent = new Intent(context, PublishActivity.class);
+                    context.startActivity(intent);
+                    dismiss();
+                }
+
+
                 break;
             case R.id.img_jianguo_icon:
-                Intent intent1 = new Intent(context, WebViewActivity.class);
-                intent1.putExtra("url", "https://jinshuju.net/f/TboSOV");
-                context.startActivity(intent1);
-                dismiss();
+                authstatus = (int) SPUtils.getParam(context, Constants.LOGIN_INFO, Constants.SP_MERCHANT_STATUS, 5);
+                if(authstatus == 1 || authstatus == 2 || authstatus == 0){
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("此功能仅对已认证用户开放")
+                            .setConfirmText("去认证")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                    context.startActivity(new Intent(context,ChooseActivity.class));
+//                                    finish();
+                                }
+                            })
+                            .setCancelText("取消")
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismissWithAnimation();
+//                                    finish();
+                                }
+                            }).show();
+                }else if(authstatus == 3){
+                    Intent intent1 = new Intent(context, WebViewActivity.class);
+                    intent1.putExtra("url", "https://jinshuju.net/f/TboSOV");
+                    context.startActivity(intent1);
+                    dismiss();
+                }
+
                 break;
             case R.id.img_dismiss:
               dismiss();

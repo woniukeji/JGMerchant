@@ -14,6 +14,7 @@ public class NewMerchant {
      * type : 2
      * status : 1
      * token : Nzk4MDIxNDgzMjk2MDY3NTg0Nl8xM0E0OEI0RjRDREUwQjY4QzcxMDE5MDc4RjEzQjcwNQ==
+     * business_type    商家权限（3是内部,2是外部商家，1是个人商户）
      */
         private int resume;
         private long createTime;

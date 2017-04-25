@@ -2,6 +2,7 @@ package com.woniukeji.jianmerchant.http;
 
 import com.woniukeji.jianmerchant.entity.AffordUser;
 import com.woniukeji.jianmerchant.entity.BaseBean;
+import com.woniukeji.jianmerchant.entity.BaseInfo;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.JobBase;
 import com.woniukeji.jianmerchant.entity.JobDetails;
@@ -339,4 +340,26 @@ Observable<BaseBean> changeJob(@Query("id") String job_id,@Query("app_id") Strin
     @GET("user/im")//T_UserGroup_Servlet
     Observable<BaseBean<List<LCChatKitUser>>> getTalkUser(@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp,@Query("ids") String ids,@Query("type") int type);
 
+    /**
+     * 获取基本信息
+     */
+    @GET("business/info")
+    Observable<BaseBean<BaseInfo>> getInfo(@Query("app_id") String app_id, @Query("sign") String sign, @Query("timestamp") String timestamp);
+
+    /**
+     * 上传基本信息
+     */
+    @POST("business/info")
+    Observable<BaseBean<BaseInfo>> postInfo(@Query("app_id") String app_id,
+                                            @Query("sign") String sign,
+                                            @Query("timestamp") String timestamp,
+                                            @Query("companyName") String companyName,
+                                            @Query("contact_phone") String contact_phone,
+                                            @Query("email") String email,
+                                            @Query("companyAdress") String companyAdress,
+                                            @Query("introduce") String introduce
+
+
+
+    );
 }

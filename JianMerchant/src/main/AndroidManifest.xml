@@ -333,7 +333,9 @@
         <activity android:name=".payWage.AlreadyCalculateActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-
+        <activity android:name=".mine.MineInfoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.woniukeji.jianmerchant.base.Constants;
 import com.woniukeji.jianmerchant.entity.AffordUser;
 import com.woniukeji.jianmerchant.entity.BaseBean;
+import com.woniukeji.jianmerchant.entity.BaseInfo;
 import com.woniukeji.jianmerchant.entity.CityAndCategoryBean;
 import com.woniukeji.jianmerchant.entity.JobBase;
 import com.woniukeji.jianmerchant.entity.JobInfo;
@@ -675,5 +676,36 @@ public class HttpMethods {
                 .subscribe(lcChatKitUserSubscriber);
     }
 
+    /**
+     * 获取基本信息
+     */
+    public void getInfo(Context context, Subscriber<BaseInfo> subscriber){
+        long timestamp = System.currentTimeMillis();
+        String tel= (String) SPUtils.getParam(context, Constants.LOGIN_INFO,Constants.SP_TEL,"");
+        String appid= MD5Util.MD5(tel);
+        String sign = MD5Util.getSign(context,timestamp);
+        methodsInterface.getInfo(appid, sign, String.valueOf(timestamp))
+                .map(new BaseBeanFun())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 上传基本信息
+     */
+    public void postInfo(Context context, Subscriber<BaseInfo> subscriber,String companyName,String contact_phone,String email,String companyAdress,String introduce){
+        long timestamp = System.currentTimeMillis();
+        String tel= (String) SPUtils.getParam(context, Constants.LOGIN_INFO,Constants.SP_TEL,"");
+        String appid= MD5Util.MD5(tel);
+        String sign = MD5Util.getSign(context,timestamp);
+        methodsInterface.postInfo(appid, sign, String.valueOf(timestamp),companyName,contact_phone,email,companyAdress,introduce)
+                .map(new BaseBeanFun())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
 }

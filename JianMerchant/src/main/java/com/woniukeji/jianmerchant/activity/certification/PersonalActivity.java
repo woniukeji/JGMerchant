@@ -120,9 +120,7 @@ public class PersonalActivity extends BaseActivity {
                 item1 = (ArrayList<RegionInfo>) RegionDAO.getProvences();
                 for (RegionInfo regionInfo : item1) {
                     item2.add((ArrayList<CityBean>) RegionDAO.getCityOnParent(regionInfo.getAdcode()));
-
                 }
-
                 handler.sendEmptyMessage(0x123);
 
             }

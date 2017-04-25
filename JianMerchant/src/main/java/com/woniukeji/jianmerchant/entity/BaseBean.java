@@ -8,6 +8,8 @@ public class BaseBean <T>{
     private String code;
     private String sum;
     private String runtime;
+    private T data;
+
 
     public String getRuntime() {
         return runtime;
@@ -25,7 +27,7 @@ public class BaseBean <T>{
         this.sum = sum;
     }
 
-    private T data;
+
 
     public T getData() {
         return data;

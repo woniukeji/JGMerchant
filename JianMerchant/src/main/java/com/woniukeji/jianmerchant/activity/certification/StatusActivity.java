@@ -38,12 +38,13 @@ public class StatusActivity extends BaseActivity {
     @BindView(R.id.rl_job) LinearLayout rlJob;
     @BindView(R.id.btn_next) Button btnNext;
     @BindView(R.id.activity_status) RelativeLayout activityStatus;
-    private int type;
+    private int type; //认证状态 1 正在审核中 2 认证失败
     private SubscriberOnNextListener<Status> subscriberOnNextListener;
     private int merchantId;
     private String tel;
     private String token;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private int businesstype;//商家权限（3是内部,2是外部商家，1是个人商户）
 
 
     @Override
@@ -56,6 +57,7 @@ public class StatusActivity extends BaseActivity {
     public void initViews() {
         merchantId = (int) SPUtils.getParam(StatusActivity.this, Constants.LOGIN_INFO, Constants.SP_MERCHANT_ID, 0);
         type = getIntent().getIntExtra("type", 0);
+        businesstype = getIntent().getIntExtra("businesstype",5);
         if (type == 1) {
             tvStatus.setText("正在审核中");
             tvContent.setText("您的认证资料正在审核中，我们的工作人员会在2小时之内为您处理，请耐心等待，如有疑问可咨询客服人员：01053350021");
@@ -139,16 +141,33 @@ public class StatusActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_next:
-                if (type == 1) {
-                    finish();
-                    ActivityManager.getActivityManager().finishAllActivity();
-                } else if(type==2){
-                    startActivity(new Intent(this,ChooseActivity.class));
-                    finish();
-                }else {
-                    startActivity(new Intent(this, MainActivity.class));
-                    finish();
+                if(businesstype == 1){
+
+                    if (type == 1) {
+                        finish();
+//                    ActivityManager.getActivityManager().finishAllActivity();
+                    } else if(type==2){
+                        startActivity(new Intent(this,PersonalDetailActivity.class));
+                        finish();
+                    }else {
+                        startActivity(new Intent(this, MainActivity.class));
+                        finish();
+                    }
+
+                }else{
+                    if (type == 1) {
+                        finish();
+//                    ActivityManager.getActivityManager().finishAllActivity();
+                    } else if(type==2){
+                        startActivity(new Intent(this,MerchantDetailActivity.class));
+                        finish();
+                    }else {
+                        startActivity(new Intent(this, MainActivity.class));
+                        finish();
+                    }
                 }
+
+
                 break;
         }
     }
